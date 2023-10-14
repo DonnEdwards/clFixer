@@ -1,0 +1,21 @@
+[UNNAMED]
++SessionDate=08/10/2023
+crc32v2=2343651879
++CurrentKey=Record Order
+ENV File Path=
+OEM=0
+Record Order=Record Order
+SET:SETTINGPK=SET:SETTINGPK
+Record Number=47R(2)~Rec No~C(0)@N_12@Y?Rec No:
+SET:EXCLUDEFILES=690L(2)~Set:Excludefiles~C(0)?Set:Excludefiles:
+SET:GUID=51L(2)~Set:Guid~C(0)?Set:Guid:
+SET:STDESCRIPTION=90L(2)~Set:Stdescription~C(0)?Set:Stdescription:
+SET:ROOTPATH=73L(2)~Set:Rootpath~C(0)?Set:Rootpath:
+SET:FILEEXTENSIONS=95L(2)~Set:Fileextensions~C(0)?Set:Fileextensions:
+Columns=6
+Column1=RECORD NUMBER
+Column2=SET:GUID
+Column3=SET:STDESCRIPTION
+Column4=SET:ROOTPATH
+Column5=SET:FILEEXTENSIONS
+Column6=SET:EXCLUDEFILES

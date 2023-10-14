@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Dictionary Name="tmpclFixer" Version="1" StructureChecked="1" DctxFormat="4">
+	<DictionaryVersion Version="1" Description="Initial version"/>
+	<Table Guid="{e58035e6-a16e-4d64-aec2-a1b48b078f42}" Usage="Global" Name="globals" Prefix="glo">
+		<Audit CreateUser="Administrator" CreateDate="25 SEP 2023" CreateTime=" 3:52:52PM" CreateVersionNumber="1" ModifiedUser="Administrator" ModifiedDate=" 5 OCT 2023" ModifiedTime=" 6:44:26PM" ModifiedVersionNumber="1"/>
+		<Option Property="Version" PropertyType="3" PropertyValue="1"/>
+		<Field Guid="{38a5215f-166c-40a2-b541-86d9393df87c}" Name="qRecords" Description="Queue Records" DataType="LONG" Size="4" ScreenPicture="@n-14" ScreenPrompt="q Records:" ReportHeading="q Records" Justification="RIGHT" Offset="1" InitialValue="0" Message="Queue Records" Tooltip="Queue Records" ReportControl=" STRING(@n-14),USE(glo:qRecords),RIGHT(1)">
+			<WindowControl>
+				<Line Text=" PROMPT(&apos;q Records:&apos;),USE(?glo:qRecords:Prompt)"/>
+				<Line Text=" ENTRY(@n-14),USE(glo:qRecords),RIGHT(1),MSG(&apos;Queue Records&apos;),TIP(&apos;Queue Records&apos;)"/>
+			</WindowControl>
+			<Audit CreateUser="Administrator" CreateDate=" 1 OCT 2023" CreateTime=" 2:59:27PM" CreateVersionNumber="1" ModifiedUser="Administrator" ModifiedDate=" 1 OCT 2023" ModifiedTime=" 3:00:04PM" ModifiedVersionNumber="1"/>
+			<Validity Check="NOCHECKS"/>
+		</Field>
+		<Field Guid="{f4db0f8e-7ee3-4284-a7af-78e0c2e99a2b}" Name="st" BaseType="StringTheory" DataType="TYPE" ScreenPicture="@s200" ScreenPrompt="st:" ReportHeading="st" ReportControl=" STRING(@s200),USE(glo:st)">
+			<WindowControl>
+				<Line Text=" PROMPT(&apos;st:&apos;),USE(?glo:st:Prompt)"/>
+				<Line Text=" ENTRY(@s200),USE(glo:st)"/>
+			</WindowControl>
+			<Audit CreateUser="Administrator" CreateDate="25 SEP 2023" CreateTime=" 3:53:20PM" CreateVersionNumber="1" ModifiedUser="Administrator" ModifiedDate=" 5 OCT 2023" ModifiedTime=" 6:44:26PM" ModifiedVersionNumber="1"/>
+			<Validity Check="NOCHECKS"/>
+		</Field>
+		<Field Guid="{d56c1776-e113-44b7-8609-076de2bcd485}" Name="AppVersion" Description="Program Version Number" DataType="STRING" Size="30" ScreenPicture="@s30" ScreenPrompt="App Version:" ReportHeading="App Version" Message="Program Version Number" Tooltip="Program Version Number" ReportControl=" STRING(@s30),USE(glo:AppVersion)">
+			<WindowControl>
+				<Line Text=" PROMPT(&apos;App Version:&apos;),USE(?glo:AppVersion:Prompt)"/>
+				<Line Text=" ENTRY(@s30),USE(glo:AppVersion),MSG(&apos;Program Version Number&apos;),TIP(&apos;Program Version Number&apos;)"/>
+			</WindowControl>
+			<Audit CreateUser="Administrator" CreateDate="27 SEP 2023" CreateTime=" 4:07:17PM" CreateVersionNumber="1" ModifiedUser="Administrator" ModifiedDate="30 SEP 2023" ModifiedTime=" 4:37:25PM" ModifiedVersionNumber="1"/>
+			<Validity Check="NOCHECKS"/>
+		</Field>
+		<Field Guid="{5ac16e4d-1b6f-4e52-887b-a0603beb263c}" Name="MachineName" Description="Machine Name" DataType="STRING" Size="20" ScreenPicture="@s30" ScreenPrompt="Machine Name:" ReportHeading="Machine Name" Message="Machine Name" Tooltip="Machine Name" ReportControl=" STRING(@s30),USE(glo:MachineName)">
+			<WindowControl>
+				<Line Text=" PROMPT(&apos;Machine Name:&apos;),USE(?glo:MachineName:Prompt)"/>
+				<Line Text=" ENTRY(@s30),USE(glo:MachineName),MSG(&apos;Machine Name&apos;),TIP(&apos;Machine Name&apos;)"/>
+			</WindowControl>
+			<Audit CreateUser="Administrator" CreateDate="30 SEP 2023" CreateTime=" 4:37:39PM" CreateVersionNumber="1" ModifiedUser="Administrator" ModifiedDate="30 SEP 2023" ModifiedTime=" 4:37:58PM" ModifiedVersionNumber="1"/>
+			<Validity Check="NOCHECKS"/>
+		</Field>
+		<Field Guid="{0eee9097-1040-40c3-bd00-3aeba11f9c53}" Name="dbugoff" Description="Disable debug messages" DataType="BYTE" Size="1" ScreenPicture="@n3" ScreenPrompt="dbugoff:" ReportHeading="dbugoff" InitialValue="0" Message="Disable debug messages" Tooltip="Disable debug messages" ReportControl=" STRING(@n3),USE(glo:dbugoff)">
+			<WindowControl>
+				<Line Text=" PROMPT(&apos;dbugoff:&apos;),USE(?glo:dbugoff:Prompt)"/>
+				<Line Text=" ENTRY(@n3),USE(glo:dbugoff),MSG(&apos;Disable debug messages&apos;),TIP(&apos;Disable debug messages&apos;)"/>
+			</WindowControl>
+			<Audit CreateUser="Administrator" CreateDate="30 SEP 2023" CreateTime=" 4:45:51PM" CreateVersionNumber="1" ModifiedUser="Administrator" ModifiedDate="30 SEP 2023" ModifiedTime=" 4:46:24PM" ModifiedVersionNumber="1"/>
+			<Validity Check="NOCHECKS"/>
+		</Field>
+		<Field Guid="{dd1ce7f3-69f4-465d-b36c-d161c51bb6e9}" Name="AppDescription" Description="Description" DataType="STRING" Size="50" ScreenPicture="@s50" ScreenPrompt="App Description:" ReportHeading="App Description" Message="Description" Tooltip="Description" ReportControl=" STRING(@s50),USE(glo:AppDescription)">
+			<WindowControl>
+				<Line Text=" PROMPT(&apos;App Description:&apos;),USE(?glo:AppDescription:Prompt)"/>
+				<Line Text=" ENTRY(@s50),USE(glo:AppDescription),MSG(&apos;Description&apos;),TIP(&apos;Description&apos;)"/>
+			</WindowControl>
+			<Audit CreateUser="Administrator" CreateDate=" 4 OCT 2023" CreateTime=" 1:01:58PM" CreateVersionNumber="1" ModifiedUser="Administrator" ModifiedDate=" 4 OCT 2023" ModifiedTime=" 1:01:58PM" ModifiedVersionNumber="1"/>
+			<Validity Check="NOCHECKS"/>
+		</Field>
+		<Field Guid="{f2817bc2-c0d5-4e25-be28-f24d9a341346}" Name="RootPath" Description="Root Path" DataType="STRING" Size="255" ScreenPicture="@s255" ScreenPrompt="Root Path:" ReportHeading="Root Path" Message="Root Path" Tooltip="Root Path" ReportControl=" STRING(@s255),USE(glo:RootPath)">
+			<WindowControl>
+				<Line Text=" PROMPT(&apos;Root Path:&apos;),USE(?glo:RootPath:Prompt)"/>
+				<Line Text=" ENTRY(@s255),USE(glo:RootPath),MSG(&apos;Root Path&apos;),TIP(&apos;Root Path&apos;)"/>
+			</WindowControl>
+			<Audit CreateUser="Administrator" CreateDate=" 4 OCT 2023" CreateTime=" 1:02:24PM" CreateVersionNumber="1" ModifiedUser="Administrator" ModifiedDate=" 4 OCT 2023" ModifiedTime=" 1:02:24PM" ModifiedVersionNumber="1"/>
+			<Validity Check="NOCHECKS"/>
+		</Field>
+		<Field Guid="{9ef8a8fe-23cc-4fc3-a261-ca3f0fcc8a2a}" Name="FileExtensions" Description="File Extensions" DataType="STRING" Size="250" ScreenPicture="@s250" ScreenPrompt="File Extensions:" ReportHeading="File Extensions" Message="File Extensions" Tooltip="File Extensions" ReportControl=" STRING(@s250),USE(glo:FileExtensions)">
+			<WindowControl>
+				<Line Text=" PROMPT(&apos;File Extensions:&apos;),USE(?glo:FileExtensions:Prompt)"/>
+				<Line Text=" ENTRY(@s250),USE(glo:FileExtensions),MSG(&apos;File Extensions&apos;),TIP(&apos;File Extensions&apos;)"/>
+			</WindowControl>
+			<Audit CreateUser="Administrator" CreateDate=" 4 OCT 2023" CreateTime=" 1:03:10PM" CreateVersionNumber="1" ModifiedUser="Administrator" ModifiedDate=" 4 OCT 2023" ModifiedTime=" 1:03:10PM" ModifiedVersionNumber="1"/>
+			<Validity Check="NOCHECKS"/>
+		</Field>
+		<Field Guid="{190dfbe6-ece9-4abe-bbdb-31b4007b8ded}" Name="ExcludeFiles" Description="Exclude Files" DataType="STRING" Size="1000" ScreenPicture="@s255" ScreenPrompt="Exclude Files:" ReportHeading="Exclude Files" Message="Exclude Files" Tooltip="Exclude Files" ReportControl=" STRING(@s255),USE(glo:ExcludeFiles)">
+			<WindowControl>
+				<Line Text=" PROMPT(&apos;Exclude Files:&apos;),USE(?glo:ExcludeFiles:Prompt)"/>
+				<Line Text=" ENTRY(@s255),USE(glo:ExcludeFiles),MSG(&apos;Exclude Files&apos;),TIP(&apos;Exclude Files&apos;)"/>
+			</WindowControl>
+			<Audit CreateUser="Administrator" CreateDate=" 4 OCT 2023" CreateTime=" 1:03:11PM" CreateVersionNumber="1" ModifiedUser="Administrator" ModifiedDate=" 4 OCT 2023" ModifiedTime=" 1:03:53PM" ModifiedVersionNumber="1"/>
+			<Validity Check="NOCHECKS"/>
+		</Field>
+		<Field Guid="{0734279a-2d8f-4b59-af36-c437a2b99d72}" Name="ProgressMessage" Description="Progress Message" DataType="STRING" Size="80" ScreenPicture="@s80" ScreenPrompt="Progress Message:" ReportHeading="Progress Message" InitialValue="Copyright (c) 2023 Black and White Inc" Message="Progress Message" Tooltip="Progress Message" ReportControl=" STRING(@s80),USE(glo:ProgressMessage)">
+			<WindowControl>
+				<Line Text=" PROMPT(&apos;Progress Message:&apos;),USE(?glo:ProgressMessage:Prompt)"/>
+				<Line Text=" ENTRY(@s80),USE(glo:ProgressMessage),MSG(&apos;Progress Message&apos;),TIP(&apos;Progress Message&apos;)"/>
+			</WindowControl>
+			<Audit CreateUser="Administrator" CreateDate=" 4 OCT 2023" CreateTime=" 5:13:09PM" CreateVersionNumber="1" ModifiedUser="Administrator" ModifiedDate=" 4 OCT 2023" ModifiedTime=" 5:30:44PM" ModifiedVersionNumber="1"/>
+			<Validity Check="NOCHECKS"/>
+		</Field>
+		<Field Guid="{095bacf4-c34e-49f0-a955-5e6843b6d231}" Name="FilesChanged" Description="No of Files Changed" DataType="LONG" Size="4" ScreenPicture="@n-14" ScreenPrompt="Files Changed:" ReportHeading="Files Changed" Justification="RIGHT" Offset="1" InitialValue="0" Message="No of Files Changed" Tooltip="No of Files Changed" ReportControl=" STRING(@n-14),USE(glo:FilesChanged),RIGHT(1)">
+			<WindowControl>
+				<Line Text=" PROMPT(&apos;Files Changed:&apos;),USE(?glo:FilesChanged:Prompt)"/>
+				<Line Text=" ENTRY(@n-14),USE(glo:FilesChanged),RIGHT(1),MSG(&apos;No of Files Changed&apos;),TIP(&apos;No of Files Changed&apos;)"/>
+			</WindowControl>
+			<Audit CreateUser="Administrator" CreateDate=" 4 OCT 2023" CreateTime=" 7:33:23PM" CreateVersionNumber="1" ModifiedUser="Administrator" ModifiedDate=" 4 OCT 2023" ModifiedTime=" 7:34:00PM" ModifiedVersionNumber="1"/>
+			<Validity Check="NOCHECKS"/>
+		</Field>
+		<Field Guid="{91557b56-46de-4a22-964c-768e845932d6}" Name="stfiles" BaseType="StringTheory" DataType="TYPE" ScreenPicture="@s200" ScreenPrompt="stfiles:" ReportHeading="stfiles" ReportControl=" STRING(@s200),USE(glo:stfiles)">
+			<WindowControl>
+				<Line Text=" PROMPT(&apos;stfiles:&apos;),USE(?glo:stfiles:Prompt)"/>
+				<Line Text=" ENTRY(@s200),USE(glo:stfiles)"/>
+			</WindowControl>
+			<Audit CreateUser="Administrator" CreateDate=" 5 OCT 2023" CreateTime=" 6:43:47PM" CreateVersionNumber="1" ModifiedUser="Administrator" ModifiedDate=" 5 OCT 2023" ModifiedTime=" 6:43:47PM" ModifiedVersionNumber="1"/>
+			<Validity Check="NOCHECKS"/>
+		</Field>
+	</Table>
+	<Table Guid="{e4a01ece-a3db-4296-919f-81457a36f4f9}" Name="Action" Description="Replacement Action" Prefix="act" Driver="TOPSPEED" Path="Action.tps" Create="true" Thread="true">
+		<Audit CreateUser="Administrator" CreateDate="25 SEP 2023" CreateTime=" 3:55:26PM" CreateVersionNumber="1" ModifiedUser="Administrator" ModifiedDate=" 8 OCT 2023" ModifiedTime=" 6:12:47PM" ModifiedVersionNumber="1"/>
+		<Option Property="Version" PropertyType="3" PropertyValue="1"/>
+		<Field Guid="{9fab9dd3-b3a2-4b1f-a756-2f2ab814b1ef}" Name="StepId" Description="Step number" DataType="LONG" Size="4" ScreenPicture="@n-14" ScreenPrompt="Step Id:" ReportHeading="Step Id" Justification="RIGHT" Offset="1" InitialValue="100" Message="Step number" Tooltip="Step number" ReportControl=" STRING(@n-14),USE(act:StepId),RIGHT(1)">
+			<WindowControl>
+				<Line Text=" PROMPT(&apos;Step Id:&apos;),USE(?act:StepId:Prompt)"/>
+				<Line Text=" ENTRY(@n-14),USE(act:StepId),RIGHT(1),MSG(&apos;Step number&apos;),TIP(&apos;Step number&apos;),REQ"/>
+			</WindowControl>
+			<Audit CreateUser="Administrator" CreateDate="25 SEP 2023" CreateTime=" 3:57:32PM" CreateVersionNumber="1" ModifiedUser="Administrator" ModifiedDate="25 SEP 2023" ModifiedTime=" 3:57:32PM" ModifiedVersionNumber="1"/>
+			<Validity Check="NONZERO"/>
+		</Field>
+		<Field Guid="{21446101-d8a0-4ca0-a9aa-8306becbdd87}" Name="stDescription" Description="Description of this step" DataType="STRING" Size="128" ScreenPicture="@s128" ScreenPrompt="Description:" ReportHeading="Description" Message="Description of this step" Tooltip="Description of this step" ReportControl=" STRING(@s128),USE(act:stDescription)">
+			<WindowControl>
+				<Line Text=" PROMPT(&apos;Description:&apos;),USE(?act:stDescription:Prompt)"/>
+				<Line Text=" ENTRY(@s128),USE(act:stDescription),MSG(&apos;Description of this step&apos;),TIP(&apos;Description of this step&apos;)"/>
+			</WindowControl>
+			<Audit CreateUser="Administrator" CreateDate="27 SEP 2023" CreateTime=" 3:10:41PM" CreateVersionNumber="1" ModifiedUser="Administrator" ModifiedDate=" 6 OCT 2023" ModifiedTime=" 8:04:57PM" ModifiedVersionNumber="1"/>
+			<Validity Check="NOCHECKS"/>
+		</Field>
+		<Field Guid="{30923a9e-e58b-4092-be0f-4ef6db793806}" Name="ExcludeFilesYN" DataType="BYTE" Size="1" ScreenPicture="@n3" ScreenPrompt="Exclude Files YN:" ReportHeading="Exclude Files YN" InitialValue="1" WindowControl=" CHECK(&apos;Exclude Files YN:&apos;),USE(act:ExcludeFilesYN),VALUE(&apos;1&apos;,&apos;0&apos;)" ReportControl=" CHECK(&apos;Exclude Files YN:&apos;),USE(act:ExcludeFilesYN),VALUE(&apos;1&apos;,&apos;0&apos;)">
+			<Audit CreateUser="Administrator" CreateDate="25 SEP 2023" CreateTime=" 3:59:57PM" CreateVersionNumber="1" ModifiedUser="Administrator" ModifiedDate="25 SEP 2023" ModifiedTime=" 4:01:48PM" ModifiedVersionNumber="1"/>
+			<Validity Check="BOOLEAN" TrueValue="1" FalseValue="0"/>
+		</Field>
+		<Field Guid="{bc62ec70-870d-459e-ad1c-7b26bc69c981}" Name="FileName" Description="Single file name for changes. Leave blank if global change" DataType="STRING" Size="128" ScreenPicture="@s128" ScreenPrompt="File Name:" ReportHeading="File Name" Message="Single file name for changes. Leave blank if global change" Tooltip="Single file name for changes. Leave blank if global change" ReportControl=" STRING(@s128),USE(act:FileName)">
+			<WindowControl>
+				<Line Text=" PROMPT(&apos;File Name:&apos;),USE(?act:FileName:Prompt)"/>
+				<Line Text=" ENTRY(@s128),USE(act:FileName),MSG(&apos;Single file name for changes. Leave blank if global change&apos;),TIP(&apos;Single file name for changes. Leave blank if global change&apos;)"/>
+			</WindowControl>
+			<Audit CreateUser="Administrator" CreateDate="26 SEP 2023" CreateTime="11:26:25AM" CreateVersionNumber="1" ModifiedUser="Administrator" ModifiedDate="27 SEP 2023" ModifiedTime=" 3:12:28PM" ModifiedVersionNumber="1"/>
+			<Validity Check="NOCHECKS"/>
+		</Field>
+		<Field Guid="{75fcc44a-4b71-4612-a8e6-60929f89785f}" Name="LineNo" Description="Start Line Number" DataType="LONG" Size="4" ScreenPicture="@n-14B" ScreenPrompt="Line No:" ReportHeading="Line No" Justification="RIGHT" Offset="1" InitialValue="0" Message="Start Line Number" Tooltip="Start Line Number" ReportControl=" STRING(@n-14B),USE(act:LineNo),RIGHT(1)">
+			<WindowControl>
+				<Line Text=" PROMPT(&apos;Line No:&apos;),USE(?act:LineNo:Prompt)"/>
+				<Line Text=" ENTRY(@n-14B),USE(act:LineNo),RIGHT(1),MSG(&apos;Start Line Number&apos;),TIP(&apos;Start Line Number&apos;)"/>
+			</WindowControl>
+			<Audit CreateUser="Administrator" CreateDate="27 SEP 2023" CreateTime=" 2:55:48PM" CreateVersionNumber="1" ModifiedUser="Administrator" ModifiedDate=" 6 OCT 2023" ModifiedTime=" 8:05:21PM" ModifiedVersionNumber="1"/>
+			<Validity Check="NOCHECKS"/>
+		</Field>
+		<Field Guid="{505d76f9-69c4-4ba2-9966-f73122f4eb22}" Name="ReorderNo" Description="Reorder Number" DataType="LONG" Size="4" ScreenPicture="@n-14B" ScreenPrompt="Reorder No:" ReportHeading="Reorder No" Justification="RIGHT" Offset="1" InitialValue="0" Message="Reorder Number" Tooltip="Reorder Number" ReportControl=" STRING(@n-14B),USE(act:ReorderNo),RIGHT(1)">
+			<WindowControl>
+				<Line Text=" PROMPT(&apos;Reorder No:&apos;),USE(?act:ReorderNo:Prompt)"/>
+				<Line Text=" ENTRY(@n-14B),USE(act:ReorderNo),RIGHT(1),MSG(&apos;Reorder Number&apos;),TIP(&apos;Reorder Number&apos;)"/>
+			</WindowControl>
+			<Audit CreateUser="Administrator" CreateDate=" 2 OCT 2023" CreateTime=" 4:55:30PM" CreateVersionNumber="1" ModifiedUser="Administrator" ModifiedDate=" 6 OCT 2023" ModifiedTime=" 8:05:37PM" ModifiedVersionNumber="1"/>
+			<Validity Check="NOCHECKS"/>
+		</Field>
+		<Field Guid="{ec303f59-3481-48bc-ad81-1c4cae9a5100}" Name="DisableYN" Description="Disable YN" DataType="BYTE" Size="1" ScreenPicture="@n3" ScreenPrompt="Disable YN:" ReportHeading="Disable YN" InitialValue="0" Message="Disable YN" Tooltip="Disable YN" WindowControl=" CHECK(&apos;Disable YN:&apos;),USE(act:DisableYN),MSG(&apos;Disable YN&apos;),VALUE(&apos;1&apos;,&apos;0&apos;),TIP(&apos;Disable YN&apos;)" ReportControl=" CHECK(&apos;Disable YN:&apos;),USE(act:DisableYN),VALUE(&apos;1&apos;,&apos;0&apos;)">
+			<Audit CreateUser="Administrator" CreateDate=" 5 OCT 2023" CreateTime=" 9:17:35AM" CreateVersionNumber="1" ModifiedUser="Administrator" ModifiedDate=" 5 OCT 2023" ModifiedTime=" 9:18:15AM" ModifiedVersionNumber="1"/>
+			<Validity Check="BOOLEAN" TrueValue="1" FalseValue="0"/>
+		</Field>
+		<Field Guid="{c34db382-4284-4aec-b0d3-c8ef18b22497}" Name="stBefore" Description="String Before" DataType="MEMO" Size="9000" ScreenPicture="@s255" ScreenPrompt="st Before:" ReportHeading="st Before" Message="String Before" Tooltip="String Before" ReportControl=" STRING(@s255),USE(act:stBefore)">
+			<WindowControl>
+				<Line Text=" PROMPT(&apos;st Before:&apos;),USE(?act:stBefore:Prompt)"/>
+				<Line Text=" ENTRY(@s255),USE(act:stBefore),MSG(&apos;String Before&apos;),TIP(&apos;String Before&apos;)"/>
+			</WindowControl>
+			<Audit CreateUser="Administrator" CreateDate="25 SEP 2023" CreateTime=" 3:57:33PM" CreateVersionNumber="1" ModifiedUser="Administrator" ModifiedDate=" 8 OCT 2023" ModifiedTime=" 6:11:15PM" ModifiedVersionNumber="1"/>
+			<Validity Check="NOCHECKS"/>
+		</Field>
+		<Field Guid="{83bbbe6a-63eb-4e3a-9e4b-5018a0c73ca4}" Name="stAfter" Description="String After" DataType="MEMO" Size="9000" ScreenPicture="@s255" ScreenPrompt="After:" ReportHeading="After" Message="String After" Tooltip="String After" ReportControl=" STRING(@s255),USE(act:stAfter)">
+			<WindowControl>
+				<Line Text=" PROMPT(&apos;After:&apos;),USE(?act:stAfter:Prompt)"/>
+				<Line Text=" ENTRY(@s255),USE(act:stAfter),MSG(&apos;String After&apos;),TIP(&apos;String After&apos;)"/>
+			</WindowControl>
+			<Audit CreateUser="Administrator" CreateDate="25 SEP 2023" CreateTime=" 3:58:57PM" CreateVersionNumber="1" ModifiedUser="Administrator" ModifiedDate=" 8 OCT 2023" ModifiedTime=" 6:12:47PM" ModifiedVersionNumber="1"/>
+			<Validity Check="NOCHECKS"/>
+		</Field>
+		<Key Guid="{acc85c04-bc3a-4ba8-98fa-380ecacbeacc}" Order="1" Name="ActionStepPK" Description="Primary Key" KeyType="KEY" Unique="true" Primary="true">
+			<Audit CreateUser="Administrator" CreateDate="25 SEP 2023" CreateTime=" 4:08:33PM" CreateVersionNumber="1" ModifiedUser="Administrator" ModifiedDate="25 SEP 2023" ModifiedTime=" 7:12:37PM" ModifiedVersionNumber="1"/>
+			<Component Guid="{7c926868-c0e2-4823-8929-5b18ff45346a}" FieldId="{9fab9dd3-b3a2-4b1f-a756-2f2ab814b1ef}" Order="1" Ascend="true">
+				<Audit CreateUser="Administrator" CreateDate="25 SEP 2023" CreateTime=" 4:29:09PM" CreateVersionNumber="1" ModifiedUser="Administrator" ModifiedDate="25 SEP 2023" ModifiedTime=" 4:29:09PM" ModifiedVersionNumber="1"/>
+			</Component>
+		</Key>
+		<Key Guid="{f21a0fc3-018d-4d23-9090-1de65c74ee2e}" Order="2" Name="ActionReorder" Description="Use this to renumber steps" KeyType="KEY">
+			<Audit CreateUser="Administrator" CreateDate=" 2 OCT 2023" CreateTime=" 4:56:08PM" CreateVersionNumber="1" ModifiedUser="Administrator" ModifiedDate=" 2 OCT 2023" ModifiedTime=" 4:57:17PM" ModifiedVersionNumber="1"/>
+			<Component Guid="{1ef8a2a1-7df5-451f-8ea8-7f1ce2237357}" FieldId="{505d76f9-69c4-4ba2-9966-f73122f4eb22}" Order="1">
+				<Audit CreateUser="Administrator" CreateDate=" 5 OCT 2023" CreateTime=" 5:22:56PM" CreateVersionNumber="1" ModifiedUser="Administrator" ModifiedDate=" 5 OCT 2023" ModifiedTime=" 5:22:56PM" ModifiedVersionNumber="1"/>
+			</Component>
+		</Key>
+		<Alias Guid="{66553e2c-0e4e-44a8-a417-71c02914e1d2}" Name="ActionAlias" Prefix="act1">
+			<Audit CreateUser="Administrator" CreateDate=" 5 OCT 2023" CreateTime="11:56:15AM" CreateVersionNumber="1" ModifiedUser="Administrator" ModifiedDate=" 5 OCT 2023" ModifiedTime="11:56:41AM" ModifiedVersionNumber="1"/>
+		</Alias>
+	</Table>
+	<Table Guid="{820eaddc-bbbd-4fc0-8587-a881377ed596}" Name="Setting" Description="Application Settings" Prefix="set" Driver="TOPSPEED" Path="Setting.tps" Create="true" Thread="true">
+		<Audit CreateUser="Administrator" CreateDate="25 SEP 2023" CreateTime=" 4:06:45PM" CreateVersionNumber="1" ModifiedUser="Administrator" ModifiedDate=" 8 OCT 2023" ModifiedTime=" 6:10:37PM" ModifiedVersionNumber="1"/>
+		<Option Property="Version" PropertyType="3" PropertyValue="1"/>
+		<Field Guid="{b5216269-34d7-45ca-a2b5-32bb09297a1a}" Name="GUID" DataType="STRING" Size="36" ScreenPicture="@s36" ScreenPrompt="GUID:" ReportHeading="GUID" InitialValue="glo:st.MakeGuid()" ReportControl=" STRING(@s36),USE(set:GUID)">
+			<WindowControl>
+				<Line Text=" PROMPT(&apos;GUID:&apos;),USE(?set:GUID:Prompt)"/>
+				<Line Text=" ENTRY(@s36),USE(set:GUID)"/>
+			</WindowControl>
+			<Audit CreateUser="Administrator" CreateDate="25 SEP 2023" CreateTime=" 4:10:37PM" CreateVersionNumber="1" ModifiedUser="Administrator" ModifiedDate="25 SEP 2023" ModifiedTime=" 6:46:33PM" ModifiedVersionNumber="1"/>
+			<Validity Check="NOCHECKS"/>
+		</Field>
+		<Field Guid="{4f5f99b6-f131-4756-ac23-7222006ce400}" Name="stDescription" DataType="STRING" Size="50" ScreenPicture="@s50" ScreenPrompt="Description:" ReportHeading="Description" ReportControl=" STRING(@s50),USE(set:stDescription)">
+			<WindowControl>
+				<Line Text=" PROMPT(&apos;Description:&apos;),USE(?set:stDescription:Prompt)"/>
+				<Line Text=" ENTRY(@s50),USE(set:stDescription),REQ"/>
+			</WindowControl>
+			<Audit CreateUser="Administrator" CreateDate="25 SEP 2023" CreateTime=" 4:11:37PM" CreateVersionNumber="1" ModifiedUser="Administrator" ModifiedDate="25 SEP 2023" ModifiedTime=" 4:11:37PM" ModifiedVersionNumber="1"/>
+			<Validity Check="NONZERO"/>
+		</Field>
+		<Field Guid="{54bbb7a7-4a89-4e77-b6f6-5ef872e814b7}" Name="RootPath" DataType="STRING" Size="255" ScreenPicture="@s255" ScreenPrompt="Root Path:" ReportHeading="Root Path" InitialValue="&apos;c:\Clarion&apos;" ReportControl=" STRING(@s255),USE(set:RootPath)">
+			<WindowControl>
+				<Line Text=" PROMPT(&apos;Root Path:&apos;),USE(?set:RootPath:Prompt)"/>
+				<Line Text=" ENTRY(@s255),USE(set:RootPath)"/>
+			</WindowControl>
+			<Audit CreateUser="Administrator" CreateDate="25 SEP 2023" CreateTime=" 4:12:34PM" CreateVersionNumber="1" ModifiedUser="Administrator" ModifiedDate="25 SEP 2023" ModifiedTime=" 4:12:34PM" ModifiedVersionNumber="1"/>
+			<Validity Check="NOCHECKS"/>
+		</Field>
+		<Field Guid="{0fec8f8e-b1ef-4cf2-8f1d-20a8a6ae78be}" Name="FileExtensions" Description="Separate extensions with a semicolon" DataType="STRING" Size="250" ScreenPicture="@s250" ScreenPrompt="File Extensions:" ReportHeading="File Extensions" InitialValue="&apos;*.inc;*.clw;*.txa;*.dctx;*.def;*.equ;*.tpl;*.tft;*.xml;*.tpw;*.tpl;&apos;" Message="Separate extensions with a semicolon" Tooltip="Separate extensions with a semicolon" ReportControl=" STRING(@s250),USE(set:FileExtensions)">
+			<WindowControl>
+				<Line Text=" PROMPT(&apos;File Extensions:&apos;),USE(?set:FileExtensions:Prompt)"/>
+				<Line Text=" ENTRY(@s250),USE(set:FileExtensions),MSG(&apos;Separate extensions with a semicolon&apos;),TIP(&apos;Separate extensions with a semicolon&apos;)"/>
+			</WindowControl>
+			<Audit CreateUser="Administrator" CreateDate="25 SEP 2023" CreateTime=" 4:14:46PM" CreateVersionNumber="1" ModifiedUser="Administrator" ModifiedDate="25 SEP 2023" ModifiedTime=" 4:14:46PM" ModifiedVersionNumber="1"/>
+			<Validity Check="NOCHECKS"/>
+		</Field>
+		<Field Guid="{db2b3ada-93fa-4b34-81df-2ef362d3887d}" Name="ExcludeFiles" Description="Exclude Files" DataType="MEMO" Size="9000" ScreenPicture="@s255" ScreenPrompt="Exclude Files:" ReportHeading="Exclude Files" Message="Exclude Files" Tooltip="Exclude Files" ReportControl=" STRING(@s255),USE(set:ExcludeFiles)">
+			<WindowControl>
+				<Line Text=" PROMPT(&apos;Exclude Files:&apos;),USE(?set:ExcludeFiles:Prompt)"/>
+				<Line Text=" ENTRY(@s255),USE(set:ExcludeFiles),MSG(&apos;Exclude Files&apos;),TIP(&apos;Exclude Files&apos;)"/>
+			</WindowControl>
+			<Audit CreateUser="Administrator" CreateDate="25 SEP 2023" CreateTime=" 4:15:45PM" CreateVersionNumber="1" ModifiedUser="Administrator" ModifiedDate=" 8 OCT 2023" ModifiedTime=" 6:10:37PM" ModifiedVersionNumber="1"/>
+			<Validity Check="NOCHECKS"/>
+		</Field>
+		<Key Guid="{043cd272-904f-42a6-83b6-ee660fc05bd3}" Order="1" Name="SettingPK" KeyType="KEY" Unique="true" Primary="true">
+			<Audit CreateUser="Administrator" CreateDate="25 SEP 2023" CreateTime=" 4:16:23PM" CreateVersionNumber="1" ModifiedUser="Administrator" ModifiedDate="25 SEP 2023" ModifiedTime=" 4:16:48PM" ModifiedVersionNumber="1"/>
+			<Component Guid="{8a764252-59ea-4c0b-8cd6-c1ea89cc37b0}" FieldId="{b5216269-34d7-45ca-a2b5-32bb09297a1a}" Order="1" Ascend="true">
+				<Audit CreateUser="Administrator" CreateDate="25 SEP 2023" CreateTime=" 4:16:48PM" CreateVersionNumber="1" ModifiedUser="Administrator" ModifiedDate="25 SEP 2023" ModifiedTime=" 4:16:48PM" ModifiedVersionNumber="1"/>
+			</Component>
+		</Key>
+	</Table>
+</Dictionary>
+

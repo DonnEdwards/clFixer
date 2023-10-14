@@ -1,0 +1,33 @@
+LANGUAGE 0x0409
+
+1 VERSIONINFO
+ FILEVERSION 0,1,0,337
+ PRODUCTVERSION 0,1,0,337
+ FILEFLAGSMASK 0x3FL
+ FILEFLAGS 0
+ FILEOS VOS__WINDOWS32
+ FILETYPE VFT_APP
+ FILESUBTYPE 0x0L
+BEGIN
+  BLOCK "StringFileInfo"
+  BEGIN
+    BLOCK "040904E4"
+      BEGIN
+        VALUE "CompanyName", "Black and White Inc\0"
+        VALUE "FileDescription", "clFixer - Make changes to default Clarion install\0"
+        VALUE "FileVersion", "0.1.0.337\0"
+        VALUE "LegalCopyright", "Copyright (c) 2013 Black and White Inc\0"
+        VALUE "LegalTrademarks", "none\0"
+        VALUE "OriginalFilename", "clFixer.EXE\0"
+        VALUE "ProductVersion", "0.1.0.337\0"
+        VALUE "Comments", "Make changes to default Clarion install\0"
+        VALUE "Clarion Version", "11100\0"
+        VALUE "Template Family", "ABC\0"
+        VALUE "Template Version", "v11.1\0"
+      END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x0409, 1252
+    END
+END

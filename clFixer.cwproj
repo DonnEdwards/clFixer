@@ -1,0 +1,109 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{77A1476C-EC89-408E-9A49-8BDD9B55DB12}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">Win32</Platform>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>clFixer</RootNamespace>
+    <AssemblyName>clFixer</AssemblyName>
+    <OutputName>clFixer</OutputName>
+    <CWOutputType>Exe</CWOutputType>
+    <DefineConstants>StringTheoryLinkMode=&gt;1%3bStringTheoryDllMode=&gt;0%3bMD5=&gt;0%3bWinEventLinkMode=&gt;1%3bWinEventDLLMode=&gt;0%3b_ABCDllMode_=&gt;0%3b_ABCLinkMode_=&gt;1</DefineConstants>
+    <Model>Dll</Model>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+    <stack_size>16384</stack_size>
+    <CopyCore>True</CopyCore>
+    <ApplicationIcon>toolbox.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>True</DebugSymbols>
+    <DebugType>Full</DebugType>
+    <vid>full</vid>
+    <check_stack>True</check_stack>
+    <check_index>True</check_index>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>False</DebugSymbols>
+    <DebugType>None</DebugType>
+    <vid>off</vid>
+    <check_stack>True</check_stack>
+    <check_index>True</check_index>
+    <warnings>on</warnings>
+    <GenerateMap>True</GenerateMap>
+    <line_numbers>False</line_numbers>
+    <dynamic_base>True</dynamic_base>
+    <dep>True</dep>
+  </PropertyGroup>
+  <ItemGroup>
+    <Library Include="clFixer.EXE.manifest" />
+    <Library Include="clFixer.Version" />
+    <FileDriver Include="TOPSPEED" />
+    <Compile Include="clFixer.clw">
+      <Generated>true</Generated>
+    </Compile>
+    <Compile Include="clFixer001.clw">
+      <Generated>true</Generated>
+    </Compile>
+    <Compile Include="clFixer002.clw">
+      <Generated>true</Generated>
+    </Compile>
+    <Compile Include="clFixer004.clw">
+      <Generated>true</Generated>
+    </Compile>
+    <Compile Include="clFixer005.clw">
+      <Generated>true</Generated>
+    </Compile>
+    <Compile Include="clFixer006.clw">
+      <Generated>true</Generated>
+    </Compile>
+    <Compile Include="clFixer007.clw">
+      <Generated>true</Generated>
+    </Compile>
+    <Compile Include="clFixer009.clw">
+      <Generated>true</Generated>
+    </Compile>
+    <Compile Include="clFixer010.clw">
+      <Generated>true</Generated>
+    </Compile>
+    <Compile Include="clFixer011.clw">
+      <Generated>true</Generated>
+    </Compile>
+    <Compile Include="clFixer012.clw">
+      <Generated>true</Generated>
+    </Compile>
+    <Compile Include="clFixer013.clw">
+      <Generated>true</Generated>
+    </Compile>
+    <Compile Include="clFixer014.clw">
+      <Generated>true</Generated>
+    </Compile>
+    <Compile Include="clFixer015.clw">
+      <Generated>true</Generated>
+    </Compile>
+    <Compile Include="clFixer016.clw">
+      <Generated>true</Generated>
+    </Compile>
+    <Compile Include="clFixer017.clw">
+      <Generated>true</Generated>
+    </Compile>
+    <Compile Include="CLFIXER_BC.CLW">
+      <Generated>true</Generated>
+    </Compile>
+    <Compile Include="clFixer_BC0.CLW">
+      <Generated>true</Generated>
+    </Compile>
+    <Compile Include="EFOCUS.CLW">
+      <Generated>true</Generated>
+    </Compile>
+    <None Include="zlibwapi.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <Generated>True</Generated>
+      <ProjectGenerated>True</ProjectGenerated>
+    </None>
+  </ItemGroup>
+  <Import Project="$(ClarionBinPath)\SoftVelocity.Build.Clarion.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>clfixer-old.bat</PreBuildEvent>
+    <PostBuildEvent>Zippy.exe HOURLY</PostBuildEvent>
+  </PropertyGroup>
+</Project>
