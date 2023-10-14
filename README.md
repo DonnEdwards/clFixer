@@ -1,7 +1,7 @@
 # clFixer
 Clarion Fixer Utility
 
-This utility allows you to make automated changes to your Clarion installation, such as changing all the "MS Sans Serif" and "Arial" fonts mentioned in various templates, to fonts from this centurey like "Segoe UI" for forms and "Calibri" for reports.
+This utility allows you to make automated changes to your Clarion installation, such as changing all the "MS Sans Serif" and "Arial" fonts mentioned in various templates, to fonts from this century like "Segoe UI" for forms and "Calibri" for reports.
 
 The application is described in much greater detail in the two PDF files included, and the EXEs can be downloaded from my blog
 https://donnedwards.openaccess.co.za/2023/10/clarion-fixer-part-1-using-app.html
