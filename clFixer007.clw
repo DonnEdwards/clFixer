@@ -18,18 +18,18 @@
 AboutBox PROCEDURE 
 
 EnhancedFocusManager EnhancedFocusClassType
-Window               WINDOW('About clFixer'),AT(75,75,263,105),FONT('Segoe UI',9),ICON('toolbox.ico'),IMM
-                       BUTTON('Close'),AT(221,7),USE(?Close),DEFAULT
+Window               WINDOW('About Clarion Fixer'),AT(75,75,299,105),FONT('Segoe UI',9),ICON('toolbox.ico'),IMM
+                       ENTRY(@s1),AT(61,63),USE(?ENTRY1),FLAT,TRN
                        IMAGE('toolbox.png'),AT(10,13,75,75),USE(?IMAGE1)
-                       STRING('clFixer'),AT(2,13,259),USE(?txtTitle),FONT(,14,,FONT:bold),CENTER,TRN
-                       ENTRY(@s30),AT(95,90,158,10),USE(glo:AppVersion),LEFT,FLAT,MSG('Program Version Number'),READONLY, |
-  TIP('Program Version Number'),TRN
-                       STRING('Freeware copyright © 2023 Black and White Inc'),AT(95,29,158,11),USE(?txtCopyright:2), |
-  FONT(,9,,FONT:bold),LEFT
+                       STRING('clFixer 0.2'),AT(96,13,166),USE(?txtTitle),FONT(,14,,FONT:bold),LEFT,TRN
+                       STRING('Freeware copyright © 2023 Black and White Inc'),AT(96,29,197,11),USE(?txtCopyright:2), |
+  FONT(,9,,FONT:bold),LEFT,TRN
                        PROMPT('Written by Donn Edwards with lots of help from the ClarionHub and ClarionLive c' & |
-  'ommunities.<0DH,0AH>Special thanks to CapeSoft for publishing WinEvent and StringThe' & |
-  'ory.<0DH,0AH>Toolbox icons created by Roundicons Premium at Flaticon.com'),AT(96,43,157, |
-  44),USE(?txtCopyright:3),FONT(,8,,FONT:regular)
+  'ommunities.<0DH,0AH>Special thanks to CapeSoft for publishing ABC Defaults, StringTh' & |
+  'eory and WinEvents.<0DH,0AH>Toolbox icons created by Roundicons Premium at Flaticon.com'), |
+  AT(96,43,193,44),USE(?txtCopyright:3),FONT(,8,,FONT:regular)
+                       ENTRY(@s30),AT(94,90,158,10),USE(glo:AppVersion),LEFT,FLAT,MSG('Program Version Number'),READONLY, |
+  TIP('Program Version Number'),TRN
                      END
 
     omit('***',WE::CantCloseNowSetHereDone=1)  !Getting Nested omit compile error, then uncheck the "Check for duplicate CantCloseNowSetHere variable declaration" in the WinEvent local template
@@ -65,17 +65,12 @@ ReturnValue          BYTE,AUTO
   SELF.Request = GlobalRequest                             ! Store the incoming request
   ReturnValue = PARENT.Init()
   IF ReturnValue THEN RETURN ReturnValue.
-  SELF.FirstField = ?Close
+  SELF.FirstField = ?ENTRY1
   SELF.VCRRequest &= VCRRequest
   SELF.Errors &= GlobalErrors                              ! Set this windows ErrorManager to the global ErrorManager
   CLEAR(GlobalRequest)                                     ! Clear GlobalRequest after storing locally
   CLEAR(GlobalResponse)
   SELF.AddItem(Toolbar)
-  IF SELF.Request = SelectRecord
-     SELF.AddItem(?Close,RequestCancelled)                 ! Add the close control to the window manger
-  ELSE
-     SELF.AddItem(?Close,RequestCompleted)                 ! Add the close control to the window manger
-  END
   SELF.Open(Window)                                        ! Open window
   Do DefineListboxStyle
   Alert(AltKeyPressed)  ! WinEvent : These keys cause a program to crash on Windows 7 and Windows 10.

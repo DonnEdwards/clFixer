@@ -20,43 +20,44 @@ UpdateAction PROCEDURE
 loc:StepId          LONG        ! Local copy of StepId
 i                   LONG
 lngStepIdmax        LONG        ! Maximum value of StepId
+udpt            UltimateDebugProcedureTracker
 CurrentTab           STRING(80)                            ! 
 ActionMessage        CSTRING(40)                           ! 
 EnhancedFocusManager EnhancedFocusClassType
 History::act:Record  LIKE(act:RECORD),THREAD
 QuickWindow          WINDOW('Form Action'),AT(,,483,278),FONT('Segoe UI',8,,FONT:regular,CHARSET:DEFAULT),RESIZE, |
   CENTER,ICON('toolbox.ico'),GRAY,IMM,MDI,HLP('UpdateAction'),SYSTEM
-                       PROMPT('Step Id:'),AT(32,12),USE(?act:StepId:Prompt),RIGHT,TRN
+                       PROMPT('Step Id:'),AT(11,13,50),USE(?act:StepId:Prompt),RIGHT,TRN
                        BUTTON('New Step No'),AT(143,10,66),USE(?btnNextStep)
                        STRING('Don''t apply this action to excluded files'),AT(243,41,209),USE(?lblExclude),RIGHT
-                       PROMPT('Description:'),AT(17,28),USE(?act:stDescription:Prompt)
+                       PROMPT('Description:'),AT(11,28,50),USE(?act:stDescription:Prompt),RIGHT
                        ENTRY(@s128),AT(65,28,405,10),USE(act:stDescription),MSG('Description of this step'),REQ,TIP('Descriptio' & |
   'n of this step')
-                       PROMPT('File Name:'),AT(22,54),USE(?act:FileName:Prompt)
+                       PROMPT('File Name:'),AT(11,54,50),USE(?act:FileName:Prompt),RIGHT
                        ENTRY(@s128),AT(65,54,405,10),USE(act:FileName),MSG('(Optional) Single file name for ch' & |
   'anges. Leave blank if global change'),TIP('(Optional) Single file name for changes. ' & |
   'Leave blank if global change')
-                       PROMPT('Line No:'),AT(29,69),USE(?act:LineNo:Prompt)
+                       PROMPT('Line No:'),AT(11,69,50),USE(?act:LineNo:Prompt),RIGHT
                        ENTRY(@n-14B),AT(65,69,65,10),USE(act:LineNo),MSG('(Optional) Start Line Number'),TIP('(Optional)' & |
   ' Start Line Number')
-                       PROMPT('Before:'),AT(33,85),USE(?act:stBefore:Prompt:2),RIGHT,TRN
-                       BUTTON('Paste ->'),AT(17,100,41,12),USE(?btnPasteBefore)
-                       TEXT,AT(65,84,405,80),USE(act:stBefore),VSCROLL,MSG('String Before (Case sensitive)'),SCROLL, |
+                       PROMPT('Before:'),AT(11,86,50),USE(?act:stBefore:Prompt:2),RIGHT,TRN
+                       BUTTON('Paste ->'),AT(19,100,41,12),USE(?btnPasteBefore)
+                       TEXT,AT(65,86,405,80),USE(act:stBefore),VSCROLL,MSG('String Before (Case sensitive)'),SCROLL, |
   TIP('String Before (Case sensitive)')
-                       PROMPT('After:'),AT(39,172),USE(?act:stAfter:Prompt:2),RIGHT,TRN
-                       BUTTON('Paste ->'),AT(17,186,41,12),USE(?btnPasteAfter)
-                       TEXT,AT(65,172,405,80),USE(act:stAfter),VSCROLL,MSG('String After (Case sensitive)'),SCROLL, |
+                       PROMPT('After:'),AT(11,173,50),USE(?act:stAfter:Prompt:2),RIGHT,TRN
+                       BUTTON('Paste ->'),AT(19,186,41,12),USE(?btnPasteAfter)
+                       TEXT,AT(65,174,405,80),USE(act:stAfter),VSCROLL,MSG('String After (Case sensitive)'),SCROLL, |
   TIP('String After (Case sensitive)')
                        BUTTON('&OK'),AT(369,255,49,14),USE(?OK),LEFT,ICON('WAOK.ICO'),MSG('Accept data and clo' & |
   'se the window'),TIP('Accept data and close the window')
                        BUTTON('&Cancel'),AT(421,255,49,14),USE(?Cancel),LEFT,ICON('WACANCEL.ICO'),MSG('Cancel operation'), |
   TIP('Cancel operation')
                        CHECK,AT(457,41,14,10),USE(act:ExcludeFilesYN),VALUE('1','0')
-                       ENTRY(@n-14),AT(65,12,65,10),USE(act:StepId),RIGHT(1),MSG('Step number'),REQ,TIP('Step number')
+                       ENTRY(@n-14),AT(65,13,65,10),USE(act:StepId),RIGHT(1),MSG('Step number'),REQ,TIP('Step number')
                        PROMPT('Disable:'),AT(407,12,46),USE(?lblDisableYN),RIGHT
                        CHECK,AT(457,12,13),USE(act:DisableYN),MSG('Disable YN'),TIP('Disable YN'),VALUE('1','0')
                        PROMPT('<<- Leave blank unless you are doing a single replacement in the file listed here'), |
-  AT(135,68,336),USE(?txtLineNo)
+  AT(135,69,336),USE(?txtLineNo)
                      END
 
     omit('***',WE::CantCloseNowSetHereDone=1)  !Getting Nested omit compile error, then uncheck the "Check for duplicate CantCloseNowSetHere variable declaration" in the WinEvent local template
@@ -92,7 +93,7 @@ DefineListboxStyle ROUTINE
 !| It`s called after the window open
 !|
 !---------------------------------------------------------------------------
-! Dislay Routines
+! Display Routines
 EnableDisabledYN    ROUTINE
     ! change description text to grey if DisabledYN
     if act:DisableYN then ! Disabled
@@ -105,43 +106,50 @@ EnableDisabledYN    ROUTINE
     
 EnableDisableLineNo ROUTINE   
     ! Disable Line No field if act:FileName is empty
-    if len(CLIP(act:FileName)) < 5 then  ! empty
-        ?act:LineNo{PROP:Flat} = True 
-        act:LineNo = 0  
-    else ! not empty
-        ?act:LineNo{PROP:Flat} = False
-    end ! not empty
+    IF ThisWindow.Request <> ViewRecord ! Don't do this during view mode      
+        if len(CLIP(act:FileName)) < 5 then  ! empty
+            ?act:LineNo{PROP:Flat} = True 
+            act:LineNo = 0  
+        else ! not empty
+            ?act:LineNo{PROP:Flat} = False
+        end ! not empty
+    END
     
+! CalcNextStep routine
 CalcNextStep        ROUTINE
     ! Find the largest step number, add 10
     loc:StepId = act:StepId ! Save the current step number
     lngStepIdmax = 0      ! Start
     !// Open an alias of the table so as not to screw things up
-    Access:ActionAlias.Open()
-    Access:ActionAlias.ClearKey(act1:ActionStepPK)
-    SET(act1:ActionStepPK)
-    LOOP UNTIL Access:ActionAlias.Next() <> Level:Benign ! Next
-        if lngStepIdmax < act1:StepId then ! lngStepIdmax
-            lngStepIdmax = act1:StepId   ! The new max
-        end ! lngStepIdmax
-    END ! Next
-    Access:ActionAlias.Close()
-    if loc:stepId <> lngStepIdmax then
-        ! Add to the most recent step to get the new one
-        act:stepId = lngStepIdmax + 10  
-        ! unless we already have the largest number
-    end 
+    if Access:ActionAlias.Open() = Level:Benign then ! open
+        Access:ActionAlias.ClearKey(act1:ActionStepPK)
+        SET(act1:ActionStepPK)
+        LOOP UNTIL Access:ActionAlias.Next() <> Level:Benign ! Next
+            if lngStepIdmax < act1:StepId then ! lngStepIdmax
+                lngStepIdmax = act1:StepId   ! The new max
+            end ! lngStepIdmax
+        END ! Next
+        Access:ActionAlias.Close()
+        if loc:stepId <> lngStepIdmax then
+            ! Add to the most recent step to get the new one
+            act:stepId = lngStepIdmax + 10  
+            ! unless we already have the largest number
+        end 
+    else ! open
+        MESSAGE('Trouble opening the ActionAlias table<13,10>Unable to calculate a new number','Please enter a step number manually',ICON:Exclamation,BUTTON:ABORT)
+        !post(EVENT:CloseDown) ! Close this window
+    end ! open
 
 ThisWindow.Ask PROCEDURE
 
   CODE
   CASE SELF.Request                                        ! Configure the action message text
   OF ViewRecord
-    ActionMessage = 'View Record'
+    ActionMessage = 'View Action Record'
   OF InsertRecord
     ActionMessage = 'Record Will Be Added'
   OF ChangeRecord
-    ActionMessage = 'Record Will Be Changed'
+    ActionMessage = 'Change Action Record'
   END
   QuickWindow{PROP:Text} = ActionMessage                   ! Display status message in title bar
   PARENT.Ask
@@ -152,6 +160,8 @@ ThisWindow.Init PROCEDURE
 ReturnValue          BYTE,AUTO
 
   CODE
+        udpt.Init(UD,'UpdateAction','clFixer005.clw','clFixer.EXE','10/19/2023 @ 06:06PM')    
+             
   GlobalErrors.SetProcedureName('UpdateAction')
   SELF.Request = GlobalRequest                             ! Store the incoming request
   ReturnValue = PARENT.Init()
@@ -200,11 +210,13 @@ ReturnValue          BYTE,AUTO
   Alert(AltSpace)       !
   WinAlertMouseZoom()
   WinAlert(WE::WM_QueryEndSession,,Return1+PostUser)
+  QuickWindow{Prop:Alrt,255} = CtrlShiftP
   IF SELF.Request = ViewRecord                             ! Configure controls for View Only mode
     DISABLE(?btnNextStep)
     ?act:stDescription{PROP:ReadOnly} = True
     ?act:FileName{PROP:ReadOnly} = True
-    ?act:LineNo{PROP:ReadOnly} = True
+    ?act:LineNo{PROP:Flat} = TRUE
+    ?act:LineNo{PROP:ReadOnly} = TRUE
     DISABLE(?btnPasteBefore)
     ?act:stBefore{PROP:ReadOnly} = True
     DISABLE(?btnPasteAfter)
@@ -212,6 +224,7 @@ ReturnValue          BYTE,AUTO
     ?act:ExcludeFilesYN{PROP:ReadOnly} = True
     ?act:StepId{PROP:ReadOnly} = True
     ?act:DisableYN{PROP:ReadOnly} = True
+    ?txtLineNo{PROP:ReadOnly} = True
   END
     ! Configure controls for View Only mode
     IF SELF.Request = ViewRecord                             
@@ -251,6 +264,8 @@ ReturnValue          BYTE,AUTO
     INIMgr.Update('UpdateAction',QuickWindow)              ! Save window data to non-volatile store
   END
   GlobalErrors.SetProcedureName
+            
+   
   RETURN ReturnValue
 
 
@@ -322,6 +337,14 @@ Looped BYTE
   If event() = event:VisibleOnDesktop !or event() = event:moved
     ds_VisibleOnDesktop()
   end
+     IF KEYCODE()=CtrlShiftP AND EVENT() = Event:PreAlertKey
+       CYCLE
+     END
+     IF KEYCODE()=CtrlShiftP  
+        UD.ShowProcedureInfo('UpdateAction',UD.SetApplicationName('clFixer','EXE'),QuickWindow{PROP:Hlp},'09/25/2023 @ 06:29PM','10/19/2023 @ 06:06PM','10/19/2023 @ 06:13PM')  
+    
+       CYCLE
+     END
     RETURN ReturnValue
   END
   ReturnValue = Level:Fatal
@@ -342,7 +365,7 @@ Looped BYTE
     END
   CASE FIELD()
   OF ?act:FileName
-        ! Disable Line No field if act:FileName is empty
+        ! Disable Line No field if act:FileName is empty and in edit mode
         do EnableDisableLineNo
   OF ?act:DisableYN
         ! All events - change description text to grey if DisabledYN  

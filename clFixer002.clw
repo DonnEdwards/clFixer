@@ -23,6 +23,7 @@
 !!! </summary>
 BrowseAction PROCEDURE 
 
+udpt            UltimateDebugProcedureTracker
 loc:StepId          LONG    ! Local copy of StepId
 CurrentTab           STRING(80)                            ! 
 BRW1::View:Browse    VIEW(Action)
@@ -111,46 +112,76 @@ DefineListboxStyle ROUTINE
 !|
 !---------------------------------------------------------------------------
 RenumberRecords ROUTINE
+    !
     !// First pass: update all the act:ReorderNo fields
-    Access:ActionAlias.Open()
-    Access:ActionAlias.ClearKey(act1:ActionStepPK)
-    SET(act1:ActionStepPK)
-    loc:StepId = 90
-    LOOP UNTIL Access:ActionAlias.Next() <> Level:Benign ! Next
-        loc:StepId += 10
-        act1:ReorderNo = 1000000 + loc:StepId
-        Access:ActionAlias.Update()
-        !dbg(act1:StepId & ' - ' & act1:ReorderNo & ' - ' & loc:StepId)            
-    END ! Next
-    Access:ActionAlias.Close()
-    !// Second pass: update all the act1:StepId fields with
-    !   big numbers
-    Access:ActionAlias.Open()
-    Access:ActionAlias.ClearKey(act1:ActionStepPK)
-    SET(act1:ActionReorder)
-    LOOP UNTIL Access:ActionAlias.Next() <> Level:Benign ! Next
-        act1:StepId = act1:ReorderNo
-        Access:ActionAlias.Update()
-        !dbg(act1:StepId & ' - ' & act1:ReorderNo)            
-    END ! Next
-    Access:ActionAlias.Close()       
-    !// Third pass: update all the act1:StepId fields with
-    !   correct step numbers
-    Access:ActionAlias.Open()
-    Access:ActionAlias.ClearKey(act1:ActionStepPK)
-    SET(act1:ActionReorder)
-    LOOP UNTIL Access:ActionAlias.Next() <> Level:Benign ! Next
-        act1:StepId = act1:ReorderNo - 1000000
-        Access:ActionAlias.Update()
-        !dbg(act1:StepId & ' - ' & act1:ReorderNo)            
-    END ! Next
-    Access:ActionAlias.Close()
+    !
+    if Access:ActionAlias.Open() = Level:Benign then ! open (1)
+        Access:ActionAlias.ClearKey(act1:ActionStepPK)
+        SET(act1:ActionStepPK)
+        loc:StepId = 90
+        LOOP UNTIL Access:ActionAlias.Next() <> Level:Benign ! Next
+            loc:StepId += 10
+            act1:ReorderNo = 1000000 + loc:StepId
+            if Access:ActionAlias.Update() <> Level:Benign then ! Trouble
+                MESSAGE('Trouble updating the ActionAlias table (1)','Window will close',ICON:Exclamation,BUTTON:ABORT)
+                post(EVENT:CloseDown) ! Close this window
+                EXIT
+            end ! trouble
+            !dbg(act1:StepId & ' - ' & act1:ReorderNo & ' - ' & loc:StepId)            
+        END ! Next
+        Access:ActionAlias.Close()
+        !
+        !// Second pass: update all the act1:StepId fields with
+        !   big numbers
+        if Access:ActionAlias.Open() = Level:Benign then ! open (2)
+            Access:ActionAlias.ClearKey(act1:ActionStepPK)
+            SET(act1:ActionReorder)
+            LOOP UNTIL Access:ActionAlias.Next() <> Level:Benign ! Next
+                act1:StepId = act1:ReorderNo
+                if Access:ActionAlias.Update() <> Level:Benign then ! Trouble
+                    MESSAGE('Trouble updating the ActionAlias table (2)','Window will close',ICON:Exclamation,BUTTON:ABORT)
+                    post(EVENT:CloseDown) ! Close this window
+                    EXIT
+                end ! trouble
+                !dbg(act1:StepId & ' - ' & act1:ReorderNo)            
+            END ! Next
+            Access:ActionAlias.Close()     
+            !
+            !// Third pass: update all the act1:StepId fields with
+            !   correct step numbers
+            if Access:ActionAlias.Open() = Level:Benign then ! open (3)
+                Access:ActionAlias.ClearKey(act1:ActionStepPK)
+                SET(act1:ActionReorder)
+                LOOP UNTIL Access:ActionAlias.Next() <> Level:Benign ! Next
+                    act1:StepId = act1:ReorderNo - 1000000
+                    if Access:ActionAlias.Update() <> Level:Benign then ! Trouble
+                        MESSAGE('Trouble updating the ActionAlias table (3)','Window will close',ICON:Exclamation,BUTTON:ABORT)
+                        post(EVENT:CloseDown) ! Close this window
+                        EXIT
+                    end ! trouble
+                    !dbg(act1:StepId & ' - ' & act1:ReorderNo)            
+                END ! Next
+                Access:ActionAlias.Close()
+            else ! Open (3)
+                MESSAGE('Trouble opening the ActionAlias table (3)','Window will close',ICON:Exclamation,BUTTON:ABORT)
+                post(EVENT:CloseDown) ! Close this window
+            end ! Open
+        else ! Open (2)
+            MESSAGE('Trouble opening the ActionAlias table (2)','Window will close',ICON:Exclamation,BUTTON:ABORT)
+            post(EVENT:CloseDown) ! Close this window
+        end ! Open
+    else ! Open (1)
+        MESSAGE('Trouble opening the ActionAlias table (1)','Window will close',ICON:Exclamation,BUTTON:ABORT)
+        post(EVENT:CloseDown) ! Close this window
+    end ! Open
 
 ThisWindow.Init PROCEDURE
 
 ReturnValue          BYTE,AUTO
 
   CODE
+        udpt.Init(UD,'BrowseAction','clFixer002.clw','clFixer.EXE','10/19/2023 @ 06:07PM')    
+             
   GlobalErrors.SetProcedureName('BrowseAction')
   SELF.Request = GlobalRequest                             ! Store the incoming request
   ReturnValue = PARENT.Init()
@@ -180,6 +211,7 @@ ReturnValue          BYTE,AUTO
   Alert(AltSpace)       !
   WinAlertMouseZoom()
   WinAlert(WE::WM_QueryEndSession,,Return1+PostUser)
+  QuickWindow{Prop:Alrt,255} = CtrlShiftP
   BRW1.Q &= Queue:Browse:1
   BRW1::Sort0:StepClass.Init(+ScrollSort:AllowAlpha)       ! Moveable thumb based upon act:StepId for sort order 1
   BRW1.AddSortOrder(BRW1::Sort0:StepClass,act:ActionStepPK) ! Add the sort order for act:ActionStepPK for sort order 1
@@ -225,6 +257,8 @@ ReturnValue          BYTE,AUTO
     INIMgr.Update('BrowseAction',QuickWindow)              ! Save window data to non-volatile store
   END
   GlobalErrors.SetProcedureName
+            
+   
   RETURN ReturnValue
 
 
@@ -298,6 +332,14 @@ Looped BYTE
   If event() = event:VisibleOnDesktop !or event() = event:moved
     ds_VisibleOnDesktop()
   end
+     IF KEYCODE()=CtrlShiftP AND EVENT() = Event:PreAlertKey
+       CYCLE
+     END
+     IF KEYCODE()=CtrlShiftP  
+        UD.ShowProcedureInfo('BrowseAction',UD.SetApplicationName('clFixer','EXE'),QuickWindow{PROP:Hlp},'09/25/2023 @ 06:29PM','10/19/2023 @ 06:07PM','10/19/2023 @ 06:13PM')  
+    
+       CYCLE
+     END
     RETURN ReturnValue
   END
   ReturnValue = Level:Fatal

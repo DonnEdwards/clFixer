@@ -19,6 +19,7 @@
 !!! </summary>
 UpdateSetting PROCEDURE 
 
+udpt            UltimateDebugProcedureTracker
 CurrentTab           STRING(80)                            ! 
 ActionMessage        CSTRING(40)                           ! 
 EnhancedFocusManager EnhancedFocusClassType
@@ -95,7 +96,7 @@ ThisWindow.Ask PROCEDURE
   CODE
   CASE SELF.Request                                        ! Configure the action message text
   OF ViewRecord
-    ActionMessage = 'View Record'
+    ActionMessage = 'View Settings Record'
   OF InsertRecord
     ActionMessage = 'Record Will Be Added'
   OF ChangeRecord
@@ -110,6 +111,8 @@ ThisWindow.Init PROCEDURE
 ReturnValue          BYTE,AUTO
 
   CODE
+        udpt.Init(UD,'UpdateSetting','clFixer006.clw','clFixer.EXE','10/20/2023 @ 01:59PM')    
+             
   GlobalErrors.SetProcedureName('UpdateSetting')
   SELF.Request = GlobalRequest                             ! Store the incoming request
   ReturnValue = PARENT.Init()
@@ -154,6 +157,7 @@ ReturnValue          BYTE,AUTO
   Alert(AltSpace)       !
   WinAlertMouseZoom()
   WinAlert(WE::WM_QueryEndSession,,Return1+PostUser)
+  QuickWindow{Prop:Alrt,255} = CtrlShiftP
   IF SELF.Request = ViewRecord                             ! Configure controls for View Only mode
     ?set:stDescription{PROP:ReadOnly} = True
     ?set:RootPath{PROP:ReadOnly} = True
@@ -203,6 +207,8 @@ ReturnValue          BYTE,AUTO
     INIMgr.Update('UpdateSetting',QuickWindow)             ! Save window data to non-volatile store
   END
   GlobalErrors.SetProcedureName
+            
+   
   RETURN ReturnValue
 
 
@@ -211,19 +217,32 @@ ThisWindow.Run PROCEDURE
 ReturnValue          BYTE,AUTO
 
   CODE
+    !// Go to the first record
     GlobalRequest = changeRecord
-    Access:Setting.Open()
     Access:Setting.UseFile()
-    If Records(Setting) < 1
-        Access:Setting.PrimeRecord()
-        set:GUID = glo:st.MakeGuid()
-        Access:Setting.Insert()
-    else
-        set(set:SettingPK)
-        Access:Setting.Next()
-    End
-    dbg(set:GUID)
-    do UpdateGlobalFields ! Update record val;ues to global variables    
+    if Access:Setting.Open() <> Level:Benign then ! open
+        MESSAGE('Trouble opening the Setting table','Window will close',ICON:Exclamation,BUTTON:ABORT)
+        post(EVENT:CloseDown) ! Close this window
+        ReturnValue = RequestCancelled ! Cancel the Run procedure and exit
+        RETURN ReturnValue
+    else ! open
+        Access:Setting.ClearKey(set:SettingPK)
+        !dbg(set:GUID)
+        !dbg(Records(Setting))
+        If Records(Setting) < 1 then 
+            Access:Setting.PrimeRecord()
+            set:GUID = glo:st.MakeGuid()
+            if Access:Setting.Insert() <> Level:Benign then
+                MESSAGE('Trouble adding a record to the Setting.tps table','Window will close',ICON:Exclamation,BUTTON:ABORT)
+                post(EVENT:CloseDown) ! Close the main window (ie Quit)
+            end 
+        else
+            set(set:SettingPK)
+            Access:Setting.Next() ! Go to the first record
+        End
+        dbg(set:GUID)
+        do UpdateGlobalFields ! Update record values to global variables 
+    end ! open
   ReturnValue = PARENT.Run()
   IF SELF.Request = ViewRecord                             ! In View Only mode always signal RequestCancelled
     ReturnValue = RequestCancelled
@@ -278,6 +297,14 @@ Looped BYTE
   If event() = event:VisibleOnDesktop !or event() = event:moved
     ds_VisibleOnDesktop()
   end
+     IF KEYCODE()=CtrlShiftP AND EVENT() = Event:PreAlertKey
+       CYCLE
+     END
+     IF KEYCODE()=CtrlShiftP  
+        UD.ShowProcedureInfo('UpdateSetting',UD.SetApplicationName('clFixer','EXE'),QuickWindow{PROP:Hlp},'09/25/2023 @ 06:29PM','10/20/2023 @ 01:59PM','10/20/2023 @ 01:59PM')  
+    
+       CYCLE
+     END
     RETURN ReturnValue
   END
   ReturnValue = Level:Fatal

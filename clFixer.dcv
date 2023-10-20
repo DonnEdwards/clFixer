@@ -2,7 +2,7 @@
 <Dictionary Name="tmpclFixer" Version="1" StructureChecked="1" DctxFormat="4">
 	<DictionaryVersion Version="1" Description="Initial version"/>
 	<Table Guid="{e58035e6-a16e-4d64-aec2-a1b48b078f42}" Usage="Global" Name="globals" Prefix="glo">
-		<Audit CreateUser="Administrator" CreateDate="25 SEP 2023" CreateTime=" 3:52:52PM" CreateVersionNumber="1" ModifiedUser="Administrator" ModifiedDate=" 5 OCT 2023" ModifiedTime=" 6:44:26PM" ModifiedVersionNumber="1"/>
+		<Audit CreateUser="Administrator" CreateDate="25 SEP 2023" CreateTime=" 3:52:52PM" CreateVersionNumber="1" ModifiedUser="Administrator" ModifiedDate="16 OCT 2023" ModifiedTime=" 4:20:08PM" ModifiedVersionNumber="1"/>
 		<Option Property="Version" PropertyType="3" PropertyValue="1"/>
 		<Field Guid="{38a5215f-166c-40a2-b541-86d9393df87c}" Name="qRecords" Description="Queue Records" DataType="LONG" Size="4" ScreenPicture="@n-14" ScreenPrompt="q Records:" ReportHeading="q Records" Justification="RIGHT" Offset="1" InitialValue="0" Message="Queue Records" Tooltip="Queue Records" ReportControl=" STRING(@n-14),USE(glo:qRecords),RIGHT(1)">
 			<WindowControl>
@@ -90,6 +90,14 @@
 				<Line Text=" ENTRY(@n-14),USE(glo:FilesChanged),RIGHT(1),MSG(&apos;No of Files Changed&apos;),TIP(&apos;No of Files Changed&apos;)"/>
 			</WindowControl>
 			<Audit CreateUser="Administrator" CreateDate=" 4 OCT 2023" CreateTime=" 7:33:23PM" CreateVersionNumber="1" ModifiedUser="Administrator" ModifiedDate=" 4 OCT 2023" ModifiedTime=" 7:34:00PM" ModifiedVersionNumber="1"/>
+			<Validity Check="NOCHECKS"/>
+		</Field>
+		<Field Guid="{59c721ae-7a92-4672-8ad9-89fcf1b86a3b}" Name="FileErrors" Description="No of Files having an error" DataType="LONG" Size="4" ScreenPicture="@n-14" ScreenPrompt="File Errors:" ReportHeading="File Errors" Justification="RIGHT" Offset="1" InitialValue="0" Message="No of Files having an error" Tooltip="No of Files having an error" ReportControl=" STRING(@n-14),USE(glo:FileErrors),RIGHT(1)">
+			<WindowControl>
+				<Line Text=" PROMPT(&apos;File Errors:&apos;),USE(?glo:FileErrors:Prompt)"/>
+				<Line Text=" ENTRY(@n-14),USE(glo:FileErrors),RIGHT(1),MSG(&apos;No of Files having an error&apos;),TIP(&apos;No of Files having an error&apos;)"/>
+			</WindowControl>
+			<Audit CreateUser="Administrator" CreateDate="16 OCT 2023" CreateTime=" 4:19:33PM" CreateVersionNumber="1" ModifiedUser="Administrator" ModifiedDate="16 OCT 2023" ModifiedTime=" 4:20:08PM" ModifiedVersionNumber="1"/>
 			<Validity Check="NOCHECKS"/>
 		</Field>
 		<Field Guid="{91557b56-46de-4a22-964c-768e845932d6}" Name="stfiles" BaseType="StringTheory" DataType="TYPE" ScreenPicture="@s200" ScreenPrompt="stfiles:" ReportHeading="stfiles" ReportControl=" STRING(@s200),USE(glo:stfiles)">

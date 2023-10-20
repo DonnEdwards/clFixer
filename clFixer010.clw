@@ -13,10 +13,17 @@
 !!! </summary>
 dbg                  PROCEDURE  (string pstrDebugMessage)  ! Declare Procedure
 std  Stringtheory   ! String Theory Debug variable
+udpt            UltimateDebugProcedureTracker
 
   CODE
+    if false then ! disable the u;timate debug message
+        udpt.Init(UD,'dbg','clFixer010.clw','clFixer.EXE','10/10/2023 @ 08:00PM')    
+    end 
+             
     !// If you encounter an UltimateDebug message here, put an "if false then" statement in front of it
     !   and an "end" statement on the next line after it
+           
+  
 
     !// The purpose of this procedure is to display debug messages
     !   This means you can enable/disable the UltimateDebug messages

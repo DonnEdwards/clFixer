@@ -27,25 +27,25 @@ QuickWindow          WINDOW('Main Dashboard'),AT(,,401,227),FONT('Segoe UI',9,,F
   CENTER,ICON('toolbox.ico'),GRAY,IMM,HLP('MyDashboard'),SYSTEM
                        BUTTON('  &OK'),AT(343,204,47,14),USE(?Ok),LEFT,ICON('WAOK.ICO'),MSG('Close this screen'), |
   TIP('Close this screen')
-                       BUTTON('Process the Files'),AT(11,11,81,18),USE(?btnScanFiles),FONT(,,,FONT:bold),LEFT,ICON('WIZFIND.ICO'), |
+                       BUTTON('Process the Files'),AT(11,11,91,18),USE(?btnScanFiles),FONT(,,,FONT:bold),LEFT,ICON('WIZFIND.ICO'), |
   MSG('Find the files and make the requested changes'),TIP('Find the files and make the' & |
   ' requested changes')
-                       PROMPT('Files Found:'),AT(95,16,63),USE(?glo:qRecords:Prompt),RIGHT
+                       PROMPT('Files Found:'),AT(95,16,63),USE(?glo:qRecords:Prompt),RIGHT,TRN
                        ENTRY(@n-14B),AT(163,15,60,12),USE(glo:qRecords),RIGHT(1),FLAT,MSG('Queue Records'),READONLY, |
   TIP('Queue Records')
-                       PROMPT('Folders:'),AT(287,16,38),USE(?glo:qFolders:Prompt),RIGHT
-                       ENTRY(@n-14B),AT(329,15,60,12),USE(glo:qFolders),RIGHT(1),FLAT,MSG('Number of Folders scanned'), |
+                       PROMPT('Folders:'),AT(286,16,38),USE(?glo:qFolders:Prompt),RIGHT
+                       ENTRY(@n-14B),AT(328,15,60,12),USE(glo:qFolders),RIGHT(1),FLAT,MSG('Number of Folders scanned'), |
   READONLY,TIP('Number of Folders scanned')
-                       PROMPT('App Description:'),AT(107,40),USE(?glo:AppDescription:Prompt),RIGHT
-                       ENTRY(@s50),AT(163,39,225,12),USE(glo:AppDescription),FLAT,MSG('Description'),READONLY,TIP('Description')
+                       PROMPT('App Description:'),AT(99,39,58),USE(?glo:AppDescription:Prompt),RIGHT
+                       ENTRY(@s50),AT(163,38,225,12),USE(glo:AppDescription),FLAT,MSG('Description'),READONLY,TIP('Description')
                        PROMPT('Root Path:'),AT(99,54,58),USE(?glo:RootPath:Prompt),RIGHT
-                       ENTRY(@s255),AT(163,54,225,12),USE(glo:RootPath),FLAT,MSG('Root Path'),READONLY,TIP('Root Path')
-                       PROMPT('File Extensions:'),AT(99,70,58),USE(?glo:FileExtensions:Prompt),RIGHT
+                       ENTRY(@s255),AT(163,53,225,12),USE(glo:RootPath),FLAT,MSG('Root Path'),READONLY,TIP('Root Path')
+                       PROMPT('File Extensions:'),AT(99,68,58),USE(?glo:FileExtensions:Prompt),RIGHT
                        ENTRY(@s250),AT(163,68,225,12),USE(glo:FileExtensions),FLAT,MSG('File Extensions'),READONLY, |
   TIP('File Extensions')
                        PROMPT('Exclude Files:'),AT(99,85,58),USE(?glo:ExcludeFiles:Prompt),RIGHT
                        TEXT,AT(163,83,225,100),USE(glo:ExcludeFiles),VSCROLL,FLAT,MSG('Exclude Files'),READONLY,TIP('Exclude Files')
-                       ENTRY(@s80),AT(11,187,376,10),USE(glo:ProgressMessage),CENTER,FLAT,MSG('Progress Message'), |
+                       ENTRY(@s80),AT(12,187,376,10),USE(glo:ProgressMessage),CENTER,FLAT,MSG('Progress Message'), |
   READONLY,TIP('Progress Message'),TRN
                      END
 

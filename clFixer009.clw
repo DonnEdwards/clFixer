@@ -71,52 +71,59 @@ OsBits               LONG                                  !
 EnhancedFocusManager EnhancedFocusClassType
 window               WINDOW('WinEvent System Info'),AT(,,301,227),FONT('Segoe UI',10,,FONT:regular),DOUBLE,CENTER, |
   ICON('System.ico'),IMM,SYSTEM
-                       BUTTON('Close'),AT(254,13),USE(?Close)
-                       STRING('Windows Version:'),AT(38,26),USE(?String1)
-                       STRING(@s3),AT(105,26),USE(WinVer),LEFT
+                       BUTTON(' Close'),AT(238,200,54),USE(?Close),LEFT,ICON('System.ico')
+                       STRING('Windows Version:'),AT(13,26,83),USE(?String1),RIGHT
+                       STRING(@s3),AT(102,26),USE(WinVer),LEFT
                        STRING('Release:'),AT(126,26),USE(?String3)
                        STRING(@s3),AT(157,26,17,10),USE(WinRel)
-                       STRING(@s3),AT(157,34),USE(DosRel)
-                       PROMPT('Windows Version Name:'),AT(21,13),USE(?NewWinVersion:Prompt)
-                       STRING(@s60),AT(105,13,144),USE(NewWinVersion)
-                       STRING('Available Space (C:):'),AT(30,61),USE(?String10)
-                       STRING(@n15),AT(105,61),USE(DiskFree),RIGHT
-                       PROMPT('MB'),AT(185,61),USE(?Prompt2)
-                       STRING('Maximum Capacity (C:):'),AT(19,69),USE(?String12)
-                       STRING(@n15),AT(105,69),USE(DiskTotal),RIGHT
-                       PROMPT('MB'),AT(185,69),USE(?Prompt3)
-                       STRING('Memory Used by this program (Kb):'),AT(21,90),USE(?String30)
-                       STRING(@n13),AT(154,90),USE(UserMemory),RIGHT
-                       STRING('Memory Analysis for the whole machine (in Kb)'),AT(21,101),USE(?String28)
-                       STRING('Total'),AT(127,111),USE(?String25),FONT(,,COLOR:Navy,FONT:bold,CHARSET:ANSI),RIGHT
-                       STRING('Free'),AT(272,111),USE(?String27),FONT(,,COLOR:Navy,FONT:bold,CHARSET:ANSI),RIGHT
-                       STRING('Physical Ram:'),AT(34,121),USE(?String29),FONT(,,COLOR:Navy,FONT:bold,CHARSET:ANSI)
-                       STRING(@n13),AT(84,121),USE(RamTotal),RIGHT
-                       STRING(@n13),AT(154,121),USE(RamUsed),RIGHT
-                       STRING(@n13),AT(227,121),USE(RamFree),RIGHT
-                       STRING('Swap File:'),AT(47,132),USE(?String31),FONT(,,COLOR:Navy,FONT:bold,CHARSET:ANSI)
-                       STRING(@n13),AT(84,132),USE(SwapTotal),RIGHT
-                       STRING(@n13),AT(154,132),USE(SwapUsed),RIGHT
-                       STRING(@n13),AT(227,132),USE(SwapFree),RIGHT
-                       STRING('Virtual Memory:'),AT(24,143),USE(?String32),FONT(,,COLOR:Navy,FONT:bold,CHARSET:ANSI)
-                       STRING(@n13),AT(84,143),USE(VirtualTotal),RIGHT
-                       STRING(@n13),AT(154,143),USE(VirtualUsed),RIGHT
-                       STRING(@n13),AT(227,143),USE(VirtualFree),RIGHT
-                       PROMPT('Screen Width:'),AT(65,161),USE(?ScreenWidth:Prompt),RIGHT
-                       STRING(@n-14),AT(112,161),USE(ScreenWidth),RIGHT(1)
-                       STRING('Used'),AT(197,111),USE(?String26),FONT(,,COLOR:Navy,FONT:bold,CHARSET:ANSI),RIGHT
-                       STRING('Release:'),AT(126,34),USE(?String3:2)
-                       STRING(@s3),AT(105,34),USE(DosVer),LEFT
-                       STRING('Dos Version:'),AT(54,34),USE(?String1:2)
-                       PROMPT('Screen Height:'),AT(62,171),USE(?ScreenHeight:Prompt),RIGHT
-                       STRING(@n-14),AT(112,171),USE(ScreenHeight),RIGHT(1)
-                       PROMPT('Screen Depth:'),AT(64,182),USE(?ScreenDepth:Prompt),RIGHT
-                       STRING(@n-14),AT(112,182),USE(ScreenDepth),RIGHT(1)
-                       PROMPT('Screenx DPI:'),AT(70,193),USE(?ScreenxDPI:Prompt),RIGHT
-                       STRING(@n-14),AT(112,193),USE(ScreenxDPI),RIGHT(1)
-                       STRING(@n-14),AT(187,192),USE(ScreenyDPI)
-                       STRING('OS Bits:'),AT(185,34),USE(?STRING2)
-                       STRING(@n3),AT(215,34),USE(OsBits)
+                       STRING(@s3),AT(157,37),USE(DosRel)
+                       PROMPT('Windows Version Name:'),AT(13,13,83),USE(?NewWinVersion:Prompt),RIGHT
+                       STRING(@s60),AT(102,13,187),USE(NewWinVersion),TRN
+                       STRING('Available Space (C:):'),AT(13,57,83),USE(?String10),RIGHT
+                       STRING(@n13),AT(102,57),USE(DiskFree),RIGHT
+                       PROMPT('MB'),AT(170,57,26),USE(?Prompt2)
+                       STRING('Maximum Capacity (C:):'),AT(13,69,83),USE(?String12),RIGHT
+                       STRING(@n13),AT(102,69),USE(DiskTotal),RIGHT
+                       PROMPT('MB'),AT(170,69,26),USE(?Prompt3)
+                       STRING('Memory Used by this program (Kb):'),AT(21,90,133),USE(?String30),FONT(,,COLOR:Navy), |
+  RIGHT
+                       STRING(@n13),AT(154,90),USE(UserMemory),FONT(,,COLOR:Navy),RIGHT
+                       STRING('Memory Analysis for the whole machine (in Kb)'),AT(21,101),USE(?String28),FONT(,,COLOR:Navy)
+                       STRING('Total'),AT(122,111,23),USE(?String25),FONT(,,COLOR:Navy,FONT:regular,CHARSET:ANSI), |
+  RIGHT
+                       STRING('Free'),AT(259,111,23),USE(?String27),FONT(,,COLOR:Navy,FONT:regular,CHARSET:ANSI), |
+  RIGHT
+                       STRING('Physical Ram:'),AT(19,121,65),USE(?String29),FONT(,,COLOR:Navy,FONT:regular,CHARSET:ANSI), |
+  RIGHT
+                       STRING(@n13),AT(89,121),USE(RamTotal),FONT(,,COLOR:Navy),RIGHT
+                       STRING(@n13),AT(154,121),USE(RamUsed),FONT(,,COLOR:Navy),RIGHT
+                       STRING(@n13),AT(227,121),USE(RamFree),FONT(,,COLOR:Navy),RIGHT
+                       STRING('Swap File:'),AT(19,132,65),USE(?String31),FONT(,,COLOR:Navy,FONT:regular,CHARSET:ANSI), |
+  RIGHT
+                       STRING(@n13),AT(89,132),USE(SwapTotal),FONT(,,COLOR:Navy),RIGHT
+                       STRING(@n13),AT(154,132),USE(SwapUsed),FONT(,,COLOR:Navy),RIGHT
+                       STRING(@n13),AT(227,132),USE(SwapFree),FONT(,,COLOR:Navy),RIGHT
+                       STRING('Virtual Memory:'),AT(19,143,65),USE(?String32),FONT(,,COLOR:Navy,FONT:regular,CHARSET:ANSI), |
+  RIGHT
+                       STRING(@n13),AT(89,143),USE(VirtualTotal),FONT(,,COLOR:Navy),RIGHT
+                       STRING(@n13),AT(154,143),USE(VirtualUsed),FONT(,,COLOR:Navy),RIGHT
+                       STRING(@n13),AT(227,143),USE(VirtualFree),FONT(,,COLOR:Navy),RIGHT
+                       PROMPT('Screen Width:'),AT(34,174,79),USE(?ScreenWidth:Prompt),RIGHT
+                       STRING(@n-14),AT(112,173),USE(ScreenWidth),RIGHT(1)
+                       STRING('Used'),AT(186,111,23),USE(?String26),FONT(,,COLOR:Navy,FONT:regular,CHARSET:ANSI), |
+  RIGHT
+                       STRING('Release:'),AT(126,37),USE(?String3:2)
+                       STRING(@s3),AT(102,37),USE(DosVer),LEFT
+                       STRING('Dos Version:'),AT(13,37,83),USE(?String1:2),RIGHT
+                       PROMPT('Screen Height:'),AT(34,185,79),USE(?ScreenHeight:Prompt),RIGHT
+                       STRING(@n-14),AT(112,185),USE(ScreenHeight),RIGHT(1)
+                       PROMPT('Screen Depth:'),AT(34,197,79),USE(?ScreenDepth:Prompt),RIGHT
+                       STRING(@n-14),AT(112,197),USE(ScreenDepth),RIGHT(1)
+                       PROMPT('Screenx DPI:'),AT(34,162,79),USE(?ScreenxDPI:Prompt),RIGHT
+                       STRING(@n-14),AT(112,162),USE(ScreenxDPI),RIGHT(1)
+                       STRING(@n-14),AT(185,162),USE(ScreenyDPI)
+                       STRING('OS Bits:'),AT(185,37),USE(?STRING2)
+                       STRING(@n3),AT(215,37),USE(OsBits)
                      END
 
     omit('***',WE::CantCloseNowSetHereDone=1)  !Getting Nested omit compile error, then uncheck the "Check for duplicate CantCloseNowSetHere variable declaration" in the WinEvent local template

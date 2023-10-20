@@ -90,6 +90,7 @@ Main PROCEDURE
 ! -----------------------------------------------------------------------------
 !endregion
 
+udpt            UltimateDebugProcedureTracker
 EnhancedFocusManager EnhancedFocusClassType
 AppFrame             APPLICATION(' Clarion Fixer '),AT(,,525,357),FONT('Segoe UI',8,,FONT:regular,CHARSET:DEFAULT), |
   RESIZE,CENTERED,CENTER,ICON('toolbox.ico'),MAX,STATUS(-1,80,120,45),SYSTEM,WALLPAPER('toolbox.png'),IMM
@@ -122,6 +123,8 @@ AppFrame             APPLICATION(' Clarion Fixer '),AT(,,525,357),FONT('Segoe UI
                            ITEM('&Diagnostics Information'),USE(?SystemInfo),MSG('Information about Windows')
                          END
                        END
+                       !            BUTTON,AT(172,2,14,14),USE(?Toolbar:Help, Toolbar:Help),ICON('WAVCRHELP.ICO'), |
+                       !              DISABLE,FLAT,TIP('Get Help'),#SEQ(1),#ORDINAL(35)
                        TOOLBAR,AT(0,0,525,16),USE(?Toolbar)
                          BUTTON,AT(4,2,14,14),USE(?Toolbar:Top, Toolbar:Top),ICON('WAVCRFIRST.ICO'),DISABLE,FLAT,TIP('Go to the ' & |
   'First Page')
@@ -147,8 +150,6 @@ AppFrame             APPLICATION(' Clarion Fixer '),AT(,,525,357),FONT('Segoe UI
   TIP('Delete This Record')
                          BUTTON,AT(158,2,14,14),USE(?Toolbar:History, Toolbar:History),ICON('WADITTO.ICO'),DISABLE, |
   FLAT,TIP('Previous value')
-                         !            BUTTON,AT(172,2,14,14),USE(?Toolbar:Help, Toolbar:Help),ICON('WAVCRHELP.ICO'), |
-                         !              DISABLE,FLAT,TIP('Get Help'),#SEQ(1),#ORDINAL(35)
                        END
                      END
 
@@ -208,6 +209,8 @@ ThisWindow.Init PROCEDURE
 ReturnValue          BYTE,AUTO
 
   CODE
+        udpt.Init(UD,'Main','clFixer001.clw','clFixer.EXE','10/20/2023 @ 01:03PM')    
+             
   GlobalErrors.SetProcedureName('Main')
   SELF.Request = GlobalRequest                             ! Store the incoming request
   ReturnValue = PARENT.Init()
@@ -230,6 +233,7 @@ ReturnValue          BYTE,AUTO
   Alert(AltSpace)       !
   WinAlertMouseZoom()
   WinAlert(WE::WM_QueryEndSession,,Return1+PostUser)
+  AppFrame{Prop:Alrt,255} = CtrlShiftP
   FrameExtension.Init(AppFrame,0,0,0{PROP:Icon},'')
   INIMgr.Fetch('Main',AppFrame)                            ! Restore window settings from non-volatile store
   ds_SetApplicationWindow(AppFrame)
@@ -256,6 +260,8 @@ ReturnValue          BYTE,AUTO
     INIMgr.Update('Main',AppFrame)                         ! Save window data to non-volatile store
   END
   GlobalErrors.SetProcedureName
+            
+   
   RETURN ReturnValue
 
 
@@ -323,6 +329,14 @@ Looped BYTE
   If event() = event:VisibleOnDesktop !or event() = event:moved
     ds_VisibleOnDesktop()
   end
+     IF KEYCODE()=CtrlShiftP AND EVENT() = Event:PreAlertKey
+       CYCLE
+     END
+     IF KEYCODE()=CtrlShiftP  
+        UD.ShowProcedureInfo('Main',UD.SetApplicationName('clFixer','EXE'),AppFrame{PROP:Hlp},'09/25/2023 @ 06:24PM','10/20/2023 @ 01:03PM','10/20/2023 @ 01:04PM')  
+    
+       CYCLE
+     END
     RETURN ReturnValue
   END
   ReturnValue = Level:Fatal
@@ -356,28 +370,39 @@ Looped BYTE
     OF EVENT:OpenWindow
       ! Get the EXE version number and global values      ! (c) 2022-2023 Black and White Inc
       !dbg('COMMAND: ' & COMMAND(''))                     ! Catch a command line parameter
-      glo:dbugoff = FALSE                                 ! Do not suppress debug messages
-      glo:AppVersion = 'Version ' & CLIP(ds_GetFileVersionInfo()) 
-      glo:MachineName = clip(ds_GetWorkstationName())
-      0{PROP:StatusText,3} = clip(glo:AppVersion)         ! Display the version number in the main status bar
-      0{PROP:StatusText,2} = clip(glo:MachineName)        ! Display the workstation name in the main status bar
-      !// Get the setting data
-      Access:Setting.Open()
-      Access:Setting.UseFile()
-      If Records(Setting) < 1
-          Access:Setting.PrimeRecord()
-          set:GUID = glo:st.MakeGuid()
-          Access:Setting.Insert()
-      else
-          set(set:SettingPK)
-          Access:Setting.Next()
-      End
-      glo:AppDescription = set:stDescription
-      glo:RootPath = set:RootPath
-      glo:FileExtensions = set:FileExtensions
-      glo:ExcludeFiles = set:ExcludeFiles
-      !dbg(set:GUID)       
-        
+        glo:dbugoff = FALSE                                 ! Do not suppress debug messages
+        glo:AppVersion = 'Version ' & CLIP(ds_GetFileVersionInfo()) 
+        glo:MachineName = clip(ds_GetWorkstationName())
+        0{PROP:StatusText,3} = clip(glo:AppVersion)         ! Display the version number in the main status bar
+        0{PROP:StatusText,2} = clip(glo:MachineName)        ! Display the workstation name in the main status bar
+        !// Get the setting data
+        Access:Setting.UseFile()
+        if Access:Setting.Open() = Level:Benign then
+            Access:Setting.ClearKey(set:SettingPK)
+            if Records(Setting) < 1
+                Access:Setting.PrimeRecord()
+                set:GUID = glo:st.MakeGuid()
+                if Access:Setting.Insert() <> Level:Benign then
+                    MESSAGE('Trouble adding a record to the Setting.tps table','Program will exit',ICON:Exclamation,BUTTON:ABORT)
+                    post(EVENT:CloseDown) ! Close the main window (ie Quit)
+                end  
+            else
+                set(set:SettingPK)
+                Access:Setting.Next() ! First (and theoretically only) record
+            end
+            glo:AppDescription = set:stDescription
+            glo:RootPath = set:RootPath
+            glo:FileExtensions = set:FileExtensions
+            glo:ExcludeFiles = set:ExcludeFiles
+            !dbg(set:GUID)       
+        else ! Major problems
+            glo:AppDescription = 'error!'
+            glo:RootPath = 'error!'
+            glo:FileExtensions = 'error!'
+            glo:ExcludeFiles = 'error!'
+            MESSAGE('Unable to open the Setting.tps table!','Program will exit',ICON:Exclamation,BUTTON:ABORT)
+            post(EVENT:CloseDown) ! Close the main window (ie Quit)
+        end ! Major problems
         post(event:visibleondesktop)
     END
     RETURN ReturnValue

@@ -13,6 +13,8 @@ WinEvent:TemplateVersion      equate('5.36')
    INCLUDE('ABFUZZY.INC'),ONCE
    INCLUDE('WINEXT.INC'),ONCE
   include('StringTheory.Inc'),ONCE
+  INCLUDE('UltimateDebug.INC'),ONCE
+  INCLUDE('UltimateDebugProcedureTracker.INC'),ONCE
     Include('WinEvent.Inc'),Once
 
    MAP
@@ -48,6 +50,10 @@ GetExcluded            PROCEDURE   !Create a queue with the list of excluded fil
      MODULE('CLFIXER017.CLW')
 ProcessFile            PROCEDURE(LONG lngPointer)   !Process each file in turn
      END
+
+DebugABCGlobalInformation_clFixer PROCEDURE()                                            ! DEBUG Prototype
+DebugABCGlobalVariables_clFixer PROCEDURE()                                              ! DEBUG Prototype
+
        MyOKToEndSessionHandler(long pLogoff),long,pascal
        MyEndSessionHandler(long pLogoff),pascal
    END
@@ -64,6 +70,7 @@ glo:FileExtensions   STRING(250)
 glo:ExcludeFiles     STRING(1000)
 glo:ProgressMessage  STRING('Copyright (c) 2023 Black and White Inc {42}')
 glo:FilesChanged     LONG(0)
+glo:FileErrors       LONG(0)
 glo:stfiles          StringTheory
 glo:qFolders         LONG
 GLO:oneInstance_Main_thread LONG(0)
@@ -119,8 +126,11 @@ DisableYN                   BYTE                           ! Disable YN
 WE::ProgramName     string(512)
 WE::MustClose       long
 WE::CantCloseNow    long
+UD         CLASS(UltimateDebug)  
+                     END
+ 
 
-!// This is a (risky) global queue, partially based on the queue structure needed by DIRECTORY function
+!// This is a global queue, partially based on the queue structure needed by DIRECTORY function
 clFiles             QUEUE,PRE(CLF),THREAD
 name                    STRING(FILE:MAXFILENAME)  !FILE:MAXFILENAME is an EQUATE string(256)
 path                    STRING(FILE:MAXFILEPATH)  !FILE:MAXFILEPATH is an EQUATE string(260)
@@ -134,12 +144,15 @@ scanned                 BYTE   ! has this folder been run through DIRECTORY yet?
 excluded                BYTE   ! Is this file in the global Excluded list?
                     END
 
-!// This is a (risky) list of excluded file names
+!// This is a list of excluded file names
 clExclude           QUEUE,PRE(CLE),THREAD
 name                    STRING(FILE:MAXFILENAME)  !FILE:MAXFILENAME is an EQUATE string(256)
 uname                   STRING(FILE:MAXFILENAME) ! UPPER(name)
 wild                    BYTE  ! Contains wild cards
                     END
+
+!// Bear in mind that global queus can be risky if several threads are all manipulating 
+!   different queue records at the same time. It's not happening here, only one process at a time
 GlobalFrameExtension WindowExtenderClass                   ! Global FrameExtension Manager
 Access:Action        &FileManager,THREAD                   ! FileManager for Action
 Relate:Action        &RelationManager,THREAD               ! RelationManager for Action
@@ -172,6 +185,16 @@ Destruct               PROCEDURE
   FuzzyMatcher.SetOption(MatchOption:WordOnly, 0)          ! Configure 'word only' matching
   INIMgr.Init('.\clFixer.INI', NVD_INI)                    ! Configure INIManager to use INI file
   DctInit()
+  UD.DebugOff       =  0
+  UD.DebugPrefix    =  '!'
+  UD.SaveToFile     =  0
+  UD.ASCIIFileName  =  'DebugLog.txt'
+  UD.SaveToJson     =  0
+  UD.JSONFileName   =  'JSONDebugLog.txt'
+  UD.DebugNoCR      =  1
+  UD.LineWrap       =  0 
+  UD.UsePlainFormat =  0
+  
   SYSTEM{PROP:Icon} = 'toolbox.ico'
     ds_SetOKToEndSessionHandler(address(MyOKToEndSessionHandler))
     ds_SetEndSessionHandler(address(MyEndSessionHandler))
@@ -197,6 +220,30 @@ MyEndSessionHandler procedure(long pLogoff)
 ! If parameter pLogoff = TRUE if the user is logging off.
 
   code
+ 
+!BOE: DEBUG Global
+DebugABCGlobalInformation_clFixer PROCEDURE()
+
+udpt            UltimateDebugProcedureTracker
+                     
+  CODE
+  
+  udpt.Init(UD,'DebugABCGlobalInformation_clFixer')
+  
+ 
+  RETURN
+
+DebugABCGlobalVariables_clFixer PROCEDURE()
+
+udpt            UltimateDebugProcedureTracker
+
+  CODE
+  
+  udpt.Init(UD,'DebugABCGlobalVariables_clFixer')
+  
+  RETURN
+!EOE: DEBUG Global
+
 
 
 Dictionary.Construct PROCEDURE

@@ -16,11 +16,15 @@ lngCurrent                  LONG
 strFolder                   STRING(FILE:MaxFilePath)
 i                           LONG
 j                           LONG
+udpt            UltimateDebugProcedureTracker
 
   CODE
+        udpt.Init(UD,'DirAllFileAndFolders','clFixer015.clw','clFixer.EXE','10/19/2023 @ 03:52PM')    
+             
     dbg('Folder=' & strDir)
     dbg('MultiMask=' & strMultiFilter)
     glo:FilesChanged = 0
+    !// Set up the glo:stFiles object to contain important error messages and modified file names
     glo:stfiles.SetValue('<13,10>clFixer ' & CLIP(LEFT(format(TODAY(),'@D18'))) & ' ' & CLIP(LEFT(format(CLOCK(),'@T1'))) & '<13,10>') ! Note the date and time
     !
     !// This is the procedure that gets a list of all the files that match a particular filter
@@ -32,6 +36,12 @@ j                           LONG
     GetExcluded()                                           ! Get the list of excluded files
     DirectoriesOnly(strDir)                                 ! Get the initial folder and its subfolders
     DirFilesMask(strDir,strMultiFilter)                     ! get the root files
+    if RECORDS(clFiles) = 1 then ! did we find anything?
+        MESSAGE(CLIP(strDir) & ' is empty or does''t exist')
+        RETURN
+    else !
+        dbg(RECORDS(clFiles))
+    end
     !// Multiple passes
     lngCurrent = 0      ! We have already scanned this folder
     LOOP
@@ -46,6 +56,7 @@ j                           LONG
             !// Scan the folder for more folders and files
             DirectoriesOnly(strFolder)                      ! Add folders to the queue
             DirFilesMask(strFolder,strMultiFilter)          ! Add matching files to the queue
+            glo:ProgressMessage = 'Inspecting ' & lngCurrent
         else ! Folder
             !dbg(lngCurrent & ' file=' & CLF:name)      ! Skip existing file names
         end ! Folder
@@ -55,6 +66,8 @@ j                           LONG
     j = 0   ! File counter
     glo:qFolders = 0
     lngCurrent = RECORDS(clFiles)
+    glo:ProgressMessage = 'Sorting ' & lngCurrent
+    DISPLAY()
     LOOP i = lngCurrent TO 1 BY -1
         GET(clFiles,i)
         if CLF:attrib = ff_:DIRECTORY or len(CLIP(CLF:name)) = 0 then ! Folder
@@ -69,18 +82,22 @@ j                           LONG
             !glo:ProgressMessage = 'Found ' & j & ' File=' & CLIP(CLF:path) & '\' & CLIP(CLF:name)
         end ! Folder
     END ! loop i
-    dbg (j & ' files')
+    !dbg (j & ' files')
     glo:qRecords = RECORDS(clFiles)
-    DISPLAY()
     SORT(clFiles,CLF:uname)
     loop i = 1 to glo:qRecords ! loop i
         GET(clFiles,i)
         ProcessFile(i)
         !dbg(i & ' ' & CLIP(CLF:name) & '--' & CLF:excluded )
     end ! loop i  
-    glo:ProgressMessage = 'Processed ' & glo:qRecords & ' files, ' & glo:FilesChanged & ' files updated.'
+    glo:ProgressMessage = 'Processed ' & glo:qRecords & ' files, ' & glo:FilesChanged & ' files updated, ' & glo:FileErrors & ' errors.'
     glo:stfiles.Append(clip(glo:ProgressMessage) & '<13,10>')
     DISPLAY()
-    glo:stfiles.SaveFile(clip(strDir) & '\clFixer.txt',True) ! Save the results
-    RUN(clip(strDir) & '\clFixer.txt')  ! Display the results in notepad
+    if glo:stfiles.SaveFile(clip(strDir) & '\clFixer.txt',True) ! Save the results
+        RUN(clip(strDir) & '\clFixer.txt')  ! Display the results in notepad
+    else ! Save
+        MESSAGE('Problem saving ' & clip(strDir) & '\clFixer.txt')
+    end ! Save
     RETURN
+           
+  

@@ -306,8 +306,9 @@ WHEN  ('Translator') (0)
 
 %NewClassProperty DEPEND %NewClassPropertyItems DEFAULT TIMES 0
 
-%NewClassDataType DEPEND %NewClassPropertyItems DEFAULT TIMES 3
+%NewClassDataType DEPEND %NewClassPropertyItems DEFAULT TIMES 4
 WHEN  ('FuzzyMatcher')TIMES 0
+WHEN  ('INIManager')TIMES 0
 WHEN  ('RelationManager:ActionAlias')TIMES 0
 WHEN  ('RelationManager:Setting')TIMES 0
 
@@ -335,8 +336,9 @@ WHEN  ('RelationManager:Setting')TIMES 0
 
 %ClassProperty DEPEND %ClassPropertyItems DEFAULT TIMES 0
 
-%ClassDataType DEPEND %ClassPropertyItems DEFAULT TIMES 3
+%ClassDataType DEPEND %ClassPropertyItems DEFAULT TIMES 4
 WHEN  ('FuzzyMatcher')TIMES 0
+WHEN  ('INIManager')TIMES 0
 WHEN  ('RelationManager:ActionAlias')TIMES 0
 WHEN  ('RelationManager:Setting')TIMES 0
 
@@ -1092,7 +1094,7 @@ WHEN  (12) ('DeformatUnixTimeStamp      PROCEDURE (String pValue,<<String pPictu
 %dAdditionalINCFiles MULTI LONG  ()
 %dAdditionalINCFile DEPEND %dAdditionalINCFiles DEFAULT TIMES 0
 
-%dClassVersion DEFAULT  ('81374')
+%dClassVersion DEFAULT  ('81380')
 [ADDITION]
 NAME AJEBackupAPP AJE_BACKUP
 [INSTANCE]
@@ -1128,7 +1130,7 @@ WHEN  (1) ('TXA')
 
 %AJEPathBackupsFolder DEPEND %AJEOtherFiles DEFAULT TIMES 0
 
-%AJEVersion DEFAULT  ('348')
+%AJEVersion DEFAULT  ('418')
 %AJEHistoryWindow LONG  (0)
 %AJEDataBaseType DEFAULT  ('TopSpeed')
 %AJEODBCStringConnection DEFAULT  ('')
@@ -1154,18 +1156,18 @@ INSTANCE 3
 %verSourceFile DEFAULT  ('')
 %verProdName DEFAULT  ('')
 %verProdMajVer DEFAULT  ('0')
-%verProdMinVer DEFAULT  ('1')
+%verProdMinVer DEFAULT  ('2')
 %verProdSubVer DEFAULT  ('0')
 %verProdGenBuildNo LONG  (1)
-%verProdBuildNo DEFAULT  ('337')
+%verProdBuildNo DEFAULT  ('403')
 %verDesc DEFAULT  ('clFixer - Make changes to default Clarion install')
 %verFileAsProdVersion LONG  (1)
 %verIntName DEFAULT  ('')
 %verFileMajVer DEFAULT  ('0')
-%verFileMinVer DEFAULT  ('1')
+%verFileMinVer DEFAULT  ('2')
 %verFileSubVer DEFAULT  ('0')
 %verFileGenBuildNo LONG  (1)
-%verFileBuildNo DEFAULT  ('337')
+%verFileBuildNo DEFAULT  ('403')
 %verFilePreRelease LONG  (0)
 %verSelLangID DEFAULT  ('U.S. English')
 %verSelCPID DEFAULT  ('Multilingual')
@@ -1249,7 +1251,43 @@ WHEN  (3) ('Release {10}PROCEDURE (),HRESULT,RAW,PROC')
 %dAdditionalINCFiles MULTI LONG  ()
 %dAdditionalINCFile DEPEND %dAdditionalINCFiles DEFAULT TIMES 0
 
-%dClassVersion DEFAULT  ('81374')
+%dClassVersion DEFAULT  ('81380')
+[ADDITION]
+NAME DPIAwareFixTpl gxDPIAwareFix
+[INSTANCE]
+INSTANCE 1
+[PROMPTS]
+%gGenerateManifest LONG  (1)
+%gDPIAwarenessMode DEFAULT  ('PerMonitorV2')
+%gLinkManifest LONG  (1)
+%gDisable LONG  (0)
+[ADDITION]
+NAME UltimateDebug UltimateDebugGlobal
+[INSTANCE]
+INSTANCE 7
+[PROMPTS]
+%CLSkelAppDisable LONG  (0)
+%gDumpTpl LONG  (0)
+%zDumpTpl LONG  (0)
+%gDumpVar LONG  (0)
+%zDumpVar LONG  (0)
+%LineWrap DEFAULT  ('0')
+%DisableProcedureDebug LONG  (0)
+%UDProcAlert DEFAULT  ('CtrlShiftP')
+%UDReportKeyState DEFAULT  ('KeyStateUD:Shift')
+%UDEntryExit LONG  (1)
+%CLSkelClass DEFAULT  ('UD')
+%CLSkelMultiDLL LONG  (0)
+%CLSkelMultiDLLData DEFAULT  ('0')
+%CLDebugPrefix DEFAULT  ('!')
+%DebugOffVariable DEFAULT  ('0')
+%SaveToFileVariable DEFAULT  ('0')
+%CLLogFileName DEFAULT  ('DebugLog.txt')
+%SaveToJSONFileVariable DEFAULT  ('0')
+%CLJSONLogFileName DEFAULT  ('JSONDebugLog.txt')
+%DoNotSplitLines LONG  (1)
+%SendWithoutFormatting LONG  (0)
+%CLSkelFamily DEFAULT  ('ABC')
 [PERSIST]
 %SaveCreateLocalMap DEFAULT  ('1')
 %GenerationCompleted DEPEND %Module DEFAULT TIMES 17
@@ -1314,7 +1352,7 @@ WHEN  ('clFixer017.clw') ('1')
 [PROGRAM]
 [COMMON]
 FROM ABC ABC
-MODIFIED '2023/10/04' '13:31:15'
+MODIFIED '2023/10/19' '14:56:14'
 [DATA]
 [SCREENCONTROLS]
 ! PROMPT('Folders:'),USE(?glo:qFolders:Prompt)
@@ -1331,7 +1369,7 @@ PROPERTY:BEGIN
 PRIORITY 2001
 PROPERTY:END
 
-!// This is a (risky) global queue, partially based on the queue structure needed by DIRECTORY function
+!// This is a global queue, partially based on the queue structure needed by DIRECTORY function
 clFiles             QUEUE,PRE(CLF),THREAD
 name                    STRING(FILE:MAXFILENAME)  !FILE:MAXFILENAME is an EQUATE string(256)
 path                    STRING(FILE:MAXFILEPATH)  !FILE:MAXFILEPATH is an EQUATE string(260)
@@ -1345,12 +1383,15 @@ scanned                 BYTE   ! has this folder been run through DIRECTORY yet?
 excluded                BYTE   ! Is this file in the global Excluded list?
                     END
 
-!// This is a (risky) list of excluded file names
+!// This is a list of excluded file names
 clExclude           QUEUE,PRE(CLE),THREAD
 name                    STRING(FILE:MAXFILENAME)  !FILE:MAXFILENAME is an EQUATE string(256)
 uname                   STRING(FILE:MAXFILENAME) ! UPPER(name)
 wild                    BYTE  ! Contains wild cards
                     END
+
+!// Bear in mind that global queus can be risky if several threads are all manipulating 
+!   different queue records at the same time. It's not happening here, only one process at a time
 [END]
 [END]
 [END]
@@ -1363,7 +1404,7 @@ NAME Main
 [COMMON]
 DESCRIPTION 'Wizard Application for F:\dev\clFixer\clFixer.dct'
 FROM ABC Frame
-MODIFIED '2023/10/08' '15:34:47'
+MODIFIED '2023/10/20' '13:03:50'
 [FILES]
 [OTHERS]
 Setting
@@ -1702,69 +1743,77 @@ WHEN  ('WindowToolbar')TIMES 0
 
 %ExtUITabStyleOverrideGlobal DEPEND %Control LONG TIMES 0
 
-%ExtUITabStyle DEPEND %Control DEFAULT TIMES 5
+%ExtUITabStyle DEPEND %Control DEFAULT TIMES 6
 WHEN  ('') ('Default')
 WHEN  ('?AboutBox') ('Default')
 WHEN  ('?BrowseSetting') ('Default')
+WHEN  ('?Exit') ('Default')
 WHEN  ('?SystemInfo') ('Default')
 WHEN  ('?mnuDashboard') ('Default')
 
-%FieldGradientColorType DEPEND %Control DEFAULT TIMES 6
+%FieldGradientColorType DEPEND %Control DEFAULT TIMES 7
 WHEN  ('') ('Off')
 WHEN  ('?AboutBox') ('Off')
 WHEN  ('?BrowseSetting') ('Off')
+WHEN  ('?Exit') ('Off')
 WHEN  ('?SystemInfo') ('Off')
 WHEN  ('?Toolbar') ('Off')
 WHEN  ('?mnuDashboard') ('Off')
 
-%FieldGradientColorTypeVariable DEPEND %Control DEFAULT TIMES 6
+%FieldGradientColorTypeVariable DEPEND %Control DEFAULT TIMES 7
 WHEN  ('') ('')
 WHEN  ('?AboutBox') ('')
 WHEN  ('?BrowseSetting') ('')
+WHEN  ('?Exit') ('')
 WHEN  ('?SystemInfo') ('')
 WHEN  ('?Toolbar') ('')
 WHEN  ('?mnuDashboard') ('')
 
-%FieldGradientColorTypeIsVariable DEPEND %Control LONG TIMES 6
+%FieldGradientColorTypeIsVariable DEPEND %Control LONG TIMES 7
 WHEN  ('') (0)
 WHEN  ('?AboutBox') (0)
 WHEN  ('?BrowseSetting') (0)
+WHEN  ('?Exit') (0)
 WHEN  ('?SystemInfo') (0)
 WHEN  ('?Toolbar') (0)
 WHEN  ('?mnuDashboard') (0)
 
-%FieldGradientColorFrom DEPEND %Control LONG TIMES 6
+%FieldGradientColorFrom DEPEND %Control LONG TIMES 7
 WHEN  ('') (-1)
 WHEN  ('?AboutBox') (-1)
 WHEN  ('?BrowseSetting') (-1)
+WHEN  ('?Exit') (-1)
 WHEN  ('?SystemInfo') (-1)
 WHEN  ('?Toolbar') (-1)
 WHEN  ('?mnuDashboard') (-1)
 
 %FieldGradientColorFromVariable DEPEND %Control DEFAULT TIMES 0
 
-%FieldGradientColorFromIsVariable DEPEND %Control LONG TIMES 6
+%FieldGradientColorFromIsVariable DEPEND %Control LONG TIMES 7
 WHEN  ('') (0)
 WHEN  ('?AboutBox') (0)
 WHEN  ('?BrowseSetting') (0)
+WHEN  ('?Exit') (0)
 WHEN  ('?SystemInfo') (0)
 WHEN  ('?Toolbar') (0)
 WHEN  ('?mnuDashboard') (0)
 
-%FieldGradientColorTo DEPEND %Control LONG TIMES 6
+%FieldGradientColorTo DEPEND %Control LONG TIMES 7
 WHEN  ('') (-1)
 WHEN  ('?AboutBox') (-1)
 WHEN  ('?BrowseSetting') (-1)
+WHEN  ('?Exit') (-1)
 WHEN  ('?SystemInfo') (-1)
 WHEN  ('?Toolbar') (-1)
 WHEN  ('?mnuDashboard') (-1)
 
 %FieldGradientColorToVariable DEPEND %Control DEFAULT TIMES 0
 
-%FieldGradientColorToIsVariable DEPEND %Control LONG TIMES 6
+%FieldGradientColorToIsVariable DEPEND %Control LONG TIMES 7
 WHEN  ('') (0)
 WHEN  ('?AboutBox') (0)
 WHEN  ('?BrowseSetting') (0)
+WHEN  ('?Exit') (0)
 WHEN  ('?SystemInfo') (0)
 WHEN  ('?Toolbar') (0)
 WHEN  ('?mnuDashboard') (0)
@@ -1795,10 +1844,11 @@ WHEN  ('?mnuDashboard') ()
 
 %PostLookupProcedureParameters DEPEND %Control DEFAULT TIMES 0
 
-%PostLookupDuringValidate DEPEND %Control LONG TIMES 5
+%PostLookupDuringValidate DEPEND %Control LONG TIMES 6
 WHEN  ('') (1)
 WHEN  ('?AboutBox') (1)
 WHEN  ('?BrowseSetting') (1)
+WHEN  ('?Exit') (1)
 WHEN  ('?SystemInfo') (1)
 WHEN  ('?mnuDashboard') (1)
 
@@ -1818,10 +1868,11 @@ WHEN  ('?mnuDashboard') (1)
 
 %CheckedControl DEPEND %CheckedHides DEFAULT TIMES 0
 
-%CheckedControlAction DEPEND %CheckedHides DEFAULT TIMES 5
+%CheckedControlAction DEPEND %CheckedHides DEFAULT TIMES 6
 WHEN  ('')TIMES 0
 WHEN  ('?AboutBox')TIMES 0
 WHEN  ('?BrowseSetting')TIMES 0
+WHEN  ('?Exit')TIMES 0
 WHEN  ('?SystemInfo')TIMES 0
 WHEN  ('?mnuDashboard')TIMES 0
 
@@ -1829,10 +1880,11 @@ WHEN  ('?mnuDashboard')TIMES 0
 
 %CheckedControl1 DEPEND %CheckedEnables DEFAULT TIMES 0
 
-%CheckedControl1Action DEPEND %CheckedEnables DEFAULT TIMES 5
+%CheckedControl1Action DEPEND %CheckedEnables DEFAULT TIMES 6
 WHEN  ('')TIMES 0
 WHEN  ('?AboutBox')TIMES 0
 WHEN  ('?BrowseSetting')TIMES 0
+WHEN  ('?Exit')TIMES 0
 WHEN  ('?SystemInfo')TIMES 0
 WHEN  ('?mnuDashboard')TIMES 0
 
@@ -1846,10 +1898,11 @@ WHEN  ('?mnuDashboard')TIMES 0
 
 %UnCheckedControl DEPEND %UnCheckedHides DEFAULT TIMES 0
 
-%UnCheckedControlAction DEPEND %UnCheckedHides DEFAULT TIMES 5
+%UnCheckedControlAction DEPEND %UnCheckedHides DEFAULT TIMES 6
 WHEN  ('')TIMES 0
 WHEN  ('?AboutBox')TIMES 0
 WHEN  ('?BrowseSetting')TIMES 0
+WHEN  ('?Exit')TIMES 0
 WHEN  ('?SystemInfo')TIMES 0
 WHEN  ('?mnuDashboard')TIMES 0
 
@@ -1857,10 +1910,11 @@ WHEN  ('?mnuDashboard')TIMES 0
 
 %UnCheckedControl1 DEPEND %UnCheckedEnables DEFAULT TIMES 0
 
-%UnCheckedControl1Action DEPEND %UnCheckedEnables DEFAULT TIMES 5
+%UnCheckedControl1Action DEPEND %UnCheckedEnables DEFAULT TIMES 6
 WHEN  ('')TIMES 0
 WHEN  ('?AboutBox')TIMES 0
 WHEN  ('?BrowseSetting')TIMES 0
+WHEN  ('?Exit')TIMES 0
 WHEN  ('?SystemInfo')TIMES 0
 WHEN  ('?mnuDashboard')TIMES 0
 
@@ -1868,10 +1922,11 @@ WHEN  ('?mnuDashboard')TIMES 0
 
 %CheckedDisableControl DEPEND %CheckedDisables DEFAULT TIMES 0
 
-%CheckedDisableControlAction DEPEND %CheckedDisables DEFAULT TIMES 5
+%CheckedDisableControlAction DEPEND %CheckedDisables DEFAULT TIMES 6
 WHEN  ('')TIMES 0
 WHEN  ('?AboutBox')TIMES 0
 WHEN  ('?BrowseSetting')TIMES 0
+WHEN  ('?Exit')TIMES 0
 WHEN  ('?SystemInfo')TIMES 0
 WHEN  ('?mnuDashboard')TIMES 0
 
@@ -1879,33 +1934,37 @@ WHEN  ('?mnuDashboard')TIMES 0
 
 %UnCheckedDisableControl DEPEND %UnCheckedDisables DEFAULT TIMES 0
 
-%UnCheckedDisableControlAction DEPEND %UnCheckedDisables DEFAULT TIMES 5
+%UnCheckedDisableControlAction DEPEND %UnCheckedDisables DEFAULT TIMES 6
 WHEN  ('')TIMES 0
 WHEN  ('?AboutBox')TIMES 0
 WHEN  ('?BrowseSetting')TIMES 0
+WHEN  ('?Exit')TIMES 0
 WHEN  ('?SystemInfo')TIMES 0
 WHEN  ('?mnuDashboard')TIMES 0
 
 %ActiveImageEnable DEPEND %Control LONG TIMES 0
 
-%AIObjectName DEPEND %Control DEFAULT TIMES 5
+%AIObjectName DEPEND %Control DEFAULT TIMES 6
 WHEN  ('') ('AIBtn0')
 WHEN  ('?AboutBox') ('AIBtn20')
 WHEN  ('?BrowseSetting') ('AIBtn12')
+WHEN  ('?Exit') ('AIBtn5')
 WHEN  ('?SystemInfo') ('AIBtn21')
 WHEN  ('?mnuDashboard') ('AIBtn13')
 
-%AIEnableMimicControl DEPEND %Control LONG TIMES 5
+%AIEnableMimicControl DEPEND %Control LONG TIMES 6
 WHEN  ('') (1)
 WHEN  ('?AboutBox') (1)
 WHEN  ('?BrowseSetting') (1)
+WHEN  ('?Exit') (1)
 WHEN  ('?SystemInfo') (1)
 WHEN  ('?mnuDashboard') (1)
 
-%AIMimicControl DEPEND %Control DEFAULT TIMES 5
+%AIMimicControl DEPEND %Control DEFAULT TIMES 6
 WHEN  ('') ('?Menubar')
 WHEN  ('?AboutBox') ('?Menubar')
 WHEN  ('?BrowseSetting') ('?Menubar')
+WHEN  ('?Exit') ('?Menubar')
 WHEN  ('?SystemInfo') ('?Menubar')
 WHEN  ('?mnuDashboard') ('?Menubar')
 
@@ -1915,10 +1974,11 @@ WHEN  ('?mnuDashboard') ('?Menubar')
 
 %AIOverrideImgVariable DEPEND %Control DEFAULT TIMES 0
 
-%AIOverrideImgIsVariable DEPEND %Control LONG TIMES 5
+%AIOverrideImgIsVariable DEPEND %Control LONG TIMES 6
 WHEN  ('') (0)
 WHEN  ('?AboutBox') (0)
 WHEN  ('?BrowseSetting') (0)
+WHEN  ('?Exit') (0)
 WHEN  ('?SystemInfo') (0)
 WHEN  ('?mnuDashboard') (0)
 
@@ -1926,10 +1986,11 @@ WHEN  ('?mnuDashboard') (0)
 
 %AIDisableImgVariable DEPEND %Control DEFAULT TIMES 0
 
-%AIDisableImgIsVariable DEPEND %Control LONG TIMES 5
+%AIDisableImgIsVariable DEPEND %Control LONG TIMES 6
 WHEN  ('') (0)
 WHEN  ('?AboutBox') (0)
 WHEN  ('?BrowseSetting') (0)
+WHEN  ('?Exit') (0)
 WHEN  ('?SystemInfo') (0)
 WHEN  ('?mnuDashboard') (0)
 
@@ -1937,10 +1998,11 @@ WHEN  ('?mnuDashboard') (0)
 
 %AIHotImgVariable DEPEND %Control DEFAULT TIMES 0
 
-%AIHotImgIsVariable DEPEND %Control LONG TIMES 5
+%AIHotImgIsVariable DEPEND %Control LONG TIMES 6
 WHEN  ('') (0)
 WHEN  ('?AboutBox') (0)
 WHEN  ('?BrowseSetting') (0)
+WHEN  ('?Exit') (0)
 WHEN  ('?SystemInfo') (0)
 WHEN  ('?mnuDashboard') (0)
 
@@ -1948,10 +2010,11 @@ WHEN  ('?mnuDashboard') (0)
 
 %AIPressedImgVariable DEPEND %Control DEFAULT TIMES 0
 
-%AIPressedImgIsVariable DEPEND %Control LONG TIMES 5
+%AIPressedImgIsVariable DEPEND %Control LONG TIMES 6
 WHEN  ('') (0)
 WHEN  ('?AboutBox') (0)
 WHEN  ('?BrowseSetting') (0)
+WHEN  ('?Exit') (0)
 WHEN  ('?SystemInfo') (0)
 WHEN  ('?mnuDashboard') (0)
 
@@ -2041,28 +2104,39 @@ PRIORITY 5000
 PROPERTY:END
 ! Get the EXE version number and global values      ! (c) 2022-2023 Black and White Inc
 !dbg('COMMAND: ' & COMMAND(''))                     ! Catch a command line parameter
-glo:dbugoff = FALSE                                 ! Do not suppress debug messages
-glo:AppVersion = 'Version ' & CLIP(ds_GetFileVersionInfo()) 
-glo:MachineName = clip(ds_GetWorkstationName())
-0{PROP:StatusText,3} = clip(glo:AppVersion)         ! Display the version number in the main status bar
-0{PROP:StatusText,2} = clip(glo:MachineName)        ! Display the workstation name in the main status bar
-!// Get the setting data
-Access:Setting.Open()
-Access:Setting.UseFile()
-If Records(Setting) < 1
-    Access:Setting.PrimeRecord()
-    set:GUID = glo:st.MakeGuid()
-    Access:Setting.Insert()
-else
-    set(set:SettingPK)
-    Access:Setting.Next()
-End
-glo:AppDescription = set:stDescription
-glo:RootPath = set:RootPath
-glo:FileExtensions = set:FileExtensions
-glo:ExcludeFiles = set:ExcludeFiles
-!dbg(set:GUID)       
-  
+  glo:dbugoff = FALSE                                 ! Do not suppress debug messages
+  glo:AppVersion = 'Version ' & CLIP(ds_GetFileVersionInfo()) 
+  glo:MachineName = clip(ds_GetWorkstationName())
+  0{PROP:StatusText,3} = clip(glo:AppVersion)         ! Display the version number in the main status bar
+  0{PROP:StatusText,2} = clip(glo:MachineName)        ! Display the workstation name in the main status bar
+  !// Get the setting data
+  Access:Setting.UseFile()
+  if Access:Setting.Open() = Level:Benign then
+      Access:Setting.ClearKey(set:SettingPK)
+      if Records(Setting) < 1
+          Access:Setting.PrimeRecord()
+          set:GUID = glo:st.MakeGuid()
+          if Access:Setting.Insert() <> Level:Benign then
+              MESSAGE('Trouble adding a record to the Setting.tps table','Program will exit',ICON:Exclamation,BUTTON:ABORT)
+              post(EVENT:CloseDown) ! Close the main window (ie Quit)
+          end  
+      else
+          set(set:SettingPK)
+          Access:Setting.Next() ! First (and theoretically only) record
+      end
+      glo:AppDescription = set:stDescription
+      glo:RootPath = set:RootPath
+      glo:FileExtensions = set:FileExtensions
+      glo:ExcludeFiles = set:ExcludeFiles
+      !dbg(set:GUID)       
+  else ! Major problems
+      glo:AppDescription = 'error!'
+      glo:RootPath = 'error!'
+      glo:FileExtensions = 'error!'
+      glo:ExcludeFiles = 'error!'
+      MESSAGE('Unable to open the Setting.tps table!','Program will exit',ICON:Exclamation,BUTTON:ABORT)
+      post(EVENT:CloseDown) ! Close the main window (ie Quit)
+  end ! Major problems
 [END]
 [END]
 [END]
@@ -2285,6 +2359,8 @@ AppFrame APPLICATION(' Clarion Fixer '),AT(,,525,357),FONT('Segoe UI',8,,FONT:re
                 #ORDINAL(21)
             END
           END
+          !            BUTTON,AT(172,2,14,14),USE(?Toolbar:Help, Toolbar:Help),ICON('WAVCRHELP.ICO'), |
+          !              DISABLE,FLAT,TIP('Get Help'),#SEQ(1),#ORDINAL(35)
           TOOLBAR,AT(0,0,525,16),USE(?Toolbar),#ORDINAL(22)
             BUTTON,AT(4,2,14,14),USE(?Toolbar:Top, Toolbar:Top),ICON('WAVCRFIRST.ICO'),DISABLE, |
               FLAT,TIP('Go to the First Page'),#SEQ(1),#ORDINAL(23)
@@ -2310,8 +2386,6 @@ AppFrame APPLICATION(' Clarion Fixer '),AT(,,525,357),FONT('Segoe UI',8,,FONT:re
               DISABLE,FLAT,TIP('Delete This Record'),#SEQ(1),#ORDINAL(33)
             BUTTON,AT(158,2,14,14),USE(?Toolbar:History, Toolbar:History),ICON('WADITTO.ICO'), |
               DISABLE,FLAT,TIP('Previous value'),#SEQ(1),#ORDINAL(34)
-            !            BUTTON,AT(172,2,14,14),USE(?Toolbar:Help, Toolbar:Help),ICON('WAVCRHELP.ICO'), |
-            !              DISABLE,FLAT,TIP('Get Help'),#SEQ(1),#ORDINAL(35)
           END
         END
 
@@ -2326,7 +2400,7 @@ NAME BrowseAction
 DESCRIPTION 'Browse the Action table'
 FROM ABC Window
 CATEGORY 'Browse'
-MODIFIED '2023/10/10' '20:00:04'
+MODIFIED '2023/10/19' '18:07:07'
 [DATA]
 CurrentTab               STRING(80)
 !!> GUID('ce2ed3f1-5cb7-4e61-aa39-f7c46ff9ee13')
@@ -2765,40 +2839,68 @@ PROPERTY:BEGIN
 PRIORITY 4000
 PROPERTY:END
 RenumberRecords ROUTINE
+    !
     !// First pass: update all the act:ReorderNo fields
-    Access:ActionAlias.Open()
-    Access:ActionAlias.ClearKey(act1:ActionStepPK)
-    SET(act1:ActionStepPK)
-    loc:StepId = 90
-    LOOP UNTIL Access:ActionAlias.Next() <> Level:Benign ! Next
-        loc:StepId += 10
-        act1:ReorderNo = 1000000 + loc:StepId
-        Access:ActionAlias.Update()
-        !dbg(act1:StepId & ' - ' & act1:ReorderNo & ' - ' & loc:StepId)            
-    END ! Next
-    Access:ActionAlias.Close()
-    !// Second pass: update all the act1:StepId fields with
-    !   big numbers
-    Access:ActionAlias.Open()
-    Access:ActionAlias.ClearKey(act1:ActionStepPK)
-    SET(act1:ActionReorder)
-    LOOP UNTIL Access:ActionAlias.Next() <> Level:Benign ! Next
-        act1:StepId = act1:ReorderNo
-        Access:ActionAlias.Update()
-        !dbg(act1:StepId & ' - ' & act1:ReorderNo)            
-    END ! Next
-    Access:ActionAlias.Close()       
-    !// Third pass: update all the act1:StepId fields with
-    !   correct step numbers
-    Access:ActionAlias.Open()
-    Access:ActionAlias.ClearKey(act1:ActionStepPK)
-    SET(act1:ActionReorder)
-    LOOP UNTIL Access:ActionAlias.Next() <> Level:Benign ! Next
-        act1:StepId = act1:ReorderNo - 1000000
-        Access:ActionAlias.Update()
-        !dbg(act1:StepId & ' - ' & act1:ReorderNo)            
-    END ! Next
-    Access:ActionAlias.Close()
+    !
+    if Access:ActionAlias.Open() = Level:Benign then ! open (1)
+        Access:ActionAlias.ClearKey(act1:ActionStepPK)
+        SET(act1:ActionStepPK)
+        loc:StepId = 90
+        LOOP UNTIL Access:ActionAlias.Next() <> Level:Benign ! Next
+            loc:StepId += 10
+            act1:ReorderNo = 1000000 + loc:StepId
+            if Access:ActionAlias.Update() <> Level:Benign then ! Trouble
+                MESSAGE('Trouble updating the ActionAlias table (1)','Window will close',ICON:Exclamation,BUTTON:ABORT)
+                post(EVENT:CloseDown) ! Close this window
+                EXIT
+            end ! trouble
+            !dbg(act1:StepId & ' - ' & act1:ReorderNo & ' - ' & loc:StepId)            
+        END ! Next
+        Access:ActionAlias.Close()
+        !
+        !// Second pass: update all the act1:StepId fields with
+        !   big numbers
+        if Access:ActionAlias.Open() = Level:Benign then ! open (2)
+            Access:ActionAlias.ClearKey(act1:ActionStepPK)
+            SET(act1:ActionReorder)
+            LOOP UNTIL Access:ActionAlias.Next() <> Level:Benign ! Next
+                act1:StepId = act1:ReorderNo
+                if Access:ActionAlias.Update() <> Level:Benign then ! Trouble
+                    MESSAGE('Trouble updating the ActionAlias table (2)','Window will close',ICON:Exclamation,BUTTON:ABORT)
+                    post(EVENT:CloseDown) ! Close this window
+                    EXIT
+                end ! trouble
+                !dbg(act1:StepId & ' - ' & act1:ReorderNo)            
+            END ! Next
+            Access:ActionAlias.Close()     
+            !
+            !// Third pass: update all the act1:StepId fields with
+            !   correct step numbers
+            if Access:ActionAlias.Open() = Level:Benign then ! open (3)
+                Access:ActionAlias.ClearKey(act1:ActionStepPK)
+                SET(act1:ActionReorder)
+                LOOP UNTIL Access:ActionAlias.Next() <> Level:Benign ! Next
+                    act1:StepId = act1:ReorderNo - 1000000
+                    if Access:ActionAlias.Update() <> Level:Benign then ! Trouble
+                        MESSAGE('Trouble updating the ActionAlias table (3)','Window will close',ICON:Exclamation,BUTTON:ABORT)
+                        post(EVENT:CloseDown) ! Close this window
+                        EXIT
+                    end ! trouble
+                    !dbg(act1:StepId & ' - ' & act1:ReorderNo)            
+                END ! Next
+                Access:ActionAlias.Close()
+            else ! Open (3)
+                MESSAGE('Trouble opening the ActionAlias table (3)','Window will close',ICON:Exclamation,BUTTON:ABORT)
+                post(EVENT:CloseDown) ! Close this window
+            end ! Open
+        else ! Open (2)
+            MESSAGE('Trouble opening the ActionAlias table (2)','Window will close',ICON:Exclamation,BUTTON:ABORT)
+            post(EVENT:CloseDown) ! Close this window
+        end ! Open
+    else ! Open (1)
+        MESSAGE('Trouble opening the ActionAlias table (1)','Window will close',ICON:Exclamation,BUTTON:ABORT)
+        post(EVENT:CloseDown) ! Close this window
+    end ! Open
 [END]
 [END]
 [ADDITION]
@@ -4254,7 +4356,7 @@ NAME UpdateAction
 DESCRIPTION 'Form Action'
 FROM ABC Window
 CATEGORY 'Form'
-MODIFIED '2023/10/10' '19:35:02'
+MODIFIED '2023/10/19' '18:06:32'
 [DATA]
 CurrentTab               STRING(80)
 !!> GUID('54e453cb-0a8c-493c-a1e1-0a72ef7c8a6f')
@@ -4268,12 +4370,13 @@ Action
 [OTHERS]
 ActionAlias
 [PROMPTS]
-%ButtonAction DEPEND %Control DEFAULT TIMES 5
+%ButtonAction DEPEND %Control DEFAULT TIMES 6
 WHEN  ('?Cancel') ('No Special Action')
 WHEN  ('?OK') ('No Special Action')
 WHEN  ('?btnNextStep') ('No Special Action')
 WHEN  ('?btnPasteAfter') ('No Special Action')
 WHEN  ('?btnPasteBefore') ('No Special Action')
+WHEN  ('?txtLineNo') ('No Special Action')
 
 %ButtonRunName DEPEND %Control DEFAULT TIMES 0
 
@@ -4283,21 +4386,23 @@ WHEN  ('?btnPasteBefore') ('No Special Action')
 
 %ButtonThread DEPEND %Control LONG TIMES 0
 
-%ButtonThreadStack DEPEND %Control DEFAULT TIMES 5
+%ButtonThreadStack DEPEND %Control DEFAULT TIMES 6
 WHEN  ('?Cancel') ('25000')
 WHEN  ('?OK') ('25000')
 WHEN  ('?btnNextStep') ('25000')
 WHEN  ('?btnPasteAfter') ('25000')
 WHEN  ('?btnPasteBefore') ('25000')
+WHEN  ('?txtLineNo') ('25000')
 
 %ButtonParameters DEPEND %Control DEFAULT TIMES 0
 
-%ButtonRequest DEPEND %Control DEFAULT TIMES 5
+%ButtonRequest DEPEND %Control DEFAULT TIMES 6
 WHEN  ('?Cancel') ('None')
 WHEN  ('?OK') ('None')
 WHEN  ('?btnNextStep') ('None')
 WHEN  ('?btnPasteAfter') ('None')
 WHEN  ('?btnPasteBefore') ('None')
+WHEN  ('?txtLineNo') ('None')
 
 %PreLookupKey DEPEND %Control KEY TIMES 0
 
@@ -4514,25 +4619,33 @@ WHEN  ('WindowToolbar')TIMES 0
 
 %ExtUITabStyleOverrideGlobal DEPEND %Control LONG TIMES 0
 
-%ExtUITabStyle DEPEND %Control DEFAULT TIMES 0
+%ExtUITabStyle DEPEND %Control DEFAULT TIMES 1
+WHEN  ('?txtLineNo') ('Default')
 
-%FieldGradientColorType DEPEND %Control DEFAULT TIMES 0
+%FieldGradientColorType DEPEND %Control DEFAULT TIMES 1
+WHEN  ('?txtLineNo') ('Off')
 
-%FieldGradientColorTypeVariable DEPEND %Control DEFAULT TIMES 0
+%FieldGradientColorTypeVariable DEPEND %Control DEFAULT TIMES 1
+WHEN  ('?txtLineNo') ('')
 
-%FieldGradientColorTypeIsVariable DEPEND %Control LONG TIMES 0
+%FieldGradientColorTypeIsVariable DEPEND %Control LONG TIMES 1
+WHEN  ('?txtLineNo') (0)
 
-%FieldGradientColorFrom DEPEND %Control LONG TIMES 0
+%FieldGradientColorFrom DEPEND %Control LONG TIMES 1
+WHEN  ('?txtLineNo') (-1)
 
 %FieldGradientColorFromVariable DEPEND %Control DEFAULT TIMES 0
 
-%FieldGradientColorFromIsVariable DEPEND %Control LONG TIMES 0
+%FieldGradientColorFromIsVariable DEPEND %Control LONG TIMES 1
+WHEN  ('?txtLineNo') (0)
 
-%FieldGradientColorTo DEPEND %Control LONG TIMES 0
+%FieldGradientColorTo DEPEND %Control LONG TIMES 1
+WHEN  ('?txtLineNo') (-1)
 
 %FieldGradientColorToVariable DEPEND %Control DEFAULT TIMES 0
 
-%FieldGradientColorToIsVariable DEPEND %Control LONG TIMES 0
+%FieldGradientColorToIsVariable DEPEND %Control LONG TIMES 1
+WHEN  ('?txtLineNo') (0)
 
 %ButtonReturnValueAssignment DEPEND %Control FIELD TIMES 0
 
@@ -4546,11 +4659,12 @@ WHEN  ('WindowToolbar')TIMES 0
 
 %PostLookupProcedureParameters DEPEND %Control DEFAULT TIMES 0
 
-%PostLookupDuringValidate DEPEND %Control LONG TIMES 4
+%PostLookupDuringValidate DEPEND %Control LONG TIMES 5
 WHEN  ('?act:FileName') (1)
 WHEN  ('?act:LineNo') (1)
 WHEN  ('?act:StepId') (1)
 WHEN  ('?act:stDescription') (1)
+WHEN  ('?txtLineNo') (1)
 
 %LookupAssign DEPEND %Control MULTI LONG TIMES 0
 
@@ -4568,13 +4682,15 @@ WHEN  ('?act:stDescription') (1)
 
 %CheckedControl DEPEND %CheckedHides DEFAULT TIMES 0
 
-%CheckedControlAction DEPEND %CheckedHides DEFAULT TIMES 0
+%CheckedControlAction DEPEND %CheckedHides DEFAULT TIMES 1
+WHEN  ('?txtLineNo')TIMES 0
 
 %CheckedEnables DEPEND %Control MULTI LONG TIMES 0
 
 %CheckedControl1 DEPEND %CheckedEnables DEFAULT TIMES 0
 
-%CheckedControl1Action DEPEND %CheckedEnables DEFAULT TIMES 0
+%CheckedControl1Action DEPEND %CheckedEnables DEFAULT TIMES 1
+WHEN  ('?txtLineNo')TIMES 0
 
 %UncheckedAssigns DEPEND %Control MULTI LONG TIMES 0
 
@@ -4586,33 +4702,40 @@ WHEN  ('?act:stDescription') (1)
 
 %UnCheckedControl DEPEND %UnCheckedHides DEFAULT TIMES 0
 
-%UnCheckedControlAction DEPEND %UnCheckedHides DEFAULT TIMES 0
+%UnCheckedControlAction DEPEND %UnCheckedHides DEFAULT TIMES 1
+WHEN  ('?txtLineNo')TIMES 0
 
 %UnCheckedEnables DEPEND %Control MULTI LONG TIMES 0
 
 %UnCheckedControl1 DEPEND %UnCheckedEnables DEFAULT TIMES 0
 
-%UnCheckedControl1Action DEPEND %UnCheckedEnables DEFAULT TIMES 0
+%UnCheckedControl1Action DEPEND %UnCheckedEnables DEFAULT TIMES 1
+WHEN  ('?txtLineNo')TIMES 0
 
 %CheckedDisables DEPEND %Control MULTI LONG TIMES 0
 
 %CheckedDisableControl DEPEND %CheckedDisables DEFAULT TIMES 0
 
-%CheckedDisableControlAction DEPEND %CheckedDisables DEFAULT TIMES 0
+%CheckedDisableControlAction DEPEND %CheckedDisables DEFAULT TIMES 1
+WHEN  ('?txtLineNo')TIMES 0
 
 %UnCheckedDisables DEPEND %Control MULTI LONG TIMES 0
 
 %UnCheckedDisableControl DEPEND %UnCheckedDisables DEFAULT TIMES 0
 
-%UnCheckedDisableControlAction DEPEND %UnCheckedDisables DEFAULT TIMES 0
+%UnCheckedDisableControlAction DEPEND %UnCheckedDisables DEFAULT TIMES 1
+WHEN  ('?txtLineNo')TIMES 0
 
 %ActiveImageEnable DEPEND %Control LONG TIMES 0
 
-%AIObjectName DEPEND %Control DEFAULT TIMES 0
+%AIObjectName DEPEND %Control DEFAULT TIMES 1
+WHEN  ('?txtLineNo') ('AIBtn22')
 
-%AIEnableMimicControl DEPEND %Control LONG TIMES 0
+%AIEnableMimicControl DEPEND %Control LONG TIMES 1
+WHEN  ('?txtLineNo') (1)
 
-%AIMimicControl DEPEND %Control DEFAULT TIMES 0
+%AIMimicControl DEPEND %Control DEFAULT TIMES 1
+WHEN  ('?txtLineNo') ('?act:StepId:Prompt')
 
 %AIImgRound DEPEND %Control LONG TIMES 0
 
@@ -4620,25 +4743,29 @@ WHEN  ('?act:stDescription') (1)
 
 %AIOverrideImgVariable DEPEND %Control DEFAULT TIMES 0
 
-%AIOverrideImgIsVariable DEPEND %Control LONG TIMES 0
+%AIOverrideImgIsVariable DEPEND %Control LONG TIMES 1
+WHEN  ('?txtLineNo') (0)
 
 %AIDisableImg DEPEND %Control DEFAULT TIMES 0
 
 %AIDisableImgVariable DEPEND %Control DEFAULT TIMES 0
 
-%AIDisableImgIsVariable DEPEND %Control LONG TIMES 0
+%AIDisableImgIsVariable DEPEND %Control LONG TIMES 1
+WHEN  ('?txtLineNo') (0)
 
 %AIHotImg DEPEND %Control DEFAULT TIMES 0
 
 %AIHotImgVariable DEPEND %Control DEFAULT TIMES 0
 
-%AIHotImgIsVariable DEPEND %Control LONG TIMES 0
+%AIHotImgIsVariable DEPEND %Control LONG TIMES 1
+WHEN  ('?txtLineNo') (0)
 
 %AIPressedImg DEPEND %Control DEFAULT TIMES 0
 
 %AIPressedImgVariable DEPEND %Control DEFAULT TIMES 0
 
-%AIPressedImgIsVariable DEPEND %Control LONG TIMES 0
+%AIPressedImgIsVariable DEPEND %Control LONG TIMES 1
+WHEN  ('?txtLineNo') (0)
 
 [EMBED]
 EMBED %WindowManagerMethodCodeSection
@@ -4735,7 +4862,7 @@ WHEN '?act:FileName'
 PROPERTY:BEGIN
 PRIORITY 4999
 PROPERTY:END
-    ! Disable Line No field if act:FileName is empty
+    ! Disable Line No field if act:FileName is empty and in edit mode
     do EnableDisableLineNo
 [END]
 [END]
@@ -4758,7 +4885,7 @@ EMBED %ProcedureRoutines
 PROPERTY:BEGIN
 PRIORITY 4000
 PROPERTY:END
-! Dislay Routines
+! Display Routines
 EnableDisabledYN    ROUTINE
     ! change description text to grey if DisabledYN
     if act:DisableYN then ! Disabled
@@ -4771,32 +4898,43 @@ EnableDisabledYN    ROUTINE
     
 EnableDisableLineNo ROUTINE   
     ! Disable Line No field if act:FileName is empty
-    if len(CLIP(act:FileName)) < 5 then  ! empty
-        ?act:LineNo{PROP:Flat} = True 
-        act:LineNo = 0  
-    else ! not empty
-        ?act:LineNo{PROP:Flat} = False
-    end ! not empty
+    IF ThisWindow.Request <> ViewRecord ! Don't do this during view mode      
+        if len(CLIP(act:FileName)) < 5 then  ! empty
+            ?act:LineNo{PROP:Flat} = True 
+            act:LineNo = 0  
+        else ! not empty
+            ?act:LineNo{PROP:Flat} = False
+        end ! not empty
+    END
     
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 4000
+PROPERTY:END
+! CalcNextStep routine
 CalcNextStep        ROUTINE
     ! Find the largest step number, add 10
     loc:StepId = act:StepId ! Save the current step number
     lngStepIdmax = 0      ! Start
     !// Open an alias of the table so as not to screw things up
-    Access:ActionAlias.Open()
-    Access:ActionAlias.ClearKey(act1:ActionStepPK)
-    SET(act1:ActionStepPK)
-    LOOP UNTIL Access:ActionAlias.Next() <> Level:Benign ! Next
-        if lngStepIdmax < act1:StepId then ! lngStepIdmax
-            lngStepIdmax = act1:StepId   ! The new max
-        end ! lngStepIdmax
-    END ! Next
-    Access:ActionAlias.Close()
-    if loc:stepId <> lngStepIdmax then
-        ! Add to the most recent step to get the new one
-        act:stepId = lngStepIdmax + 10  
-        ! unless we already have the largest number
-    end 
+    if Access:ActionAlias.Open() = Level:Benign then ! open
+        Access:ActionAlias.ClearKey(act1:ActionStepPK)
+        SET(act1:ActionStepPK)
+        LOOP UNTIL Access:ActionAlias.Next() <> Level:Benign ! Next
+            if lngStepIdmax < act1:StepId then ! lngStepIdmax
+                lngStepIdmax = act1:StepId   ! The new max
+            end ! lngStepIdmax
+        END ! Next
+        Access:ActionAlias.Close()
+        if loc:stepId <> lngStepIdmax then
+            ! Add to the most recent step to get the new one
+            act:stepId = lngStepIdmax + 10  
+            ! unless we already have the largest number
+        end 
+    else ! open
+        MESSAGE('Trouble opening the ActionAlias table<13,10>Unable to calculate a new number','Please enter a step number manually',ICON:Exclamation,BUTTON:ABORT)
+        !post(EVENT:CloseDown) ! Close this window
+    end ! open
 [END]
 [END]
 [ADDITION]
@@ -4856,10 +4994,10 @@ PROCPROP
 %InsertAllowed LONG  (1)
 %InsertMessage DEFAULT  ('Record Will Be Added')
 %ChangeAllowed LONG  (1)
-%ChangeMessage DEFAULT  ('Record Will Be Changed')
+%ChangeMessage DEFAULT  ('Change Action Record')
 %DeleteAllowed LONG  (1)
 %DeleteMessage DEFAULT  ('Record Will Be Deleted')
-%ViewMessage DEFAULT  ('View Record')
+%ViewMessage DEFAULT  ('View Action Record')
 %MessageHeader LONG  (0)
 %ActionOnDelete DEFAULT  ('Standard Warning')
 %PrimingFields MULTI LONG  ()
@@ -4983,7 +5121,7 @@ WHEN  ('?act:DisableYN') ('ReadOnly')
 WHEN  ('?act:ExcludeFilesYN') ('ReadOnly')
 WHEN  ('?act:FileName') ('ReadOnly')
 WHEN  ('?act:FileName:Prompt') ('None')
-WHEN  ('?act:LineNo') ('ReadOnly')
+WHEN  ('?act:LineNo') ('Set Properties')
 WHEN  ('?act:LineNo:Prompt') ('None')
 WHEN  ('?act:StepId') ('ReadOnly')
 WHEN  ('?act:StepId:Prompt') ('None')
@@ -4998,41 +5136,48 @@ WHEN  ('?btnPasteAfter') ('Disable')
 WHEN  ('?btnPasteBefore') ('Disable')
 WHEN  ('?lblDisableYN') ('None')
 WHEN  ('?lblExclude') ('None')
-WHEN  ('?txtLineNo') ('None')
+WHEN  ('?txtLineNo') ('ReadOnly')
 
-%PropertyAssignments DEPEND %Control MULTI LONG TIMES 0
+%PropertyAssignments DEPEND %Control MULTI LONG TIMES 1
+WHEN  ('?act:LineNo') (1, 2)
 
-%CtrlProperty DEPEND %PropertyAssignments DEFAULT TIMES 0
+%CtrlProperty DEPEND %PropertyAssignments DEFAULT TIMES 1
+WHEN  ('?act:LineNo')TIMES 2
+WHEN  (1) ('PROP:Flat')
+WHEN  (2) ('PROP:ReadOnly')
 
-%CtrlValue DEPEND %PropertyAssignments DEFAULT TIMES 0
+%CtrlValue DEPEND %PropertyAssignments DEFAULT TIMES 1
+WHEN  ('?act:LineNo')TIMES 2
+WHEN  (1) ('TRUE')
+WHEN  (2) ('TRUE')
 
 [WINDOW]
 QuickWindow WINDOW('Form Action'),AT(,,483,278),FONT('Segoe UI',8,,FONT:regular,CHARSET:DEFAULT), |
           RESIZE,CENTER,ICON('toolbox.ico'),GRAY,IMM,MDI,HLP('UpdateAction'),SYSTEM
-          PROMPT('Step Id:'),AT(32,12),USE(?act:StepId:Prompt),RIGHT,TRN,#LINK(?act:StepId), |
+          PROMPT('Step Id:'),AT(11,13,50),USE(?act:StepId:Prompt),RIGHT,TRN,#LINK(?act:StepId), |
             #ORIG(?act:StepId:Prompt),#ORDINAL(1)
           BUTTON('New Step No'),AT(143,10,66),USE(?btnNextStep),#ORDINAL(2)
           STRING('Don''t apply this action to excluded files'),AT(243,41,209),USE(?lblExclude), |
             RIGHT,#ORDINAL(3)
-          PROMPT('Description:'),AT(17,28),USE(?act:stDescription:Prompt),#ORDINAL(4)
+          PROMPT('Description:'),AT(11,28,50),USE(?act:stDescription:Prompt),RIGHT,#ORDINAL(4)
           ENTRY(@s128),AT(65,28,405,10),USE(act:stDescription),MSG('Description of this step'), |
             REQ,TIP('Description of this step'),#ORDINAL(5)
-          PROMPT('File Name:'),AT(22,54),USE(?act:FileName:Prompt),#ORDINAL(6)
+          PROMPT('File Name:'),AT(11,54,50),USE(?act:FileName:Prompt),RIGHT,#ORDINAL(6)
           ENTRY(@s128),AT(65,54,405,10),USE(act:FileName),MSG('(Optional) Single file n' & |
             'ame for changes. Leave blank if global change'),TIP('(Optional) Single fil' & |
             'e name for changes. Leave blank if global change'),#ORDINAL(7)
-          PROMPT('Line No:'),AT(29,69),USE(?act:LineNo:Prompt),#ORDINAL(8)
+          PROMPT('Line No:'),AT(11,69,50),USE(?act:LineNo:Prompt),RIGHT,#ORDINAL(8)
           ENTRY(@n-14B),AT(65,69,65,10),USE(act:LineNo),MSG('(Optional) Start Line Number'), |
             TIP('(Optional) Start Line Number'),#ORDINAL(9)
-          PROMPT('Before:'),AT(33,85),USE(?act:stBefore:Prompt:2),RIGHT,TRN,#ORIG(?act:stBefore:Prompt), |
+          PROMPT('Before:'),AT(11,86,50),USE(?act:stBefore:Prompt:2),RIGHT,TRN,#ORIG(?act:stBefore:Prompt), |
             #ORDINAL(10)
-          BUTTON('Paste ->'),AT(17,100,41,12),USE(?btnPasteBefore),#ORDINAL(11)
-          TEXT,AT(65,84,405,80),USE(act:stBefore),VSCROLL,MSG('String Before (Case sensitive)'), |
+          BUTTON('Paste ->'),AT(19,100,41,12),USE(?btnPasteBefore),#ORDINAL(11)
+          TEXT,AT(65,86,405,80),USE(act:stBefore),VSCROLL,MSG('String Before (Case sensitive)'), |
             SCROLL,TIP('String Before (Case sensitive)'),#ORDINAL(12)
-          PROMPT('After:'),AT(39,172),USE(?act:stAfter:Prompt:2),RIGHT,TRN,#ORIG(?act:stAfter:Prompt), |
+          PROMPT('After:'),AT(11,173,50),USE(?act:stAfter:Prompt:2),RIGHT,TRN,#ORIG(?act:stAfter:Prompt), |
             #ORDINAL(13)
-          BUTTON('Paste ->'),AT(17,186,41,12),USE(?btnPasteAfter),#ORDINAL(14)
-          TEXT,AT(65,172,405,80),USE(act:stAfter),VSCROLL,MSG('String After (Case sensitive)'), |
+          BUTTON('Paste ->'),AT(19,186,41,12),USE(?btnPasteAfter),#ORDINAL(14)
+          TEXT,AT(65,174,405,80),USE(act:stAfter),VSCROLL,MSG('String After (Case sensitive)'), |
             SCROLL,TIP('String After (Case sensitive)'),#ORIG(act:stAfter),#ORDINAL(15)
           BUTTON('&OK'),AT(369,255,49,14),USE(?OK),LEFT,ICON('WAOK.ICO'),MSG('Accept dat' & |
             'a and close the window'),TIP('Accept data and close the window'),#ORIG(?OK),#SEQ(2), |
@@ -5041,13 +5186,13 @@ QuickWindow WINDOW('Form Action'),AT(,,483,278),FONT('Segoe UI',8,,FONT:regular,
             TIP('Cancel operation'),#ORIG(?Cancel),#SEQ(3),#ORDINAL(17)
           CHECK,AT(457,41,14,10),USE(act:ExcludeFilesYN),VALUE('1','0'),#ORIG(act:ExcludeFilesYN), |
             #ORDINAL(18)
-          ENTRY(@n-14),AT(65,12,65,10),USE(act:StepId),RIGHT(1),MSG('Step number'),REQ,TIP('Step number'), |
+          ENTRY(@n-14),AT(65,13,65,10),USE(act:StepId),RIGHT(1),MSG('Step number'),REQ,TIP('Step number'), |
             #LINK(?act:StepId:Prompt),#ORIG(act:StepId),#ORDINAL(19)
           PROMPT('Disable:'),AT(407,12,46),USE(?lblDisableYN),RIGHT,#ORDINAL(20)
           CHECK,AT(457,12,13),USE(act:DisableYN),MSG('Disable YN'),TIP('Disable YN'),VALUE('1', |
             '0'),#ORDINAL(21)
           PROMPT('<<- Leave blank unless you are doing a single replacement in the file' & |
-            ' listed here'),AT(135,68,336),USE(?txtLineNo),#ORDINAL(22)
+            ' listed here'),AT(135,69,336),USE(?txtLineNo),#ORDINAL(22)
         END
 
 [END]
@@ -5061,7 +5206,7 @@ NAME UpdateSetting
 DESCRIPTION 'Form Setting'
 FROM ABC Window
 CATEGORY 'Form'
-MODIFIED '2023/10/10' '20:18:11'
+MODIFIED '2023/10/20' '13:59:01'
 [DATA]
 CurrentTab               STRING(80)
 !!> GUID('7056dbc8-cf1e-4700-85ff-c9cc247bbc94')
@@ -5506,19 +5651,32 @@ WHEN '(),BYTE'
 PROPERTY:BEGIN
 PRIORITY 50
 PROPERTY:END
+  !// Go to the first record
   GlobalRequest = changeRecord
-  Access:Setting.Open()
   Access:Setting.UseFile()
-  If Records(Setting) < 1
-      Access:Setting.PrimeRecord()
-      set:GUID = glo:st.MakeGuid()
-      Access:Setting.Insert()
-  else
-      set(set:SettingPK)
-      Access:Setting.Next()
-  End
-  dbg(set:GUID)
-  do UpdateGlobalFields ! Update record val;ues to global variables    
+  if Access:Setting.Open() <> Level:Benign then ! open
+      MESSAGE('Trouble opening the Setting table','Window will close',ICON:Exclamation,BUTTON:ABORT)
+      post(EVENT:CloseDown) ! Close this window
+      ReturnValue = RequestCancelled ! Cancel the Run procedure and exit
+      RETURN ReturnValue
+  else ! open
+      Access:Setting.ClearKey(set:SettingPK)
+      !dbg(set:GUID)
+      !dbg(Records(Setting))
+      If Records(Setting) < 1 then 
+          Access:Setting.PrimeRecord()
+          set:GUID = glo:st.MakeGuid()
+          if Access:Setting.Insert() <> Level:Benign then
+              MESSAGE('Trouble adding a record to the Setting.tps table','Window will close',ICON:Exclamation,BUTTON:ABORT)
+              post(EVENT:CloseDown) ! Close the main window (ie Quit)
+          end 
+      else
+          set(set:SettingPK)
+          Access:Setting.Next() ! Go to the first record
+      End
+      dbg(set:GUID)
+      do UpdateGlobalFields ! Update record values to global variables 
+  end ! open
 [END]
 [END]
 WHEN 'Init'
@@ -5626,7 +5784,7 @@ PROCPROP
 %ChangeMessage DEFAULT  ('Update the Settings')
 %DeleteAllowed LONG  (1)
 %DeleteMessage DEFAULT  ('Record Will Be Deleted')
-%ViewMessage DEFAULT  ('View Record')
+%ViewMessage DEFAULT  ('View Settings Record')
 %MessageHeader LONG  (0)
 %ActionOnDelete DEFAULT  ('Standard Warning')
 %PrimingFields MULTI LONG  ()
@@ -5965,7 +6123,7 @@ NAME AboutBox
 [COMMON]
 DESCRIPTION 'About Box'
 FROM ABC Splash
-MODIFIED '2023/10/04' '19:58:57'
+MODIFIED '2023/10/17' '20:24:47'
 [PROMPTS]
 %ClassItem UNIQUE DEFAULT  ('Default', 'WindowToolbar')
 %DefaultBaseClassType DEPEND %ClassItem DEFAULT TIMES 2
@@ -6196,9 +6354,8 @@ WHEN  ('') (-1)
 %FieldGradientColorToIsVariable DEPEND %Control LONG TIMES 1
 WHEN  ('') (0)
 
-%ButtonAction DEPEND %Control DEFAULT TIMES 2
+%ButtonAction DEPEND %Control DEFAULT TIMES 1
 WHEN  ('') ('No Special Action')
-WHEN  ('?Close') ('No Special Action')
 
 %ButtonRunName DEPEND %Control DEFAULT TIMES 0
 
@@ -6208,9 +6365,8 @@ WHEN  ('?Close') ('No Special Action')
 
 %ButtonThread DEPEND %Control LONG TIMES 0
 
-%ButtonThreadStack DEPEND %Control DEFAULT TIMES 2
+%ButtonThreadStack DEPEND %Control DEFAULT TIMES 1
 WHEN  ('') ('25000')
-WHEN  ('?Close') ('25000')
 
 %ButtonParameters DEPEND %Control DEFAULT TIMES 0
 
@@ -6218,9 +6374,8 @@ WHEN  ('?Close') ('25000')
 
 %ButtonReturnValueReferenceAssign DEPEND %Control LONG TIMES 0
 
-%ButtonRequest DEPEND %Control DEFAULT TIMES 2
+%ButtonRequest DEPEND %Control DEFAULT TIMES 1
 WHEN  ('') ('None')
-WHEN  ('?Close') ('None')
 
 %ButtonThreadParameters DEPEND %Control DEFAULT TIMES 0
 
@@ -6242,8 +6397,9 @@ WHEN  ('?Close') ('None')
 
 %PostLookupProcedureParameters DEPEND %Control DEFAULT TIMES 0
 
-%PostLookupDuringValidate DEPEND %Control LONG TIMES 2
+%PostLookupDuringValidate DEPEND %Control LONG TIMES 3
 WHEN  ('') (1)
+WHEN  ('?ENTRY1') (1)
 WHEN  ('?glo:AppVersion') (1)
 
 %LookupAssign DEPEND %Control MULTI LONG TIMES 0
@@ -6319,7 +6475,7 @@ WHEN  ('') (1)
 WHEN  ('?IMAGE1') (1)
 
 %AIMimicControl DEPEND %Control DEFAULT TIMES 2
-WHEN  ('') ('?Close')
+WHEN  ('') ('?ENTRY1')
 WHEN  ('?IMAGE1') ('?IMAGE1')
 
 %AIImgRound DEPEND %Control LONG TIMES 0
@@ -6387,24 +6543,21 @@ OWNER 6
 %AlertControlType DEPEND %WinAlert DEFAULT TIMES 0
 
 %locCloseDownWhenWindowClosesSet LONG  (0)
-[ADDITION]
-NAME ABC CloseButton
-[INSTANCE]
-INSTANCE 3
 [WINDOW]
-Window  WINDOW('About clFixer'),AT(75,75,263,105),FONT('Segoe UI',9),ICON('toolbox.ico')
-          BUTTON('Close'),AT(221,7),USE(?Close),DEFAULT,#ORIG(?Close),#SEQ(3),#ORDINAL(1)
+Window  WINDOW('About Clarion Fixer'),AT(75,75,299,105),FONT('Segoe UI',9),ICON('toolbox.ico')
+          ENTRY(@s1),AT(61,63),USE(?ENTRY1),FLAT,TRN,#ORDINAL(1)
           IMAGE('toolbox.png'),AT(10,13,75,75),USE(?IMAGE1),#ORDINAL(2)
-          STRING('clFixer'),AT(2,13,259),USE(?txtTitle),FONT(,14,,FONT:bold),CENTER,TRN,#ORDINAL(3)
-          ENTRY(@s30),AT(95,90,158,10),USE(glo:AppVersion),LEFT,FLAT,MSG('Program Version Number'), |
-            READONLY,TIP('Program Version Number'),TRN,#ORDINAL(4)
-          STRING('Freeware copyright © 2023 Black and White Inc'),AT(95,29,158,11),USE(?txtCopyright:2), |
-            FONT(,9,,FONT:bold),LEFT,#ORDINAL(5)
+          STRING('clFixer 0.2'),AT(96,13,166),USE(?txtTitle),FONT(,14,,FONT:bold),LEFT,TRN, |
+            #ORDINAL(3)
+          STRING('Freeware copyright © 2023 Black and White Inc'),AT(96,29,197,11),USE(?txtCopyright:2), |
+            FONT(,9,,FONT:bold),LEFT,TRN,#ORDINAL(4)
           PROMPT('Written by Donn Edwards with lots of help from the ClarionHub and Cla' & |
-            'rionLive communities.<0DH,0AH>Special thanks to CapeSoft for publishing Wi' & |
-            'nEvent and StringTheory.<0DH,0AH>Toolbox icons created by Roundicons Premi' & |
-            'um at Flaticon.com'),AT(96,43,157,44),USE(?txtCopyright:3),FONT(,8,,FONT:regular), |
-            #ORDINAL(6)
+            'rionLive communities.<0DH,0AH>Special thanks to CapeSoft for publishing AB' & |
+            'C Defaults, StringTheory and WinEvents.<0DH,0AH>Toolbox icons created by R' & |
+            'oundicons Premium at Flaticon.com'),AT(96,43,193,44),USE(?txtCopyright:3),FONT(, |
+            8,,FONT:regular),#ORDINAL(5)
+          ENTRY(@s30),AT(94,90,158,10),USE(glo:AppVersion),LEFT,FLAT,MSG('Program Version Number'), |
+            READONLY,TIP('Program Version Number'),TRN,#ORDINAL(6)
         END
 
 [END]
@@ -6418,7 +6571,7 @@ GLOBAL
 [COMMON]
 DESCRIPTION 'System Diagnostics from CapeSoft WinEvents'
 FROM ABC Window
-MODIFIED '2023/10/05' '18:17:36'
+MODIFIED '2023/10/18' '15:18:58'
 [DATA]
 [SCREENCONTROLS]
 ! PROMPT('LocalRequest:'),USE(?LocalRequest:Prompt)
@@ -7676,71 +7829,84 @@ OWNER 6
 [WINDOW]
 window  WINDOW('WinEvent System Info'),AT(,,301,227),FONT('Segoe UI',10,,FONT:regular),DOUBLE, |
           CENTER,ICON('System.ico'),IMM,SYSTEM
-          BUTTON('Close'),AT(254,13),USE(?Close),#ORIG(?Close),#ORDINAL(1)
-          STRING('Windows Version:'),AT(38,26),USE(?String1),#ORIG(?String1),#ORDINAL(3)
-          STRING(@s3),AT(105,26),USE(WinVer),LEFT,#ORIG(?String2),#ORDINAL(4)
-          STRING('Release:'),AT(126,26),USE(?String3),#ORIG(?String3),#ORDINAL(5)
-          STRING(@s3),AT(157,26,17,10),USE(WinRel),#ORIG(?String4),#ORDINAL(6)
-          STRING(@s3),AT(157,34),USE(DosRel),#ORIG(?String8),#ORDINAL(7)
-          PROMPT('Windows Version Name:'),AT(21,13),USE(?NewWinVersion:Prompt),#LINK(?NewWinVersion), |
-            #ORIG(?NewWinVersion:Prompt),#ORDINAL(9)
-          STRING(@s60),AT(105,13,144),USE(NewWinVersion),#LINK(?NewWinVersion:Prompt),#ORIG(NewWinVersion), |
-            #ORDINAL(10)
-          STRING('Available Space (C:):'),AT(30,61),USE(?String10),#ORIG(?String10),#ORDINAL(12)
-          STRING(@n15),AT(105,61),USE(DiskFree),RIGHT,#ORIG(?String11),#ORDINAL(13)
-          PROMPT('MB'),AT(185,61),USE(?Prompt2),#ORIG(?Prompt2),#ORDINAL(14)
-          STRING('Maximum Capacity (C:):'),AT(19,69),USE(?String12),#ORIG(?String12),#ORDINAL(15)
-          STRING(@n15),AT(105,69),USE(DiskTotal),RIGHT,#ORIG(?String13),#ORDINAL(16)
-          PROMPT('MB'),AT(185,69),USE(?Prompt3),#ORIG(?Prompt3),#ORDINAL(17)
-          STRING('Memory Used by this program (Kb):'),AT(21,90),USE(?String30),#ORIG(?String30), |
-            #ORDINAL(19)
-          STRING(@n13),AT(154,90),USE(UserMemory),RIGHT,#ORIG(?String39),#ORDINAL(20)
+          BUTTON(' Close'),AT(238,200,54),USE(?Close),LEFT,ICON('System.ico'),#ORIG(?Close), |
+            #ORDINAL(1)
+          STRING('Windows Version:'),AT(13,26,83),USE(?String1),RIGHT,#ORIG(?String1),#ORDINAL(2)
+          STRING(@s3),AT(102,26),USE(WinVer),LEFT,#ORIG(?String2),#ORDINAL(3)
+          STRING('Release:'),AT(126,26),USE(?String3),#ORIG(?String3),#ORDINAL(4)
+          STRING(@s3),AT(157,26,17,10),USE(WinRel),#ORIG(?String4),#ORDINAL(5)
+          STRING(@s3),AT(157,37),USE(DosRel),#ORIG(?String8),#ORDINAL(6)
+          PROMPT('Windows Version Name:'),AT(13,13,83),USE(?NewWinVersion:Prompt),RIGHT,#LINK(?NewWinVersion), |
+            #ORIG(?NewWinVersion:Prompt),#ORDINAL(7)
+          STRING(@s60),AT(102,13,187),USE(NewWinVersion),TRN,#LINK(?NewWinVersion:Prompt), |
+            #ORIG(NewWinVersion),#ORDINAL(8)
+          STRING('Available Space (C:):'),AT(13,57,83),USE(?String10),RIGHT,#ORIG(?String10), |
+            #ORDINAL(9)
+          STRING(@n13),AT(102,57),USE(DiskFree),RIGHT,#ORIG(?String11),#ORDINAL(10)
+          PROMPT('MB'),AT(170,57,26),USE(?Prompt2),#ORIG(?Prompt2),#ORDINAL(11)
+          STRING('Maximum Capacity (C:):'),AT(13,69,83),USE(?String12),RIGHT,#ORIG(?String12), |
+            #ORDINAL(12)
+          STRING(@n13),AT(102,69),USE(DiskTotal),RIGHT,#ORIG(?String13),#ORDINAL(13)
+          PROMPT('MB'),AT(170,69,26),USE(?Prompt3),#ORIG(?Prompt3),#ORDINAL(14)
+          STRING('Memory Used by this program (Kb):'),AT(21,90,133),USE(?String30),FONT(,, |
+            COLOR:Navy),RIGHT,#ORIG(?String30),#ORDINAL(15)
+          STRING(@n13),AT(154,90),USE(UserMemory),FONT(,,COLOR:Navy),RIGHT,#ORIG(?String39), |
+            #ORDINAL(16)
           STRING('Memory Analysis for the whole machine (in Kb)'),AT(21,101),USE(?String28), |
-            #ORIG(?String28),#ORDINAL(21)
-          STRING('Total'),AT(127,111),USE(?String25),FONT(,,COLOR:Navy,FONT:bold,CHARSET:ANSI), |
-            RIGHT,#ORIG(?String25),#ORDINAL(22)
-          STRING('Free'),AT(272,111),USE(?String27),FONT(,,COLOR:Navy,FONT:bold,CHARSET:ANSI), |
-            RIGHT,#ORIG(?String27),#ORDINAL(23)
-          STRING('Physical Ram:'),AT(34,121),USE(?String29),FONT(,,COLOR:Navy,FONT:bold,CHARSET:ANSI), |
-            #ORIG(?String29),#ORDINAL(24)
-          STRING(@n13),AT(84,121),USE(RamTotal),RIGHT,#ORIG(?String33),#ORDINAL(25)
-          STRING(@n13),AT(154,121),USE(RamUsed),RIGHT,#ORIG(?String33),#ORDINAL(26)
-          STRING(@n13),AT(227,121),USE(RamFree),RIGHT,#ORIG(?String36),#ORDINAL(27)
-          STRING('Swap File:'),AT(47,132),USE(?String31),FONT(,,COLOR:Navy,FONT:bold,CHARSET:ANSI), |
-            #ORIG(?String31),#ORDINAL(28)
-          STRING(@n13),AT(84,132),USE(SwapTotal),RIGHT,#ORIG(?String34),#ORDINAL(29)
-          STRING(@n13),AT(154,132),USE(SwapUsed),RIGHT,#ORIG(?String34),#ORDINAL(30)
-          STRING(@n13),AT(227,132),USE(SwapFree),RIGHT,#ORIG(?String37),#ORDINAL(31)
-          STRING('Virtual Memory:'),AT(24,143),USE(?String32),FONT(,,COLOR:Navy,FONT:bold, |
-            CHARSET:ANSI),#ORIG(?String32),#ORDINAL(32)
-          STRING(@n13),AT(84,143),USE(VirtualTotal),RIGHT,#ORIG(?String35),#ORDINAL(33)
-          STRING(@n13),AT(154,143),USE(VirtualUsed),RIGHT,#ORIG(?String35),#ORDINAL(34)
-          STRING(@n13),AT(227,143),USE(VirtualFree),RIGHT,#ORIG(?String38),#ORDINAL(35)
-          PROMPT('Screen Width:'),AT(65,161),USE(?ScreenWidth:Prompt),RIGHT,#LINK(?ScreenWidth), |
-            #ORIG(?ScreenWidth:Prompt),#ORDINAL(37)
-          STRING(@n-14),AT(112,161),USE(ScreenWidth),RIGHT(1),#LINK(?ScreenWidth:Prompt),#ORIG(ScreenWidth), |
-            #ORDINAL(38)
-          STRING('Used'),AT(197,111),USE(?String26),FONT(,,COLOR:Navy,FONT:bold,CHARSET:ANSI), |
-            RIGHT,#ORIG(?String26),#ORDINAL(39)
-          STRING('Release:'),AT(126,34),USE(?String3:2),#ORIG(?String3),#ORDINAL(40)
-          STRING(@s3),AT(105,34),USE(DosVer),LEFT,#ORIG(?String7),#ORDINAL(41)
-          STRING('Dos Version:'),AT(54,34),USE(?String1:2),#ORIG(?String1),#ORDINAL(42)
-          PROMPT('Screen Height:'),AT(62,171),USE(?ScreenHeight:Prompt),RIGHT,#LINK(?ScreenHeight), |
-            #ORIG(?ScreenHeight:Prompt),#ORDINAL(43)
-          STRING(@n-14),AT(112,171),USE(ScreenHeight),RIGHT(1),#LINK(?ScreenHeight:Prompt), |
-            #ORIG(ScreenHeight),#ORDINAL(44)
-          PROMPT('Screen Depth:'),AT(64,182),USE(?ScreenDepth:Prompt),RIGHT,#LINK(?ScreenDepth), |
-            #ORIG(?ScreenDepth:Prompt),#ORDINAL(45)
-          STRING(@n-14),AT(112,182),USE(ScreenDepth),RIGHT(1),#LINK(?ScreenDepth:Prompt),#ORIG(ScreenDepth), |
-            #ORDINAL(46)
-          PROMPT('Screenx DPI:'),AT(70,193),USE(?ScreenxDPI:Prompt),RIGHT,#LINK(?ScreenxDPI), |
-            #ORIG(?ScreenxDPI:Prompt),#ORDINAL(47)
-          STRING(@n-14),AT(112,193),USE(ScreenxDPI),RIGHT(1),#LINK(?ScreenxDPI:Prompt),#ORIG(ScreenxDPI), |
-            #ORDINAL(48)
-          STRING(@n-14),AT(187,192),USE(ScreenyDPI),#LINK(?ScreenyDPI:Prompt),#ORIG(ScreenyDPI), |
-            #ORDINAL(50)
-          STRING('OS Bits:'),AT(185,34),USE(?STRING2),#ORDINAL(51)
-          STRING(@n3),AT(215,34),USE(OsBits),#ORDINAL(52)
+            FONT(,,COLOR:Navy),#ORIG(?String28),#ORDINAL(17)
+          STRING('Total'),AT(122,111,23),USE(?String25),FONT(,,COLOR:Navy,FONT:regular,CHARSET:ANSI), |
+            RIGHT,#ORIG(?String25),#ORDINAL(18)
+          STRING('Free'),AT(259,111,23),USE(?String27),FONT(,,COLOR:Navy,FONT:regular,CHARSET:ANSI), |
+            RIGHT,#ORIG(?String27),#ORDINAL(19)
+          STRING('Physical Ram:'),AT(19,121,65),USE(?String29),FONT(,,COLOR:Navy,FONT:regular, |
+            CHARSET:ANSI),RIGHT,#ORIG(?String29),#ORDINAL(20)
+          STRING(@n13),AT(89,121),USE(RamTotal),FONT(,,COLOR:Navy),RIGHT,#ORIG(?String33), |
+            #ORDINAL(21)
+          STRING(@n13),AT(154,121),USE(RamUsed),FONT(,,COLOR:Navy),RIGHT,#ORIG(?String33), |
+            #ORDINAL(22)
+          STRING(@n13),AT(227,121),USE(RamFree),FONT(,,COLOR:Navy),RIGHT,#ORIG(?String36), |
+            #ORDINAL(23)
+          STRING('Swap File:'),AT(19,132,65),USE(?String31),FONT(,,COLOR:Navy,FONT:regular, |
+            CHARSET:ANSI),RIGHT,#ORIG(?String31),#ORDINAL(24)
+          STRING(@n13),AT(89,132),USE(SwapTotal),FONT(,,COLOR:Navy),RIGHT,#ORIG(?String34), |
+            #ORDINAL(25)
+          STRING(@n13),AT(154,132),USE(SwapUsed),FONT(,,COLOR:Navy),RIGHT,#ORIG(?String34), |
+            #ORDINAL(26)
+          STRING(@n13),AT(227,132),USE(SwapFree),FONT(,,COLOR:Navy),RIGHT,#ORIG(?String37), |
+            #ORDINAL(27)
+          STRING('Virtual Memory:'),AT(19,143,65),USE(?String32),FONT(,,COLOR:Navy,FONT:regular, |
+            CHARSET:ANSI),RIGHT,#ORIG(?String32),#ORDINAL(28)
+          STRING(@n13),AT(89,143),USE(VirtualTotal),FONT(,,COLOR:Navy),RIGHT,#ORIG(?String35), |
+            #ORDINAL(29)
+          STRING(@n13),AT(154,143),USE(VirtualUsed),FONT(,,COLOR:Navy),RIGHT,#ORIG(?String35), |
+            #ORDINAL(30)
+          STRING(@n13),AT(227,143),USE(VirtualFree),FONT(,,COLOR:Navy),RIGHT,#ORIG(?String38), |
+            #ORDINAL(31)
+          PROMPT('Screen Width:'),AT(34,174,79),USE(?ScreenWidth:Prompt),RIGHT,#LINK(?ScreenWidth), |
+            #ORIG(?ScreenWidth:Prompt),#ORDINAL(32)
+          STRING(@n-14),AT(112,173),USE(ScreenWidth),RIGHT(1),#LINK(?ScreenWidth:Prompt),#ORIG(ScreenWidth), |
+            #ORDINAL(33)
+          STRING('Used'),AT(186,111,23),USE(?String26),FONT(,,COLOR:Navy,FONT:regular,CHARSET:ANSI), |
+            RIGHT,#ORIG(?String26),#ORDINAL(34)
+          STRING('Release:'),AT(126,37),USE(?String3:2),#ORIG(?String3),#ORDINAL(35)
+          STRING(@s3),AT(102,37),USE(DosVer),LEFT,#ORIG(?String7),#ORDINAL(36)
+          STRING('Dos Version:'),AT(13,37,83),USE(?String1:2),RIGHT,#ORIG(?String1),#ORDINAL(37)
+          PROMPT('Screen Height:'),AT(34,185,79),USE(?ScreenHeight:Prompt),RIGHT,#LINK(?ScreenHeight), |
+            #ORIG(?ScreenHeight:Prompt),#ORDINAL(38)
+          STRING(@n-14),AT(112,185),USE(ScreenHeight),RIGHT(1),#LINK(?ScreenHeight:Prompt), |
+            #ORIG(ScreenHeight),#ORDINAL(39)
+          PROMPT('Screen Depth:'),AT(34,197,79),USE(?ScreenDepth:Prompt),RIGHT,#LINK(?ScreenDepth), |
+            #ORIG(?ScreenDepth:Prompt),#ORDINAL(40)
+          STRING(@n-14),AT(112,197),USE(ScreenDepth),RIGHT(1),#LINK(?ScreenDepth:Prompt),#ORIG(ScreenDepth), |
+            #ORDINAL(41)
+          PROMPT('Screenx DPI:'),AT(34,162,79),USE(?ScreenxDPI:Prompt),RIGHT,#LINK(?ScreenxDPI), |
+            #ORIG(?ScreenxDPI:Prompt),#ORDINAL(42)
+          STRING(@n-14),AT(112,162),USE(ScreenxDPI),RIGHT(1),#LINK(?ScreenxDPI:Prompt),#ORIG(ScreenxDPI), |
+            #ORDINAL(43)
+          STRING(@n-14),AT(185,162),USE(ScreenyDPI),#LINK(?ScreenyDPI:Prompt),#ORIG(ScreenyDPI), |
+            #ORDINAL(44)
+          STRING('OS Bits:'),AT(185,37),USE(?STRING2),#ORDINAL(45)
+          STRING(@n3),AT(215,37),USE(OsBits),#ORDINAL(46)
         END
 
 [END]
@@ -7854,7 +8020,7 @@ NAME MainDashboard
 DESCRIPTION 'Window'
 FROM ABC Window
 CATEGORY 'Window'
-MODIFIED '2023/10/08' '14:21:04'
+MODIFIED '2023/10/17' '19:17:08'
 [PROMPTS]
 %ButtonAction DEPEND %Control DEFAULT TIMES 3
 WHEN  ('') ('No Special Action')
@@ -8465,28 +8631,28 @@ QuickWindow WINDOW('Main Dashboard'),AT(,,401,227),FONT('Segoe UI',9,,FONT:regul
           RESIZE,CENTER,ICON('toolbox.ico'),GRAY,IMM,HLP('MyDashboard'),SYSTEM
           BUTTON('  &OK'),AT(343,204,47,14),USE(?Ok),LEFT,ICON('WAOK.ICO'),MSG('Close this screen'), |
             TIP('Close this screen'),#ORIG(?Ok),#SEQ(1),#ORDINAL(1)
-          BUTTON('Process the Files'),AT(11,11,81,18),USE(?btnScanFiles),FONT(,,,FONT:bold), |
+          BUTTON('Process the Files'),AT(11,11,91,18),USE(?btnScanFiles),FONT(,,,FONT:bold), |
             LEFT,ICON('WIZFIND.ICO'),MSG('Find the files and make the requested changes'), |
             TIP('Find the files and make the requested changes'),#ORDINAL(2)
-          PROMPT('Files Found:'),AT(95,16,63),USE(?glo:qRecords:Prompt),RIGHT,#ORDINAL(3)
+          PROMPT('Files Found:'),AT(95,16,63),USE(?glo:qRecords:Prompt),RIGHT,TRN,#ORDINAL(3)
           ENTRY(@n-14B),AT(163,15,60,12),USE(glo:qRecords),RIGHT(1),FLAT,MSG('Queue Records'), |
             READONLY,TIP('Queue Records'),#ORDINAL(4)
-          PROMPT('Folders:'),AT(287,16,38),USE(?glo:qFolders:Prompt),RIGHT,#ORDINAL(5)
-          ENTRY(@n-14B),AT(329,15,60,12),USE(glo:qFolders),RIGHT(1),FLAT,MSG('Number of ' & |
+          PROMPT('Folders:'),AT(286,16,38),USE(?glo:qFolders:Prompt),RIGHT,#ORDINAL(5)
+          ENTRY(@n-14B),AT(328,15,60,12),USE(glo:qFolders),RIGHT(1),FLAT,MSG('Number of ' & |
             'Folders scanned'),READONLY,TIP('Number of Folders scanned'),#ORDINAL(6)
-          PROMPT('App Description:'),AT(107,40),USE(?glo:AppDescription:Prompt),RIGHT,#ORDINAL(7)
-          ENTRY(@s50),AT(163,39,225,12),USE(glo:AppDescription),FLAT,MSG('Description'),READONLY, |
+          PROMPT('App Description:'),AT(99,39,58),USE(?glo:AppDescription:Prompt),RIGHT,#ORDINAL(7)
+          ENTRY(@s50),AT(163,38,225,12),USE(glo:AppDescription),FLAT,MSG('Description'),READONLY, |
             TIP('Description'),#ORDINAL(8)
           PROMPT('Root Path:'),AT(99,54,58),USE(?glo:RootPath:Prompt),RIGHT,#ORDINAL(9)
-          ENTRY(@s255),AT(163,54,225,12),USE(glo:RootPath),FLAT,MSG('Root Path'),READONLY, |
+          ENTRY(@s255),AT(163,53,225,12),USE(glo:RootPath),FLAT,MSG('Root Path'),READONLY, |
             TIP('Root Path'),#ORDINAL(10)
-          PROMPT('File Extensions:'),AT(99,70,58),USE(?glo:FileExtensions:Prompt),RIGHT,#ORDINAL(11)
+          PROMPT('File Extensions:'),AT(99,68,58),USE(?glo:FileExtensions:Prompt),RIGHT,#ORDINAL(11)
           ENTRY(@s250),AT(163,68,225,12),USE(glo:FileExtensions),FLAT,MSG('File Extensions'), |
             READONLY,TIP('File Extensions'),#ORDINAL(12)
           PROMPT('Exclude Files:'),AT(99,85,58),USE(?glo:ExcludeFiles:Prompt),RIGHT,#ORDINAL(13)
           TEXT,AT(163,83,225,100),USE(glo:ExcludeFiles),VSCROLL,FLAT,MSG('Exclude Files'), |
             READONLY,TIP('Exclude Files'),#ORDINAL(14)
-          ENTRY(@s80),AT(11,187,376,10),USE(glo:ProgressMessage),CENTER,FLAT,MSG('Progress Message'), |
+          ENTRY(@s80),AT(12,187,376,10),USE(glo:ProgressMessage),CENTER,FLAT,MSG('Progress Message'), |
             READONLY,TIP('Progress Message'),TRN,#ORDINAL(15)
         END
 
@@ -8503,7 +8669,7 @@ GLOBAL
 [COMMON]
 DESCRIPTION 'Get DIR of just file names, not folders'
 FROM ABC Source
-MODIFIED '2023/10/04' '17:50:05'
+MODIFIED '2023/10/19' '16:59:34'
 [PROMPTS]
 %GenerateOpenClose LONG  (0)
 %GenerateSaveRestore LONG  (0)
@@ -8523,7 +8689,7 @@ PROPERTY:END
 !size                            LONG
 !attrib                          BYTE   !A bitmap, the same as the attributes EQUATEs
 !                            END
-AllFiles                    QUEUE(File:queue),PRE(FIL)    
+qAllFiles                   QUEUE(File:queue),PRE(FIL)    
                                 !Inherit exact declaration of File:queue
                                 !This is the structure used by DIRECTORY command
                             END
@@ -8539,45 +8705,49 @@ EMBED %ProcessedCode
 PROPERTY:BEGIN
 PRIORITY 4000
 PROPERTY:END
-    strMyFilter = strFilter & ';'
-    i = INSTRING(';',strMyFilter)
-    strMyFilter = SUB(strMyFilter,1,i-1) ! Trim off the trailing ;
+    !strMyFilter = strFilter & ';'
+    !i = INSTRING(';',strMyFilter)
+    !strMyFilter = SUB(strMyFilter,1,i-1) ! Trim off the trailing ;
     !dbg('strFilter=' & clip(strMyFilter))
     !dbg('strDir=' & clip(strDir))
+    strMyFilter = CLIP(strFilter)
+    if LEN(CLIP(strMyFilter)) < 2 then ! not a valid filter
+        RETURN 
+    end ! not a valid filter
     
     !// Get a directory listing of all the normal files in this folder
     !   Put the file name and path in the clFiles queue
     
-    DIRECTORY(AllFiles, CLIP(strDir) & '\' & strMyFilter,ff_:NORMAL)   !Get all visible files 
-    lngRecs = RECORDS(AllFiles) 
+    DIRECTORY(qAllFiles, CLIP(strDir) & '\' & strMyFilter,ff_:NORMAL)   !Get all visible files 
+    lngRecs = RECORDS(qAllFiles) 
     
-    LOOP i = 1 to lngRecs !TO 1 BY -1 ! Loop i
-        GET(AllFiles,i)    
-        IF FIL:Attrib = ff_:DIRECTORY 
-            !DELETE(AllFiles)                        !Ignore directory entries            
-        ELSE
+    LOOP i = 1 to lngRecs ! Loop i
+        GET(qAllFiles,i)    
+        IF FIL:Attrib = ff_:DIRECTORY ! Attrib
+            ! Don't process directory entries here           
+        ELSE ! Attrib
             glo:ProgressMessage =  CLIP(strDir) & '\' & CLIP(FIL:name)
             DISPLAY()
-            ADD(clFiles)    ! Note the file name in the clFiles Queue
+            ! Note the file name in the clFiles Queue
             CLF:name = FIL:name
             CLF:path = strDir
             CLF:uname = UPPER(FIL:name)
             CLF:attrib = FIL:attrib
             CLF:scanned = FALSE  ! Not a folder
             CLF:excluded  = FALSE  ! Not an excluded file
-            loop n = 1 TO RECORDS(clExclude) ! loop n
+            LOOP n = 1 TO RECORDS(clExclude) ! loop n
                 GET(clExclude,n)
                 if CLE:wild = TRUE then ! wild
-                    if MATCH(CLF:uname,CLE:uname) then
+                    if MATCH(CLF:uname,CLE:uname,Match:Wild) then ! Wild card match?
                         CLF:excluded  = TRUE
-                    end
+                    end ! Wild card match
                 else ! not wild
                     if CLIP(CLF:uname) = CLIP(CLE:uname) then ! matching file name
                         CLF:excluded  = TRUE
                     end ! matching file name    
                 end ! not wild
-            end ! loop n
-            PUT(clFiles)
+            END ! loop n
+            ADD(clFiles) ! File name noted
         END        
     END ! Loop i
     glo:qRecords  = RECORDS(clFiles)
@@ -8629,7 +8799,7 @@ GLOBAL
 [COMMON]
 DESCRIPTION 'Scan for Folders Only'
 FROM ABC Source
-MODIFIED '2023/10/05' '18:38:29'
+MODIFIED '2023/10/19' '16:28:43'
 [PROMPTS]
 %GenerateOpenClose LONG  (0)
 %GenerateSaveRestore LONG  (0)
@@ -8648,7 +8818,7 @@ PROPERTY:END
                             !size                            LONG
                             !attrib                          BYTE   !A bitmap, the same as the attributes EQUATEs
                             !                            END
-AllFiles                    QUEUE(File:queue),PRE(FIL)    
+qAllFiles                   QUEUE(File:queue),PRE(FIL)    
                                 !Inherit exact declaration of File:queue
                                 !This is the structure used by DIRECTORY command
                             END
@@ -8665,36 +8835,36 @@ PROPERTY:END
     !dbg('strDir=' & clip(strDir))
     glo:qRecords  = RECORDS(clFiles)
     if glo:qRecords = 0 then ! very first folder
-        ADD(clFiles)
+        ! Add the first folder to clFiles
         CLF:name = CLIP(strDir)
         CLF:path = CLIP(strDir) 
         CLF:uname = UPPER(strDir)
         CLF:attrib = ff_:DIRECTORY
         CLF:scanned = TRUE 
-        PUT(clFiles)
+        ADD(clFiles)
         !dbg('First Folder=' & CLIP(strDir) )
     end ! very first folder
     !
     !// Find all the folder names and add them to the clFiles queue
     !
-    DIRECTORY(AllFiles, CLIP(strDir) & '\*.*',ff_:DIRECTORY)   !Get all files and directories
-    lngRecs = RECORDS(AllFiles) 
+    DIRECTORY(qAllFiles, CLIP(strDir) & '\*.*',ff_:DIRECTORY)   !Get all files and directories
+    lngRecs = RECORDS(qAllFiles) 
     !
-    LOOP i = 1 to lngRecs ! TO 1 BY -1 ! Loop i
-        GET(AllFiles,i)  
+    LOOP i = 1 to lngRecs ! Loop i
+        GET(qAllFiles,i)  ! qAllfiles is the queue with the names of all the folders
         !dbg(i & ' Attrib=' & FIL:attrib & ' name=' & CLIP(FIL:name))
         IF (FIL:Attrib = ff_:DIRECTORY) AND FIL:ShortName <> '..' AND FIL:ShortName <> '.'
-            ADD(clFiles)        ! Add folder names to the clFiles queue
+            ! Add folder names to the clFiles queue
             CLF:name = FIL:name
             CLF:path = CLIP(strDir) & '\' & CLIP(FIL:name)
             CLF:uname = UPPER(FIL:name)
             CLF:attrib = ff_:DIRECTORY
             CLF:scanned = FALSE  
-            PUT(clFiles)
+            ADD(clFiles)
             !dbg(i & ' ' & j & ' folder=' & CLF:path)
             !dbg(i & ' ' & j & ' name=' & CLF:name)
         ELSE
-            !DELETE(AllFiles)                        !Ignore non-directory entries             
+            !Ignore non-directory entries             
         END  
     END ! Loop i
     glo:qRecords  = RECORDS(clFiles)
@@ -8747,7 +8917,7 @@ GLOBAL
 [COMMON]
 DESCRIPTION 'Find files based on multipe extension mask'
 FROM ABC Source
-MODIFIED '2023/10/05' '18:22:18'
+MODIFIED '2023/10/19' '15:26:14'
 [PROMPTS]
 %GenerateOpenClose LONG  (0)
 %GenerateSaveRestore LONG  (0)
@@ -8771,23 +8941,15 @@ PROPERTY:END
     
     !// Assume the file filter contains multiple extensions (*.inc;*.clw;*.txt etc)
     !   Extract each one and do a directory listing to find matching files
+    !   Thanks to Geoff Robinson for his code suggestions
     !
-    stf.SetValue(strMultiFilter & ';')
-    LOOP
-        !dbg('strMultiFilter=' & clip(stf.GetValue()))
-        strFilter = stf.Before(';')     ! get the leftmost filter
-        !i = INSTRING('*',strFilter) ! Where is the * ?
-        !if i = 0 then ! No *
-        !    strFilter = '*' & CLIP(strFilter)
-        !end ! No *
-        !dbg('strFilter=' & clip(strFilter))
-        !dbg('strDir=' & clip(strDir)) 
-        DirFilesOnly(strDir,strFilter)
-        stf.SetAfter(';') ! Drop the leftmost filter, keep the others
-    WHILE stf.Length() > 2 ! Keep going until you get ;; or less
-    !dbg('strMultiFilter=' & clip(stf.GetValue()))
-    RETURN
-        
+    stf.SetValue(strMultiFilter)
+    stf.Split(';',,,,st:clip,st:left)  ! split into multiple clipped lines
+    stf.RemoveLines() ! Remove blank lines
+    LOOP i = 1 to stf.Records()
+        DirFilesOnly(strDir,stf.GetLine(i))  ! Try each mask in turn
+    END
+    RETURN        
     
 [END]
 [END]
@@ -8835,7 +8997,7 @@ GLOBAL
 [COMMON]
 DESCRIPTION 'Scan entire directory structure including all subfolders'
 FROM ABC Source
-MODIFIED '2023/10/05' '19:29:49'
+MODIFIED '2023/10/19' '15:52:33'
 [PROMPTS]
 %GenerateOpenClose LONG  (0)
 %GenerateSaveRestore LONG  (0)
@@ -8849,6 +9011,7 @@ PROPERTY:END
     dbg('Folder=' & strDir)
     dbg('MultiMask=' & strMultiFilter)
     glo:FilesChanged = 0
+    !// Set up the glo:stFiles object to contain important error messages and modified file names
     glo:stfiles.SetValue('<13,10>clFixer ' & CLIP(LEFT(format(TODAY(),'@D18'))) & ' ' & CLIP(LEFT(format(CLOCK(),'@T1'))) & '<13,10>') ! Note the date and time
     !
     !// This is the procedure that gets a list of all the files that match a particular filter
@@ -8860,6 +9023,12 @@ PROPERTY:END
     GetExcluded()                                           ! Get the list of excluded files
     DirectoriesOnly(strDir)                                 ! Get the initial folder and its subfolders
     DirFilesMask(strDir,strMultiFilter)                     ! get the root files
+    if RECORDS(clFiles) = 1 then ! did we find anything?
+        MESSAGE(CLIP(strDir) & ' is empty or does''t exist')
+        RETURN
+    else !
+        dbg(RECORDS(clFiles))
+    end
     !// Multiple passes
     lngCurrent = 0      ! We have already scanned this folder
     LOOP
@@ -8874,6 +9043,7 @@ PROPERTY:END
             !// Scan the folder for more folders and files
             DirectoriesOnly(strFolder)                      ! Add folders to the queue
             DirFilesMask(strFolder,strMultiFilter)          ! Add matching files to the queue
+            glo:ProgressMessage = 'Inspecting ' & lngCurrent
         else ! Folder
             !dbg(lngCurrent & ' file=' & CLF:name)      ! Skip existing file names
         end ! Folder
@@ -8883,6 +9053,8 @@ PROPERTY:END
     j = 0   ! File counter
     glo:qFolders = 0
     lngCurrent = RECORDS(clFiles)
+    glo:ProgressMessage = 'Sorting ' & lngCurrent
+    DISPLAY()
     LOOP i = lngCurrent TO 1 BY -1
         GET(clFiles,i)
         if CLF:attrib = ff_:DIRECTORY or len(CLIP(CLF:name)) = 0 then ! Folder
@@ -8897,20 +9069,22 @@ PROPERTY:END
             !glo:ProgressMessage = 'Found ' & j & ' File=' & CLIP(CLF:path) & '\' & CLIP(CLF:name)
         end ! Folder
     END ! loop i
-    dbg (j & ' files')
+    !dbg (j & ' files')
     glo:qRecords = RECORDS(clFiles)
-    DISPLAY()
     SORT(clFiles,CLF:uname)
     loop i = 1 to glo:qRecords ! loop i
         GET(clFiles,i)
         ProcessFile(i)
         !dbg(i & ' ' & CLIP(CLF:name) & '--' & CLF:excluded )
     end ! loop i  
-    glo:ProgressMessage = 'Processed ' & glo:qRecords & ' files, ' & glo:FilesChanged & ' files updated.'
+    glo:ProgressMessage = 'Processed ' & glo:qRecords & ' files, ' & glo:FilesChanged & ' files updated, ' & glo:FileErrors & ' errors.'
     glo:stfiles.Append(clip(glo:ProgressMessage) & '<13,10>')
     DISPLAY()
-    glo:stfiles.SaveFile(clip(strDir) & '\clFixer.txt',True) ! Save the results
-    RUN(clip(strDir) & '\clFixer.txt')  ! Display the results in notepad
+    if glo:stfiles.SaveFile(clip(strDir) & '\clFixer.txt',True) ! Save the results
+        RUN(clip(strDir) & '\clFixer.txt')  ! Display the results in notepad
+    else ! Save
+        MESSAGE('Problem saving ' & clip(strDir) & '\clFixer.txt')
+    end ! Save
     RETURN
 [END]
 EMBED %DataSection
@@ -8967,7 +9141,7 @@ GLOBAL
 [COMMON]
 DESCRIPTION 'Create a queue with the list of excluded files'
 FROM ABC Source
-MODIFIED '2023/10/04' '16:45:40'
+MODIFIED '2023/10/19' '15:22:59'
 [PROMPTS]
 %GenerateOpenClose LONG  (0)
 %GenerateSaveRestore LONG  (0)
@@ -8980,33 +9154,26 @@ PRIORITY 4000
 PROPERTY:END
     !
     !// We want to take the global ExcludeFiles value and put it into a queue of Excluded file names
+    !   Big thanks to Geoff Robinson for helping me optimise (rewrite) this code
     !
     CLEAR(clExclude)                                        ! Empty the queue
-    !lngPointer = 0
     st.SetValue(glo:ExcludeFiles)                           ! Get the data into a string theory object
-    st.Split('<13,10>')                                     ! each file name on a separate line
-    LOOP ! lines
-        strLine = st.GetLine(1)
-        if len(CLIP(strLine)) > 2 then ! strLine is not zero
-            ADD(clExclude)
-            CLE:name = strLine
-            CLE:uname = UPPER(strLine)
-            CLE:wild = FALSE                                ! Not a wild card by default
-            i = STRPOS(strLine,'\*',Match:Simple+Match:NoCase)  ! Contains a *
-            if i > 0 then 
-                !dbg('Wild card: ' & strLine)
+    st.Split('<13,10>',,,,st:clip,st:left)                  ! each file name on a separate line, CLIPPED
+    st.RemoveLines('<9,10,13>')                             ! Get rid of empty lines
+    LOOP i = 1 to st.Records()
+        stf.setValue(CLIP(st.getLine(i))) ! File name or wild card
+        if stf.Length() >= 5 ! Must be a valid name
+            CLE:name = stf.GetValue()
+            CLE:uname = CLIP(UPPER(CLE:name))
+            if stf.containsChar('*') or stf.containsChar('?') ! Does the file name have any wild cards?
                 CLE:wild = TRUE
+            else
+                CLE:wild = FALSE
             end
-            i = STRPOS(strLine,'\?',Match:Simple+Match:NoCase) ! Contains a ?
-            if i > 0 then 
-                !dbg('Wild card: ' & strLine)
-                CLE:wild = TRUE
-            end    
-            PUT(clExclude)                                  ! Saved to the queue
-            !lngPointer += 1
-            !dbg(lngPointer & ' line=' & CLIP(strLine) & ' wild: ' & CLE:wild)
-        end ! strLine is not zero        
-    UNTIL st.DeleteLine(1)  ! No more lines to process
+            !dbg(CLE:wild & ' Exclude=' & CLE:name)
+            ADD(clExclude)                                  ! Saved to the queue
+        end ! Valid Name
+    END    
 [END]
 EMBED %DataSection
 [DEFINITION]
@@ -9014,10 +9181,9 @@ EMBED %DataSection
 PROPERTY:BEGIN
 PRIORITY 50
 PROPERTY:END
-st                          StringTheory
-!lngPointer                  LONG
-i                           LONG
-strLine                     STRING(FILE:MaxFileName)
+st                          StringTheory ! List of files
+stf                         StringTheory ! File name
+i                           LONG    ! Line number
 [END]
 [END]
 [ADDITION]
@@ -9064,7 +9230,7 @@ GLOBAL
 [COMMON]
 DESCRIPTION 'Process each file in turn'
 FROM ABC Source
-MODIFIED '2023/10/05' '18:56:26'
+MODIFIED '2023/10/18' '18:37:19'
 [FILES]
 [OTHERS]
 Action
@@ -9082,38 +9248,52 @@ PROPERTY:END
     glo:ProgressMessage = lngPointer & ' ' & CLIP(strFilePathName)
     DISPLAY()
     blnExclude = CLF:excluded ! Is this one of the excluded files?
-    stb.LoadFile(strFilePathName) 
-    sta.SetValue(stb.GetValue()) ! Copy from before to after
-    Access:Action.Open()
-    Access:Action.ClearKey(act:ActionStepPK)
-    SET(act:ActionStepPK)
-    LOOP UNTIL Access:Action.Next() <> Level:Benign ! Next
-        if act:DisableYN then CYCLE.        ! Ignore this action
-        if LEN(CLIP(act:FileName)) >= 5 then ! file
-            if MATCH(CLF:name,act:FileName,Match:Wild+Match:NoCase) then !
-                !// Files match, so proceed
-                do SearchAndReplace
-            end !
-        else ! file
-            if act:ExcludeFilesYN and CLF:excluded then !
-                !// Do nothing
-                !dbg('Excluded file ' & strFilePathName)
-            else !
-                do SearchAndReplace
-            end !     
-        end ! file            
-    END ! Next
-    Access:Action.Close()
-    IF stb.GetValue() <> sta.GetValue() THEN ! changes
+    if not stb.LoadFile(strFilePathName) ! File load
+        !// Report error in glo:stFiles - Thanks to Geoff Robinson for the help here
+        glo:stfiles.Append('Error opening ' & CLIP(strFilePathName) & ' - ' & stb.lastError & '<13,10>')
+        glo:FileErrors += 1
+        RETURN
+    end ! File load
+    sta.SetValue(stb) ! Copy from before to after
+    if Access:Action.TryOpen() = Level:Benign then ! Open
+        Access:Action.ClearKey(act:ActionStepPK)
+        SET(act:ActionStepPK)
+        LOOP UNTIL Access:Action.Next() <> Level:Benign ! Next
+            if act:DisableYN then CYCLE.        ! Ignore this action
+            if LEN(CLIP(act:FileName)) >= 5 then ! file - must be a valid file name
+                if MATCH(CLF:name,act:FileName,Match:Wild+Match:NoCase) then !
+                    !// Files match, so proceed
+                    do SearchAndReplace
+                end !
+            else ! file
+                if act:ExcludeFilesYN and CLF:excluded then !
+                    !// Do nothing
+                    !dbg('Excluded file ' & strFilePathName)
+                else !
+                    do SearchAndReplace
+                end !     
+            end ! file            
+        END ! Next
+        Access:Action.Close()
+    end ! open
+    IF NOT stb.Equals(sta) THEN ! changes - Compare the before and after contents to see if they are equal
         !// Preserve the original, save the new one
         if EXISTS(CLIP(strFilePathName) & '.bf') = false then
             RENAME(CLIP(strFilePathName),CLIP(strFilePathName) & '.bf') ! Rename the original
+            if ERRORCODE() 
+                glo:stfiles.Append('Error renaming ' & CLIP(strFilePathName) & ' to *.bf - ' & ERROR() & '<13,10>')
+                glo:FileErrors += 1                
+            end 
         end        
         !dbg('Saved file ' & CLIP(strFilePathName))
-        sta.SaveFile(CLIP(strFilePathName)) ! Save the modified version
-        glo:FilesChanged += 1
-        dbg(strFilePathName)
-        glo:stfiles.Append(CLIP(strFilePathName) & '<13,10>')
+        if sta.SaveFile(CLIP(strFilePathName)) then ! Save the modified version
+            glo:FilesChanged += 1
+            dbg(strFilePathName)
+            glo:stfiles.Append(CLIP(strFilePathName) & '<13,10>')
+        else ! problem saving
+            glo:stfiles.Append('Error saving ' & CLIP(strFilePathName) & ' - ' & stb.lastError & '<13,10>')
+            glo:FileErrors += 1
+        end ! problem saving   
     END ! changes
     RETURN
 [END]
@@ -9127,6 +9307,7 @@ strFilePathName             STRING(500)
 stb                         StringTheory ! Contents of the file before
 sta                         StringTheory ! File after
 stl                         StringTheory ! Split into lines
+st                          StringTheory ! Temporary
 blnExclude                  BYTE ! This is one of the excluded files
 lngLineNo                   LONG
 i                           LONG
@@ -9145,14 +9326,15 @@ SearchAndReplace    ROUTINE
     !dbg(CLIP(act:stDescription))
     lngLineNo = act:LineNo
     if lngLineNo = 0 then ! Line No
-        sta.Replace(CLIP(act:stBefore),CLIP(act:stAfter))
+        sta.Replace(CLIP(act:stBefore),CLIP(act:stAfter),,,,True) ! Case insensitive replace
     else ! Line No
         !// Start at a particular line number
-        stl.SetValue(sta.GetValue())  ! Copy the current version into stl
+        stl.SetValue(sta)  ! Copy the current version into stl
         stl.Split('<13,10>') ! Split into lines
         lngBefore = 0
         LOOP i = 1 to lngLineNo-1 ! loop i
-            lngBefore = lngBefore + LEN(CLIP(stl.Getline(i))) + 2  ! total no of characters before act:LineNo
+            st.SetValue(stl.Getline(i))
+            lngBefore = lngBefore + st.Length() + 2  ! total no of characters before act:LineNo
         END ! loop i
         lngAfter = lngBefore + LEN(CLIP(act:stBefore)) + 2 ! Total characters to the end of act:LineNo
         !// Do a single replace in the area specified
