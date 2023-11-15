@@ -1130,7 +1130,7 @@ WHEN  (1) ('TXA')
 
 %AJEPathBackupsFolder DEPEND %AJEOtherFiles DEFAULT TIMES 0
 
-%AJEVersion DEFAULT  ('418')
+%AJEVersion DEFAULT  ('419')
 %AJEHistoryWindow LONG  (0)
 %AJEDataBaseType DEFAULT  ('TopSpeed')
 %AJEODBCStringConnection DEFAULT  ('')
@@ -1159,7 +1159,7 @@ INSTANCE 3
 %verProdMinVer DEFAULT  ('2')
 %verProdSubVer DEFAULT  ('0')
 %verProdGenBuildNo LONG  (1)
-%verProdBuildNo DEFAULT  ('403')
+%verProdBuildNo DEFAULT  ('404')
 %verDesc DEFAULT  ('clFixer - Make changes to default Clarion install')
 %verFileAsProdVersion LONG  (1)
 %verIntName DEFAULT  ('')
@@ -1167,7 +1167,7 @@ INSTANCE 3
 %verFileMinVer DEFAULT  ('2')
 %verFileSubVer DEFAULT  ('0')
 %verFileGenBuildNo LONG  (1)
-%verFileBuildNo DEFAULT  ('403')
+%verFileBuildNo DEFAULT  ('404')
 %verFilePreRelease LONG  (0)
 %verSelLangID DEFAULT  ('U.S. English')
 %verSelCPID DEFAULT  ('Multilingual')
@@ -1399,6 +1399,653 @@ wild                    BYTE  ! Contains wild cards
 [COMMON]
 FROM ABC GENERATED
 MODIFIED '2023/09/25' '18:44:48'
+[PROCEDURE]
+NAME MainDashboard
+[COMMON]
+DESCRIPTION 'Window'
+FROM ABC Window
+CATEGORY 'Window'
+MODIFIED '2023/10/17' '19:17:08'
+[PROMPTS]
+%ButtonAction DEPEND %Control DEFAULT TIMES 3
+WHEN  ('') ('No Special Action')
+WHEN  ('?Ok') ('No Special Action')
+WHEN  ('?btnScanFiles') ('No Special Action')
+
+%ButtonRunName DEPEND %Control DEFAULT TIMES 0
+
+%ButtonRunParameters DEPEND %Control DEFAULT TIMES 0
+
+%ButtonProcedure DEPEND %Control PROCEDURE TIMES 0
+
+%ButtonThread DEPEND %Control LONG TIMES 0
+
+%ButtonThreadStack DEPEND %Control DEFAULT TIMES 3
+WHEN  ('') ('25000')
+WHEN  ('?Ok') ('25000')
+WHEN  ('?btnScanFiles') ('25000')
+
+%ButtonParameters DEPEND %Control DEFAULT TIMES 0
+
+%ButtonRequest DEPEND %Control DEFAULT TIMES 3
+WHEN  ('') ('None')
+WHEN  ('?Ok') ('None')
+WHEN  ('?btnScanFiles') ('None')
+
+%PreLookupKey DEPEND %Control KEY TIMES 0
+
+%PreLookupField DEPEND %Control COMPONENT TIMES 0
+
+%PreLookupProcedure DEPEND %Control PROCEDURE TIMES 0
+
+%PostLookupKey DEPEND %Control KEY TIMES 0
+
+%PostLookupField DEPEND %Control COMPONENT TIMES 0
+
+%PostLookupProcedure DEPEND %Control PROCEDURE TIMES 0
+
+%ForceWindowRefresh DEPEND %Control LONG TIMES 0
+
+%ClassItem UNIQUE DEFAULT  ('Default', 'WindowToolbar')
+%DefaultBaseClassType DEPEND %ClassItem DEFAULT TIMES 2
+WHEN  ('Default') ('WindowManager')
+WHEN  ('WindowToolbar') ('ToolbarClass')
+
+%ActualDefaultBaseClassType DEPEND %ClassItem DEFAULT TIMES 2
+WHEN  ('Default') ('')
+WHEN  ('WindowToolbar') ('')
+
+%ClassLines DEPEND %ClassItem MULTI DEFAULT TIMES 1
+WHEN  ('Default') ('Init {19}PROCEDURE(),BYTE,PROC,DERIVED', 'Kill {19}PROCEDURE(),BYTE,PROC,DERIVED', |
+  'TakeAccepted {11}PROCEDURE(),BYTE,PROC,DERIVED', 'TakeEvent {14}PROCEDURE(),BYTE,PROC,DERIVED', |
+  'TakeWindowEvent        PROCEDURE(),BYTE,PROC,DERIVED')
+
+%ReturnValue FIELD  ()
+%ProcedureOneInstance LONG  (0)
+%WindowOperationMode DEFAULT  ('Use WINDOW setting')
+%INISaveWindow LONG  (1)
+%ProcedureDisableEnhanceFocus LONG  (0)
+%ProcedureUseEnterInsteadTabOverride LONG  (0)
+%WindowUseEnterInsteadTab LONG  (1)
+%ProcedureUseEnterInsteadTabExcludeListCombo LONG  (0)
+%ProcedureUseEnterInsteadTabEnableNextTabStop LONG  (0)
+%ProcedureUseEnterInsteadTabExcludeG LONG  (1)
+%WindowUseEnterInsteadTabExclude MULTI DEFAULT  ()
+%GlobalObject DEPEND %ClassItem DEFAULT TIMES 2
+WHEN  ('Default') ('NO')
+WHEN  ('WindowToolbar') ('NO')
+
+%ThisObjectName DEPEND %ClassItem DEFAULT TIMES 2
+WHEN  ('Default') ('ThisWindow')
+WHEN  ('WindowToolbar') ('Toolbar')
+
+%UseDefaultABCBaseClass DEPEND %ClassItem LONG TIMES 2
+WHEN  ('Default') (1)
+WHEN  ('WindowToolbar') (1)
+
+%UseABCBaseClass DEPEND %ClassItem LONG TIMES 2
+WHEN  ('Default') (1)
+WHEN  ('WindowToolbar') (1)
+
+%ABCBaseClass DEPEND %ClassItem DEFAULT TIMES 2
+WHEN  ('Default') ('ADOBlob')
+WHEN  ('WindowToolbar') ('ADOBlob')
+
+%ExtBaseClass DEPEND %ClassItem DEFAULT TIMES 0
+
+%BaseClassIncludeFile DEPEND %ClassItem DEFAULT TIMES 0
+
+%DeriveFromBaseClass DEPEND %ClassItem LONG TIMES 2
+WHEN  ('Default') (0)
+WHEN  ('WindowToolbar') (0)
+
+%NewMethods DEPEND %ClassItem MULTI LONG TIMES 0
+
+%NewMethodName DEPEND %NewMethods DEFAULT TIMES 0
+
+%NewMethodPrototype DEPEND %NewMethods DEFAULT TIMES 0
+
+%NewClassPropertyItems DEPEND %ClassItem MULTI LONG TIMES 0
+
+%NewClassProperty DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataType DEPEND %NewClassPropertyItems DEFAULT TIMES 1
+WHEN  ('WindowToolbar')TIMES 0
+
+%NewClassOtherType DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataIsRef DEPEND %NewClassPropertyItems LONG TIMES 0
+
+%NewClassDataSize DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataDim1 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataDim2 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataDim3 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataDim4 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%ClassMethods DEPEND %ClassItem MULTI LONG TIMES 0
+
+%ClassMethodName DEPEND %ClassMethods DEFAULT TIMES 0
+
+%ClassMethodPrototype DEPEND %ClassMethods DEFAULT TIMES 0
+
+%ClassPropertyItems DEPEND %ClassItem MULTI LONG TIMES 0
+
+%ClassProperty DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataType DEPEND %ClassPropertyItems DEFAULT TIMES 1
+WHEN  ('WindowToolbar')TIMES 0
+
+%ClassOtherType DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataIsRef DEPEND %ClassPropertyItems LONG TIMES 0
+
+%ClassDataSize DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataDim1 DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataDim2 DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataDim3 DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataDim4 DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%WindowStyles MULTI LONG  ()
+%WindowStyleFontName DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleFontNameVariable DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleFontNameIsVariable DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleFontSize DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleFontSizeVariable DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleFontSizeIsVariable DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleFontStyle DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleFontStyleVariable DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleFontStyleIsVariable DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleFontColor DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleFontCharSet DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleForegroundNormal DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleForegroundNormalVariable DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleForegroundNormalIsVariable DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleBackgroundNormal DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleBackgroundNormalVariable DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleBackgroundNormalIsVariable DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleForegroundSelected DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleForegroundSelectedVariable DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleForegroundSelectedIsVariable DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleBackgroundSelected DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleBackgroundSelectedVariable DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleBackgroundSelectedIsVariable DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStylePicture DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStylePictureVariable DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStylePictureIsVariable DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleOtherListboxes MULTI DEFAULT  ()
+%ProcedureAutoBindFields MULTI LONG  ()
+%ProcedureAutoBindField DEPEND %ProcedureAutoBindFields DEFAULT TIMES 0
+
+%ProcedureAutoBindFieldTPL DEPEND %ProcedureAutoBindFields DEFAULT TIMES 0
+
+%ProcedureAutoBindProcedures MULTI LONG  ()
+%ProcedureAutoBindProcedure DEPEND %ProcedureAutoBindProcedures DEFAULT TIMES 0
+
+%ProcedureAutoBindProcedureTPL DEPEND %ProcedureAutoBindProcedures DEFAULT TIMES 0
+
+%ProcedureAutoBindFieldsIgnored MULTI LONG  ()
+%ProcedureAutoBindFieldIgnored DEPEND %ProcedureAutoBindFieldsIgnored DEFAULT TIMES 0
+
+%ProcedureAutoBindProceduresIgnored MULTI LONG  ()
+%ProcedureAutoBindProcedureIgnored DEPEND %ProcedureAutoBindProceduresIgnored DEFAULT TIMES 0
+
+%ProcedureAutoBindValidToAddField LONG  (0)
+%ProcedureUserBindFields MULTI LONG  ()
+%ProcedureUserBindField DEPEND %ProcedureUserBindFields FIELD TIMES 0
+
+%ProcedureAutoBindFieldIgnore DEPEND %ProcedureAutoBindFields LONG TIMES 0
+
+%ProcedureUserBindProcedures MULTI LONG  ()
+%ProcedureUserBindProcedure DEPEND %ProcedureUserBindProcedures PROCEDURE TIMES 0
+
+%ProcedureAutoBindProcedureIgnore DEPEND %ProcedureAutoBindProcedures LONG TIMES 0
+
+%ProcedureUserBindExpressions MULTI LONG  ()
+%ProcedureUserBindExpressionName DEPEND %ProcedureUserBindExpressions DEFAULT TIMES 0
+
+%ProcedureUserBindExpression DEPEND %ProcedureUserBindExpressions DEFAULT TIMES 0
+
+%PreserveVarsLoc MULTI LONG  ()
+%PreserveVarLoc DEPEND %PreserveVarsLoc DEFAULT TIMES 0
+
+%ExtUITabIcon DEPEND %Control DEFAULT TIMES 0
+
+%ExtUITabStyleOverrideGlobal DEPEND %Control LONG TIMES 0
+
+%ExtUITabStyle DEPEND %Control DEFAULT TIMES 1
+WHEN  ('') ('Default')
+
+%FieldGradientColorType DEPEND %Control DEFAULT TIMES 1
+WHEN  ('') ('Off')
+
+%FieldGradientColorTypeVariable DEPEND %Control DEFAULT TIMES 1
+WHEN  ('') ('')
+
+%FieldGradientColorTypeIsVariable DEPEND %Control LONG TIMES 1
+WHEN  ('') (0)
+
+%FieldGradientColorFrom DEPEND %Control LONG TIMES 1
+WHEN  ('') (-1)
+
+%FieldGradientColorFromVariable DEPEND %Control DEFAULT TIMES 0
+
+%FieldGradientColorFromIsVariable DEPEND %Control LONG TIMES 1
+WHEN  ('') (0)
+
+%FieldGradientColorTo DEPEND %Control LONG TIMES 1
+WHEN  ('') (-1)
+
+%FieldGradientColorToVariable DEPEND %Control DEFAULT TIMES 0
+
+%FieldGradientColorToIsVariable DEPEND %Control LONG TIMES 1
+WHEN  ('') (0)
+
+%ButtonReturnValueAssignment DEPEND %Control FIELD TIMES 0
+
+%ButtonReturnValueReferenceAssign DEPEND %Control LONG TIMES 0
+
+%ButtonThreadParameters DEPEND %Control DEFAULT TIMES 0
+
+%ButtonThreadReturnValueAssignment DEPEND %Control FIELD TIMES 0
+
+%PreLookupProcedureParameters DEPEND %Control DEFAULT TIMES 0
+
+%PostLookupProcedureParameters DEPEND %Control DEFAULT TIMES 0
+
+%PostLookupDuringValidate DEPEND %Control LONG TIMES 7
+WHEN  ('') (1)
+WHEN  ('?glo:AppDescription') (1)
+WHEN  ('?glo:FileExtensions') (1)
+WHEN  ('?glo:ProgressMessage') (1)
+WHEN  ('?glo:RootPath') (1)
+WHEN  ('?glo:qFolders') (1)
+WHEN  ('?glo:qRecords') (1)
+
+%LookupAssign DEPEND %Control MULTI LONG TIMES 0
+
+%MoreTarget DEPEND %LookupAssign FIELD TIMES 0
+
+%MoreField DEPEND %LookupAssign DEFAULT TIMES 0
+
+%CheckedAssigns DEPEND %Control MULTI LONG TIMES 0
+
+%CheckedAssignVariable DEPEND %CheckedAssigns FIELD TIMES 0
+
+%CheckedAssignValue DEPEND %CheckedAssigns DEFAULT TIMES 0
+
+%CheckedHides DEPEND %Control MULTI LONG TIMES 0
+
+%CheckedControl DEPEND %CheckedHides DEFAULT TIMES 0
+
+%CheckedControlAction DEPEND %CheckedHides DEFAULT TIMES 1
+WHEN  ('')TIMES 0
+
+%CheckedEnables DEPEND %Control MULTI LONG TIMES 0
+
+%CheckedControl1 DEPEND %CheckedEnables DEFAULT TIMES 0
+
+%CheckedControl1Action DEPEND %CheckedEnables DEFAULT TIMES 1
+WHEN  ('')TIMES 0
+
+%UncheckedAssigns DEPEND %Control MULTI LONG TIMES 0
+
+%UncheckedAssignVariable DEPEND %UncheckedAssigns FIELD TIMES 0
+
+%UncheckedAssignValue DEPEND %UncheckedAssigns DEFAULT TIMES 0
+
+%UnCheckedHides DEPEND %Control MULTI LONG TIMES 0
+
+%UnCheckedControl DEPEND %UnCheckedHides DEFAULT TIMES 0
+
+%UnCheckedControlAction DEPEND %UnCheckedHides DEFAULT TIMES 1
+WHEN  ('')TIMES 0
+
+%UnCheckedEnables DEPEND %Control MULTI LONG TIMES 0
+
+%UnCheckedControl1 DEPEND %UnCheckedEnables DEFAULT TIMES 0
+
+%UnCheckedControl1Action DEPEND %UnCheckedEnables DEFAULT TIMES 1
+WHEN  ('')TIMES 0
+
+%CheckedDisables DEPEND %Control MULTI LONG TIMES 0
+
+%CheckedDisableControl DEPEND %CheckedDisables DEFAULT TIMES 0
+
+%CheckedDisableControlAction DEPEND %CheckedDisables DEFAULT TIMES 1
+WHEN  ('')TIMES 0
+
+%UnCheckedDisables DEPEND %Control MULTI LONG TIMES 0
+
+%UnCheckedDisableControl DEPEND %UnCheckedDisables DEFAULT TIMES 0
+
+%UnCheckedDisableControlAction DEPEND %UnCheckedDisables DEFAULT TIMES 1
+WHEN  ('')TIMES 0
+
+%ActiveImageEnable DEPEND %Control LONG TIMES 0
+
+%AIObjectName DEPEND %Control DEFAULT TIMES 1
+WHEN  ('') ('AIBtn0')
+
+%AIEnableMimicControl DEPEND %Control LONG TIMES 1
+WHEN  ('') (1)
+
+%AIMimicControl DEPEND %Control DEFAULT TIMES 1
+WHEN  ('') ('?Ok')
+
+%AIImgRound DEPEND %Control LONG TIMES 0
+
+%AIOverrideImg DEPEND %Control DEFAULT TIMES 0
+
+%AIOverrideImgVariable DEPEND %Control DEFAULT TIMES 0
+
+%AIOverrideImgIsVariable DEPEND %Control LONG TIMES 1
+WHEN  ('') (0)
+
+%AIDisableImg DEPEND %Control DEFAULT TIMES 0
+
+%AIDisableImgVariable DEPEND %Control DEFAULT TIMES 0
+
+%AIDisableImgIsVariable DEPEND %Control LONG TIMES 1
+WHEN  ('') (0)
+
+%AIHotImg DEPEND %Control DEFAULT TIMES 0
+
+%AIHotImgVariable DEPEND %Control DEFAULT TIMES 0
+
+%AIHotImgIsVariable DEPEND %Control LONG TIMES 1
+WHEN  ('') (0)
+
+%AIPressedImg DEPEND %Control DEFAULT TIMES 0
+
+%AIPressedImgVariable DEPEND %Control DEFAULT TIMES 0
+
+%AIPressedImgIsVariable DEPEND %Control LONG TIMES 1
+WHEN  ('') (0)
+
+[EMBED]
+EMBED %DataSection
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 50
+PROPERTY:END
+
+i                   LONG
+lngRecords          LONG
+
+[END]
+EMBED %ControlEventHandling
+[INSTANCES]
+WHEN '?btnScanFiles'
+[INSTANCES]
+WHEN 'Accepted'
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 5000
+PROPERTY:END
+  ! Click the Scan Files button
+  DirAllFileAndFolders(glo:RootPath,glo:FileExtensions) 
+  ! 'c:\Clarion11.1','*.inc;*.clw;*.txa;*.dctx;*.def;*.equ;*.tpl;*.tft;*.xml;*.tpw;*.tpl;')
+[END]
+[END]
+[END]
+EMBED %WindowEventHandling
+[INSTANCES]
+WHEN 'OpenWindow'
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 5000
+PROPERTY:END
+  !// Reset clFiles
+  lngRecords = RECORDS(clFiles)
+  LOOP i = lngRecords to 1 BY -1 ! Loop i
+      GET(clFiles,i)
+      CLEAR(clFiles)
+      DELETE(clFiles)
+  END ! Loop i
+  glo:qRecords  = RECORDS(clFiles)
+  glo:ProgressMessage = 'Freeware copyright <169> 2023 Black and White Inc'
+  DISPLAY()
+[END]
+[END]
+[END]
+[ADDITION]
+NAME WinEvent WinEvent
+[INSTANCE]
+INSTANCE 3
+OWNER 6
+[PROMPTS]
+%DisableWinEvent LONG  (0)
+%CheckForCantCloseNowSetHere LONG  (1)
+%AutoDown LONG  (0)
+%NoAutoDown LONG  (0)
+%LocWindowsVisible DEFAULT  ('0')
+%WindowsVisibleAfterOpen LONG  (1)
+%AlertWinEventDebug LONG  (0)
+%DisplayCompileDate LONG  (0)
+%DisplayCompileDateFormat DEFAULT  ('@D10')
+%locNoHandleCloseDown LONG  (0)
+%locCloseDownWhenWindowCloses LONG  (0)
+%locCloseDownWhenWindowClosesCtrl DEFAULT  ('')
+%altWinFix DEFAULT  ('Default')
+%WinAlert MULTI LONG  ()
+%Mess DEPEND %WinAlert DEFAULT TIMES 0
+
+%Act1 DEPEND %WinAlert DEFAULT TIMES 0
+
+%act2 DEPEND %WinAlert DEFAULT TIMES 0
+
+%AlertControl DEPEND %WinAlert DEFAULT TIMES 0
+
+%AlertControlType DEPEND %WinAlert DEFAULT TIMES 0
+
+%locCloseDownWhenWindowClosesSet LONG  (0)
+[ADDITION]
+NAME ABC CloseButton
+[INSTANCE]
+INSTANCE 1
+[ADDITION]
+NAME ABC WindowResize
+[FIELDPROMPT]
+%ResizeAnchorTop DEPEND %Control LONG TIMES 0
+
+%ResizeAnchorLeft DEPEND %Control LONG TIMES 0
+
+%ResizeAnchorRight DEPEND %Control LONG TIMES 0
+
+%ResizeAnchorBottom DEPEND %Control LONG TIMES 0
+
+%ResizeAnchorGrowTop DEPEND %Control LONG TIMES 0
+
+%ResizeAnchorGrowLeft DEPEND %Control LONG TIMES 0
+
+%ResizeAnchorGrowRight DEPEND %Control LONG TIMES 0
+
+%ResizeAnchorGrowBottom DEPEND %Control LONG TIMES 0
+
+[INSTANCE]
+INSTANCE 2
+[PROMPTS]
+%UseAppStrategy DEFAULT  ('1')
+%AppStrategy DEFAULT  ('Surface')
+%RestrictMinSize LONG  (1)
+%WindowMinWidth DEFAULT  ('0')
+%WindowMaxWidth DEFAULT  ('0')
+%ClassItem UNIQUE DEFAULT  ('Default')
+%DefaultBaseClassType DEPEND %ClassItem DEFAULT TIMES 1
+WHEN  ('Default') ('WindowResizeClass')
+
+%ActualDefaultBaseClassType DEPEND %ClassItem DEFAULT TIMES 1
+WHEN  ('Default') ('')
+
+%ClassLines DEPEND %ClassItem MULTI DEFAULT TIMES 1
+WHEN  ('Default') ('Init {19}PROCEDURE(BYTE AppStrategy=AppStrategy:Resize,BYTE SetWindowMinSize=False,BYTE SetWindowMaxSize=False)')
+
+%WindowMinHeight DEFAULT  ('')
+%RestrictMaxSize LONG  (0)
+%WindowMaxHeight DEFAULT  ('')
+%AutoFindParents DEFAULT  ('Default')
+%DeferMoves DEFAULT  ('Default')
+%OverrideControls MULTI LONG  ()
+%OverrideControl DEPEND %OverrideControls DEFAULT TIMES 0
+
+%DisableResize DEPEND %OverrideControls LONG TIMES 0
+
+%HorizResize DEPEND %OverrideControls DEFAULT TIMES 0
+
+%VertResize DEPEND %OverrideControls DEFAULT TIMES 0
+
+%HorizPositional DEPEND %OverrideControls DEFAULT TIMES 0
+
+%VertPositional DEPEND %OverrideControls DEFAULT TIMES 0
+
+%GlobalObject DEPEND %ClassItem DEFAULT TIMES 1
+WHEN  ('Default') ('NO')
+
+%ThisObjectName DEPEND %ClassItem DEFAULT TIMES 1
+WHEN  ('Default') ('Resizer')
+
+%UseDefaultABCBaseClass DEPEND %ClassItem LONG TIMES 1
+WHEN  ('Default') (1)
+
+%UseABCBaseClass DEPEND %ClassItem LONG TIMES 1
+WHEN  ('Default') (1)
+
+%ABCBaseClass DEPEND %ClassItem DEFAULT TIMES 1
+WHEN  ('Default') ('ADOBlob')
+
+%ExtBaseClass DEPEND %ClassItem DEFAULT TIMES 0
+
+%BaseClassIncludeFile DEPEND %ClassItem DEFAULT TIMES 0
+
+%DeriveFromBaseClass DEPEND %ClassItem LONG TIMES 1
+WHEN  ('Default') (0)
+
+%NewMethods DEPEND %ClassItem MULTI LONG TIMES 0
+
+%NewMethodName DEPEND %NewMethods DEFAULT TIMES 0
+
+%NewMethodPrototype DEPEND %NewMethods DEFAULT TIMES 0
+
+%NewClassPropertyItems DEPEND %ClassItem MULTI LONG TIMES 0
+
+%NewClassProperty DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataType DEPEND %NewClassPropertyItems DEFAULT TIMES 1
+WHEN  ('Default')TIMES 0
+
+%NewClassOtherType DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataIsRef DEPEND %NewClassPropertyItems LONG TIMES 0
+
+%NewClassDataSize DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataDim1 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataDim2 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataDim3 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataDim4 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%ClassMethods DEPEND %ClassItem MULTI LONG TIMES 0
+
+%ClassMethodName DEPEND %ClassMethods DEFAULT TIMES 0
+
+%ClassMethodPrototype DEPEND %ClassMethods DEFAULT TIMES 0
+
+%ClassPropertyItems DEPEND %ClassItem MULTI LONG TIMES 0
+
+%ClassProperty DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataType DEPEND %ClassPropertyItems DEFAULT TIMES 1
+WHEN  ('Default')TIMES 0
+
+%ClassOtherType DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataIsRef DEPEND %ClassPropertyItems LONG TIMES 0
+
+%ClassDataSize DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataDim1 DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataDim2 DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataDim3 DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataDim4 DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+[WINDOW]
+QuickWindow WINDOW('Main Dashboard'),AT(,,401,227),FONT('Segoe UI',9,,FONT:regular,CHARSET:DEFAULT), |
+          RESIZE,CENTER,ICON('toolbox.ico'),GRAY,IMM,HLP('MyDashboard'),SYSTEM
+          BUTTON('  &OK'),AT(343,204,47,14),USE(?Ok),LEFT,ICON('WAOK.ICO'),MSG('Close this screen'), |
+            TIP('Close this screen'),#ORIG(?Ok),#SEQ(1),#ORDINAL(1)
+          BUTTON('Process the Files'),AT(11,11,91,18),USE(?btnScanFiles),FONT(,,,FONT:bold), |
+            LEFT,ICON('WIZFIND.ICO'),MSG('Find the files and make the requested changes'), |
+            TIP('Find the files and make the requested changes'),#ORDINAL(2)
+          PROMPT('Files Found:'),AT(95,16,63),USE(?glo:qRecords:Prompt),RIGHT,TRN,#ORDINAL(3)
+          ENTRY(@n-14B),AT(163,15,60,12),USE(glo:qRecords),RIGHT(1),FLAT,MSG('Queue Records'), |
+            READONLY,TIP('Queue Records'),#ORDINAL(4)
+          PROMPT('Folders:'),AT(286,16,38),USE(?glo:qFolders:Prompt),RIGHT,#ORDINAL(5)
+          ENTRY(@n-14B),AT(328,15,60,12),USE(glo:qFolders),RIGHT(1),FLAT,MSG('Number of ' & |
+            'Folders scanned'),READONLY,TIP('Number of Folders scanned'),#ORDINAL(6)
+          PROMPT('App Description:'),AT(99,39,58),USE(?glo:AppDescription:Prompt),RIGHT,#ORDINAL(7)
+          ENTRY(@s50),AT(163,38,225,12),USE(glo:AppDescription),FLAT,MSG('Description'),READONLY, |
+            TIP('Description'),#ORDINAL(8)
+          PROMPT('Root Path:'),AT(99,54,58),USE(?glo:RootPath:Prompt),RIGHT,#ORDINAL(9)
+          ENTRY(@s255),AT(163,53,225,12),USE(glo:RootPath),FLAT,MSG('Root Path'),READONLY, |
+            TIP('Root Path'),#ORDINAL(10)
+          PROMPT('File Extensions:'),AT(99,68,58),USE(?glo:FileExtensions:Prompt),RIGHT,#ORDINAL(11)
+          ENTRY(@s250),AT(163,68,225,12),USE(glo:FileExtensions),FLAT,MSG('File Extensions'), |
+            READONLY,TIP('File Extensions'),#ORDINAL(12)
+          PROMPT('Exclude Files:'),AT(99,85,58),USE(?glo:ExcludeFiles:Prompt),RIGHT,#ORDINAL(13)
+          TEXT,AT(163,83,225,100),USE(glo:ExcludeFiles),VSCROLL,FLAT,MSG('Exclude Files'), |
+            READONLY,TIP('Exclude Files'),#ORDINAL(14)
+          ENTRY(@s80),AT(12,187,376,10),USE(glo:ProgressMessage),CENTER,FLAT,MSG('Progress Message'), |
+            READONLY,TIP('Progress Message'),TRN,#ORDINAL(15)
+        END
+
+[END]
+[MODULE]
+[COMMON]
+FROM ABC GENERATED
+MODIFIED '2023/09/25' '18:29:07'
 [PROCEDURE]
 NAME Main
 [COMMON]
@@ -2394,6 +3041,2318 @@ AppFrame APPLICATION(' Clarion Fixer '),AT(,,525,357),FONT('Segoe UI',8,,FONT:re
 [COMMON]
 FROM ABC GENERATED
 MODIFIED '2023/09/25' '18:29:07'
+[PROCEDURE]
+NAME SystemInfo
+GLOBAL
+[COMMON]
+DESCRIPTION 'System Diagnostics from CapeSoft WinEvents'
+FROM ABC Window
+MODIFIED '2023/10/18' '15:18:58'
+[DATA]
+[SCREENCONTROLS]
+! PROMPT('LocalRequest:'),USE(?LocalRequest:Prompt)
+! ENTRY(@n-14),USE(LocalRequest)
+[REPORTCONTROLS]
+! STRING(@n-14),USE(LocalRequest)
+LocalRequest             LONG
+!!> GUID('a59c55c7-4a6c-4257-9908-7d6c15c2a056'),PROMPT('LocalRequest:'),HEADER('LocalRequest'),PICTURE(@n-14)
+[SCREENCONTROLS]
+! PROMPT('Swap Used:'),USE(?SwapUsed:Prompt)
+! STRING(@n13),USE(SwapUsed)
+[REPORTCONTROLS]
+! STRING(@n13),USE(SwapUsed)
+SwapUsed                 ULONG
+!!> GUID('86858e65-d7aa-40be-9361-aaa71a9a57dd'),PROMPT('Swap Used:'),HEADER('Swap Used'),PICTURE(@n13)
+[SCREENCONTROLS]
+! PROMPT('Swap Free:'),USE(?SwapFree:Prompt)
+! ENTRY(@n13),USE(SwapFree)
+[REPORTCONTROLS]
+! STRING(@n13),USE(SwapFree)
+SwapFree                 ULONG
+!!> GUID('d98f46f1-d022-4ba8-b0c6-a02fba646265'),PROMPT('Swap Free:'),HEADER('Swap Free'),PICTURE(@n13)
+[SCREENCONTROLS]
+! PROMPT('Swap Total:'),USE(?SwapTotal:Prompt)
+! ENTRY(@n13),USE(SwapTotal)
+[REPORTCONTROLS]
+! STRING(@n13),USE(SwapTotal)
+SwapTotal                ULONG
+!!> GUID('38f67a69-3b2a-49c0-9351-97c7bef9bec5'),PROMPT('Swap Total:'),HEADER('Swap Total'),PICTURE(@n13)
+[SCREENCONTROLS]
+! PROMPT('Ram Free:'),USE(?RamFree:Prompt)
+! STRING(@n13),USE(RamFree)
+[REPORTCONTROLS]
+! STRING(@n13),USE(RamFree)
+RamFree                  ULONG
+!!> GUID('35d0a650-e8c5-420d-8f6b-045cf6692483'),PROMPT('Ram Free:'),HEADER('Ram Free'),PICTURE(@n13)
+[SCREENCONTROLS]
+! PROMPT('Ram Used:'),USE(?RamUsed:Prompt)
+! ENTRY(@n13),USE(RamUsed)
+[REPORTCONTROLS]
+! STRING(@n13),USE(RamUsed)
+RamUsed                  ULONG
+!!> GUID('935a366e-8250-4649-991d-e60f9b694ffb'),PROMPT('Ram Used:'),HEADER('Ram Used'),PICTURE(@n13)
+[SCREENCONTROLS]
+! PROMPT('Ram Total:'),USE(?RamTotal:Prompt)
+! ENTRY(@n13),USE(RamTotal)
+[REPORTCONTROLS]
+! STRING(@n13),USE(RamTotal)
+RamTotal                 ULONG
+!!> GUID('9544fbab-3e9d-43d2-ba45-c5f89437185f'),PROMPT('Ram Total:'),HEADER('Ram Total'),PICTURE(@n13)
+[SCREENCONTROLS]
+! PROMPT('Virtual Used:'),USE(?VirtualUsed:Prompt)
+! STRING(@n13),USE(VirtualUsed)
+[REPORTCONTROLS]
+! STRING(@n13),USE(VirtualUsed)
+VirtualUsed              ULONG
+!!> GUID('3098bd01-f2e6-4afe-abc1-fda69a9c9ffd'),PROMPT('Virtual Used:'),HEADER('Virtual Used'),PICTURE(@n13)
+[SCREENCONTROLS]
+! PROMPT('Virtual Free:'),USE(?VirtualFree:Prompt)
+! ENTRY(@n13),USE(VirtualFree)
+[REPORTCONTROLS]
+! STRING(@n13),USE(VirtualFree)
+VirtualFree              ULONG
+!!> GUID('9a13b932-57ab-4509-97c2-1c7a5fdc9400'),PROMPT('Virtual Free:'),HEADER('Virtual Free'),PICTURE(@n13)
+[SCREENCONTROLS]
+! PROMPT('Virtual Total:'),USE(?VirtualTotal:Prompt)
+! ENTRY(@n13),USE(VirtualTotal)
+[REPORTCONTROLS]
+! STRING(@n13),USE(VirtualTotal)
+VirtualTotal             ULONG
+!!> GUID('b4565c80-6885-4b81-ad7b-e2eedee79b57'),PROMPT('Virtual Total:'),HEADER('Virtual Total'),PICTURE(@n13)
+[SCREENCONTROLS]
+! PROMPT('User Memory:'),USE(?UserMemory:Prompt)
+! ENTRY(@n13),USE(UserMemory)
+[REPORTCONTROLS]
+! STRING(@n13),USE(UserMemory)
+UserMemory               ULONG
+!!> GUID('5cb19930-bc93-461b-9c49-0c303947d7ea'),PROMPT('User Memory:'),HEADER('User Memory'),PICTURE(@n13)
+[SCREENCONTROLS]
+! PROMPT('FilesOpened:'),USE(?FilesOpened:Prompt)
+! ENTRY(@n3),USE(FilesOpened)
+[REPORTCONTROLS]
+! STRING(@n3),USE(FilesOpened)
+FilesOpened              BYTE
+!!> GUID('be262ecf-93bb-4fad-9eb1-dee42cdecb08'),PROMPT('FilesOpened:'),HEADER('FilesOpened'),PICTURE(@n3)
+[SCREENCONTROLS]
+! PROMPT('Win Ver:'),USE(?WinVer:Prompt)
+! ENTRY(@n3),USE(WinVer)
+[REPORTCONTROLS]
+! STRING(@n3),USE(WinVer)
+WinVer                   BYTE
+!!> GUID('0fba0bf2-38a3-43f3-a528-67e8e820d3fe'),PROMPT('Win Ver:'),HEADER('Win Ver'),PICTURE(@n3)
+[SCREENCONTROLS]
+! PROMPT('Win Rel:'),USE(?WinRel:Prompt)
+! ENTRY(@n3),USE(WinRel)
+[REPORTCONTROLS]
+! STRING(@n3),USE(WinRel)
+WinRel                   BYTE
+!!> GUID('4ad52e98-b5cd-4697-85d9-4ca32a4818b5'),PROMPT('Win Rel:'),HEADER('Win Rel'),PICTURE(@n3)
+[SCREENCONTROLS]
+! PROMPT('Dos Ver:'),USE(?DosVer:Prompt)
+! ENTRY(@n3),USE(DosVer)
+[REPORTCONTROLS]
+! STRING(@n3),USE(DosVer)
+DosVer                   BYTE
+!!> GUID('0e9d0d18-436d-4f19-9f2a-592530fa558f'),PROMPT('Dos Ver:'),HEADER('Dos Ver'),PICTURE(@n3)
+[SCREENCONTROLS]
+! PROMPT('Dos Rel:'),USE(?DosRel:Prompt)
+! ENTRY(@n3),USE(DosRel)
+[REPORTCONTROLS]
+! STRING(@n3),USE(DosRel)
+DosRel                   BYTE
+!!> GUID('09ccffac-014a-4fe2-b8da-5977ba6b755f'),PROMPT('Dos Rel:'),HEADER('Dos Rel'),PICTURE(@n3)
+[SCREENCONTROLS]
+! PROMPT('allver:'),USE(?allver:Prompt)
+! ENTRY(@n13),USE(allver)
+[REPORTCONTROLS]
+! STRING(@n13),USE(allver)
+allver                   ULONG
+!!> GUID('06ed7568-f3a5-4697-b884-e67db23924ef'),PROMPT('allver:'),HEADER('allver'),PICTURE(@n13)
+[SCREENCONTROLS]
+! PROMPT('Disk Free:'),USE(?DiskFree:Prompt)
+! ENTRY(@n10.2),USE(DiskFree),DECIMAL(14)
+[REPORTCONTROLS]
+! STRING(@n10.2),USE(DiskFree),DECIMAL(14)
+DiskFree                 REAL
+!!> GUID('c1fd6525-f3cf-4d7b-8009-a74b7d79650a'),PROMPT('Disk Free:'),HEADER('Disk Free'),PICTURE(@n10.2),JUSTIFY(DECIMAL,14)
+[SCREENCONTROLS]
+! PROMPT('Disk Total:'),USE(?DiskTotal:Prompt)
+! ENTRY(@n10.2),USE(DiskTotal),DECIMAL(14)
+[REPORTCONTROLS]
+! STRING(@n10.2),USE(DiskTotal),DECIMAL(14)
+DiskTotal                REAL
+!!> GUID('7e2079ee-2710-4d47-9a0b-2be7057e7fe5'),PROMPT('Disk Total:'),HEADER('Disk Total'),PICTURE(@n10.2),JUSTIFY(DECIMAL,14)
+[SCREENCONTROLS]
+! PROMPT('This Machine:'),USE(?ThisMachine:Prompt)
+! ENTRY(@s30),USE(ThisMachine)
+[REPORTCONTROLS]
+! STRING(@s30),USE(ThisMachine)
+ThisMachine              STRING(30)
+!!> GUID('a7b999f9-d142-4e37-a243-543b987ae240'),PROMPT('This Machine:'),HEADER('This Machine'),PICTURE(@s30)
+[SCREENCONTROLS]
+! PROMPT('New   Win Version:'),USE(?NewWinVersion:Prompt)
+! STRING(@s60),USE(NewWinVersion)
+[REPORTCONTROLS]
+! STRING(@s60),USE(NewWinVersion)
+NewWinVersion            STRING(60)
+!!> GUID('92350e28-c109-4687-aef8-2a3c7eee1211'),PROMPT('New   Win Version:'),HEADER('New   Win Version'),PICTURE(@s60)
+[SCREENCONTROLS]
+! PROMPT('My Documents:'),USE(?MyDocuments:Prompt)
+! ENTRY(@s80),USE(MyDocuments)
+[REPORTCONTROLS]
+! STRING(@s80),USE(MyDocuments)
+MyDocuments              STRING(80)
+!!> GUID('d97f242d-838e-44f3-8392-c2ff86d6296b'),PROMPT('My Documents:'),HEADER('My Documents'),PICTURE(@s80)
+[SCREENCONTROLS]
+! PROMPT('My Pictures:'),USE(?MyPictures:Prompt)
+! ENTRY(@s80),USE(MyPictures)
+[REPORTCONTROLS]
+! STRING(@s80),USE(MyPictures)
+MyPictures               STRING(80)
+!!> GUID('ea3ef341-b16b-4009-912d-b9078b392df8'),PROMPT('My Pictures:'),HEADER('My Pictures'),PICTURE(@s80)
+[SCREENCONTROLS]
+! PROMPT('Desktop:'),USE(?Desktop:Prompt)
+! ENTRY(@s80),USE(Desktop)
+[REPORTCONTROLS]
+! STRING(@s80),USE(Desktop)
+Desktop                  STRING(80)
+!!> GUID('fb14bdb8-3f33-4b23-9378-69643b55f07f'),PROMPT('Desktop:'),HEADER('Desktop'),PICTURE(@s80)
+[SCREENCONTROLS]
+! PROMPT('Windows Folder:'),USE(?WindowsFolder:Prompt)
+! ENTRY(@s80),USE(WindowsFolder)
+[REPORTCONTROLS]
+! STRING(@s80),USE(WindowsFolder)
+WindowsFolder            STRING(80)
+!!> GUID('9f7ab6b9-f983-4a96-acfa-86fd23c6c1ac'),PROMPT('Windows Folder:'),HEADER('Windows Folder'),PICTURE(@s80)
+[SCREENCONTROLS]
+! PROMPT('System Folder:'),USE(?SystemFolder:Prompt)
+! ENTRY(@s80),USE(SystemFolder)
+[REPORTCONTROLS]
+! STRING(@s80),USE(SystemFolder)
+SystemFolder             STRING(80)
+!!> GUID('a245c525-c130-4bd5-986b-5ae74d9ad293'),PROMPT('System Folder:'),HEADER('System Folder'),PICTURE(@s80)
+[SCREENCONTROLS]
+! PROMPT('Work Station:'),USE(?WorkStation:Prompt)
+! STRING(@s252),USE(WorkStation)
+[REPORTCONTROLS]
+! STRING(@s252),USE(WorkStation)
+WorkStation              STRING(252)
+!!> GUID('6289b1a3-23b4-4d8c-b970-f0947f6125c4'),PROMPT('Work Station:'),HEADER('Work Station'),PICTURE(@s252)
+[SCREENCONTROLS]
+! PROMPT('User Name:'),USE(?UserName:Prompt)
+! STRING(@s252),USE(UserName)
+[REPORTCONTROLS]
+! STRING(@s252),USE(UserName)
+UserName                 STRING(252)
+!!> GUID('f5226561-b092-4ee3-a92f-4bd9ef163ca2'),PROMPT('User Name:'),HEADER('User Name'),PICTURE(@s252)
+[SCREENCONTROLS]
+! PROMPT('User Account Name:'),USE(?UserAccountName:Prompt)
+! STRING(@s252),USE(UserAccountName)
+[REPORTCONTROLS]
+! STRING(@s252),USE(UserAccountName)
+UserAccountName          STRING(252)
+!!> GUID('8094dd13-75de-48d1-8469-875ef8ca8b1f'),PROMPT('User Account Name:'),HEADER('User Account Name'),PICTURE(@s252)
+[SCREENCONTROLS]
+! PROMPT('Registry Key:'),USE(?RegistryKey:Prompt)
+! LIST,USE(RegistryKey),DROP(5),FROM('WE::WM_HKEY_CURRENT_USER|#WE::WM_HKEY_CURRENT_USER|WE::WM_HKEY_LOCAL_MACHINE|#WE::WM_HKEY_LOCAL_MACHINE')
+[REPORTCONTROLS]
+! STRING(@s50),USE(RegistryKey)
+RegistryKey              STRING(50)
+!!> GUID('ca928ed5-911d-4e60-8275-702ef71432cb'),VALID(INLIST('WE::WM_HKEY_CURRENT_USER|WE::WM_HKEY_LOCAL_MACHINE')),PROMPT('Registry Key:'),HEADER('Registry Key'),PICTURE(@s50),VALUES('WE::WM_HKEY_CURRENT_USER|WE::WM_HKEY_LOCAL_MACHINE')
+[SCREENCONTROLS]
+! PROMPT('Registry Key Long:'),USE(?RegistryKeyLong:Prompt)
+! ENTRY(@n-14),USE(RegistryKeyLong),RIGHT(1)
+[REPORTCONTROLS]
+! STRING(@n-14),USE(RegistryKeyLong),RIGHT(1)
+RegistryKeyLong          LONG
+!!> GUID('bebed2a4-f133-4164-b0f4-e0dffd064a86'),PROMPT('Registry Key Long:'),HEADER('Registry Key Long'),PICTURE(@n-14),JUSTIFY(RIGHT,1)
+[SCREENCONTROLS]
+! PROMPT('Key Path:'),USE(?KeyPath:Prompt)
+! ENTRY(@s252),USE(KeyPath)
+[REPORTCONTROLS]
+! STRING(@s252),USE(KeyPath)
+KeyPath                  STRING(252)
+!!> GUID('c565354d-cac4-4432-b9ac-70cce65cafed'),INITIAL('Software\CapeSoft\WinEventDemo {222}'),PROMPT('Key Path:'),HEADER('Key Path'),PICTURE(@s252)
+[SCREENCONTROLS]
+! PROMPT('Value Name:'),USE(?ValueName:Prompt)
+! ENTRY(@s100),USE(ValueName)
+[REPORTCONTROLS]
+! STRING(@s100),USE(ValueName)
+ValueName                STRING(100)
+!!> GUID('2561017e-0198-460b-a6cc-080492016bc9'),INITIAL('Test {96}'),PROMPT('Value Name:'),HEADER('Value Name'),PICTURE(@s100)
+[SCREENCONTROLS]
+! PROMPT('Value:'),USE(?Value:Prompt)
+! ENTRY(@s100),USE(Value)
+[REPORTCONTROLS]
+! STRING(@s100),USE(Value)
+Value                    STRING(100)
+!!> GUID('67e5319a-a229-4001-8811-b50e0a8ef0f3'),PROMPT('Value:'),HEADER('Value'),PICTURE(@s100)
+[SCREENCONTROLS]
+! PROMPT('Key Type:'),USE(?KeyType:Prompt)
+! LIST,USE(KeyType),DROP(5),FROM('WE::REG_SZ|#WE::REG_SZ|WE::REG_DWORD|#WE::REG_DWORD')
+[REPORTCONTROLS]
+! STRING(@s20),USE(KeyType)
+KeyType                  STRING(20)
+!!> GUID('4593a1aa-7033-4ed2-a6bc-5bf8213e4193'),VALID(INLIST('WE::REG_SZ|WE::REG_DWORD')),INITIAL('WE::REG_SZ {10}'),PROMPT('Key Type:'),HEADER('Key Type'),PICTURE(@s20),VALUES('WE::REG_SZ|WE::REG_DWORD')
+[SCREENCONTROLS]
+! PROMPT('Key Type Long:'),USE(?KeyTypeLong:Prompt)
+! ENTRY(@n-14),USE(KeyTypeLong),RIGHT(1)
+[REPORTCONTROLS]
+! STRING(@n-14),USE(KeyTypeLong),RIGHT(1)
+KeyTypeLong              LONG
+!!> GUID('75e013aa-788b-4070-b348-5d6b172c0041'),PROMPT('Key Type Long:'),HEADER('Key Type Long'),PICTURE(@n-14),JUSTIFY(RIGHT,1)
+[SCREENCONTROLS]
+! PROMPT('Screen Width:'),USE(?ScreenWidth:Prompt)
+! STRING(@s20),USE(ScreenWidth)
+[REPORTCONTROLS]
+! STRING(@s20),USE(ScreenWidth)
+ScreenWidth              STRING(20)
+!!> GUID('9dc75896-ce23-4555-b17d-f79ca3625c78'),PROMPT('Screen Width:'),HEADER('Screen Width'),PICTURE(@s20)
+[SCREENCONTROLS]
+! PROMPT('Screen Height:'),USE(?ScreenHeight:Prompt)
+! STRING(@n-14),USE(ScreenHeight),RIGHT(1)
+[REPORTCONTROLS]
+! STRING(@n-14),USE(ScreenHeight),RIGHT(1)
+ScreenHeight             LONG
+!!> GUID('9bcd72e5-ba70-4f44-ab3e-b832ca6ec770'),PROMPT('Screen Height:'),HEADER('Screen Height'),PICTURE(@n-14),JUSTIFY(RIGHT,1)
+[SCREENCONTROLS]
+! PROMPT('Screen Depth:'),USE(?ScreenDepth:Prompt)
+! STRING(@n-14),USE(ScreenDepth),RIGHT(1)
+[REPORTCONTROLS]
+! STRING(@n-14),USE(ScreenDepth),RIGHT(1)
+ScreenDepth              LONG
+!!> GUID('8dd0b164-58f0-4927-b793-b4f5f4676ff7'),PROMPT('Screen Depth:'),HEADER('Screen Depth'),PICTURE(@n-14),JUSTIFY(RIGHT,1)
+[SCREENCONTROLS]
+! PROMPT('Screenx DPI:'),USE(?ScreenxDPI:Prompt)
+! STRING(@n-14),USE(ScreenxDPI),RIGHT(1)
+[REPORTCONTROLS]
+! STRING(@n-14),USE(ScreenxDPI),RIGHT(1)
+ScreenxDPI               LONG
+!!> GUID('552556bc-42db-46b0-a137-069a0561b204'),PROMPT('Screenx DPI:'),HEADER('Screenx DPI'),PICTURE(@n-14),JUSTIFY(RIGHT,1)
+[SCREENCONTROLS]
+! PROMPT(''),USE(?ScreenyDPI:Prompt)
+! STRING(@n-14),USE(ScreenyDPI)
+[REPORTCONTROLS]
+! STRING(@n-14),USE(ScreenyDPI)
+ScreenyDPI               LONG
+!!> GUID('ae5a5be2-dbe2-49ce-af1e-4454c2173c5b'),HEADER('Screeny DPI'),PICTURE(@n-14)
+[SCREENCONTROLS]
+! CHECK('Is Media Center'),USE(IsMediaCenter),DISABLE
+[REPORTCONTROLS]
+! CHECK('Is Media Center'),USE(IsMediaCenter)
+IsMediaCenter            LONG
+!!> GUID('22938b0f-e5ba-4954-8867-37026fe94e4b'),VALID(BOOLEAN),PROMPT('Is Media Center'),HEADER('Is Media Center'),PICTURE(@n-14)
+[SCREENCONTROLS]
+! CHECK('Is Terminal Server'),USE(IsTerminalServer),DISABLE
+[REPORTCONTROLS]
+! CHECK('Is Terminal Server'),USE(IsTerminalServer)
+IsTerminalServer         LONG
+!!> GUID('7f6621ed-d366-4b22-8402-39e5854ec025'),VALID(BOOLEAN),PROMPT('Is Terminal Server'),HEADER('Is Terminal Server'),PICTURE(@n-14)
+[SCREENCONTROLS]
+! CHECK('Is Tablet'),USE(IsTablet),DISABLE
+[REPORTCONTROLS]
+! CHECK('Is Tablet'),USE(IsTablet)
+IsTablet                 LONG
+!!> GUID('d9f2e08d-d30b-4378-95b0-b5dd2322ef87'),VALID(BOOLEAN),PROMPT('Is Tablet'),HEADER('Is Tablet'),PICTURE(@n-14)
+[SCREENCONTROLS]
+! CHECK('Is Starter'),USE(IsStarter),DISABLE
+[REPORTCONTROLS]
+! CHECK('Is Starter'),USE(IsStarter)
+IsStarter                LONG
+!!> GUID('a5c357ad-6bb1-4469-8f39-3b6aaa9e5dee'),VALID(BOOLEAN),PROMPT('Is Starter'),HEADER('Is Starter'),PICTURE(@n-14)
+[SCREENCONTROLS]
+! CHECK('On Network'),USE(OnNetwork),DISABLE
+[REPORTCONTROLS]
+! CHECK('On Network'),USE(OnNetwork)
+OnNetwork                LONG
+!!> GUID('8f9edea8-0129-4d5d-abbe-a5314ed11e38'),VALID(BOOLEAN),PROMPT('On Network'),HEADER('On Network'),PICTURE(@n-14)
+[SCREENCONTROLS]
+! PROMPT('Os Bits:'),USE(?OsBits:Prompt)
+! ENTRY(@n-14),USE(OsBits),RIGHT(1)
+[REPORTCONTROLS]
+! STRING(@n-14),USE(OsBits),RIGHT(1)
+OsBits                   LONG
+!!> GUID('2dfb68d4-fd4e-4039-873e-68f8ea09e594'),PROMPT('Os Bits:'),HEADER('Os Bits'),PICTURE(@n-14),TYPEMODE(INS),JUSTIFY(RIGHT,1)
+[PROMPTS]
+%ReturnValue FIELD  ()
+%WindowOperationMode DEFAULT  ('Use WINDOW setting')
+%INISaveWindow LONG  (1)
+%ButtonAction DEPEND %Control DEFAULT TIMES 32
+WHEN  ('') ('No Special Action')
+WHEN  ('?Close') ('No Special Action')
+WHEN  ('?DiskFree') ('No Special Action')
+WHEN  ('?DiskTotal') ('No Special Action')
+WHEN  ('?DosRel') ('No Special Action')
+WHEN  ('?DosVer') ('No Special Action')
+WHEN  ('?OsBits') ('No Special Action')
+WHEN  ('?RamFree') ('No Special Action')
+WHEN  ('?RamTotal') ('No Special Action')
+WHEN  ('?RamUsed') ('No Special Action')
+WHEN  ('?String1') ('No Special Action')
+WHEN  ('?String10') ('No Special Action')
+WHEN  ('?String12') ('No Special Action')
+WHEN  ('?String1:2') ('No Special Action')
+WHEN  ('?String25') ('No Special Action')
+WHEN  ('?String26') ('No Special Action')
+WHEN  ('?String27') ('No Special Action')
+WHEN  ('?String28') ('No Special Action')
+WHEN  ('?String29') ('No Special Action')
+WHEN  ('?String3') ('No Special Action')
+WHEN  ('?String30') ('No Special Action')
+WHEN  ('?String31') ('No Special Action')
+WHEN  ('?String32') ('No Special Action')
+WHEN  ('?SwapFree') ('No Special Action')
+WHEN  ('?SwapTotal') ('No Special Action')
+WHEN  ('?SwapUsed') ('No Special Action')
+WHEN  ('?UserMemory') ('No Special Action')
+WHEN  ('?VirtualFree') ('No Special Action')
+WHEN  ('?VirtualTotal') ('No Special Action')
+WHEN  ('?VirtualUsed') ('No Special Action')
+WHEN  ('?WinRel') ('No Special Action')
+WHEN  ('?WinVer') ('No Special Action')
+
+%ButtonRunName DEPEND %Control DEFAULT TIMES 11
+WHEN  ('?DiskFree') ('')
+WHEN  ('?DiskTotal') ('')
+WHEN  ('?DosRel') ('')
+WHEN  ('?DosVer') ('')
+WHEN  ('?String1') ('')
+WHEN  ('?String10') ('')
+WHEN  ('?String12') ('')
+WHEN  ('?String1:2') ('')
+WHEN  ('?String3') ('')
+WHEN  ('?WinRel') ('')
+WHEN  ('?WinVer') ('')
+
+%ButtonRunParameters DEPEND %Control DEFAULT TIMES 11
+WHEN  ('?DiskFree') ('')
+WHEN  ('?DiskTotal') ('')
+WHEN  ('?DosRel') ('')
+WHEN  ('?DosVer') ('')
+WHEN  ('?String1') ('')
+WHEN  ('?String10') ('')
+WHEN  ('?String12') ('')
+WHEN  ('?String1:2') ('')
+WHEN  ('?String3') ('')
+WHEN  ('?WinRel') ('')
+WHEN  ('?WinVer') ('')
+
+%ButtonProcedure DEPEND %Control PROCEDURE TIMES 11
+WHEN  ('?DiskFree') ()
+WHEN  ('?DiskTotal') ()
+WHEN  ('?DosRel') ()
+WHEN  ('?DosVer') ()
+WHEN  ('?String1') ()
+WHEN  ('?String10') ()
+WHEN  ('?String12') ()
+WHEN  ('?String1:2') ()
+WHEN  ('?String3') ()
+WHEN  ('?WinRel') ()
+WHEN  ('?WinVer') ()
+
+%ButtonThread DEPEND %Control LONG TIMES 11
+WHEN  ('?DiskFree') (0)
+WHEN  ('?DiskTotal') (0)
+WHEN  ('?DosRel') (0)
+WHEN  ('?DosVer') (0)
+WHEN  ('?String1') (0)
+WHEN  ('?String10') (0)
+WHEN  ('?String12') (0)
+WHEN  ('?String1:2') (0)
+WHEN  ('?String3') (0)
+WHEN  ('?WinRel') (0)
+WHEN  ('?WinVer') (0)
+
+%ButtonThreadStack DEPEND %Control DEFAULT TIMES 32
+WHEN  ('') ('25000')
+WHEN  ('?Close') ('25000')
+WHEN  ('?DiskFree') ('25000')
+WHEN  ('?DiskTotal') ('25000')
+WHEN  ('?DosRel') ('25000')
+WHEN  ('?DosVer') ('25000')
+WHEN  ('?OsBits') ('25000')
+WHEN  ('?RamFree') ('25000')
+WHEN  ('?RamTotal') ('25000')
+WHEN  ('?RamUsed') ('25000')
+WHEN  ('?String1') ('25000')
+WHEN  ('?String10') ('25000')
+WHEN  ('?String12') ('25000')
+WHEN  ('?String1:2') ('25000')
+WHEN  ('?String25') ('25000')
+WHEN  ('?String26') ('25000')
+WHEN  ('?String27') ('25000')
+WHEN  ('?String28') ('25000')
+WHEN  ('?String29') ('25000')
+WHEN  ('?String3') ('25000')
+WHEN  ('?String30') ('25000')
+WHEN  ('?String31') ('25000')
+WHEN  ('?String32') ('25000')
+WHEN  ('?SwapFree') ('25000')
+WHEN  ('?SwapTotal') ('25000')
+WHEN  ('?SwapUsed') ('25000')
+WHEN  ('?UserMemory') ('25000')
+WHEN  ('?VirtualFree') ('25000')
+WHEN  ('?VirtualTotal') ('25000')
+WHEN  ('?VirtualUsed') ('25000')
+WHEN  ('?WinRel') ('25000')
+WHEN  ('?WinVer') ('25000')
+
+%ButtonParameters DEPEND %Control DEFAULT TIMES 11
+WHEN  ('?DiskFree') ('')
+WHEN  ('?DiskTotal') ('')
+WHEN  ('?DosRel') ('')
+WHEN  ('?DosVer') ('')
+WHEN  ('?String1') ('')
+WHEN  ('?String10') ('')
+WHEN  ('?String12') ('')
+WHEN  ('?String1:2') ('')
+WHEN  ('?String3') ('')
+WHEN  ('?WinRel') ('')
+WHEN  ('?WinVer') ('')
+
+%ButtonRequest DEPEND %Control DEFAULT TIMES 32
+WHEN  ('') ('None')
+WHEN  ('?Close') ('None')
+WHEN  ('?DiskFree') ('None')
+WHEN  ('?DiskTotal') ('None')
+WHEN  ('?DosRel') ('None')
+WHEN  ('?DosVer') ('None')
+WHEN  ('?OsBits') ('None')
+WHEN  ('?RamFree') ('None')
+WHEN  ('?RamTotal') ('None')
+WHEN  ('?RamUsed') ('None')
+WHEN  ('?String1') ('None')
+WHEN  ('?String10') ('None')
+WHEN  ('?String12') ('None')
+WHEN  ('?String1:2') ('None')
+WHEN  ('?String25') ('None')
+WHEN  ('?String26') ('None')
+WHEN  ('?String27') ('None')
+WHEN  ('?String28') ('None')
+WHEN  ('?String29') ('None')
+WHEN  ('?String3') ('None')
+WHEN  ('?String30') ('None')
+WHEN  ('?String31') ('None')
+WHEN  ('?String32') ('None')
+WHEN  ('?SwapFree') ('None')
+WHEN  ('?SwapTotal') ('None')
+WHEN  ('?SwapUsed') ('None')
+WHEN  ('?UserMemory') ('None')
+WHEN  ('?VirtualFree') ('None')
+WHEN  ('?VirtualTotal') ('None')
+WHEN  ('?VirtualUsed') ('None')
+WHEN  ('?WinRel') ('None')
+WHEN  ('?WinVer') ('None')
+
+%PreLookupKey DEPEND %Control KEY TIMES 11
+WHEN  ('?DiskFree') ()
+WHEN  ('?DiskTotal') ()
+WHEN  ('?DosRel') ()
+WHEN  ('?DosVer') ()
+WHEN  ('?String1') ()
+WHEN  ('?String10') ()
+WHEN  ('?String12') ()
+WHEN  ('?String1:2') ()
+WHEN  ('?String3') ()
+WHEN  ('?WinRel') ()
+WHEN  ('?WinVer') ()
+
+%PreLookupField DEPEND %Control COMPONENT TIMES 11
+WHEN  ('?DiskFree') ()
+WHEN  ('?DiskTotal') ()
+WHEN  ('?DosRel') ()
+WHEN  ('?DosVer') ()
+WHEN  ('?String1') ()
+WHEN  ('?String10') ()
+WHEN  ('?String12') ()
+WHEN  ('?String1:2') ()
+WHEN  ('?String3') ()
+WHEN  ('?WinRel') ()
+WHEN  ('?WinVer') ()
+
+%PreLookupProcedure DEPEND %Control PROCEDURE TIMES 11
+WHEN  ('?DiskFree') ()
+WHEN  ('?DiskTotal') ()
+WHEN  ('?DosRel') ()
+WHEN  ('?DosVer') ()
+WHEN  ('?String1') ()
+WHEN  ('?String10') ()
+WHEN  ('?String12') ()
+WHEN  ('?String1:2') ()
+WHEN  ('?String3') ()
+WHEN  ('?WinRel') ()
+WHEN  ('?WinVer') ()
+
+%PostLookupKey DEPEND %Control KEY TIMES 11
+WHEN  ('?DiskFree') ()
+WHEN  ('?DiskTotal') ()
+WHEN  ('?DosRel') ()
+WHEN  ('?DosVer') ()
+WHEN  ('?String1') ()
+WHEN  ('?String10') ()
+WHEN  ('?String12') ()
+WHEN  ('?String1:2') ()
+WHEN  ('?String3') ()
+WHEN  ('?WinRel') ()
+WHEN  ('?WinVer') ()
+
+%PostLookupField DEPEND %Control COMPONENT TIMES 11
+WHEN  ('?DiskFree') ()
+WHEN  ('?DiskTotal') ()
+WHEN  ('?DosRel') ()
+WHEN  ('?DosVer') ()
+WHEN  ('?String1') ()
+WHEN  ('?String10') ()
+WHEN  ('?String12') ()
+WHEN  ('?String1:2') ()
+WHEN  ('?String3') ()
+WHEN  ('?WinRel') ()
+WHEN  ('?WinVer') ()
+
+%PostLookupProcedure DEPEND %Control PROCEDURE TIMES 11
+WHEN  ('?DiskFree') ()
+WHEN  ('?DiskTotal') ()
+WHEN  ('?DosRel') ()
+WHEN  ('?DosVer') ()
+WHEN  ('?String1') ()
+WHEN  ('?String10') ()
+WHEN  ('?String12') ()
+WHEN  ('?String1:2') ()
+WHEN  ('?String3') ()
+WHEN  ('?WinRel') ()
+WHEN  ('?WinVer') ()
+
+%PostLookupDuringValidate DEPEND %Control LONG TIMES 32
+WHEN  ('') (1)
+WHEN  ('?Close') (1)
+WHEN  ('?DiskFree') (1)
+WHEN  ('?DiskTotal') (1)
+WHEN  ('?DosRel') (1)
+WHEN  ('?DosVer') (1)
+WHEN  ('?OsBits') (1)
+WHEN  ('?RamFree') (1)
+WHEN  ('?RamTotal') (1)
+WHEN  ('?RamUsed') (1)
+WHEN  ('?String1') (1)
+WHEN  ('?String10') (1)
+WHEN  ('?String12') (1)
+WHEN  ('?String1:2') (1)
+WHEN  ('?String25') (1)
+WHEN  ('?String26') (1)
+WHEN  ('?String27') (1)
+WHEN  ('?String28') (1)
+WHEN  ('?String29') (1)
+WHEN  ('?String3') (1)
+WHEN  ('?String30') (1)
+WHEN  ('?String31') (1)
+WHEN  ('?String32') (1)
+WHEN  ('?SwapFree') (1)
+WHEN  ('?SwapTotal') (1)
+WHEN  ('?SwapUsed') (1)
+WHEN  ('?UserMemory') (1)
+WHEN  ('?VirtualFree') (1)
+WHEN  ('?VirtualTotal') (1)
+WHEN  ('?VirtualUsed') (1)
+WHEN  ('?WinRel') (1)
+WHEN  ('?WinVer') (1)
+
+%ForceWindowRefresh DEPEND %Control LONG TIMES 11
+WHEN  ('?DiskFree') (0)
+WHEN  ('?DiskTotal') (0)
+WHEN  ('?DosRel') (0)
+WHEN  ('?DosVer') (0)
+WHEN  ('?String1') (0)
+WHEN  ('?String10') (0)
+WHEN  ('?String12') (0)
+WHEN  ('?String1:2') (0)
+WHEN  ('?String3') (0)
+WHEN  ('?WinRel') (0)
+WHEN  ('?WinVer') (0)
+
+%CheckedAssigns DEPEND %Control MULTI LONG TIMES 0
+
+%CheckedAssignVariable DEPEND %CheckedAssigns FIELD TIMES 11
+WHEN  ('?DiskFree')TIMES 0
+WHEN  ('?DiskTotal')TIMES 0
+WHEN  ('?DosRel')TIMES 0
+WHEN  ('?DosVer')TIMES 0
+WHEN  ('?String1')TIMES 0
+WHEN  ('?String10')TIMES 0
+WHEN  ('?String12')TIMES 0
+WHEN  ('?String1:2')TIMES 0
+WHEN  ('?String3')TIMES 0
+WHEN  ('?WinRel')TIMES 0
+WHEN  ('?WinVer')TIMES 0
+
+%CheckedAssignValue DEPEND %CheckedAssigns DEFAULT TIMES 11
+WHEN  ('?DiskFree')TIMES 0
+WHEN  ('?DiskTotal')TIMES 0
+WHEN  ('?DosRel')TIMES 0
+WHEN  ('?DosVer')TIMES 0
+WHEN  ('?String1')TIMES 0
+WHEN  ('?String10')TIMES 0
+WHEN  ('?String12')TIMES 0
+WHEN  ('?String1:2')TIMES 0
+WHEN  ('?String3')TIMES 0
+WHEN  ('?WinRel')TIMES 0
+WHEN  ('?WinVer')TIMES 0
+
+%CheckedHides DEPEND %Control MULTI LONG TIMES 0
+
+%CheckedControl DEPEND %CheckedHides DEFAULT TIMES 11
+WHEN  ('?DiskFree')TIMES 0
+WHEN  ('?DiskTotal')TIMES 0
+WHEN  ('?DosRel')TIMES 0
+WHEN  ('?DosVer')TIMES 0
+WHEN  ('?String1')TIMES 0
+WHEN  ('?String10')TIMES 0
+WHEN  ('?String12')TIMES 0
+WHEN  ('?String1:2')TIMES 0
+WHEN  ('?String3')TIMES 0
+WHEN  ('?WinRel')TIMES 0
+WHEN  ('?WinVer')TIMES 0
+
+%CheckedControlAction DEPEND %CheckedHides DEFAULT TIMES 32
+WHEN  ('')TIMES 0
+WHEN  ('?Close')TIMES 0
+WHEN  ('?DiskFree')TIMES 0
+WHEN  ('?DiskTotal')TIMES 0
+WHEN  ('?DosRel')TIMES 0
+WHEN  ('?DosVer')TIMES 0
+WHEN  ('?OsBits')TIMES 0
+WHEN  ('?RamFree')TIMES 0
+WHEN  ('?RamTotal')TIMES 0
+WHEN  ('?RamUsed')TIMES 0
+WHEN  ('?String1')TIMES 0
+WHEN  ('?String10')TIMES 0
+WHEN  ('?String12')TIMES 0
+WHEN  ('?String1:2')TIMES 0
+WHEN  ('?String25')TIMES 0
+WHEN  ('?String26')TIMES 0
+WHEN  ('?String27')TIMES 0
+WHEN  ('?String28')TIMES 0
+WHEN  ('?String29')TIMES 0
+WHEN  ('?String3')TIMES 0
+WHEN  ('?String30')TIMES 0
+WHEN  ('?String31')TIMES 0
+WHEN  ('?String32')TIMES 0
+WHEN  ('?SwapFree')TIMES 0
+WHEN  ('?SwapTotal')TIMES 0
+WHEN  ('?SwapUsed')TIMES 0
+WHEN  ('?UserMemory')TIMES 0
+WHEN  ('?VirtualFree')TIMES 0
+WHEN  ('?VirtualTotal')TIMES 0
+WHEN  ('?VirtualUsed')TIMES 0
+WHEN  ('?WinRel')TIMES 0
+WHEN  ('?WinVer')TIMES 0
+
+%UncheckedAssigns DEPEND %Control MULTI LONG TIMES 0
+
+%UncheckedAssignVariable DEPEND %UncheckedAssigns FIELD TIMES 11
+WHEN  ('?DiskFree')TIMES 0
+WHEN  ('?DiskTotal')TIMES 0
+WHEN  ('?DosRel')TIMES 0
+WHEN  ('?DosVer')TIMES 0
+WHEN  ('?String1')TIMES 0
+WHEN  ('?String10')TIMES 0
+WHEN  ('?String12')TIMES 0
+WHEN  ('?String1:2')TIMES 0
+WHEN  ('?String3')TIMES 0
+WHEN  ('?WinRel')TIMES 0
+WHEN  ('?WinVer')TIMES 0
+
+%UncheckedAssignValue DEPEND %UncheckedAssigns DEFAULT TIMES 11
+WHEN  ('?DiskFree')TIMES 0
+WHEN  ('?DiskTotal')TIMES 0
+WHEN  ('?DosRel')TIMES 0
+WHEN  ('?DosVer')TIMES 0
+WHEN  ('?String1')TIMES 0
+WHEN  ('?String10')TIMES 0
+WHEN  ('?String12')TIMES 0
+WHEN  ('?String1:2')TIMES 0
+WHEN  ('?String3')TIMES 0
+WHEN  ('?WinRel')TIMES 0
+WHEN  ('?WinVer')TIMES 0
+
+%UnCheckedHides DEPEND %Control MULTI LONG TIMES 0
+
+%UnCheckedControl DEPEND %UnCheckedHides DEFAULT TIMES 11
+WHEN  ('?DiskFree')TIMES 0
+WHEN  ('?DiskTotal')TIMES 0
+WHEN  ('?DosRel')TIMES 0
+WHEN  ('?DosVer')TIMES 0
+WHEN  ('?String1')TIMES 0
+WHEN  ('?String10')TIMES 0
+WHEN  ('?String12')TIMES 0
+WHEN  ('?String1:2')TIMES 0
+WHEN  ('?String3')TIMES 0
+WHEN  ('?WinRel')TIMES 0
+WHEN  ('?WinVer')TIMES 0
+
+%UnCheckedControlAction DEPEND %UnCheckedHides DEFAULT TIMES 32
+WHEN  ('')TIMES 0
+WHEN  ('?Close')TIMES 0
+WHEN  ('?DiskFree')TIMES 0
+WHEN  ('?DiskTotal')TIMES 0
+WHEN  ('?DosRel')TIMES 0
+WHEN  ('?DosVer')TIMES 0
+WHEN  ('?OsBits')TIMES 0
+WHEN  ('?RamFree')TIMES 0
+WHEN  ('?RamTotal')TIMES 0
+WHEN  ('?RamUsed')TIMES 0
+WHEN  ('?String1')TIMES 0
+WHEN  ('?String10')TIMES 0
+WHEN  ('?String12')TIMES 0
+WHEN  ('?String1:2')TIMES 0
+WHEN  ('?String25')TIMES 0
+WHEN  ('?String26')TIMES 0
+WHEN  ('?String27')TIMES 0
+WHEN  ('?String28')TIMES 0
+WHEN  ('?String29')TIMES 0
+WHEN  ('?String3')TIMES 0
+WHEN  ('?String30')TIMES 0
+WHEN  ('?String31')TIMES 0
+WHEN  ('?String32')TIMES 0
+WHEN  ('?SwapFree')TIMES 0
+WHEN  ('?SwapTotal')TIMES 0
+WHEN  ('?SwapUsed')TIMES 0
+WHEN  ('?UserMemory')TIMES 0
+WHEN  ('?VirtualFree')TIMES 0
+WHEN  ('?VirtualTotal')TIMES 0
+WHEN  ('?VirtualUsed')TIMES 0
+WHEN  ('?WinRel')TIMES 0
+WHEN  ('?WinVer')TIMES 0
+
+%ClassItem UNIQUE DEFAULT  ('Default', 'WindowToolbar')
+%DefaultBaseClassType DEPEND %ClassItem DEFAULT TIMES 2
+WHEN  ('Default') ('WindowManager')
+WHEN  ('WindowToolbar') ('ToolbarClass')
+
+%ActualDefaultBaseClassType DEPEND %ClassItem DEFAULT TIMES 2
+WHEN  ('Default') ('')
+WHEN  ('WindowToolbar') ('')
+
+%ClassLines DEPEND %ClassItem MULTI DEFAULT TIMES 1
+WHEN  ('Default') ('Init {19}PROCEDURE(),BYTE,PROC,DERIVED', 'Kill {19}PROCEDURE(),BYTE,PROC,DERIVED', |
+  'TakeAccepted {11}PROCEDURE(),BYTE,PROC,DERIVED', 'TakeEvent {14}PROCEDURE(),BYTE,PROC,DERIVED', |
+  'TakeWindowEvent        PROCEDURE(),BYTE,PROC,DERIVED')
+
+%ThisObjectName DEPEND %ClassItem DEFAULT TIMES 2
+WHEN  ('Default') ('ThisWindow')
+WHEN  ('WindowToolbar') ('Toolbar')
+
+%UseDefaultABCBaseClass DEPEND %ClassItem LONG TIMES 2
+WHEN  ('Default') (1)
+WHEN  ('WindowToolbar') (1)
+
+%UseABCBaseClass DEPEND %ClassItem LONG TIMES 2
+WHEN  ('Default') (1)
+WHEN  ('WindowToolbar') (1)
+
+%ABCBaseClass DEPEND %ClassItem DEFAULT TIMES 2
+WHEN  ('Default') ('')
+WHEN  ('WindowToolbar') ('')
+
+%ExtBaseClass DEPEND %ClassItem DEFAULT TIMES 0
+
+%BaseClassIncludeFile DEPEND %ClassItem DEFAULT TIMES 0
+
+%DeriveFromBaseClass DEPEND %ClassItem LONG TIMES 2
+WHEN  ('Default') (0)
+WHEN  ('WindowToolbar') (0)
+
+%NewMethods DEPEND %ClassItem MULTI LONG TIMES 0
+
+%NewMethodName DEPEND %NewMethods DEFAULT TIMES 0
+
+%NewMethodPrototype DEPEND %NewMethods DEFAULT TIMES 0
+
+%NewClassPropertyItems DEPEND %ClassItem MULTI LONG TIMES 0
+
+%NewClassProperty DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataType DEPEND %NewClassPropertyItems DEFAULT TIMES 1
+WHEN  ('WindowToolbar')TIMES 0
+
+%NewClassOtherType DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataIsRef DEPEND %NewClassPropertyItems LONG TIMES 0
+
+%NewClassDataSize DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataDim1 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataDim2 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataDim3 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataDim4 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%ClassMethods DEPEND %ClassItem MULTI LONG TIMES 0
+
+%ClassMethodName DEPEND %ClassMethods DEFAULT TIMES 0
+
+%ClassMethodPrototype DEPEND %ClassMethods DEFAULT TIMES 0
+
+%ClassPropertyItems DEPEND %ClassItem MULTI LONG TIMES 0
+
+%ClassProperty DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataType DEPEND %ClassPropertyItems DEFAULT TIMES 1
+WHEN  ('WindowToolbar')TIMES 0
+
+%ClassOtherType DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataIsRef DEPEND %ClassPropertyItems LONG TIMES 0
+
+%ClassDataSize DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataDim1 DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataDim2 DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataDim3 DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataDim4 DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%CheckedEnables DEPEND %Control MULTI LONG TIMES 0
+
+%CheckedControl1 DEPEND %CheckedEnables DEFAULT TIMES 0
+
+%CheckedControl1Action DEPEND %CheckedEnables DEFAULT TIMES 21
+WHEN  ('')TIMES 0
+WHEN  ('?OsBits')TIMES 0
+WHEN  ('?RamFree')TIMES 0
+WHEN  ('?RamTotal')TIMES 0
+WHEN  ('?RamUsed')TIMES 0
+WHEN  ('?String1:2')TIMES 0
+WHEN  ('?String25')TIMES 0
+WHEN  ('?String26')TIMES 0
+WHEN  ('?String27')TIMES 0
+WHEN  ('?String28')TIMES 0
+WHEN  ('?String29')TIMES 0
+WHEN  ('?String30')TIMES 0
+WHEN  ('?String31')TIMES 0
+WHEN  ('?String32')TIMES 0
+WHEN  ('?SwapFree')TIMES 0
+WHEN  ('?SwapTotal')TIMES 0
+WHEN  ('?SwapUsed')TIMES 0
+WHEN  ('?UserMemory')TIMES 0
+WHEN  ('?VirtualFree')TIMES 0
+WHEN  ('?VirtualTotal')TIMES 0
+WHEN  ('?VirtualUsed')TIMES 0
+
+%UnCheckedEnables DEPEND %Control MULTI LONG TIMES 0
+
+%UnCheckedControl1 DEPEND %UnCheckedEnables DEFAULT TIMES 0
+
+%UnCheckedControl1Action DEPEND %UnCheckedEnables DEFAULT TIMES 21
+WHEN  ('')TIMES 0
+WHEN  ('?OsBits')TIMES 0
+WHEN  ('?RamFree')TIMES 0
+WHEN  ('?RamTotal')TIMES 0
+WHEN  ('?RamUsed')TIMES 0
+WHEN  ('?String1:2')TIMES 0
+WHEN  ('?String25')TIMES 0
+WHEN  ('?String26')TIMES 0
+WHEN  ('?String27')TIMES 0
+WHEN  ('?String28')TIMES 0
+WHEN  ('?String29')TIMES 0
+WHEN  ('?String30')TIMES 0
+WHEN  ('?String31')TIMES 0
+WHEN  ('?String32')TIMES 0
+WHEN  ('?SwapFree')TIMES 0
+WHEN  ('?SwapTotal')TIMES 0
+WHEN  ('?SwapUsed')TIMES 0
+WHEN  ('?UserMemory')TIMES 0
+WHEN  ('?VirtualFree')TIMES 0
+WHEN  ('?VirtualTotal')TIMES 0
+WHEN  ('?VirtualUsed')TIMES 0
+
+%ButtonReturnValueAssignment DEPEND %Control FIELD TIMES 0
+
+%ButtonReturnValueReferenceAssign DEPEND %Control LONG TIMES 0
+
+%ButtonThreadParameters DEPEND %Control DEFAULT TIMES 0
+
+%ButtonThreadReturnValueAssignment DEPEND %Control FIELD TIMES 0
+
+%LookupAssign DEPEND %Control MULTI LONG TIMES 0
+
+%MoreField DEPEND %LookupAssign DEFAULT TIMES 0
+
+%MoreTarget DEPEND %LookupAssign FIELD TIMES 0
+
+%GlobalObject DEPEND %ClassItem DEFAULT TIMES 2
+WHEN  ('Default') ('NO')
+WHEN  ('WindowToolbar') ('NO')
+
+%ProcedureDisableEnhanceFocus LONG  (0)
+%ProcedureUseEnterInsteadTabOverride LONG  (0)
+%WindowUseEnterInsteadTab LONG  (1)
+%ProcedureUseEnterInsteadTabExcludeListCombo LONG  (0)
+%ProcedureUseEnterInsteadTabEnableNextTabStop LONG  (0)
+%ProcedureUseEnterInsteadTabExcludeG LONG  (1)
+%WindowUseEnterInsteadTabExclude MULTI DEFAULT  ()
+%WindowStyles MULTI LONG  ()
+%WindowStyleFontName DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleFontNameVariable DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleFontNameIsVariable DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleFontSize DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleFontSizeVariable DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleFontSizeIsVariable DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleFontStyle DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleFontStyleVariable DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleFontStyleIsVariable DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleFontColor DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleFontCharSet DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleForegroundNormal DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleForegroundNormalVariable DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleForegroundNormalIsVariable DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleBackgroundNormal DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleBackgroundNormalVariable DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleBackgroundNormalIsVariable DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleForegroundSelected DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleForegroundSelectedVariable DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleForegroundSelectedIsVariable DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleBackgroundSelected DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleBackgroundSelectedVariable DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleBackgroundSelectedIsVariable DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStylePicture DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStylePictureVariable DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStylePictureIsVariable DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleOtherListboxes MULTI DEFAULT  ()
+%ProcedureAutoBindFields MULTI LONG  ()
+%ProcedureAutoBindField DEPEND %ProcedureAutoBindFields DEFAULT TIMES 0
+
+%ProcedureAutoBindFieldTPL DEPEND %ProcedureAutoBindFields DEFAULT TIMES 0
+
+%ProcedureAutoBindProcedures MULTI LONG  ()
+%ProcedureAutoBindProcedure DEPEND %ProcedureAutoBindProcedures DEFAULT TIMES 0
+
+%ProcedureAutoBindProcedureTPL DEPEND %ProcedureAutoBindProcedures DEFAULT TIMES 0
+
+%ProcedureAutoBindFieldsIgnored MULTI LONG  ()
+%ProcedureAutoBindFieldIgnored DEPEND %ProcedureAutoBindFieldsIgnored DEFAULT TIMES 0
+
+%ProcedureAutoBindProceduresIgnored MULTI LONG  ()
+%ProcedureAutoBindProcedureIgnored DEPEND %ProcedureAutoBindProceduresIgnored DEFAULT TIMES 0
+
+%ProcedureAutoBindValidToAddField LONG  (0)
+%ProcedureUserBindFields MULTI LONG  ()
+%ProcedureUserBindField DEPEND %ProcedureUserBindFields FIELD TIMES 0
+
+%ProcedureAutoBindFieldIgnore DEPEND %ProcedureAutoBindFields LONG TIMES 0
+
+%ProcedureUserBindProcedures MULTI LONG  ()
+%ProcedureUserBindProcedure DEPEND %ProcedureUserBindProcedures PROCEDURE TIMES 0
+
+%ProcedureAutoBindProcedureIgnore DEPEND %ProcedureAutoBindProcedures LONG TIMES 0
+
+%ProcedureUserBindExpressions MULTI LONG  ()
+%ProcedureUserBindExpressionName DEPEND %ProcedureUserBindExpressions DEFAULT TIMES 0
+
+%ProcedureUserBindExpression DEPEND %ProcedureUserBindExpressions DEFAULT TIMES 0
+
+%ExtUITabIcon DEPEND %Control DEFAULT TIMES 0
+
+%ExtUITabStyleOverrideGlobal DEPEND %Control LONG TIMES 0
+
+%ExtUITabStyle DEPEND %Control DEFAULT TIMES 2
+WHEN  ('') ('Default')
+WHEN  ('?OsBits') ('Default')
+
+%PreLookupProcedureParameters DEPEND %Control DEFAULT TIMES 0
+
+%PostLookupProcedureParameters DEPEND %Control DEFAULT TIMES 0
+
+%CheckedDisables DEPEND %Control MULTI LONG TIMES 0
+
+%CheckedDisableControl DEPEND %CheckedDisables DEFAULT TIMES 0
+
+%CheckedDisableControlAction DEPEND %CheckedDisables DEFAULT TIMES 2
+WHEN  ('')TIMES 0
+WHEN  ('?OsBits')TIMES 0
+
+%UnCheckedDisables DEPEND %Control MULTI LONG TIMES 0
+
+%UnCheckedDisableControl DEPEND %UnCheckedDisables DEFAULT TIMES 0
+
+%UnCheckedDisableControlAction DEPEND %UnCheckedDisables DEFAULT TIMES 2
+WHEN  ('')TIMES 0
+WHEN  ('?OsBits')TIMES 0
+
+%ProcedureOneInstance LONG  (0)
+%PreserveVarsLoc MULTI LONG  ()
+%PreserveVarLoc DEPEND %PreserveVarsLoc DEFAULT TIMES 0
+
+%FieldGradientColorType DEPEND %Control DEFAULT TIMES 3
+WHEN  ('') ('Off')
+WHEN  ('?Close') ('Off')
+WHEN  ('?OsBits') ('Off')
+
+%FieldGradientColorTypeVariable DEPEND %Control DEFAULT TIMES 3
+WHEN  ('') ('')
+WHEN  ('?Close') ('')
+WHEN  ('?OsBits') ('')
+
+%FieldGradientColorTypeIsVariable DEPEND %Control LONG TIMES 3
+WHEN  ('') (0)
+WHEN  ('?Close') (0)
+WHEN  ('?OsBits') (0)
+
+%FieldGradientColorFrom DEPEND %Control LONG TIMES 3
+WHEN  ('') (-1)
+WHEN  ('?Close') (-1)
+WHEN  ('?OsBits') (-1)
+
+%FieldGradientColorFromVariable DEPEND %Control DEFAULT TIMES 0
+
+%FieldGradientColorFromIsVariable DEPEND %Control LONG TIMES 3
+WHEN  ('') (0)
+WHEN  ('?Close') (0)
+WHEN  ('?OsBits') (0)
+
+%FieldGradientColorTo DEPEND %Control LONG TIMES 3
+WHEN  ('') (-1)
+WHEN  ('?Close') (-1)
+WHEN  ('?OsBits') (-1)
+
+%FieldGradientColorToVariable DEPEND %Control DEFAULT TIMES 0
+
+%FieldGradientColorToIsVariable DEPEND %Control LONG TIMES 3
+WHEN  ('') (0)
+WHEN  ('?Close') (0)
+WHEN  ('?OsBits') (0)
+
+%ActiveImageEnable DEPEND %Control LONG TIMES 0
+
+%AIObjectName DEPEND %Control DEFAULT TIMES 2
+WHEN  ('') ('AIBtn0')
+WHEN  ('?OsBits') ('AIBtn46')
+
+%AIEnableMimicControl DEPEND %Control LONG TIMES 2
+WHEN  ('') (1)
+WHEN  ('?OsBits') (1)
+
+%AIMimicControl DEPEND %Control DEFAULT TIMES 2
+WHEN  ('') ('?Close')
+WHEN  ('?OsBits') ('?Close')
+
+%AIImgRound DEPEND %Control LONG TIMES 0
+
+%AIOverrideImg DEPEND %Control DEFAULT TIMES 0
+
+%AIOverrideImgVariable DEPEND %Control DEFAULT TIMES 0
+
+%AIOverrideImgIsVariable DEPEND %Control LONG TIMES 2
+WHEN  ('') (0)
+WHEN  ('?OsBits') (0)
+
+%AIDisableImg DEPEND %Control DEFAULT TIMES 0
+
+%AIDisableImgVariable DEPEND %Control DEFAULT TIMES 0
+
+%AIDisableImgIsVariable DEPEND %Control LONG TIMES 2
+WHEN  ('') (0)
+WHEN  ('?OsBits') (0)
+
+%AIHotImg DEPEND %Control DEFAULT TIMES 0
+
+%AIHotImgVariable DEPEND %Control DEFAULT TIMES 0
+
+%AIHotImgIsVariable DEPEND %Control LONG TIMES 2
+WHEN  ('') (0)
+WHEN  ('?OsBits') (0)
+
+%AIPressedImg DEPEND %Control DEFAULT TIMES 0
+
+%AIPressedImgVariable DEPEND %Control DEFAULT TIMES 0
+
+%AIPressedImgIsVariable DEPEND %Control LONG TIMES 2
+WHEN  ('') (0)
+WHEN  ('?OsBits') (0)
+
+[EMBED]
+EMBED %ProcedureSetup
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 4000
+PROPERTY:END
+  NewWinVersion = ds_GetWinVersion()
+  WinVer = WindowsVersion()
+  WinRel = WindowsRelease()
+  DosVer = DosVersion()
+  DosRel = DosRelease()
+  DiskFree = ds_GetDiskMegs('c:','User Free')
+  DiskTotal = ds_GetDiskMegs('c:','Total')
+
+  SwapUsed     = ds_Memory('SWAP USED')
+  SwapFree     = ds_Memory('SWAP FREE')
+  SwapTotal    = ds_Memory('SWAP TOTAL')
+  RamFree      = ds_Memory('RAM FREE')
+  RamUsed      = ds_Memory('RAM USED')
+  RamTotal     = ds_Memory('RAM TOTAL')
+  VirtualUsed  = ds_Memory('VMEM USED')
+  VirtualFree  = ds_Memory('VMEM FREE')
+  VirtualTotal = ds_Memory('VMEM TOTAL')
+  UserMemory   = ds_Memory('USER')
+
+  ScreenyDPI = ds_GetScreenDPI(1)
+  ScreenxDPI = ds_GetScreenDPI()
+  ScreenWidth = ScreenWidth()
+  ScreenHeight = ScreenHeight()
+  ScreenDepth = ScreenDepth()
+  OsBits = ds_OsBits()
+[END]
+EMBED %DataSection
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 50
+PROPERTY:END
+
+! This window shamelessly copied from the CapeSoft WinEvent demo program, written by Bruce Johnson
+! Copyright (c) CapeSoft
+! Minor layout tweaks by Donn Edwards and removal of several options to simplify
+[END]
+EMBED %ControlEventHandling
+[INSTANCES]
+WHEN '?Close'
+[INSTANCES]
+WHEN 'Accepted'
+[DEFINITION]
+[GROUP]
+PRIORITY 4499
+INSTANCE 3
+[END]
+[END]
+[END]
+[END]
+[ADDITION]
+NAME ABC CloseCurrentWindow
+[INSTANCE]
+INSTANCE 3
+[ADDITION]
+NAME WinEvent WinEvent
+[INSTANCE]
+INSTANCE 1
+OWNER 6
+[PROMPTS]
+%AutoDown LONG  (0)
+%WinAlert MULTI LONG  ()
+%Mess DEPEND %WinAlert DEFAULT TIMES 0
+
+%Act1 DEPEND %WinAlert DEFAULT TIMES 0
+
+%act2 DEPEND %WinAlert DEFAULT TIMES 0
+
+%NoAutoDown LONG  (0)
+%AlertWinEventDebug LONG  (0)
+%DisplayCompileDate LONG  (0)
+%SortListbox MULTI LONG  ()
+%ThisListbox DEPEND %SortListbox DEFAULT TIMES 0
+
+%ThisListboxHeader DEPEND %SortListbox MULTI DEFAULT TIMES 0
+
+%gloWinEventTesting LONG  (0)
+%gloWinEventTestingColor1 LONG  (15728618)
+%gloWinEventTestingColor2 LONG  (16777215)
+%ShowBeta DEFAULT  ('1')
+%EnableWheelMouse LONG  (0)
+%AutoDownNM LONG  (0)
+%DisplayCompileDateFormat DEFAULT  ('@D6')
+%DisableWinEvent LONG  (0)
+%LocWindowsVisible DEFAULT  ('0')
+%WindowsVisibleAfterOpen LONG  (1)
+%CheckForCantCloseNowSetHere LONG  (1)
+%locNoHandleCloseDown LONG  (0)
+%locCloseDownWhenWindowCloses LONG  (0)
+%locCloseDownWhenWindowClosesSet LONG  (0)
+%locCloseDownWhenWindowClosesCtrl DEFAULT  ('')
+%altWinFix DEFAULT  ('Default')
+%AlertControl DEPEND %WinAlert DEFAULT TIMES 0
+
+%AlertControlType DEPEND %WinAlert DEFAULT TIMES 0
+
+[WINDOW]
+window  WINDOW('WinEvent System Info'),AT(,,301,227),FONT('Segoe UI',10,,FONT:regular),DOUBLE, |
+          CENTER,ICON('System.ico'),IMM,SYSTEM
+          BUTTON(' Close'),AT(238,200,54),USE(?Close),LEFT,ICON('System.ico'),#ORIG(?Close), |
+            #ORDINAL(1)
+          STRING('Windows Version:'),AT(13,26,83),USE(?String1),RIGHT,#ORIG(?String1),#ORDINAL(2)
+          STRING(@s3),AT(102,26),USE(WinVer),LEFT,#ORIG(?String2),#ORDINAL(3)
+          STRING('Release:'),AT(126,26),USE(?String3),#ORIG(?String3),#ORDINAL(4)
+          STRING(@s3),AT(157,26,17,10),USE(WinRel),#ORIG(?String4),#ORDINAL(5)
+          STRING(@s3),AT(157,37),USE(DosRel),#ORIG(?String8),#ORDINAL(6)
+          PROMPT('Windows Version Name:'),AT(13,13,83),USE(?NewWinVersion:Prompt),RIGHT,#LINK(?NewWinVersion), |
+            #ORIG(?NewWinVersion:Prompt),#ORDINAL(7)
+          STRING(@s60),AT(102,13,187),USE(NewWinVersion),TRN,#LINK(?NewWinVersion:Prompt), |
+            #ORIG(NewWinVersion),#ORDINAL(8)
+          STRING('Available Space (C:):'),AT(13,57,83),USE(?String10),RIGHT,#ORIG(?String10), |
+            #ORDINAL(9)
+          STRING(@n13),AT(102,57),USE(DiskFree),RIGHT,#ORIG(?String11),#ORDINAL(10)
+          PROMPT('MB'),AT(170,57,26),USE(?Prompt2),#ORIG(?Prompt2),#ORDINAL(11)
+          STRING('Maximum Capacity (C:):'),AT(13,69,83),USE(?String12),RIGHT,#ORIG(?String12), |
+            #ORDINAL(12)
+          STRING(@n13),AT(102,69),USE(DiskTotal),RIGHT,#ORIG(?String13),#ORDINAL(13)
+          PROMPT('MB'),AT(170,69,26),USE(?Prompt3),#ORIG(?Prompt3),#ORDINAL(14)
+          STRING('Memory Used by this program (Kb):'),AT(21,90,133),USE(?String30),FONT(,, |
+            COLOR:Navy),RIGHT,#ORIG(?String30),#ORDINAL(15)
+          STRING(@n13),AT(154,90),USE(UserMemory),FONT(,,COLOR:Navy),RIGHT,#ORIG(?String39), |
+            #ORDINAL(16)
+          STRING('Memory Analysis for the whole machine (in Kb)'),AT(21,101),USE(?String28), |
+            FONT(,,COLOR:Navy),#ORIG(?String28),#ORDINAL(17)
+          STRING('Total'),AT(122,111,23),USE(?String25),FONT(,,COLOR:Navy,FONT:regular,CHARSET:ANSI), |
+            RIGHT,#ORIG(?String25),#ORDINAL(18)
+          STRING('Free'),AT(259,111,23),USE(?String27),FONT(,,COLOR:Navy,FONT:regular,CHARSET:ANSI), |
+            RIGHT,#ORIG(?String27),#ORDINAL(19)
+          STRING('Physical Ram:'),AT(19,121,65),USE(?String29),FONT(,,COLOR:Navy,FONT:regular, |
+            CHARSET:ANSI),RIGHT,#ORIG(?String29),#ORDINAL(20)
+          STRING(@n13),AT(89,121),USE(RamTotal),FONT(,,COLOR:Navy),RIGHT,#ORIG(?String33), |
+            #ORDINAL(21)
+          STRING(@n13),AT(154,121),USE(RamUsed),FONT(,,COLOR:Navy),RIGHT,#ORIG(?String33), |
+            #ORDINAL(22)
+          STRING(@n13),AT(227,121),USE(RamFree),FONT(,,COLOR:Navy),RIGHT,#ORIG(?String36), |
+            #ORDINAL(23)
+          STRING('Swap File:'),AT(19,132,65),USE(?String31),FONT(,,COLOR:Navy,FONT:regular, |
+            CHARSET:ANSI),RIGHT,#ORIG(?String31),#ORDINAL(24)
+          STRING(@n13),AT(89,132),USE(SwapTotal),FONT(,,COLOR:Navy),RIGHT,#ORIG(?String34), |
+            #ORDINAL(25)
+          STRING(@n13),AT(154,132),USE(SwapUsed),FONT(,,COLOR:Navy),RIGHT,#ORIG(?String34), |
+            #ORDINAL(26)
+          STRING(@n13),AT(227,132),USE(SwapFree),FONT(,,COLOR:Navy),RIGHT,#ORIG(?String37), |
+            #ORDINAL(27)
+          STRING('Virtual Memory:'),AT(19,143,65),USE(?String32),FONT(,,COLOR:Navy,FONT:regular, |
+            CHARSET:ANSI),RIGHT,#ORIG(?String32),#ORDINAL(28)
+          STRING(@n13),AT(89,143),USE(VirtualTotal),FONT(,,COLOR:Navy),RIGHT,#ORIG(?String35), |
+            #ORDINAL(29)
+          STRING(@n13),AT(154,143),USE(VirtualUsed),FONT(,,COLOR:Navy),RIGHT,#ORIG(?String35), |
+            #ORDINAL(30)
+          STRING(@n13),AT(227,143),USE(VirtualFree),FONT(,,COLOR:Navy),RIGHT,#ORIG(?String38), |
+            #ORDINAL(31)
+          PROMPT('Screen Width:'),AT(34,174,79),USE(?ScreenWidth:Prompt),RIGHT,#LINK(?ScreenWidth), |
+            #ORIG(?ScreenWidth:Prompt),#ORDINAL(32)
+          STRING(@n-14),AT(112,173),USE(ScreenWidth),RIGHT(1),#LINK(?ScreenWidth:Prompt),#ORIG(ScreenWidth), |
+            #ORDINAL(33)
+          STRING('Used'),AT(186,111,23),USE(?String26),FONT(,,COLOR:Navy,FONT:regular,CHARSET:ANSI), |
+            RIGHT,#ORIG(?String26),#ORDINAL(34)
+          STRING('Release:'),AT(126,37),USE(?String3:2),#ORIG(?String3),#ORDINAL(35)
+          STRING(@s3),AT(102,37),USE(DosVer),LEFT,#ORIG(?String7),#ORDINAL(36)
+          STRING('Dos Version:'),AT(13,37,83),USE(?String1:2),RIGHT,#ORIG(?String1),#ORDINAL(37)
+          PROMPT('Screen Height:'),AT(34,185,79),USE(?ScreenHeight:Prompt),RIGHT,#LINK(?ScreenHeight), |
+            #ORIG(?ScreenHeight:Prompt),#ORDINAL(38)
+          STRING(@n-14),AT(112,185),USE(ScreenHeight),RIGHT(1),#LINK(?ScreenHeight:Prompt), |
+            #ORIG(ScreenHeight),#ORDINAL(39)
+          PROMPT('Screen Depth:'),AT(34,197,79),USE(?ScreenDepth:Prompt),RIGHT,#LINK(?ScreenDepth), |
+            #ORIG(?ScreenDepth:Prompt),#ORDINAL(40)
+          STRING(@n-14),AT(112,197),USE(ScreenDepth),RIGHT(1),#LINK(?ScreenDepth:Prompt),#ORIG(ScreenDepth), |
+            #ORDINAL(41)
+          PROMPT('Screenx DPI:'),AT(34,162,79),USE(?ScreenxDPI:Prompt),RIGHT,#LINK(?ScreenxDPI), |
+            #ORIG(?ScreenxDPI:Prompt),#ORDINAL(42)
+          STRING(@n-14),AT(112,162),USE(ScreenxDPI),RIGHT(1),#LINK(?ScreenxDPI:Prompt),#ORIG(ScreenxDPI), |
+            #ORDINAL(43)
+          STRING(@n-14),AT(185,162),USE(ScreenyDPI),#LINK(?ScreenyDPI:Prompt),#ORIG(ScreenyDPI), |
+            #ORDINAL(44)
+          STRING('OS Bits:'),AT(185,37),USE(?STRING2),#ORDINAL(45)
+          STRING(@n3),AT(215,37),USE(OsBits),#ORDINAL(46)
+        END
+
+[END]
+[MODULE]
+[COMMON]
+FROM ABC GENERATED
+MODIFIED '2023/09/25' '18:32:27'
+[PROCEDURE]
+NAME UpdateSetting
+[COMMON]
+DESCRIPTION 'Form Setting'
+FROM ABC Window
+CATEGORY 'Form'
+MODIFIED '2023/10/20' '13:59:01'
+[DATA]
+CurrentTab               STRING(80)
+!!> GUID('7056dbc8-cf1e-4700-85ff-c9cc247bbc94')
+ActionMessage            CSTRING(40)
+!!> GUID('36a44731-7bbe-4444-a84c-257fe898a01e')
+[FILES]
+[PRIMARY]
+Setting
+[INSTANCE]
+2
+[PROMPTS]
+%ButtonAction DEPEND %Control DEFAULT TIMES 4
+WHEN  ('?Cancel') ('No Special Action')
+WHEN  ('?LookupFile') ('No Special Action')
+WHEN  ('?OK') ('No Special Action')
+WHEN  ('?set:GUID') ('No Special Action')
+
+%ButtonRunName DEPEND %Control DEFAULT TIMES 1
+WHEN  ('?LookupFile') ('')
+
+%ButtonRunParameters DEPEND %Control DEFAULT TIMES 1
+WHEN  ('?LookupFile') ('')
+
+%ButtonProcedure DEPEND %Control PROCEDURE TIMES 1
+WHEN  ('?LookupFile') ()
+
+%ButtonThread DEPEND %Control LONG TIMES 1
+WHEN  ('?LookupFile') (0)
+
+%ButtonThreadStack DEPEND %Control DEFAULT TIMES 4
+WHEN  ('?Cancel') ('25000')
+WHEN  ('?LookupFile') ('25000')
+WHEN  ('?OK') ('25000')
+WHEN  ('?set:GUID') ('25000')
+
+%ButtonParameters DEPEND %Control DEFAULT TIMES 1
+WHEN  ('?LookupFile') ('')
+
+%ButtonRequest DEPEND %Control DEFAULT TIMES 4
+WHEN  ('?Cancel') ('None')
+WHEN  ('?LookupFile') ('None')
+WHEN  ('?OK') ('None')
+WHEN  ('?set:GUID') ('None')
+
+%PreLookupKey DEPEND %Control KEY TIMES 0
+
+%PreLookupField DEPEND %Control COMPONENT TIMES 0
+
+%PreLookupProcedure DEPEND %Control PROCEDURE TIMES 0
+
+%PostLookupKey DEPEND %Control KEY TIMES 0
+
+%PostLookupField DEPEND %Control COMPONENT TIMES 0
+
+%PostLookupProcedure DEPEND %Control PROCEDURE TIMES 0
+
+%ForceWindowRefresh DEPEND %Control LONG TIMES 0
+
+%ClassItem UNIQUE DEFAULT  ('Default', 'WindowToolbar')
+%DefaultBaseClassType DEPEND %ClassItem DEFAULT TIMES 2
+WHEN  ('Default') ('WindowManager')
+WHEN  ('WindowToolbar') ('ToolbarClass')
+
+%ActualDefaultBaseClassType DEPEND %ClassItem DEFAULT TIMES 2
+WHEN  ('Default') ('')
+WHEN  ('WindowToolbar') ('')
+
+%ClassLines DEPEND %ClassItem MULTI DEFAULT TIMES 1
+WHEN  ('Default') ('Ask {20}PROCEDURE(),DERIVED', 'Init {19}PROCEDURE(),BYTE,PROC,DERIVED', |
+  'Kill {19}PROCEDURE(),BYTE,PROC,DERIVED', 'Run {20}PROCEDURE(),BYTE,PROC,DERIVED', |
+  'TakeAccepted {11}PROCEDURE(),BYTE,PROC,DERIVED', 'TakeEvent {14}PROCEDURE(),BYTE,PROC,DERIVED', |
+  'TakeWindowEvent        PROCEDURE(),BYTE,PROC,DERIVED', 'Update {17}PROCEDURE(),DERIVED')
+
+%ReturnValue FIELD  ()
+%ProcedureOneInstance LONG  (1)
+%WindowOperationMode DEFAULT  ('Use WINDOW setting')
+%INISaveWindow LONG  (1)
+%ProcedureDisableEnhanceFocus LONG  (0)
+%ProcedureUseEnterInsteadTabOverride LONG  (0)
+%WindowUseEnterInsteadTab LONG  (1)
+%ProcedureUseEnterInsteadTabExcludeListCombo LONG  (0)
+%ProcedureUseEnterInsteadTabEnableNextTabStop LONG  (0)
+%ProcedureUseEnterInsteadTabExcludeG LONG  (1)
+%WindowUseEnterInsteadTabExclude MULTI DEFAULT  ()
+%GlobalObject DEPEND %ClassItem DEFAULT TIMES 2
+WHEN  ('Default') ('NO')
+WHEN  ('WindowToolbar') ('NO')
+
+%ThisObjectName DEPEND %ClassItem DEFAULT TIMES 2
+WHEN  ('Default') ('ThisWindow')
+WHEN  ('WindowToolbar') ('Toolbar')
+
+%UseDefaultABCBaseClass DEPEND %ClassItem LONG TIMES 2
+WHEN  ('Default') (1)
+WHEN  ('WindowToolbar') (1)
+
+%UseABCBaseClass DEPEND %ClassItem LONG TIMES 2
+WHEN  ('Default') (1)
+WHEN  ('WindowToolbar') (1)
+
+%ABCBaseClass DEPEND %ClassItem DEFAULT TIMES 2
+WHEN  ('Default') ('')
+WHEN  ('WindowToolbar') ('')
+
+%ExtBaseClass DEPEND %ClassItem DEFAULT TIMES 0
+
+%BaseClassIncludeFile DEPEND %ClassItem DEFAULT TIMES 0
+
+%DeriveFromBaseClass DEPEND %ClassItem LONG TIMES 2
+WHEN  ('Default') (0)
+WHEN  ('WindowToolbar') (0)
+
+%NewMethods DEPEND %ClassItem MULTI LONG TIMES 0
+
+%NewMethodName DEPEND %NewMethods DEFAULT TIMES 0
+
+%NewMethodPrototype DEPEND %NewMethods DEFAULT TIMES 0
+
+%NewClassPropertyItems DEPEND %ClassItem MULTI LONG TIMES 0
+
+%NewClassProperty DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataType DEPEND %NewClassPropertyItems DEFAULT TIMES 1
+WHEN  ('WindowToolbar')TIMES 0
+
+%NewClassOtherType DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataIsRef DEPEND %NewClassPropertyItems LONG TIMES 0
+
+%NewClassDataSize DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataDim1 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataDim2 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataDim3 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataDim4 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%ClassMethods DEPEND %ClassItem MULTI LONG TIMES 0
+
+%ClassMethodName DEPEND %ClassMethods DEFAULT TIMES 0
+
+%ClassMethodPrototype DEPEND %ClassMethods DEFAULT TIMES 0
+
+%ClassPropertyItems DEPEND %ClassItem MULTI LONG TIMES 0
+
+%ClassProperty DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataType DEPEND %ClassPropertyItems DEFAULT TIMES 1
+WHEN  ('WindowToolbar')TIMES 0
+
+%ClassOtherType DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataIsRef DEPEND %ClassPropertyItems LONG TIMES 0
+
+%ClassDataSize DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataDim1 DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataDim2 DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataDim3 DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataDim4 DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%WindowStyles MULTI LONG  ()
+%WindowStyleFontName DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleFontNameVariable DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleFontNameIsVariable DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleFontSize DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleFontSizeVariable DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleFontSizeIsVariable DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleFontStyle DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleFontStyleVariable DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleFontStyleIsVariable DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleFontColor DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleFontCharSet DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleForegroundNormal DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleForegroundNormalVariable DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleForegroundNormalIsVariable DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleBackgroundNormal DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleBackgroundNormalVariable DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleBackgroundNormalIsVariable DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleForegroundSelected DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleForegroundSelectedVariable DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleForegroundSelectedIsVariable DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleBackgroundSelected DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleBackgroundSelectedVariable DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleBackgroundSelectedIsVariable DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStylePicture DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStylePictureVariable DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStylePictureIsVariable DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleOtherListboxes MULTI DEFAULT  ()
+%ProcedureAutoBindFields MULTI LONG  ()
+%ProcedureAutoBindField DEPEND %ProcedureAutoBindFields DEFAULT TIMES 0
+
+%ProcedureAutoBindFieldTPL DEPEND %ProcedureAutoBindFields DEFAULT TIMES 0
+
+%ProcedureAutoBindProcedures MULTI LONG  ()
+%ProcedureAutoBindProcedure DEPEND %ProcedureAutoBindProcedures DEFAULT TIMES 0
+
+%ProcedureAutoBindProcedureTPL DEPEND %ProcedureAutoBindProcedures DEFAULT TIMES 0
+
+%ProcedureAutoBindFieldsIgnored MULTI LONG  ()
+%ProcedureAutoBindFieldIgnored DEPEND %ProcedureAutoBindFieldsIgnored DEFAULT TIMES 0
+
+%ProcedureAutoBindProceduresIgnored MULTI LONG  ()
+%ProcedureAutoBindProcedureIgnored DEPEND %ProcedureAutoBindProceduresIgnored DEFAULT TIMES 0
+
+%ProcedureAutoBindValidToAddField LONG  (0)
+%ProcedureUserBindFields MULTI LONG  ()
+%ProcedureUserBindField DEPEND %ProcedureUserBindFields FIELD TIMES 0
+
+%ProcedureAutoBindFieldIgnore DEPEND %ProcedureAutoBindFields LONG TIMES 0
+
+%ProcedureUserBindProcedures MULTI LONG  ()
+%ProcedureUserBindProcedure DEPEND %ProcedureUserBindProcedures PROCEDURE TIMES 0
+
+%ProcedureAutoBindProcedureIgnore DEPEND %ProcedureAutoBindProcedures LONG TIMES 0
+
+%ProcedureUserBindExpressions MULTI LONG  ()
+%ProcedureUserBindExpressionName DEPEND %ProcedureUserBindExpressions DEFAULT TIMES 0
+
+%ProcedureUserBindExpression DEPEND %ProcedureUserBindExpressions DEFAULT TIMES 0
+
+%PreserveVarsLoc MULTI LONG  ()
+%PreserveVarLoc DEPEND %PreserveVarsLoc DEFAULT TIMES 0
+
+%ExtUITabIcon DEPEND %Control DEFAULT TIMES 0
+
+%ExtUITabStyleOverrideGlobal DEPEND %Control LONG TIMES 0
+
+%ExtUITabStyle DEPEND %Control DEFAULT TIMES 2
+WHEN  ('?LookupFile') ('Default')
+WHEN  ('?set:GUID') ('Default')
+
+%FieldGradientColorType DEPEND %Control DEFAULT TIMES 2
+WHEN  ('?LookupFile') ('Off')
+WHEN  ('?set:GUID') ('Off')
+
+%FieldGradientColorTypeVariable DEPEND %Control DEFAULT TIMES 2
+WHEN  ('?LookupFile') ('')
+WHEN  ('?set:GUID') ('')
+
+%FieldGradientColorTypeIsVariable DEPEND %Control LONG TIMES 2
+WHEN  ('?LookupFile') (0)
+WHEN  ('?set:GUID') (0)
+
+%FieldGradientColorFrom DEPEND %Control LONG TIMES 2
+WHEN  ('?LookupFile') (-1)
+WHEN  ('?set:GUID') (-1)
+
+%FieldGradientColorFromVariable DEPEND %Control DEFAULT TIMES 0
+
+%FieldGradientColorFromIsVariable DEPEND %Control LONG TIMES 2
+WHEN  ('?LookupFile') (0)
+WHEN  ('?set:GUID') (0)
+
+%FieldGradientColorTo DEPEND %Control LONG TIMES 2
+WHEN  ('?LookupFile') (-1)
+WHEN  ('?set:GUID') (-1)
+
+%FieldGradientColorToVariable DEPEND %Control DEFAULT TIMES 0
+
+%FieldGradientColorToIsVariable DEPEND %Control LONG TIMES 2
+WHEN  ('?LookupFile') (0)
+WHEN  ('?set:GUID') (0)
+
+%ButtonReturnValueAssignment DEPEND %Control FIELD TIMES 1
+WHEN  ('?LookupFile') ()
+
+%ButtonReturnValueReferenceAssign DEPEND %Control LONG TIMES 1
+WHEN  ('?LookupFile') (0)
+
+%ButtonThreadParameters DEPEND %Control DEFAULT TIMES 1
+WHEN  ('?LookupFile') ('')
+
+%ButtonThreadReturnValueAssignment DEPEND %Control FIELD TIMES 1
+WHEN  ('?LookupFile') ()
+
+%PreLookupProcedureParameters DEPEND %Control DEFAULT TIMES 0
+
+%PostLookupProcedureParameters DEPEND %Control DEFAULT TIMES 0
+
+%PostLookupDuringValidate DEPEND %Control LONG TIMES 6
+WHEN  ('?LookupFile') (1)
+WHEN  ('?set:ExcludeFiles') (1)
+WHEN  ('?set:FileExtensions') (1)
+WHEN  ('?set:GUID') (1)
+WHEN  ('?set:RootPath') (1)
+WHEN  ('?set:stDescription') (1)
+
+%LookupAssign DEPEND %Control MULTI LONG TIMES 0
+
+%MoreTarget DEPEND %LookupAssign FIELD TIMES 0
+
+%MoreField DEPEND %LookupAssign DEFAULT TIMES 0
+
+%CheckedAssigns DEPEND %Control MULTI LONG TIMES 0
+
+%CheckedAssignVariable DEPEND %CheckedAssigns FIELD TIMES 0
+
+%CheckedAssignValue DEPEND %CheckedAssigns DEFAULT TIMES 0
+
+%CheckedHides DEPEND %Control MULTI LONG TIMES 0
+
+%CheckedControl DEPEND %CheckedHides DEFAULT TIMES 0
+
+%CheckedControlAction DEPEND %CheckedHides DEFAULT TIMES 2
+WHEN  ('?LookupFile')TIMES 0
+WHEN  ('?set:GUID')TIMES 0
+
+%CheckedEnables DEPEND %Control MULTI LONG TIMES 0
+
+%CheckedControl1 DEPEND %CheckedEnables DEFAULT TIMES 0
+
+%CheckedControl1Action DEPEND %CheckedEnables DEFAULT TIMES 2
+WHEN  ('?LookupFile')TIMES 0
+WHEN  ('?set:GUID')TIMES 0
+
+%UncheckedAssigns DEPEND %Control MULTI LONG TIMES 0
+
+%UncheckedAssignVariable DEPEND %UncheckedAssigns FIELD TIMES 0
+
+%UncheckedAssignValue DEPEND %UncheckedAssigns DEFAULT TIMES 0
+
+%UnCheckedHides DEPEND %Control MULTI LONG TIMES 0
+
+%UnCheckedControl DEPEND %UnCheckedHides DEFAULT TIMES 0
+
+%UnCheckedControlAction DEPEND %UnCheckedHides DEFAULT TIMES 2
+WHEN  ('?LookupFile')TIMES 0
+WHEN  ('?set:GUID')TIMES 0
+
+%UnCheckedEnables DEPEND %Control MULTI LONG TIMES 0
+
+%UnCheckedControl1 DEPEND %UnCheckedEnables DEFAULT TIMES 0
+
+%UnCheckedControl1Action DEPEND %UnCheckedEnables DEFAULT TIMES 2
+WHEN  ('?LookupFile')TIMES 0
+WHEN  ('?set:GUID')TIMES 0
+
+%CheckedDisables DEPEND %Control MULTI LONG TIMES 0
+
+%CheckedDisableControl DEPEND %CheckedDisables DEFAULT TIMES 0
+
+%CheckedDisableControlAction DEPEND %CheckedDisables DEFAULT TIMES 2
+WHEN  ('?LookupFile')TIMES 0
+WHEN  ('?set:GUID')TIMES 0
+
+%UnCheckedDisables DEPEND %Control MULTI LONG TIMES 0
+
+%UnCheckedDisableControl DEPEND %UnCheckedDisables DEFAULT TIMES 0
+
+%UnCheckedDisableControlAction DEPEND %UnCheckedDisables DEFAULT TIMES 2
+WHEN  ('?LookupFile')TIMES 0
+WHEN  ('?set:GUID')TIMES 0
+
+%ActiveImageEnable DEPEND %Control LONG TIMES 0
+
+%AIObjectName DEPEND %Control DEFAULT TIMES 2
+WHEN  ('?LookupFile') ('AIBtn11')
+WHEN  ('?set:GUID') ('AIBtn13')
+
+%AIEnableMimicControl DEPEND %Control LONG TIMES 2
+WHEN  ('?LookupFile') (1)
+WHEN  ('?set:GUID') (1)
+
+%AIMimicControl DEPEND %Control DEFAULT TIMES 2
+WHEN  ('?LookupFile') ('?CurrentTab')
+WHEN  ('?set:GUID') ('?set:GUID:Prompt')
+
+%AIImgRound DEPEND %Control LONG TIMES 0
+
+%AIOverrideImg DEPEND %Control DEFAULT TIMES 0
+
+%AIOverrideImgVariable DEPEND %Control DEFAULT TIMES 0
+
+%AIOverrideImgIsVariable DEPEND %Control LONG TIMES 2
+WHEN  ('?LookupFile') (0)
+WHEN  ('?set:GUID') (0)
+
+%AIDisableImg DEPEND %Control DEFAULT TIMES 0
+
+%AIDisableImgVariable DEPEND %Control DEFAULT TIMES 0
+
+%AIDisableImgIsVariable DEPEND %Control LONG TIMES 2
+WHEN  ('?LookupFile') (0)
+WHEN  ('?set:GUID') (0)
+
+%AIHotImg DEPEND %Control DEFAULT TIMES 0
+
+%AIHotImgVariable DEPEND %Control DEFAULT TIMES 0
+
+%AIHotImgIsVariable DEPEND %Control LONG TIMES 2
+WHEN  ('?LookupFile') (0)
+WHEN  ('?set:GUID') (0)
+
+%AIPressedImg DEPEND %Control DEFAULT TIMES 0
+
+%AIPressedImgVariable DEPEND %Control DEFAULT TIMES 0
+
+%AIPressedImgIsVariable DEPEND %Control LONG TIMES 2
+WHEN  ('?LookupFile') (0)
+WHEN  ('?set:GUID') (0)
+
+[EMBED]
+EMBED %WindowManagerMethodCodeSection
+[INSTANCES]
+WHEN 'Run'
+[INSTANCES]
+WHEN '(),BYTE'
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 50
+PROPERTY:END
+  !// Go to the first record
+  GlobalRequest = changeRecord
+  Access:Setting.UseFile()
+  if Access:Setting.Open() <> Level:Benign then ! open
+      MESSAGE('Trouble opening the Setting table','Window will close',ICON:Exclamation,BUTTON:ABORT)
+      post(EVENT:CloseDown) ! Close this window
+      ReturnValue = RequestCancelled ! Cancel the Run procedure and exit
+      RETURN ReturnValue
+  else ! open
+      Access:Setting.ClearKey(set:SettingPK)
+      !dbg(set:GUID)
+      !dbg(Records(Setting))
+      If Records(Setting) < 1 then 
+          Access:Setting.PrimeRecord()
+          set:GUID = glo:st.MakeGuid()
+          if Access:Setting.Insert() <> Level:Benign then
+              MESSAGE('Trouble adding a record to the Setting.tps table','Window will close',ICON:Exclamation,BUTTON:ABORT)
+              post(EVENT:CloseDown) ! Close the main window (ie Quit)
+          end 
+      else
+          set(set:SettingPK)
+          Access:Setting.Next() ! Go to the first record
+      End
+      dbg(set:GUID)
+      do UpdateGlobalFields ! Update record values to global variables 
+  end ! open
+[END]
+[END]
+WHEN 'Init'
+[INSTANCES]
+WHEN '(),BYTE'
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 8110
+PROPERTY:END
+  ! Configure controls for View Only mode
+  IF SELF.Request = ViewRecord              
+      ?set:stDescription{PROP:Flat} = True
+      ?set:RootPath{PROP:Flat} = True
+      ?set:FileExtensions{PROP:Flat} = True
+      ?set:GUID{PROP:Flat} = True
+      ?set:ExcludeFiles{PROP:Flat} = True
+  END  
+[END]
+[END]
+WHEN 'Update'
+[INSTANCES]
+WHEN '()'
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 5001
+PROPERTY:END
+do UpdateGlobalFields  !// Note the changed data into global variables
+[END]
+[END]
+[END]
+EMBED %ProcedureRoutines
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 4000
+PROPERTY:END
+!// Update Global values
+UpdateGlobalFields  ROUTINE
+    glo:AppDescription = set:stDescription
+    glo:RootPath = set:RootPath
+    glo:FileExtensions = set:FileExtensions
+    glo:ExcludeFiles = set:ExcludeFiles
+    DISPLAY()
+[END]
+[END]
+[ADDITION]
+NAME WinEvent WinEvent
+[INSTANCE]
+INSTANCE 4
+OWNER 6
+[PROMPTS]
+%DisableWinEvent LONG  (0)
+%CheckForCantCloseNowSetHere LONG  (1)
+%AutoDown LONG  (0)
+%NoAutoDown LONG  (0)
+%LocWindowsVisible DEFAULT  ('0')
+%WindowsVisibleAfterOpen LONG  (1)
+%AlertWinEventDebug LONG  (0)
+%DisplayCompileDate LONG  (0)
+%DisplayCompileDateFormat DEFAULT  ('@D10')
+%locNoHandleCloseDown LONG  (0)
+%locCloseDownWhenWindowCloses LONG  (0)
+%locCloseDownWhenWindowClosesCtrl DEFAULT  ('')
+%altWinFix DEFAULT  ('Default')
+%WinAlert MULTI LONG  ()
+%Mess DEPEND %WinAlert DEFAULT TIMES 0
+
+%Act1 DEPEND %WinAlert DEFAULT TIMES 0
+
+%act2 DEPEND %WinAlert DEFAULT TIMES 0
+
+%AlertControl DEPEND %WinAlert DEFAULT TIMES 0
+
+%AlertControlType DEPEND %WinAlert DEFAULT TIMES 0
+
+%locCloseDownWhenWindowClosesSet LONG  (0)
+[ADDITION]
+NAME ABC RecordValidation
+[INSTANCE]
+INSTANCE 1
+PROCPROP
+[PROMPTS]
+%ValidateOnAccept LONG  (1)
+%ValidateOnNonStopSelect LONG  (1)
+%ControlsExcluded MULTI LONG  ()
+%ControlToExclude DEPEND %ControlsExcluded DEFAULT TIMES 0
+
+%ValidateUsingColoration LONG  (0)
+%InvalidFieldColor LONG  (255)
+%InvalidPromptColor LONG  (255)
+%UseValidateMessage LONG  (0)
+%ValidationMessage DEFAULT  ('The values of Colored Fields are invalid, Please correct this information.')
+%MessageControl FIELD  ()
+[ADDITION]
+NAME ABC SaveButton
+[INSTANCE]
+INSTANCE 2
+PROCPROP
+[PROMPTS]
+%InsertAllowed LONG  (1)
+%InsertMessage DEFAULT  ('Record Will Be Added')
+%ChangeAllowed LONG  (1)
+%ChangeMessage DEFAULT  ('Update the Settings')
+%DeleteAllowed LONG  (1)
+%DeleteMessage DEFAULT  ('Record Will Be Deleted')
+%ViewMessage DEFAULT  ('View Settings Record')
+%MessageHeader LONG  (0)
+%ActionOnDelete DEFAULT  ('Standard Warning')
+%PrimingFields MULTI LONG  ()
+%PrimedField DEPEND %PrimingFields FIELD TIMES 0
+
+%PrimedValue DEPEND %PrimingFields DEFAULT TIMES 0
+
+%ActionOnCancel DEFAULT  ('Confirm cancel')
+%MessageLocation DEFAULT  ('Status Bar')
+%MessageStatusSection DEFAULT  ('0')
+%HistoryKey DEFAULT  ('CtrlH')
+%AppendToTitle LONG  (0)
+%AppendToTitleID DEFAULT  ('')
+%AfterGoodInsert DEFAULT  ('Return to caller')
+%AskAfterAdd LONG  (0)
+[ADDITION]
+NAME ABC CancelButton
+[INSTANCE]
+INSTANCE 3
+[ADDITION]
+NAME ABC DOSFileLookup
+[INSTANCE]
+INSTANCE 8
+[PROMPTS]
+%ClassItem UNIQUE DEFAULT  ('Default')
+%DefaultBaseClassType DEPEND %ClassItem DEFAULT TIMES 1
+WHEN  ('Default') ('SelectFileClass')
+
+%ActualDefaultBaseClassType DEPEND %ClassItem DEFAULT TIMES 1
+WHEN  ('Default') ('')
+
+%ClassLines DEPEND %ClassItem MULTI DEFAULT TIMES 0
+
+%DOSFileDialogHeader DEFAULT  ('')
+%DOSFileField FIELD  (set:RootPath)
+%DOSInitialDirectory DEFAULT  ('''c:\Clarion''')
+%DOSInitialFilename DEFAULT  ('')
+%ReturnToOriginalDir LONG  (1)
+%AllowLongFilenames LONG  (1)
+%DOSFileDialogType DEFAULT  ('Directory')
+%AllowNoError LONG  (0)
+%DefaultOnCancel LONG  (0)
+%AllowMultiSelect LONG  (0)
+%ActionsToTake DEFAULT  ('')
+%AssignToImageControl LONG  (0)
+%ImageControl DEFAULT  ('')
+%ImageResize LONG  (1)
+%DOSVariableMask LONG  (0)
+%DOSMaskVariable DEFAULT  ('')
+%DOSMaskDesc DEFAULT  ('All Files')
+%DOSMask DEFAULT  ('*.*')
+%DOSMoreMasks MULTI LONG  ()
+%DOSMoreMaskDesc DEPEND %DOSMoreMasks DEFAULT TIMES 0
+
+%DOSMoreMask DEPEND %DOSMoreMasks DEFAULT TIMES 0
+
+%RedisplayWindow LONG  (1)
+%UpdateFields MULTI LONG  ()
+%UpdateFeq DEPEND %UpdateFields DEFAULT TIMES 0
+
+%GlobalObject DEPEND %ClassItem DEFAULT TIMES 1
+WHEN  ('Default') ('NO')
+
+%ThisObjectName DEPEND %ClassItem DEFAULT TIMES 1
+WHEN  ('Default') ('FileLookup8')
+
+%UseDefaultABCBaseClass DEPEND %ClassItem LONG TIMES 1
+WHEN  ('Default') (1)
+
+%UseABCBaseClass DEPEND %ClassItem LONG TIMES 1
+WHEN  ('Default') (1)
+
+%ABCBaseClass DEPEND %ClassItem DEFAULT TIMES 1
+WHEN  ('Default') ('ADOBlob')
+
+%ExtBaseClass DEPEND %ClassItem DEFAULT TIMES 0
+
+%BaseClassIncludeFile DEPEND %ClassItem DEFAULT TIMES 0
+
+%DeriveFromBaseClass DEPEND %ClassItem LONG TIMES 1
+WHEN  ('Default') (0)
+
+%NewMethods DEPEND %ClassItem MULTI LONG TIMES 0
+
+%NewMethodName DEPEND %NewMethods DEFAULT TIMES 0
+
+%NewMethodPrototype DEPEND %NewMethods DEFAULT TIMES 0
+
+%NewClassPropertyItems DEPEND %ClassItem MULTI LONG TIMES 0
+
+%NewClassProperty DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataType DEPEND %NewClassPropertyItems DEFAULT TIMES 1
+WHEN  ('Default')TIMES 0
+
+%NewClassOtherType DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataIsRef DEPEND %NewClassPropertyItems LONG TIMES 0
+
+%NewClassDataSize DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataDim1 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataDim2 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataDim3 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataDim4 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%ClassMethods DEPEND %ClassItem MULTI LONG TIMES 0
+
+%ClassMethodName DEPEND %ClassMethods DEFAULT TIMES 0
+
+%ClassMethodPrototype DEPEND %ClassMethods DEFAULT TIMES 0
+
+%ClassPropertyItems DEPEND %ClassItem MULTI LONG TIMES 0
+
+%ClassProperty DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataType DEPEND %ClassPropertyItems DEFAULT TIMES 1
+WHEN  ('Default')TIMES 0
+
+%ClassOtherType DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataIsRef DEPEND %ClassPropertyItems LONG TIMES 0
+
+%ClassDataSize DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataDim1 DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataDim2 DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataDim3 DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataDim4 DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+[ADDITION]
+NAME ABC WindowResize
+[FIELDPROMPT]
+%ResizeAnchorTop DEPEND %Control LONG TIMES 0
+
+%ResizeAnchorLeft DEPEND %Control LONG TIMES 0
+
+%ResizeAnchorRight DEPEND %Control LONG TIMES 0
+
+%ResizeAnchorBottom DEPEND %Control LONG TIMES 0
+
+%ResizeAnchorGrowTop DEPEND %Control LONG TIMES 0
+
+%ResizeAnchorGrowLeft DEPEND %Control LONG TIMES 0
+
+%ResizeAnchorGrowRight DEPEND %Control LONG TIMES 0
+
+%ResizeAnchorGrowBottom DEPEND %Control LONG TIMES 0
+
+[INSTANCE]
+INSTANCE 7
+[PROMPTS]
+%UseAppStrategy DEFAULT  ('1')
+%AppStrategy DEFAULT  ('Surface')
+%RestrictMinSize LONG  (1)
+%WindowMinWidth DEFAULT  ('0')
+%WindowMaxWidth DEFAULT  ('0')
+%ClassItem UNIQUE DEFAULT  ('Default')
+%DefaultBaseClassType DEPEND %ClassItem DEFAULT TIMES 1
+WHEN  ('Default') ('WindowResizeClass')
+
+%ActualDefaultBaseClassType DEPEND %ClassItem DEFAULT TIMES 1
+WHEN  ('Default') ('')
+
+%ClassLines DEPEND %ClassItem MULTI DEFAULT TIMES 1
+WHEN  ('Default') ('Init {19}PROCEDURE(BYTE AppStrategy=AppStrategy:Resize,BYTE SetWindowMinSize=False,BYTE SetWindowMaxSize=False)')
+
+%WindowMinHeight DEFAULT  ('')
+%RestrictMaxSize LONG  (0)
+%WindowMaxHeight DEFAULT  ('')
+%AutoFindParents DEFAULT  ('Default')
+%DeferMoves DEFAULT  ('Default')
+%OverrideControls MULTI LONG  ()
+%OverrideControl DEPEND %OverrideControls DEFAULT TIMES 0
+
+%DisableResize DEPEND %OverrideControls LONG TIMES 0
+
+%HorizResize DEPEND %OverrideControls DEFAULT TIMES 0
+
+%VertResize DEPEND %OverrideControls DEFAULT TIMES 0
+
+%HorizPositional DEPEND %OverrideControls DEFAULT TIMES 0
+
+%VertPositional DEPEND %OverrideControls DEFAULT TIMES 0
+
+%GlobalObject DEPEND %ClassItem DEFAULT TIMES 1
+WHEN  ('Default') ('NO')
+
+%ThisObjectName DEPEND %ClassItem DEFAULT TIMES 1
+WHEN  ('Default') ('Resizer')
+
+%UseDefaultABCBaseClass DEPEND %ClassItem LONG TIMES 1
+WHEN  ('Default') (1)
+
+%UseABCBaseClass DEPEND %ClassItem LONG TIMES 1
+WHEN  ('Default') (1)
+
+%ABCBaseClass DEPEND %ClassItem DEFAULT TIMES 1
+WHEN  ('Default') ('')
+
+%ExtBaseClass DEPEND %ClassItem DEFAULT TIMES 0
+
+%BaseClassIncludeFile DEPEND %ClassItem DEFAULT TIMES 0
+
+%DeriveFromBaseClass DEPEND %ClassItem LONG TIMES 1
+WHEN  ('Default') (0)
+
+%NewMethods DEPEND %ClassItem MULTI LONG TIMES 0
+
+%NewMethodName DEPEND %NewMethods DEFAULT TIMES 0
+
+%NewMethodPrototype DEPEND %NewMethods DEFAULT TIMES 0
+
+%NewClassPropertyItems DEPEND %ClassItem MULTI LONG TIMES 0
+
+%NewClassProperty DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataType DEPEND %NewClassPropertyItems DEFAULT TIMES 1
+WHEN  ('Default')TIMES 0
+
+%NewClassOtherType DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataIsRef DEPEND %NewClassPropertyItems LONG TIMES 0
+
+%NewClassDataSize DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataDim1 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataDim2 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataDim3 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataDim4 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%ClassMethods DEPEND %ClassItem MULTI LONG TIMES 0
+
+%ClassMethodName DEPEND %ClassMethods DEFAULT TIMES 0
+
+%ClassMethodPrototype DEPEND %ClassMethods DEFAULT TIMES 0
+
+%ClassPropertyItems DEPEND %ClassItem MULTI LONG TIMES 0
+
+%ClassProperty DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataType DEPEND %ClassPropertyItems DEFAULT TIMES 1
+WHEN  ('Default')TIMES 0
+
+%ClassOtherType DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataIsRef DEPEND %ClassPropertyItems LONG TIMES 0
+
+%ClassDataSize DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataDim1 DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataDim2 DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataDim3 DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataDim4 DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+[ADDITION]
+NAME ABC ViewFormActions
+[INSTANCE]
+INSTANCE 6
+[PROMPTS]
+%ForceViewOnly LONG  (0)
+%ViewAction DEPEND %Control DEFAULT TIMES 13
+WHEN  ('?Cancel') ('None')
+WHEN  ('?LookupFile') ('Hide')
+WHEN  ('?OK') ('Hide')
+WHEN  ('?set:ExcludeFiles') ('ReadOnly')
+WHEN  ('?set:ExcludeFiles:Prompt') ('None')
+WHEN  ('?set:FileExtensions') ('ReadOnly')
+WHEN  ('?set:FileExtensions:Prompt') ('None')
+WHEN  ('?set:GUID') ('ReadOnly')
+WHEN  ('?set:GUID:Prompt') ('None')
+WHEN  ('?set:RootPath') ('ReadOnly')
+WHEN  ('?set:RootPath:Prompt') ('None')
+WHEN  ('?set:stDescription') ('ReadOnly')
+WHEN  ('?set:stDescription:Prompt') ('None')
+
+%PropertyAssignments DEPEND %Control MULTI LONG TIMES 0
+
+%CtrlProperty DEPEND %PropertyAssignments DEFAULT TIMES 0
+
+%CtrlValue DEPEND %PropertyAssignments DEFAULT TIMES 0
+
+[WINDOW]
+QuickWindow WINDOW(' Update Application Settings'),AT(,,358,273),FONT('Segoe UI',8,,FONT:regular, |
+          CHARSET:DEFAULT),RESIZE,CENTER,ICON('toolbox.ico'),GRAY,IMM,MDI,HLP('UpdateSetting'), |
+          SYSTEM
+          PROMPT('GUID:'),AT(10,9,61),USE(?set:GUID:Prompt),RIGHT,TRN,#LINK(?set:GUID),#ORIG(?set:GUID:Prompt), |
+            #ORDINAL(1)
+          PROMPT('Description:'),AT(10,34,61),USE(?set:stDescription:Prompt),RIGHT,TRN,#LINK(?set:stDescription), |
+            #ORIG(?set:stDescription:Prompt),#ORDINAL(2)
+          ENTRY(@s50),AT(76,34,247,10),USE(set:stDescription),REQ,#LINK(?set:stDescription:Prompt), |
+            #ORIG(set:stDescription),#ORDINAL(3)
+          PROMPT('Root Path:'),AT(10,48,61),USE(?set:RootPath:Prompt),RIGHT,TRN,#LINK(?set:RootPath), |
+            #ORIG(?set:RootPath:Prompt),#ORDINAL(4)
+          ENTRY(@s255),AT(76,48,247,10),USE(set:RootPath),#LINK(?set:RootPath:Prompt),#ORIG(set:RootPath), |
+            #ORDINAL(5)
+          PROMPT('File Extensions:'),AT(10,63,61),USE(?set:FileExtensions:Prompt),RIGHT,TRN, |
+            #LINK(?set:FileExtensions),#ORIG(?set:FileExtensions:Prompt),#ORDINAL(6)
+          ENTRY(@s250),AT(76,63,274,10),USE(set:FileExtensions),MSG('Separate extension' & |
+            's with a semicolon'),TIP('Separate extensions with a semicolon'),#LINK(?set:FileExtensions:Prompt), |
+            #ORIG(set:FileExtensions),#ORDINAL(7)
+          BUTTON('...'),AT(327,47,12,12),USE(?LookupFile),#ORIG(?LookupFile),#SEQ(8),#ORDINAL(8)
+          PROMPT('Exclude Files:'),AT(10,86,61),USE(?set:ExcludeFiles:Prompt),RIGHT,TRN,#LINK(?set:ExcludeFiles), |
+            #ORIG(?set:ExcludeFiles:Prompt),#ORDINAL(9)
+          TEXT,AT(76,86,274,160),USE(set:ExcludeFiles),VSCROLL,MSG('Exclude these files' & |
+            ' if requested'),SCROLL,TIP('Exclude these files if requested'),#LINK(?set:ExcludeFiles:Prompt), |
+            #ORIG(set:ExcludeFiles),#ORDINAL(10)
+          BUTTON('&OK'),AT(248,250,49,14),USE(?OK),LEFT,ICON('WAOK.ICO'),MSG('Accept dat' & |
+            'a and close the window'),TIP('Accept data and close the window'),#ORIG(?OK),#SEQ(2), |
+            #ORDINAL(11)
+          BUTTON('&Cancel'),AT(301,250,49,14),USE(?Cancel),LEFT,ICON('WACANCEL.ICO'),MSG('Cancel operation'), |
+            TIP('Cancel operation'),#ORIG(?Cancel),#SEQ(3),#ORDINAL(12)
+          ENTRY(@s36),AT(75,9,148,10),USE(set:GUID),DISABLE,FLAT,READONLY,REQ,#LINK(?set:GUID:Prompt), |
+            #ORIG(set:GUID),#ORDINAL(13)
+        END
+
+[END]
+[MODULE]
+[COMMON]
+FROM ABC GENERATED
+MODIFIED '2023/09/25' '18:32:27'
+[PROCEDURE]
+NAME SelectSetting
+[COMMON]
+DESCRIPTION 'Placeholder - not used'
+FROM ABC Source
+MODIFIED '2023/09/25' '20:44:31'
+[PROMPTS]
+%GenerateOpenClose LONG  (0)
+%GenerateSaveRestore LONG  (0)
+[ADDITION]
+NAME WinEvent WinEvent
+[INSTANCE]
+INSTANCE 1
+OWNER 6
+[PROMPTS]
+%DisableWinEvent LONG  (0)
+%CheckForCantCloseNowSetHere LONG  (1)
+%AutoDown LONG  (0)
+%NoAutoDown LONG  (0)
+%LocWindowsVisible DEFAULT  ('0')
+%WindowsVisibleAfterOpen LONG  (1)
+%AlertWinEventDebug LONG  (0)
+%DisplayCompileDate LONG  (0)
+%DisplayCompileDateFormat DEFAULT  ('@D10')
+%locNoHandleCloseDown LONG  (0)
+%locCloseDownWhenWindowCloses LONG  (0)
+%locCloseDownWhenWindowClosesCtrl DEFAULT  ('')
+%altWinFix DEFAULT  ('Default')
+%WinAlert MULTI LONG  ()
+%Mess DEPEND %WinAlert DEFAULT TIMES 0
+
+%Act1 DEPEND %WinAlert DEFAULT TIMES 0
+
+%act2 DEPEND %WinAlert DEFAULT TIMES 0
+
+%AlertControl DEPEND %WinAlert DEFAULT TIMES 0
+
+%AlertControlType DEPEND %WinAlert DEFAULT TIMES 0
+
+%locCloseDownWhenWindowClosesSet LONG  (0)
+[END]
+[MODULE]
+[COMMON]
+FROM ABC GENERATED
+MODIFIED '2023/09/25' '18:43:22'
 [PROCEDURE]
 NAME BrowseAction
 [COMMON]
@@ -4304,52 +7263,7 @@ QuickWindow WINDOW('Browse the Action table'),AT(,,499,298),FONT('Segoe UI',8,,F
 [MODULE]
 [COMMON]
 FROM ABC GENERATED
-MODIFIED '2023/09/25' '18:29:07'
-[PROCEDURE]
-NAME SelectSetting
-[COMMON]
-DESCRIPTION 'Placeholder - not used'
-FROM ABC Source
-MODIFIED '2023/09/25' '20:44:31'
-[PROMPTS]
-%GenerateOpenClose LONG  (0)
-%GenerateSaveRestore LONG  (0)
-[ADDITION]
-NAME WinEvent WinEvent
-[INSTANCE]
-INSTANCE 1
-OWNER 6
-[PROMPTS]
-%DisableWinEvent LONG  (0)
-%CheckForCantCloseNowSetHere LONG  (1)
-%AutoDown LONG  (0)
-%NoAutoDown LONG  (0)
-%LocWindowsVisible DEFAULT  ('0')
-%WindowsVisibleAfterOpen LONG  (1)
-%AlertWinEventDebug LONG  (0)
-%DisplayCompileDate LONG  (0)
-%DisplayCompileDateFormat DEFAULT  ('@D10')
-%locNoHandleCloseDown LONG  (0)
-%locCloseDownWhenWindowCloses LONG  (0)
-%locCloseDownWhenWindowClosesCtrl DEFAULT  ('')
-%altWinFix DEFAULT  ('Default')
-%WinAlert MULTI LONG  ()
-%Mess DEPEND %WinAlert DEFAULT TIMES 0
-
-%Act1 DEPEND %WinAlert DEFAULT TIMES 0
-
-%act2 DEPEND %WinAlert DEFAULT TIMES 0
-
-%AlertControl DEPEND %WinAlert DEFAULT TIMES 0
-
-%AlertControlType DEPEND %WinAlert DEFAULT TIMES 0
-
-%locCloseDownWhenWindowClosesSet LONG  (0)
-[END]
-[MODULE]
-[COMMON]
-FROM ABC GENERATED
-MODIFIED '2023/09/25' '18:32:27'
+MODIFIED '2023/09/30' '13:18:25'
 [PROCEDURE]
 NAME UpdateAction
 [COMMON]
@@ -5199,925 +8113,7 @@ QuickWindow WINDOW('Form Action'),AT(,,483,278),FONT('Segoe UI',8,,FONT:regular,
 [MODULE]
 [COMMON]
 FROM ABC GENERATED
-MODIFIED '2023/09/25' '18:32:27'
-[PROCEDURE]
-NAME UpdateSetting
-[COMMON]
-DESCRIPTION 'Form Setting'
-FROM ABC Window
-CATEGORY 'Form'
-MODIFIED '2023/10/20' '13:59:01'
-[DATA]
-CurrentTab               STRING(80)
-!!> GUID('7056dbc8-cf1e-4700-85ff-c9cc247bbc94')
-ActionMessage            CSTRING(40)
-!!> GUID('36a44731-7bbe-4444-a84c-257fe898a01e')
-[FILES]
-[PRIMARY]
-Setting
-[INSTANCE]
-2
-[PROMPTS]
-%ButtonAction DEPEND %Control DEFAULT TIMES 4
-WHEN  ('?Cancel') ('No Special Action')
-WHEN  ('?LookupFile') ('No Special Action')
-WHEN  ('?OK') ('No Special Action')
-WHEN  ('?set:GUID') ('No Special Action')
-
-%ButtonRunName DEPEND %Control DEFAULT TIMES 1
-WHEN  ('?LookupFile') ('')
-
-%ButtonRunParameters DEPEND %Control DEFAULT TIMES 1
-WHEN  ('?LookupFile') ('')
-
-%ButtonProcedure DEPEND %Control PROCEDURE TIMES 1
-WHEN  ('?LookupFile') ()
-
-%ButtonThread DEPEND %Control LONG TIMES 1
-WHEN  ('?LookupFile') (0)
-
-%ButtonThreadStack DEPEND %Control DEFAULT TIMES 4
-WHEN  ('?Cancel') ('25000')
-WHEN  ('?LookupFile') ('25000')
-WHEN  ('?OK') ('25000')
-WHEN  ('?set:GUID') ('25000')
-
-%ButtonParameters DEPEND %Control DEFAULT TIMES 1
-WHEN  ('?LookupFile') ('')
-
-%ButtonRequest DEPEND %Control DEFAULT TIMES 4
-WHEN  ('?Cancel') ('None')
-WHEN  ('?LookupFile') ('None')
-WHEN  ('?OK') ('None')
-WHEN  ('?set:GUID') ('None')
-
-%PreLookupKey DEPEND %Control KEY TIMES 0
-
-%PreLookupField DEPEND %Control COMPONENT TIMES 0
-
-%PreLookupProcedure DEPEND %Control PROCEDURE TIMES 0
-
-%PostLookupKey DEPEND %Control KEY TIMES 0
-
-%PostLookupField DEPEND %Control COMPONENT TIMES 0
-
-%PostLookupProcedure DEPEND %Control PROCEDURE TIMES 0
-
-%ForceWindowRefresh DEPEND %Control LONG TIMES 0
-
-%ClassItem UNIQUE DEFAULT  ('Default', 'WindowToolbar')
-%DefaultBaseClassType DEPEND %ClassItem DEFAULT TIMES 2
-WHEN  ('Default') ('WindowManager')
-WHEN  ('WindowToolbar') ('ToolbarClass')
-
-%ActualDefaultBaseClassType DEPEND %ClassItem DEFAULT TIMES 2
-WHEN  ('Default') ('')
-WHEN  ('WindowToolbar') ('')
-
-%ClassLines DEPEND %ClassItem MULTI DEFAULT TIMES 1
-WHEN  ('Default') ('Ask {20}PROCEDURE(),DERIVED', 'Init {19}PROCEDURE(),BYTE,PROC,DERIVED', |
-  'Kill {19}PROCEDURE(),BYTE,PROC,DERIVED', 'Run {20}PROCEDURE(),BYTE,PROC,DERIVED', |
-  'TakeAccepted {11}PROCEDURE(),BYTE,PROC,DERIVED', 'TakeEvent {14}PROCEDURE(),BYTE,PROC,DERIVED', |
-  'TakeWindowEvent        PROCEDURE(),BYTE,PROC,DERIVED', 'Update {17}PROCEDURE(),DERIVED')
-
-%ReturnValue FIELD  ()
-%ProcedureOneInstance LONG  (1)
-%WindowOperationMode DEFAULT  ('Use WINDOW setting')
-%INISaveWindow LONG  (1)
-%ProcedureDisableEnhanceFocus LONG  (0)
-%ProcedureUseEnterInsteadTabOverride LONG  (0)
-%WindowUseEnterInsteadTab LONG  (1)
-%ProcedureUseEnterInsteadTabExcludeListCombo LONG  (0)
-%ProcedureUseEnterInsteadTabEnableNextTabStop LONG  (0)
-%ProcedureUseEnterInsteadTabExcludeG LONG  (1)
-%WindowUseEnterInsteadTabExclude MULTI DEFAULT  ()
-%GlobalObject DEPEND %ClassItem DEFAULT TIMES 2
-WHEN  ('Default') ('NO')
-WHEN  ('WindowToolbar') ('NO')
-
-%ThisObjectName DEPEND %ClassItem DEFAULT TIMES 2
-WHEN  ('Default') ('ThisWindow')
-WHEN  ('WindowToolbar') ('Toolbar')
-
-%UseDefaultABCBaseClass DEPEND %ClassItem LONG TIMES 2
-WHEN  ('Default') (1)
-WHEN  ('WindowToolbar') (1)
-
-%UseABCBaseClass DEPEND %ClassItem LONG TIMES 2
-WHEN  ('Default') (1)
-WHEN  ('WindowToolbar') (1)
-
-%ABCBaseClass DEPEND %ClassItem DEFAULT TIMES 2
-WHEN  ('Default') ('')
-WHEN  ('WindowToolbar') ('')
-
-%ExtBaseClass DEPEND %ClassItem DEFAULT TIMES 0
-
-%BaseClassIncludeFile DEPEND %ClassItem DEFAULT TIMES 0
-
-%DeriveFromBaseClass DEPEND %ClassItem LONG TIMES 2
-WHEN  ('Default') (0)
-WHEN  ('WindowToolbar') (0)
-
-%NewMethods DEPEND %ClassItem MULTI LONG TIMES 0
-
-%NewMethodName DEPEND %NewMethods DEFAULT TIMES 0
-
-%NewMethodPrototype DEPEND %NewMethods DEFAULT TIMES 0
-
-%NewClassPropertyItems DEPEND %ClassItem MULTI LONG TIMES 0
-
-%NewClassProperty DEPEND %NewClassPropertyItems DEFAULT TIMES 0
-
-%NewClassDataType DEPEND %NewClassPropertyItems DEFAULT TIMES 1
-WHEN  ('WindowToolbar')TIMES 0
-
-%NewClassOtherType DEPEND %NewClassPropertyItems DEFAULT TIMES 0
-
-%NewClassDataIsRef DEPEND %NewClassPropertyItems LONG TIMES 0
-
-%NewClassDataSize DEPEND %NewClassPropertyItems DEFAULT TIMES 0
-
-%NewClassDataDim1 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
-
-%NewClassDataDim2 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
-
-%NewClassDataDim3 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
-
-%NewClassDataDim4 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
-
-%ClassMethods DEPEND %ClassItem MULTI LONG TIMES 0
-
-%ClassMethodName DEPEND %ClassMethods DEFAULT TIMES 0
-
-%ClassMethodPrototype DEPEND %ClassMethods DEFAULT TIMES 0
-
-%ClassPropertyItems DEPEND %ClassItem MULTI LONG TIMES 0
-
-%ClassProperty DEPEND %ClassPropertyItems DEFAULT TIMES 0
-
-%ClassDataType DEPEND %ClassPropertyItems DEFAULT TIMES 1
-WHEN  ('WindowToolbar')TIMES 0
-
-%ClassOtherType DEPEND %ClassPropertyItems DEFAULT TIMES 0
-
-%ClassDataIsRef DEPEND %ClassPropertyItems LONG TIMES 0
-
-%ClassDataSize DEPEND %ClassPropertyItems DEFAULT TIMES 0
-
-%ClassDataDim1 DEPEND %ClassPropertyItems DEFAULT TIMES 0
-
-%ClassDataDim2 DEPEND %ClassPropertyItems DEFAULT TIMES 0
-
-%ClassDataDim3 DEPEND %ClassPropertyItems DEFAULT TIMES 0
-
-%ClassDataDim4 DEPEND %ClassPropertyItems DEFAULT TIMES 0
-
-%WindowStyles MULTI LONG  ()
-%WindowStyleFontName DEPEND %WindowStyles DEFAULT TIMES 0
-
-%WindowStyleFontNameVariable DEPEND %WindowStyles DEFAULT TIMES 0
-
-%WindowStyleFontNameIsVariable DEPEND %WindowStyles LONG TIMES 0
-
-%WindowStyleFontSize DEPEND %WindowStyles DEFAULT TIMES 0
-
-%WindowStyleFontSizeVariable DEPEND %WindowStyles DEFAULT TIMES 0
-
-%WindowStyleFontSizeIsVariable DEPEND %WindowStyles LONG TIMES 0
-
-%WindowStyleFontStyle DEPEND %WindowStyles DEFAULT TIMES 0
-
-%WindowStyleFontStyleVariable DEPEND %WindowStyles DEFAULT TIMES 0
-
-%WindowStyleFontStyleIsVariable DEPEND %WindowStyles LONG TIMES 0
-
-%WindowStyleFontColor DEPEND %WindowStyles DEFAULT TIMES 0
-
-%WindowStyleFontCharSet DEPEND %WindowStyles DEFAULT TIMES 0
-
-%WindowStyleForegroundNormal DEPEND %WindowStyles LONG TIMES 0
-
-%WindowStyleForegroundNormalVariable DEPEND %WindowStyles DEFAULT TIMES 0
-
-%WindowStyleForegroundNormalIsVariable DEPEND %WindowStyles LONG TIMES 0
-
-%WindowStyleBackgroundNormal DEPEND %WindowStyles LONG TIMES 0
-
-%WindowStyleBackgroundNormalVariable DEPEND %WindowStyles DEFAULT TIMES 0
-
-%WindowStyleBackgroundNormalIsVariable DEPEND %WindowStyles LONG TIMES 0
-
-%WindowStyleForegroundSelected DEPEND %WindowStyles LONG TIMES 0
-
-%WindowStyleForegroundSelectedVariable DEPEND %WindowStyles DEFAULT TIMES 0
-
-%WindowStyleForegroundSelectedIsVariable DEPEND %WindowStyles LONG TIMES 0
-
-%WindowStyleBackgroundSelected DEPEND %WindowStyles LONG TIMES 0
-
-%WindowStyleBackgroundSelectedVariable DEPEND %WindowStyles DEFAULT TIMES 0
-
-%WindowStyleBackgroundSelectedIsVariable DEPEND %WindowStyles LONG TIMES 0
-
-%WindowStylePicture DEPEND %WindowStyles DEFAULT TIMES 0
-
-%WindowStylePictureVariable DEPEND %WindowStyles DEFAULT TIMES 0
-
-%WindowStylePictureIsVariable DEPEND %WindowStyles LONG TIMES 0
-
-%WindowStyleOtherListboxes MULTI DEFAULT  ()
-%ProcedureAutoBindFields MULTI LONG  ()
-%ProcedureAutoBindField DEPEND %ProcedureAutoBindFields DEFAULT TIMES 0
-
-%ProcedureAutoBindFieldTPL DEPEND %ProcedureAutoBindFields DEFAULT TIMES 0
-
-%ProcedureAutoBindProcedures MULTI LONG  ()
-%ProcedureAutoBindProcedure DEPEND %ProcedureAutoBindProcedures DEFAULT TIMES 0
-
-%ProcedureAutoBindProcedureTPL DEPEND %ProcedureAutoBindProcedures DEFAULT TIMES 0
-
-%ProcedureAutoBindFieldsIgnored MULTI LONG  ()
-%ProcedureAutoBindFieldIgnored DEPEND %ProcedureAutoBindFieldsIgnored DEFAULT TIMES 0
-
-%ProcedureAutoBindProceduresIgnored MULTI LONG  ()
-%ProcedureAutoBindProcedureIgnored DEPEND %ProcedureAutoBindProceduresIgnored DEFAULT TIMES 0
-
-%ProcedureAutoBindValidToAddField LONG  (0)
-%ProcedureUserBindFields MULTI LONG  ()
-%ProcedureUserBindField DEPEND %ProcedureUserBindFields FIELD TIMES 0
-
-%ProcedureAutoBindFieldIgnore DEPEND %ProcedureAutoBindFields LONG TIMES 0
-
-%ProcedureUserBindProcedures MULTI LONG  ()
-%ProcedureUserBindProcedure DEPEND %ProcedureUserBindProcedures PROCEDURE TIMES 0
-
-%ProcedureAutoBindProcedureIgnore DEPEND %ProcedureAutoBindProcedures LONG TIMES 0
-
-%ProcedureUserBindExpressions MULTI LONG  ()
-%ProcedureUserBindExpressionName DEPEND %ProcedureUserBindExpressions DEFAULT TIMES 0
-
-%ProcedureUserBindExpression DEPEND %ProcedureUserBindExpressions DEFAULT TIMES 0
-
-%PreserveVarsLoc MULTI LONG  ()
-%PreserveVarLoc DEPEND %PreserveVarsLoc DEFAULT TIMES 0
-
-%ExtUITabIcon DEPEND %Control DEFAULT TIMES 0
-
-%ExtUITabStyleOverrideGlobal DEPEND %Control LONG TIMES 0
-
-%ExtUITabStyle DEPEND %Control DEFAULT TIMES 2
-WHEN  ('?LookupFile') ('Default')
-WHEN  ('?set:GUID') ('Default')
-
-%FieldGradientColorType DEPEND %Control DEFAULT TIMES 2
-WHEN  ('?LookupFile') ('Off')
-WHEN  ('?set:GUID') ('Off')
-
-%FieldGradientColorTypeVariable DEPEND %Control DEFAULT TIMES 2
-WHEN  ('?LookupFile') ('')
-WHEN  ('?set:GUID') ('')
-
-%FieldGradientColorTypeIsVariable DEPEND %Control LONG TIMES 2
-WHEN  ('?LookupFile') (0)
-WHEN  ('?set:GUID') (0)
-
-%FieldGradientColorFrom DEPEND %Control LONG TIMES 2
-WHEN  ('?LookupFile') (-1)
-WHEN  ('?set:GUID') (-1)
-
-%FieldGradientColorFromVariable DEPEND %Control DEFAULT TIMES 0
-
-%FieldGradientColorFromIsVariable DEPEND %Control LONG TIMES 2
-WHEN  ('?LookupFile') (0)
-WHEN  ('?set:GUID') (0)
-
-%FieldGradientColorTo DEPEND %Control LONG TIMES 2
-WHEN  ('?LookupFile') (-1)
-WHEN  ('?set:GUID') (-1)
-
-%FieldGradientColorToVariable DEPEND %Control DEFAULT TIMES 0
-
-%FieldGradientColorToIsVariable DEPEND %Control LONG TIMES 2
-WHEN  ('?LookupFile') (0)
-WHEN  ('?set:GUID') (0)
-
-%ButtonReturnValueAssignment DEPEND %Control FIELD TIMES 1
-WHEN  ('?LookupFile') ()
-
-%ButtonReturnValueReferenceAssign DEPEND %Control LONG TIMES 1
-WHEN  ('?LookupFile') (0)
-
-%ButtonThreadParameters DEPEND %Control DEFAULT TIMES 1
-WHEN  ('?LookupFile') ('')
-
-%ButtonThreadReturnValueAssignment DEPEND %Control FIELD TIMES 1
-WHEN  ('?LookupFile') ()
-
-%PreLookupProcedureParameters DEPEND %Control DEFAULT TIMES 0
-
-%PostLookupProcedureParameters DEPEND %Control DEFAULT TIMES 0
-
-%PostLookupDuringValidate DEPEND %Control LONG TIMES 6
-WHEN  ('?LookupFile') (1)
-WHEN  ('?set:ExcludeFiles') (1)
-WHEN  ('?set:FileExtensions') (1)
-WHEN  ('?set:GUID') (1)
-WHEN  ('?set:RootPath') (1)
-WHEN  ('?set:stDescription') (1)
-
-%LookupAssign DEPEND %Control MULTI LONG TIMES 0
-
-%MoreTarget DEPEND %LookupAssign FIELD TIMES 0
-
-%MoreField DEPEND %LookupAssign DEFAULT TIMES 0
-
-%CheckedAssigns DEPEND %Control MULTI LONG TIMES 0
-
-%CheckedAssignVariable DEPEND %CheckedAssigns FIELD TIMES 0
-
-%CheckedAssignValue DEPEND %CheckedAssigns DEFAULT TIMES 0
-
-%CheckedHides DEPEND %Control MULTI LONG TIMES 0
-
-%CheckedControl DEPEND %CheckedHides DEFAULT TIMES 0
-
-%CheckedControlAction DEPEND %CheckedHides DEFAULT TIMES 2
-WHEN  ('?LookupFile')TIMES 0
-WHEN  ('?set:GUID')TIMES 0
-
-%CheckedEnables DEPEND %Control MULTI LONG TIMES 0
-
-%CheckedControl1 DEPEND %CheckedEnables DEFAULT TIMES 0
-
-%CheckedControl1Action DEPEND %CheckedEnables DEFAULT TIMES 2
-WHEN  ('?LookupFile')TIMES 0
-WHEN  ('?set:GUID')TIMES 0
-
-%UncheckedAssigns DEPEND %Control MULTI LONG TIMES 0
-
-%UncheckedAssignVariable DEPEND %UncheckedAssigns FIELD TIMES 0
-
-%UncheckedAssignValue DEPEND %UncheckedAssigns DEFAULT TIMES 0
-
-%UnCheckedHides DEPEND %Control MULTI LONG TIMES 0
-
-%UnCheckedControl DEPEND %UnCheckedHides DEFAULT TIMES 0
-
-%UnCheckedControlAction DEPEND %UnCheckedHides DEFAULT TIMES 2
-WHEN  ('?LookupFile')TIMES 0
-WHEN  ('?set:GUID')TIMES 0
-
-%UnCheckedEnables DEPEND %Control MULTI LONG TIMES 0
-
-%UnCheckedControl1 DEPEND %UnCheckedEnables DEFAULT TIMES 0
-
-%UnCheckedControl1Action DEPEND %UnCheckedEnables DEFAULT TIMES 2
-WHEN  ('?LookupFile')TIMES 0
-WHEN  ('?set:GUID')TIMES 0
-
-%CheckedDisables DEPEND %Control MULTI LONG TIMES 0
-
-%CheckedDisableControl DEPEND %CheckedDisables DEFAULT TIMES 0
-
-%CheckedDisableControlAction DEPEND %CheckedDisables DEFAULT TIMES 2
-WHEN  ('?LookupFile')TIMES 0
-WHEN  ('?set:GUID')TIMES 0
-
-%UnCheckedDisables DEPEND %Control MULTI LONG TIMES 0
-
-%UnCheckedDisableControl DEPEND %UnCheckedDisables DEFAULT TIMES 0
-
-%UnCheckedDisableControlAction DEPEND %UnCheckedDisables DEFAULT TIMES 2
-WHEN  ('?LookupFile')TIMES 0
-WHEN  ('?set:GUID')TIMES 0
-
-%ActiveImageEnable DEPEND %Control LONG TIMES 0
-
-%AIObjectName DEPEND %Control DEFAULT TIMES 2
-WHEN  ('?LookupFile') ('AIBtn11')
-WHEN  ('?set:GUID') ('AIBtn13')
-
-%AIEnableMimicControl DEPEND %Control LONG TIMES 2
-WHEN  ('?LookupFile') (1)
-WHEN  ('?set:GUID') (1)
-
-%AIMimicControl DEPEND %Control DEFAULT TIMES 2
-WHEN  ('?LookupFile') ('?CurrentTab')
-WHEN  ('?set:GUID') ('?set:GUID:Prompt')
-
-%AIImgRound DEPEND %Control LONG TIMES 0
-
-%AIOverrideImg DEPEND %Control DEFAULT TIMES 0
-
-%AIOverrideImgVariable DEPEND %Control DEFAULT TIMES 0
-
-%AIOverrideImgIsVariable DEPEND %Control LONG TIMES 2
-WHEN  ('?LookupFile') (0)
-WHEN  ('?set:GUID') (0)
-
-%AIDisableImg DEPEND %Control DEFAULT TIMES 0
-
-%AIDisableImgVariable DEPEND %Control DEFAULT TIMES 0
-
-%AIDisableImgIsVariable DEPEND %Control LONG TIMES 2
-WHEN  ('?LookupFile') (0)
-WHEN  ('?set:GUID') (0)
-
-%AIHotImg DEPEND %Control DEFAULT TIMES 0
-
-%AIHotImgVariable DEPEND %Control DEFAULT TIMES 0
-
-%AIHotImgIsVariable DEPEND %Control LONG TIMES 2
-WHEN  ('?LookupFile') (0)
-WHEN  ('?set:GUID') (0)
-
-%AIPressedImg DEPEND %Control DEFAULT TIMES 0
-
-%AIPressedImgVariable DEPEND %Control DEFAULT TIMES 0
-
-%AIPressedImgIsVariable DEPEND %Control LONG TIMES 2
-WHEN  ('?LookupFile') (0)
-WHEN  ('?set:GUID') (0)
-
-[EMBED]
-EMBED %WindowManagerMethodCodeSection
-[INSTANCES]
-WHEN 'Run'
-[INSTANCES]
-WHEN '(),BYTE'
-[DEFINITION]
-[SOURCE]
-PROPERTY:BEGIN
-PRIORITY 50
-PROPERTY:END
-  !// Go to the first record
-  GlobalRequest = changeRecord
-  Access:Setting.UseFile()
-  if Access:Setting.Open() <> Level:Benign then ! open
-      MESSAGE('Trouble opening the Setting table','Window will close',ICON:Exclamation,BUTTON:ABORT)
-      post(EVENT:CloseDown) ! Close this window
-      ReturnValue = RequestCancelled ! Cancel the Run procedure and exit
-      RETURN ReturnValue
-  else ! open
-      Access:Setting.ClearKey(set:SettingPK)
-      !dbg(set:GUID)
-      !dbg(Records(Setting))
-      If Records(Setting) < 1 then 
-          Access:Setting.PrimeRecord()
-          set:GUID = glo:st.MakeGuid()
-          if Access:Setting.Insert() <> Level:Benign then
-              MESSAGE('Trouble adding a record to the Setting.tps table','Window will close',ICON:Exclamation,BUTTON:ABORT)
-              post(EVENT:CloseDown) ! Close the main window (ie Quit)
-          end 
-      else
-          set(set:SettingPK)
-          Access:Setting.Next() ! Go to the first record
-      End
-      dbg(set:GUID)
-      do UpdateGlobalFields ! Update record values to global variables 
-  end ! open
-[END]
-[END]
-WHEN 'Init'
-[INSTANCES]
-WHEN '(),BYTE'
-[DEFINITION]
-[SOURCE]
-PROPERTY:BEGIN
-PRIORITY 8110
-PROPERTY:END
-  ! Configure controls for View Only mode
-  IF SELF.Request = ViewRecord              
-      ?set:stDescription{PROP:Flat} = True
-      ?set:RootPath{PROP:Flat} = True
-      ?set:FileExtensions{PROP:Flat} = True
-      ?set:GUID{PROP:Flat} = True
-      ?set:ExcludeFiles{PROP:Flat} = True
-  END  
-[END]
-[END]
-WHEN 'Update'
-[INSTANCES]
-WHEN '()'
-[DEFINITION]
-[SOURCE]
-PROPERTY:BEGIN
-PRIORITY 5001
-PROPERTY:END
-do UpdateGlobalFields  !// Note the changed data into global variables
-[END]
-[END]
-[END]
-EMBED %ProcedureRoutines
-[DEFINITION]
-[SOURCE]
-PROPERTY:BEGIN
-PRIORITY 4000
-PROPERTY:END
-!// Update Global values
-UpdateGlobalFields  ROUTINE
-    glo:AppDescription = set:stDescription
-    glo:RootPath = set:RootPath
-    glo:FileExtensions = set:FileExtensions
-    glo:ExcludeFiles = set:ExcludeFiles
-    DISPLAY()
-[END]
-[END]
-[ADDITION]
-NAME WinEvent WinEvent
-[INSTANCE]
-INSTANCE 4
-OWNER 6
-[PROMPTS]
-%DisableWinEvent LONG  (0)
-%CheckForCantCloseNowSetHere LONG  (1)
-%AutoDown LONG  (0)
-%NoAutoDown LONG  (0)
-%LocWindowsVisible DEFAULT  ('0')
-%WindowsVisibleAfterOpen LONG  (1)
-%AlertWinEventDebug LONG  (0)
-%DisplayCompileDate LONG  (0)
-%DisplayCompileDateFormat DEFAULT  ('@D10')
-%locNoHandleCloseDown LONG  (0)
-%locCloseDownWhenWindowCloses LONG  (0)
-%locCloseDownWhenWindowClosesCtrl DEFAULT  ('')
-%altWinFix DEFAULT  ('Default')
-%WinAlert MULTI LONG  ()
-%Mess DEPEND %WinAlert DEFAULT TIMES 0
-
-%Act1 DEPEND %WinAlert DEFAULT TIMES 0
-
-%act2 DEPEND %WinAlert DEFAULT TIMES 0
-
-%AlertControl DEPEND %WinAlert DEFAULT TIMES 0
-
-%AlertControlType DEPEND %WinAlert DEFAULT TIMES 0
-
-%locCloseDownWhenWindowClosesSet LONG  (0)
-[ADDITION]
-NAME ABC RecordValidation
-[INSTANCE]
-INSTANCE 1
-PROCPROP
-[PROMPTS]
-%ValidateOnAccept LONG  (1)
-%ValidateOnNonStopSelect LONG  (1)
-%ControlsExcluded MULTI LONG  ()
-%ControlToExclude DEPEND %ControlsExcluded DEFAULT TIMES 0
-
-%ValidateUsingColoration LONG  (0)
-%InvalidFieldColor LONG  (255)
-%InvalidPromptColor LONG  (255)
-%UseValidateMessage LONG  (0)
-%ValidationMessage DEFAULT  ('The values of Colored Fields are invalid, Please correct this information.')
-%MessageControl FIELD  ()
-[ADDITION]
-NAME ABC SaveButton
-[INSTANCE]
-INSTANCE 2
-PROCPROP
-[PROMPTS]
-%InsertAllowed LONG  (1)
-%InsertMessage DEFAULT  ('Record Will Be Added')
-%ChangeAllowed LONG  (1)
-%ChangeMessage DEFAULT  ('Update the Settings')
-%DeleteAllowed LONG  (1)
-%DeleteMessage DEFAULT  ('Record Will Be Deleted')
-%ViewMessage DEFAULT  ('View Settings Record')
-%MessageHeader LONG  (0)
-%ActionOnDelete DEFAULT  ('Standard Warning')
-%PrimingFields MULTI LONG  ()
-%PrimedField DEPEND %PrimingFields FIELD TIMES 0
-
-%PrimedValue DEPEND %PrimingFields DEFAULT TIMES 0
-
-%ActionOnCancel DEFAULT  ('Confirm cancel')
-%MessageLocation DEFAULT  ('Status Bar')
-%MessageStatusSection DEFAULT  ('0')
-%HistoryKey DEFAULT  ('CtrlH')
-%AppendToTitle LONG  (0)
-%AppendToTitleID DEFAULT  ('')
-%AfterGoodInsert DEFAULT  ('Return to caller')
-%AskAfterAdd LONG  (0)
-[ADDITION]
-NAME ABC CancelButton
-[INSTANCE]
-INSTANCE 3
-[ADDITION]
-NAME ABC DOSFileLookup
-[INSTANCE]
-INSTANCE 8
-[PROMPTS]
-%ClassItem UNIQUE DEFAULT  ('Default')
-%DefaultBaseClassType DEPEND %ClassItem DEFAULT TIMES 1
-WHEN  ('Default') ('SelectFileClass')
-
-%ActualDefaultBaseClassType DEPEND %ClassItem DEFAULT TIMES 1
-WHEN  ('Default') ('')
-
-%ClassLines DEPEND %ClassItem MULTI DEFAULT TIMES 0
-
-%DOSFileDialogHeader DEFAULT  ('')
-%DOSFileField FIELD  (set:RootPath)
-%DOSInitialDirectory DEFAULT  ('''c:\Clarion''')
-%DOSInitialFilename DEFAULT  ('')
-%ReturnToOriginalDir LONG  (1)
-%AllowLongFilenames LONG  (1)
-%DOSFileDialogType DEFAULT  ('Directory')
-%AllowNoError LONG  (0)
-%DefaultOnCancel LONG  (0)
-%AllowMultiSelect LONG  (0)
-%ActionsToTake DEFAULT  ('')
-%AssignToImageControl LONG  (0)
-%ImageControl DEFAULT  ('')
-%ImageResize LONG  (1)
-%DOSVariableMask LONG  (0)
-%DOSMaskVariable DEFAULT  ('')
-%DOSMaskDesc DEFAULT  ('All Files')
-%DOSMask DEFAULT  ('*.*')
-%DOSMoreMasks MULTI LONG  ()
-%DOSMoreMaskDesc DEPEND %DOSMoreMasks DEFAULT TIMES 0
-
-%DOSMoreMask DEPEND %DOSMoreMasks DEFAULT TIMES 0
-
-%RedisplayWindow LONG  (1)
-%UpdateFields MULTI LONG  ()
-%UpdateFeq DEPEND %UpdateFields DEFAULT TIMES 0
-
-%GlobalObject DEPEND %ClassItem DEFAULT TIMES 1
-WHEN  ('Default') ('NO')
-
-%ThisObjectName DEPEND %ClassItem DEFAULT TIMES 1
-WHEN  ('Default') ('FileLookup8')
-
-%UseDefaultABCBaseClass DEPEND %ClassItem LONG TIMES 1
-WHEN  ('Default') (1)
-
-%UseABCBaseClass DEPEND %ClassItem LONG TIMES 1
-WHEN  ('Default') (1)
-
-%ABCBaseClass DEPEND %ClassItem DEFAULT TIMES 1
-WHEN  ('Default') ('ADOBlob')
-
-%ExtBaseClass DEPEND %ClassItem DEFAULT TIMES 0
-
-%BaseClassIncludeFile DEPEND %ClassItem DEFAULT TIMES 0
-
-%DeriveFromBaseClass DEPEND %ClassItem LONG TIMES 1
-WHEN  ('Default') (0)
-
-%NewMethods DEPEND %ClassItem MULTI LONG TIMES 0
-
-%NewMethodName DEPEND %NewMethods DEFAULT TIMES 0
-
-%NewMethodPrototype DEPEND %NewMethods DEFAULT TIMES 0
-
-%NewClassPropertyItems DEPEND %ClassItem MULTI LONG TIMES 0
-
-%NewClassProperty DEPEND %NewClassPropertyItems DEFAULT TIMES 0
-
-%NewClassDataType DEPEND %NewClassPropertyItems DEFAULT TIMES 1
-WHEN  ('Default')TIMES 0
-
-%NewClassOtherType DEPEND %NewClassPropertyItems DEFAULT TIMES 0
-
-%NewClassDataIsRef DEPEND %NewClassPropertyItems LONG TIMES 0
-
-%NewClassDataSize DEPEND %NewClassPropertyItems DEFAULT TIMES 0
-
-%NewClassDataDim1 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
-
-%NewClassDataDim2 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
-
-%NewClassDataDim3 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
-
-%NewClassDataDim4 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
-
-%ClassMethods DEPEND %ClassItem MULTI LONG TIMES 0
-
-%ClassMethodName DEPEND %ClassMethods DEFAULT TIMES 0
-
-%ClassMethodPrototype DEPEND %ClassMethods DEFAULT TIMES 0
-
-%ClassPropertyItems DEPEND %ClassItem MULTI LONG TIMES 0
-
-%ClassProperty DEPEND %ClassPropertyItems DEFAULT TIMES 0
-
-%ClassDataType DEPEND %ClassPropertyItems DEFAULT TIMES 1
-WHEN  ('Default')TIMES 0
-
-%ClassOtherType DEPEND %ClassPropertyItems DEFAULT TIMES 0
-
-%ClassDataIsRef DEPEND %ClassPropertyItems LONG TIMES 0
-
-%ClassDataSize DEPEND %ClassPropertyItems DEFAULT TIMES 0
-
-%ClassDataDim1 DEPEND %ClassPropertyItems DEFAULT TIMES 0
-
-%ClassDataDim2 DEPEND %ClassPropertyItems DEFAULT TIMES 0
-
-%ClassDataDim3 DEPEND %ClassPropertyItems DEFAULT TIMES 0
-
-%ClassDataDim4 DEPEND %ClassPropertyItems DEFAULT TIMES 0
-
-[ADDITION]
-NAME ABC WindowResize
-[FIELDPROMPT]
-%ResizeAnchorTop DEPEND %Control LONG TIMES 0
-
-%ResizeAnchorLeft DEPEND %Control LONG TIMES 0
-
-%ResizeAnchorRight DEPEND %Control LONG TIMES 0
-
-%ResizeAnchorBottom DEPEND %Control LONG TIMES 0
-
-%ResizeAnchorGrowTop DEPEND %Control LONG TIMES 0
-
-%ResizeAnchorGrowLeft DEPEND %Control LONG TIMES 0
-
-%ResizeAnchorGrowRight DEPEND %Control LONG TIMES 0
-
-%ResizeAnchorGrowBottom DEPEND %Control LONG TIMES 0
-
-[INSTANCE]
-INSTANCE 7
-[PROMPTS]
-%UseAppStrategy DEFAULT  ('1')
-%AppStrategy DEFAULT  ('Surface')
-%RestrictMinSize LONG  (1)
-%WindowMinWidth DEFAULT  ('0')
-%WindowMaxWidth DEFAULT  ('0')
-%ClassItem UNIQUE DEFAULT  ('Default')
-%DefaultBaseClassType DEPEND %ClassItem DEFAULT TIMES 1
-WHEN  ('Default') ('WindowResizeClass')
-
-%ActualDefaultBaseClassType DEPEND %ClassItem DEFAULT TIMES 1
-WHEN  ('Default') ('')
-
-%ClassLines DEPEND %ClassItem MULTI DEFAULT TIMES 1
-WHEN  ('Default') ('Init {19}PROCEDURE(BYTE AppStrategy=AppStrategy:Resize,BYTE SetWindowMinSize=False,BYTE SetWindowMaxSize=False)')
-
-%WindowMinHeight DEFAULT  ('')
-%RestrictMaxSize LONG  (0)
-%WindowMaxHeight DEFAULT  ('')
-%AutoFindParents DEFAULT  ('Default')
-%DeferMoves DEFAULT  ('Default')
-%OverrideControls MULTI LONG  ()
-%OverrideControl DEPEND %OverrideControls DEFAULT TIMES 0
-
-%DisableResize DEPEND %OverrideControls LONG TIMES 0
-
-%HorizResize DEPEND %OverrideControls DEFAULT TIMES 0
-
-%VertResize DEPEND %OverrideControls DEFAULT TIMES 0
-
-%HorizPositional DEPEND %OverrideControls DEFAULT TIMES 0
-
-%VertPositional DEPEND %OverrideControls DEFAULT TIMES 0
-
-%GlobalObject DEPEND %ClassItem DEFAULT TIMES 1
-WHEN  ('Default') ('NO')
-
-%ThisObjectName DEPEND %ClassItem DEFAULT TIMES 1
-WHEN  ('Default') ('Resizer')
-
-%UseDefaultABCBaseClass DEPEND %ClassItem LONG TIMES 1
-WHEN  ('Default') (1)
-
-%UseABCBaseClass DEPEND %ClassItem LONG TIMES 1
-WHEN  ('Default') (1)
-
-%ABCBaseClass DEPEND %ClassItem DEFAULT TIMES 1
-WHEN  ('Default') ('')
-
-%ExtBaseClass DEPEND %ClassItem DEFAULT TIMES 0
-
-%BaseClassIncludeFile DEPEND %ClassItem DEFAULT TIMES 0
-
-%DeriveFromBaseClass DEPEND %ClassItem LONG TIMES 1
-WHEN  ('Default') (0)
-
-%NewMethods DEPEND %ClassItem MULTI LONG TIMES 0
-
-%NewMethodName DEPEND %NewMethods DEFAULT TIMES 0
-
-%NewMethodPrototype DEPEND %NewMethods DEFAULT TIMES 0
-
-%NewClassPropertyItems DEPEND %ClassItem MULTI LONG TIMES 0
-
-%NewClassProperty DEPEND %NewClassPropertyItems DEFAULT TIMES 0
-
-%NewClassDataType DEPEND %NewClassPropertyItems DEFAULT TIMES 1
-WHEN  ('Default')TIMES 0
-
-%NewClassOtherType DEPEND %NewClassPropertyItems DEFAULT TIMES 0
-
-%NewClassDataIsRef DEPEND %NewClassPropertyItems LONG TIMES 0
-
-%NewClassDataSize DEPEND %NewClassPropertyItems DEFAULT TIMES 0
-
-%NewClassDataDim1 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
-
-%NewClassDataDim2 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
-
-%NewClassDataDim3 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
-
-%NewClassDataDim4 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
-
-%ClassMethods DEPEND %ClassItem MULTI LONG TIMES 0
-
-%ClassMethodName DEPEND %ClassMethods DEFAULT TIMES 0
-
-%ClassMethodPrototype DEPEND %ClassMethods DEFAULT TIMES 0
-
-%ClassPropertyItems DEPEND %ClassItem MULTI LONG TIMES 0
-
-%ClassProperty DEPEND %ClassPropertyItems DEFAULT TIMES 0
-
-%ClassDataType DEPEND %ClassPropertyItems DEFAULT TIMES 1
-WHEN  ('Default')TIMES 0
-
-%ClassOtherType DEPEND %ClassPropertyItems DEFAULT TIMES 0
-
-%ClassDataIsRef DEPEND %ClassPropertyItems LONG TIMES 0
-
-%ClassDataSize DEPEND %ClassPropertyItems DEFAULT TIMES 0
-
-%ClassDataDim1 DEPEND %ClassPropertyItems DEFAULT TIMES 0
-
-%ClassDataDim2 DEPEND %ClassPropertyItems DEFAULT TIMES 0
-
-%ClassDataDim3 DEPEND %ClassPropertyItems DEFAULT TIMES 0
-
-%ClassDataDim4 DEPEND %ClassPropertyItems DEFAULT TIMES 0
-
-[ADDITION]
-NAME ABC ViewFormActions
-[INSTANCE]
-INSTANCE 6
-[PROMPTS]
-%ForceViewOnly LONG  (0)
-%ViewAction DEPEND %Control DEFAULT TIMES 13
-WHEN  ('?Cancel') ('None')
-WHEN  ('?LookupFile') ('Hide')
-WHEN  ('?OK') ('Hide')
-WHEN  ('?set:ExcludeFiles') ('ReadOnly')
-WHEN  ('?set:ExcludeFiles:Prompt') ('None')
-WHEN  ('?set:FileExtensions') ('ReadOnly')
-WHEN  ('?set:FileExtensions:Prompt') ('None')
-WHEN  ('?set:GUID') ('ReadOnly')
-WHEN  ('?set:GUID:Prompt') ('None')
-WHEN  ('?set:RootPath') ('ReadOnly')
-WHEN  ('?set:RootPath:Prompt') ('None')
-WHEN  ('?set:stDescription') ('ReadOnly')
-WHEN  ('?set:stDescription:Prompt') ('None')
-
-%PropertyAssignments DEPEND %Control MULTI LONG TIMES 0
-
-%CtrlProperty DEPEND %PropertyAssignments DEFAULT TIMES 0
-
-%CtrlValue DEPEND %PropertyAssignments DEFAULT TIMES 0
-
-[WINDOW]
-QuickWindow WINDOW(' Update Application Settings'),AT(,,358,273),FONT('Segoe UI',8,,FONT:regular, |
-          CHARSET:DEFAULT),RESIZE,CENTER,ICON('toolbox.ico'),GRAY,IMM,MDI,HLP('UpdateSetting'), |
-          SYSTEM
-          PROMPT('GUID:'),AT(10,9,61),USE(?set:GUID:Prompt),RIGHT,TRN,#LINK(?set:GUID),#ORIG(?set:GUID:Prompt), |
-            #ORDINAL(1)
-          PROMPT('Description:'),AT(10,34,61),USE(?set:stDescription:Prompt),RIGHT,TRN,#LINK(?set:stDescription), |
-            #ORIG(?set:stDescription:Prompt),#ORDINAL(2)
-          ENTRY(@s50),AT(76,34,247,10),USE(set:stDescription),REQ,#LINK(?set:stDescription:Prompt), |
-            #ORIG(set:stDescription),#ORDINAL(3)
-          PROMPT('Root Path:'),AT(10,48,61),USE(?set:RootPath:Prompt),RIGHT,TRN,#LINK(?set:RootPath), |
-            #ORIG(?set:RootPath:Prompt),#ORDINAL(4)
-          ENTRY(@s255),AT(76,48,247,10),USE(set:RootPath),#LINK(?set:RootPath:Prompt),#ORIG(set:RootPath), |
-            #ORDINAL(5)
-          PROMPT('File Extensions:'),AT(10,63,61),USE(?set:FileExtensions:Prompt),RIGHT,TRN, |
-            #LINK(?set:FileExtensions),#ORIG(?set:FileExtensions:Prompt),#ORDINAL(6)
-          ENTRY(@s250),AT(76,63,274,10),USE(set:FileExtensions),MSG('Separate extension' & |
-            's with a semicolon'),TIP('Separate extensions with a semicolon'),#LINK(?set:FileExtensions:Prompt), |
-            #ORIG(set:FileExtensions),#ORDINAL(7)
-          BUTTON('...'),AT(327,47,12,12),USE(?LookupFile),#ORIG(?LookupFile),#SEQ(8),#ORDINAL(8)
-          PROMPT('Exclude Files:'),AT(10,86,61),USE(?set:ExcludeFiles:Prompt),RIGHT,TRN,#LINK(?set:ExcludeFiles), |
-            #ORIG(?set:ExcludeFiles:Prompt),#ORDINAL(9)
-          TEXT,AT(76,86,274,160),USE(set:ExcludeFiles),VSCROLL,MSG('Exclude these files' & |
-            ' if requested'),SCROLL,TIP('Exclude these files if requested'),#LINK(?set:ExcludeFiles:Prompt), |
-            #ORIG(set:ExcludeFiles),#ORDINAL(10)
-          BUTTON('&OK'),AT(248,250,49,14),USE(?OK),LEFT,ICON('WAOK.ICO'),MSG('Accept dat' & |
-            'a and close the window'),TIP('Accept data and close the window'),#ORIG(?OK),#SEQ(2), |
-            #ORDINAL(11)
-          BUTTON('&Cancel'),AT(301,250,49,14),USE(?Cancel),LEFT,ICON('WACANCEL.ICO'),MSG('Cancel operation'), |
-            TIP('Cancel operation'),#ORIG(?Cancel),#SEQ(3),#ORDINAL(12)
-          ENTRY(@s36),AT(75,9,148,10),USE(set:GUID),DISABLE,FLAT,READONLY,REQ,#LINK(?set:GUID:Prompt), |
-            #ORIG(set:GUID),#ORDINAL(13)
-        END
-
-[END]
-[MODULE]
-[COMMON]
-FROM ABC GENERATED
-MODIFIED '2023/09/25' '18:43:22'
+MODIFIED '2023/09/30' '16:44:45'
 [PROCEDURE]
 NAME AboutBox
 [COMMON]
@@ -6564,1356 +8560,7 @@ Window  WINDOW('About Clarion Fixer'),AT(75,75,299,105),FONT('Segoe UI',9),ICON(
 [MODULE]
 [COMMON]
 FROM ABC GENERATED
-MODIFIED '2023/09/30' '13:18:25'
-[PROCEDURE]
-NAME SystemInfo
-GLOBAL
-[COMMON]
-DESCRIPTION 'System Diagnostics from CapeSoft WinEvents'
-FROM ABC Window
-MODIFIED '2023/10/18' '15:18:58'
-[DATA]
-[SCREENCONTROLS]
-! PROMPT('LocalRequest:'),USE(?LocalRequest:Prompt)
-! ENTRY(@n-14),USE(LocalRequest)
-[REPORTCONTROLS]
-! STRING(@n-14),USE(LocalRequest)
-LocalRequest             LONG
-!!> GUID('a59c55c7-4a6c-4257-9908-7d6c15c2a056'),PROMPT('LocalRequest:'),HEADER('LocalRequest'),PICTURE(@n-14)
-[SCREENCONTROLS]
-! PROMPT('Swap Used:'),USE(?SwapUsed:Prompt)
-! STRING(@n13),USE(SwapUsed)
-[REPORTCONTROLS]
-! STRING(@n13),USE(SwapUsed)
-SwapUsed                 ULONG
-!!> GUID('86858e65-d7aa-40be-9361-aaa71a9a57dd'),PROMPT('Swap Used:'),HEADER('Swap Used'),PICTURE(@n13)
-[SCREENCONTROLS]
-! PROMPT('Swap Free:'),USE(?SwapFree:Prompt)
-! ENTRY(@n13),USE(SwapFree)
-[REPORTCONTROLS]
-! STRING(@n13),USE(SwapFree)
-SwapFree                 ULONG
-!!> GUID('d98f46f1-d022-4ba8-b0c6-a02fba646265'),PROMPT('Swap Free:'),HEADER('Swap Free'),PICTURE(@n13)
-[SCREENCONTROLS]
-! PROMPT('Swap Total:'),USE(?SwapTotal:Prompt)
-! ENTRY(@n13),USE(SwapTotal)
-[REPORTCONTROLS]
-! STRING(@n13),USE(SwapTotal)
-SwapTotal                ULONG
-!!> GUID('38f67a69-3b2a-49c0-9351-97c7bef9bec5'),PROMPT('Swap Total:'),HEADER('Swap Total'),PICTURE(@n13)
-[SCREENCONTROLS]
-! PROMPT('Ram Free:'),USE(?RamFree:Prompt)
-! STRING(@n13),USE(RamFree)
-[REPORTCONTROLS]
-! STRING(@n13),USE(RamFree)
-RamFree                  ULONG
-!!> GUID('35d0a650-e8c5-420d-8f6b-045cf6692483'),PROMPT('Ram Free:'),HEADER('Ram Free'),PICTURE(@n13)
-[SCREENCONTROLS]
-! PROMPT('Ram Used:'),USE(?RamUsed:Prompt)
-! ENTRY(@n13),USE(RamUsed)
-[REPORTCONTROLS]
-! STRING(@n13),USE(RamUsed)
-RamUsed                  ULONG
-!!> GUID('935a366e-8250-4649-991d-e60f9b694ffb'),PROMPT('Ram Used:'),HEADER('Ram Used'),PICTURE(@n13)
-[SCREENCONTROLS]
-! PROMPT('Ram Total:'),USE(?RamTotal:Prompt)
-! ENTRY(@n13),USE(RamTotal)
-[REPORTCONTROLS]
-! STRING(@n13),USE(RamTotal)
-RamTotal                 ULONG
-!!> GUID('9544fbab-3e9d-43d2-ba45-c5f89437185f'),PROMPT('Ram Total:'),HEADER('Ram Total'),PICTURE(@n13)
-[SCREENCONTROLS]
-! PROMPT('Virtual Used:'),USE(?VirtualUsed:Prompt)
-! STRING(@n13),USE(VirtualUsed)
-[REPORTCONTROLS]
-! STRING(@n13),USE(VirtualUsed)
-VirtualUsed              ULONG
-!!> GUID('3098bd01-f2e6-4afe-abc1-fda69a9c9ffd'),PROMPT('Virtual Used:'),HEADER('Virtual Used'),PICTURE(@n13)
-[SCREENCONTROLS]
-! PROMPT('Virtual Free:'),USE(?VirtualFree:Prompt)
-! ENTRY(@n13),USE(VirtualFree)
-[REPORTCONTROLS]
-! STRING(@n13),USE(VirtualFree)
-VirtualFree              ULONG
-!!> GUID('9a13b932-57ab-4509-97c2-1c7a5fdc9400'),PROMPT('Virtual Free:'),HEADER('Virtual Free'),PICTURE(@n13)
-[SCREENCONTROLS]
-! PROMPT('Virtual Total:'),USE(?VirtualTotal:Prompt)
-! ENTRY(@n13),USE(VirtualTotal)
-[REPORTCONTROLS]
-! STRING(@n13),USE(VirtualTotal)
-VirtualTotal             ULONG
-!!> GUID('b4565c80-6885-4b81-ad7b-e2eedee79b57'),PROMPT('Virtual Total:'),HEADER('Virtual Total'),PICTURE(@n13)
-[SCREENCONTROLS]
-! PROMPT('User Memory:'),USE(?UserMemory:Prompt)
-! ENTRY(@n13),USE(UserMemory)
-[REPORTCONTROLS]
-! STRING(@n13),USE(UserMemory)
-UserMemory               ULONG
-!!> GUID('5cb19930-bc93-461b-9c49-0c303947d7ea'),PROMPT('User Memory:'),HEADER('User Memory'),PICTURE(@n13)
-[SCREENCONTROLS]
-! PROMPT('FilesOpened:'),USE(?FilesOpened:Prompt)
-! ENTRY(@n3),USE(FilesOpened)
-[REPORTCONTROLS]
-! STRING(@n3),USE(FilesOpened)
-FilesOpened              BYTE
-!!> GUID('be262ecf-93bb-4fad-9eb1-dee42cdecb08'),PROMPT('FilesOpened:'),HEADER('FilesOpened'),PICTURE(@n3)
-[SCREENCONTROLS]
-! PROMPT('Win Ver:'),USE(?WinVer:Prompt)
-! ENTRY(@n3),USE(WinVer)
-[REPORTCONTROLS]
-! STRING(@n3),USE(WinVer)
-WinVer                   BYTE
-!!> GUID('0fba0bf2-38a3-43f3-a528-67e8e820d3fe'),PROMPT('Win Ver:'),HEADER('Win Ver'),PICTURE(@n3)
-[SCREENCONTROLS]
-! PROMPT('Win Rel:'),USE(?WinRel:Prompt)
-! ENTRY(@n3),USE(WinRel)
-[REPORTCONTROLS]
-! STRING(@n3),USE(WinRel)
-WinRel                   BYTE
-!!> GUID('4ad52e98-b5cd-4697-85d9-4ca32a4818b5'),PROMPT('Win Rel:'),HEADER('Win Rel'),PICTURE(@n3)
-[SCREENCONTROLS]
-! PROMPT('Dos Ver:'),USE(?DosVer:Prompt)
-! ENTRY(@n3),USE(DosVer)
-[REPORTCONTROLS]
-! STRING(@n3),USE(DosVer)
-DosVer                   BYTE
-!!> GUID('0e9d0d18-436d-4f19-9f2a-592530fa558f'),PROMPT('Dos Ver:'),HEADER('Dos Ver'),PICTURE(@n3)
-[SCREENCONTROLS]
-! PROMPT('Dos Rel:'),USE(?DosRel:Prompt)
-! ENTRY(@n3),USE(DosRel)
-[REPORTCONTROLS]
-! STRING(@n3),USE(DosRel)
-DosRel                   BYTE
-!!> GUID('09ccffac-014a-4fe2-b8da-5977ba6b755f'),PROMPT('Dos Rel:'),HEADER('Dos Rel'),PICTURE(@n3)
-[SCREENCONTROLS]
-! PROMPT('allver:'),USE(?allver:Prompt)
-! ENTRY(@n13),USE(allver)
-[REPORTCONTROLS]
-! STRING(@n13),USE(allver)
-allver                   ULONG
-!!> GUID('06ed7568-f3a5-4697-b884-e67db23924ef'),PROMPT('allver:'),HEADER('allver'),PICTURE(@n13)
-[SCREENCONTROLS]
-! PROMPT('Disk Free:'),USE(?DiskFree:Prompt)
-! ENTRY(@n10.2),USE(DiskFree),DECIMAL(14)
-[REPORTCONTROLS]
-! STRING(@n10.2),USE(DiskFree),DECIMAL(14)
-DiskFree                 REAL
-!!> GUID('c1fd6525-f3cf-4d7b-8009-a74b7d79650a'),PROMPT('Disk Free:'),HEADER('Disk Free'),PICTURE(@n10.2),JUSTIFY(DECIMAL,14)
-[SCREENCONTROLS]
-! PROMPT('Disk Total:'),USE(?DiskTotal:Prompt)
-! ENTRY(@n10.2),USE(DiskTotal),DECIMAL(14)
-[REPORTCONTROLS]
-! STRING(@n10.2),USE(DiskTotal),DECIMAL(14)
-DiskTotal                REAL
-!!> GUID('7e2079ee-2710-4d47-9a0b-2be7057e7fe5'),PROMPT('Disk Total:'),HEADER('Disk Total'),PICTURE(@n10.2),JUSTIFY(DECIMAL,14)
-[SCREENCONTROLS]
-! PROMPT('This Machine:'),USE(?ThisMachine:Prompt)
-! ENTRY(@s30),USE(ThisMachine)
-[REPORTCONTROLS]
-! STRING(@s30),USE(ThisMachine)
-ThisMachine              STRING(30)
-!!> GUID('a7b999f9-d142-4e37-a243-543b987ae240'),PROMPT('This Machine:'),HEADER('This Machine'),PICTURE(@s30)
-[SCREENCONTROLS]
-! PROMPT('New   Win Version:'),USE(?NewWinVersion:Prompt)
-! STRING(@s60),USE(NewWinVersion)
-[REPORTCONTROLS]
-! STRING(@s60),USE(NewWinVersion)
-NewWinVersion            STRING(60)
-!!> GUID('92350e28-c109-4687-aef8-2a3c7eee1211'),PROMPT('New   Win Version:'),HEADER('New   Win Version'),PICTURE(@s60)
-[SCREENCONTROLS]
-! PROMPT('My Documents:'),USE(?MyDocuments:Prompt)
-! ENTRY(@s80),USE(MyDocuments)
-[REPORTCONTROLS]
-! STRING(@s80),USE(MyDocuments)
-MyDocuments              STRING(80)
-!!> GUID('d97f242d-838e-44f3-8392-c2ff86d6296b'),PROMPT('My Documents:'),HEADER('My Documents'),PICTURE(@s80)
-[SCREENCONTROLS]
-! PROMPT('My Pictures:'),USE(?MyPictures:Prompt)
-! ENTRY(@s80),USE(MyPictures)
-[REPORTCONTROLS]
-! STRING(@s80),USE(MyPictures)
-MyPictures               STRING(80)
-!!> GUID('ea3ef341-b16b-4009-912d-b9078b392df8'),PROMPT('My Pictures:'),HEADER('My Pictures'),PICTURE(@s80)
-[SCREENCONTROLS]
-! PROMPT('Desktop:'),USE(?Desktop:Prompt)
-! ENTRY(@s80),USE(Desktop)
-[REPORTCONTROLS]
-! STRING(@s80),USE(Desktop)
-Desktop                  STRING(80)
-!!> GUID('fb14bdb8-3f33-4b23-9378-69643b55f07f'),PROMPT('Desktop:'),HEADER('Desktop'),PICTURE(@s80)
-[SCREENCONTROLS]
-! PROMPT('Windows Folder:'),USE(?WindowsFolder:Prompt)
-! ENTRY(@s80),USE(WindowsFolder)
-[REPORTCONTROLS]
-! STRING(@s80),USE(WindowsFolder)
-WindowsFolder            STRING(80)
-!!> GUID('9f7ab6b9-f983-4a96-acfa-86fd23c6c1ac'),PROMPT('Windows Folder:'),HEADER('Windows Folder'),PICTURE(@s80)
-[SCREENCONTROLS]
-! PROMPT('System Folder:'),USE(?SystemFolder:Prompt)
-! ENTRY(@s80),USE(SystemFolder)
-[REPORTCONTROLS]
-! STRING(@s80),USE(SystemFolder)
-SystemFolder             STRING(80)
-!!> GUID('a245c525-c130-4bd5-986b-5ae74d9ad293'),PROMPT('System Folder:'),HEADER('System Folder'),PICTURE(@s80)
-[SCREENCONTROLS]
-! PROMPT('Work Station:'),USE(?WorkStation:Prompt)
-! STRING(@s252),USE(WorkStation)
-[REPORTCONTROLS]
-! STRING(@s252),USE(WorkStation)
-WorkStation              STRING(252)
-!!> GUID('6289b1a3-23b4-4d8c-b970-f0947f6125c4'),PROMPT('Work Station:'),HEADER('Work Station'),PICTURE(@s252)
-[SCREENCONTROLS]
-! PROMPT('User Name:'),USE(?UserName:Prompt)
-! STRING(@s252),USE(UserName)
-[REPORTCONTROLS]
-! STRING(@s252),USE(UserName)
-UserName                 STRING(252)
-!!> GUID('f5226561-b092-4ee3-a92f-4bd9ef163ca2'),PROMPT('User Name:'),HEADER('User Name'),PICTURE(@s252)
-[SCREENCONTROLS]
-! PROMPT('User Account Name:'),USE(?UserAccountName:Prompt)
-! STRING(@s252),USE(UserAccountName)
-[REPORTCONTROLS]
-! STRING(@s252),USE(UserAccountName)
-UserAccountName          STRING(252)
-!!> GUID('8094dd13-75de-48d1-8469-875ef8ca8b1f'),PROMPT('User Account Name:'),HEADER('User Account Name'),PICTURE(@s252)
-[SCREENCONTROLS]
-! PROMPT('Registry Key:'),USE(?RegistryKey:Prompt)
-! LIST,USE(RegistryKey),DROP(5),FROM('WE::WM_HKEY_CURRENT_USER|#WE::WM_HKEY_CURRENT_USER|WE::WM_HKEY_LOCAL_MACHINE|#WE::WM_HKEY_LOCAL_MACHINE')
-[REPORTCONTROLS]
-! STRING(@s50),USE(RegistryKey)
-RegistryKey              STRING(50)
-!!> GUID('ca928ed5-911d-4e60-8275-702ef71432cb'),VALID(INLIST('WE::WM_HKEY_CURRENT_USER|WE::WM_HKEY_LOCAL_MACHINE')),PROMPT('Registry Key:'),HEADER('Registry Key'),PICTURE(@s50),VALUES('WE::WM_HKEY_CURRENT_USER|WE::WM_HKEY_LOCAL_MACHINE')
-[SCREENCONTROLS]
-! PROMPT('Registry Key Long:'),USE(?RegistryKeyLong:Prompt)
-! ENTRY(@n-14),USE(RegistryKeyLong),RIGHT(1)
-[REPORTCONTROLS]
-! STRING(@n-14),USE(RegistryKeyLong),RIGHT(1)
-RegistryKeyLong          LONG
-!!> GUID('bebed2a4-f133-4164-b0f4-e0dffd064a86'),PROMPT('Registry Key Long:'),HEADER('Registry Key Long'),PICTURE(@n-14),JUSTIFY(RIGHT,1)
-[SCREENCONTROLS]
-! PROMPT('Key Path:'),USE(?KeyPath:Prompt)
-! ENTRY(@s252),USE(KeyPath)
-[REPORTCONTROLS]
-! STRING(@s252),USE(KeyPath)
-KeyPath                  STRING(252)
-!!> GUID('c565354d-cac4-4432-b9ac-70cce65cafed'),INITIAL('Software\CapeSoft\WinEventDemo {222}'),PROMPT('Key Path:'),HEADER('Key Path'),PICTURE(@s252)
-[SCREENCONTROLS]
-! PROMPT('Value Name:'),USE(?ValueName:Prompt)
-! ENTRY(@s100),USE(ValueName)
-[REPORTCONTROLS]
-! STRING(@s100),USE(ValueName)
-ValueName                STRING(100)
-!!> GUID('2561017e-0198-460b-a6cc-080492016bc9'),INITIAL('Test {96}'),PROMPT('Value Name:'),HEADER('Value Name'),PICTURE(@s100)
-[SCREENCONTROLS]
-! PROMPT('Value:'),USE(?Value:Prompt)
-! ENTRY(@s100),USE(Value)
-[REPORTCONTROLS]
-! STRING(@s100),USE(Value)
-Value                    STRING(100)
-!!> GUID('67e5319a-a229-4001-8811-b50e0a8ef0f3'),PROMPT('Value:'),HEADER('Value'),PICTURE(@s100)
-[SCREENCONTROLS]
-! PROMPT('Key Type:'),USE(?KeyType:Prompt)
-! LIST,USE(KeyType),DROP(5),FROM('WE::REG_SZ|#WE::REG_SZ|WE::REG_DWORD|#WE::REG_DWORD')
-[REPORTCONTROLS]
-! STRING(@s20),USE(KeyType)
-KeyType                  STRING(20)
-!!> GUID('4593a1aa-7033-4ed2-a6bc-5bf8213e4193'),VALID(INLIST('WE::REG_SZ|WE::REG_DWORD')),INITIAL('WE::REG_SZ {10}'),PROMPT('Key Type:'),HEADER('Key Type'),PICTURE(@s20),VALUES('WE::REG_SZ|WE::REG_DWORD')
-[SCREENCONTROLS]
-! PROMPT('Key Type Long:'),USE(?KeyTypeLong:Prompt)
-! ENTRY(@n-14),USE(KeyTypeLong),RIGHT(1)
-[REPORTCONTROLS]
-! STRING(@n-14),USE(KeyTypeLong),RIGHT(1)
-KeyTypeLong              LONG
-!!> GUID('75e013aa-788b-4070-b348-5d6b172c0041'),PROMPT('Key Type Long:'),HEADER('Key Type Long'),PICTURE(@n-14),JUSTIFY(RIGHT,1)
-[SCREENCONTROLS]
-! PROMPT('Screen Width:'),USE(?ScreenWidth:Prompt)
-! STRING(@s20),USE(ScreenWidth)
-[REPORTCONTROLS]
-! STRING(@s20),USE(ScreenWidth)
-ScreenWidth              STRING(20)
-!!> GUID('9dc75896-ce23-4555-b17d-f79ca3625c78'),PROMPT('Screen Width:'),HEADER('Screen Width'),PICTURE(@s20)
-[SCREENCONTROLS]
-! PROMPT('Screen Height:'),USE(?ScreenHeight:Prompt)
-! STRING(@n-14),USE(ScreenHeight),RIGHT(1)
-[REPORTCONTROLS]
-! STRING(@n-14),USE(ScreenHeight),RIGHT(1)
-ScreenHeight             LONG
-!!> GUID('9bcd72e5-ba70-4f44-ab3e-b832ca6ec770'),PROMPT('Screen Height:'),HEADER('Screen Height'),PICTURE(@n-14),JUSTIFY(RIGHT,1)
-[SCREENCONTROLS]
-! PROMPT('Screen Depth:'),USE(?ScreenDepth:Prompt)
-! STRING(@n-14),USE(ScreenDepth),RIGHT(1)
-[REPORTCONTROLS]
-! STRING(@n-14),USE(ScreenDepth),RIGHT(1)
-ScreenDepth              LONG
-!!> GUID('8dd0b164-58f0-4927-b793-b4f5f4676ff7'),PROMPT('Screen Depth:'),HEADER('Screen Depth'),PICTURE(@n-14),JUSTIFY(RIGHT,1)
-[SCREENCONTROLS]
-! PROMPT('Screenx DPI:'),USE(?ScreenxDPI:Prompt)
-! STRING(@n-14),USE(ScreenxDPI),RIGHT(1)
-[REPORTCONTROLS]
-! STRING(@n-14),USE(ScreenxDPI),RIGHT(1)
-ScreenxDPI               LONG
-!!> GUID('552556bc-42db-46b0-a137-069a0561b204'),PROMPT('Screenx DPI:'),HEADER('Screenx DPI'),PICTURE(@n-14),JUSTIFY(RIGHT,1)
-[SCREENCONTROLS]
-! PROMPT(''),USE(?ScreenyDPI:Prompt)
-! STRING(@n-14),USE(ScreenyDPI)
-[REPORTCONTROLS]
-! STRING(@n-14),USE(ScreenyDPI)
-ScreenyDPI               LONG
-!!> GUID('ae5a5be2-dbe2-49ce-af1e-4454c2173c5b'),HEADER('Screeny DPI'),PICTURE(@n-14)
-[SCREENCONTROLS]
-! CHECK('Is Media Center'),USE(IsMediaCenter),DISABLE
-[REPORTCONTROLS]
-! CHECK('Is Media Center'),USE(IsMediaCenter)
-IsMediaCenter            LONG
-!!> GUID('22938b0f-e5ba-4954-8867-37026fe94e4b'),VALID(BOOLEAN),PROMPT('Is Media Center'),HEADER('Is Media Center'),PICTURE(@n-14)
-[SCREENCONTROLS]
-! CHECK('Is Terminal Server'),USE(IsTerminalServer),DISABLE
-[REPORTCONTROLS]
-! CHECK('Is Terminal Server'),USE(IsTerminalServer)
-IsTerminalServer         LONG
-!!> GUID('7f6621ed-d366-4b22-8402-39e5854ec025'),VALID(BOOLEAN),PROMPT('Is Terminal Server'),HEADER('Is Terminal Server'),PICTURE(@n-14)
-[SCREENCONTROLS]
-! CHECK('Is Tablet'),USE(IsTablet),DISABLE
-[REPORTCONTROLS]
-! CHECK('Is Tablet'),USE(IsTablet)
-IsTablet                 LONG
-!!> GUID('d9f2e08d-d30b-4378-95b0-b5dd2322ef87'),VALID(BOOLEAN),PROMPT('Is Tablet'),HEADER('Is Tablet'),PICTURE(@n-14)
-[SCREENCONTROLS]
-! CHECK('Is Starter'),USE(IsStarter),DISABLE
-[REPORTCONTROLS]
-! CHECK('Is Starter'),USE(IsStarter)
-IsStarter                LONG
-!!> GUID('a5c357ad-6bb1-4469-8f39-3b6aaa9e5dee'),VALID(BOOLEAN),PROMPT('Is Starter'),HEADER('Is Starter'),PICTURE(@n-14)
-[SCREENCONTROLS]
-! CHECK('On Network'),USE(OnNetwork),DISABLE
-[REPORTCONTROLS]
-! CHECK('On Network'),USE(OnNetwork)
-OnNetwork                LONG
-!!> GUID('8f9edea8-0129-4d5d-abbe-a5314ed11e38'),VALID(BOOLEAN),PROMPT('On Network'),HEADER('On Network'),PICTURE(@n-14)
-[SCREENCONTROLS]
-! PROMPT('Os Bits:'),USE(?OsBits:Prompt)
-! ENTRY(@n-14),USE(OsBits),RIGHT(1)
-[REPORTCONTROLS]
-! STRING(@n-14),USE(OsBits),RIGHT(1)
-OsBits                   LONG
-!!> GUID('2dfb68d4-fd4e-4039-873e-68f8ea09e594'),PROMPT('Os Bits:'),HEADER('Os Bits'),PICTURE(@n-14),TYPEMODE(INS),JUSTIFY(RIGHT,1)
-[PROMPTS]
-%ReturnValue FIELD  ()
-%WindowOperationMode DEFAULT  ('Use WINDOW setting')
-%INISaveWindow LONG  (1)
-%ButtonAction DEPEND %Control DEFAULT TIMES 32
-WHEN  ('') ('No Special Action')
-WHEN  ('?Close') ('No Special Action')
-WHEN  ('?DiskFree') ('No Special Action')
-WHEN  ('?DiskTotal') ('No Special Action')
-WHEN  ('?DosRel') ('No Special Action')
-WHEN  ('?DosVer') ('No Special Action')
-WHEN  ('?OsBits') ('No Special Action')
-WHEN  ('?RamFree') ('No Special Action')
-WHEN  ('?RamTotal') ('No Special Action')
-WHEN  ('?RamUsed') ('No Special Action')
-WHEN  ('?String1') ('No Special Action')
-WHEN  ('?String10') ('No Special Action')
-WHEN  ('?String12') ('No Special Action')
-WHEN  ('?String1:2') ('No Special Action')
-WHEN  ('?String25') ('No Special Action')
-WHEN  ('?String26') ('No Special Action')
-WHEN  ('?String27') ('No Special Action')
-WHEN  ('?String28') ('No Special Action')
-WHEN  ('?String29') ('No Special Action')
-WHEN  ('?String3') ('No Special Action')
-WHEN  ('?String30') ('No Special Action')
-WHEN  ('?String31') ('No Special Action')
-WHEN  ('?String32') ('No Special Action')
-WHEN  ('?SwapFree') ('No Special Action')
-WHEN  ('?SwapTotal') ('No Special Action')
-WHEN  ('?SwapUsed') ('No Special Action')
-WHEN  ('?UserMemory') ('No Special Action')
-WHEN  ('?VirtualFree') ('No Special Action')
-WHEN  ('?VirtualTotal') ('No Special Action')
-WHEN  ('?VirtualUsed') ('No Special Action')
-WHEN  ('?WinRel') ('No Special Action')
-WHEN  ('?WinVer') ('No Special Action')
-
-%ButtonRunName DEPEND %Control DEFAULT TIMES 11
-WHEN  ('?DiskFree') ('')
-WHEN  ('?DiskTotal') ('')
-WHEN  ('?DosRel') ('')
-WHEN  ('?DosVer') ('')
-WHEN  ('?String1') ('')
-WHEN  ('?String10') ('')
-WHEN  ('?String12') ('')
-WHEN  ('?String1:2') ('')
-WHEN  ('?String3') ('')
-WHEN  ('?WinRel') ('')
-WHEN  ('?WinVer') ('')
-
-%ButtonRunParameters DEPEND %Control DEFAULT TIMES 11
-WHEN  ('?DiskFree') ('')
-WHEN  ('?DiskTotal') ('')
-WHEN  ('?DosRel') ('')
-WHEN  ('?DosVer') ('')
-WHEN  ('?String1') ('')
-WHEN  ('?String10') ('')
-WHEN  ('?String12') ('')
-WHEN  ('?String1:2') ('')
-WHEN  ('?String3') ('')
-WHEN  ('?WinRel') ('')
-WHEN  ('?WinVer') ('')
-
-%ButtonProcedure DEPEND %Control PROCEDURE TIMES 11
-WHEN  ('?DiskFree') ()
-WHEN  ('?DiskTotal') ()
-WHEN  ('?DosRel') ()
-WHEN  ('?DosVer') ()
-WHEN  ('?String1') ()
-WHEN  ('?String10') ()
-WHEN  ('?String12') ()
-WHEN  ('?String1:2') ()
-WHEN  ('?String3') ()
-WHEN  ('?WinRel') ()
-WHEN  ('?WinVer') ()
-
-%ButtonThread DEPEND %Control LONG TIMES 11
-WHEN  ('?DiskFree') (0)
-WHEN  ('?DiskTotal') (0)
-WHEN  ('?DosRel') (0)
-WHEN  ('?DosVer') (0)
-WHEN  ('?String1') (0)
-WHEN  ('?String10') (0)
-WHEN  ('?String12') (0)
-WHEN  ('?String1:2') (0)
-WHEN  ('?String3') (0)
-WHEN  ('?WinRel') (0)
-WHEN  ('?WinVer') (0)
-
-%ButtonThreadStack DEPEND %Control DEFAULT TIMES 32
-WHEN  ('') ('25000')
-WHEN  ('?Close') ('25000')
-WHEN  ('?DiskFree') ('25000')
-WHEN  ('?DiskTotal') ('25000')
-WHEN  ('?DosRel') ('25000')
-WHEN  ('?DosVer') ('25000')
-WHEN  ('?OsBits') ('25000')
-WHEN  ('?RamFree') ('25000')
-WHEN  ('?RamTotal') ('25000')
-WHEN  ('?RamUsed') ('25000')
-WHEN  ('?String1') ('25000')
-WHEN  ('?String10') ('25000')
-WHEN  ('?String12') ('25000')
-WHEN  ('?String1:2') ('25000')
-WHEN  ('?String25') ('25000')
-WHEN  ('?String26') ('25000')
-WHEN  ('?String27') ('25000')
-WHEN  ('?String28') ('25000')
-WHEN  ('?String29') ('25000')
-WHEN  ('?String3') ('25000')
-WHEN  ('?String30') ('25000')
-WHEN  ('?String31') ('25000')
-WHEN  ('?String32') ('25000')
-WHEN  ('?SwapFree') ('25000')
-WHEN  ('?SwapTotal') ('25000')
-WHEN  ('?SwapUsed') ('25000')
-WHEN  ('?UserMemory') ('25000')
-WHEN  ('?VirtualFree') ('25000')
-WHEN  ('?VirtualTotal') ('25000')
-WHEN  ('?VirtualUsed') ('25000')
-WHEN  ('?WinRel') ('25000')
-WHEN  ('?WinVer') ('25000')
-
-%ButtonParameters DEPEND %Control DEFAULT TIMES 11
-WHEN  ('?DiskFree') ('')
-WHEN  ('?DiskTotal') ('')
-WHEN  ('?DosRel') ('')
-WHEN  ('?DosVer') ('')
-WHEN  ('?String1') ('')
-WHEN  ('?String10') ('')
-WHEN  ('?String12') ('')
-WHEN  ('?String1:2') ('')
-WHEN  ('?String3') ('')
-WHEN  ('?WinRel') ('')
-WHEN  ('?WinVer') ('')
-
-%ButtonRequest DEPEND %Control DEFAULT TIMES 32
-WHEN  ('') ('None')
-WHEN  ('?Close') ('None')
-WHEN  ('?DiskFree') ('None')
-WHEN  ('?DiskTotal') ('None')
-WHEN  ('?DosRel') ('None')
-WHEN  ('?DosVer') ('None')
-WHEN  ('?OsBits') ('None')
-WHEN  ('?RamFree') ('None')
-WHEN  ('?RamTotal') ('None')
-WHEN  ('?RamUsed') ('None')
-WHEN  ('?String1') ('None')
-WHEN  ('?String10') ('None')
-WHEN  ('?String12') ('None')
-WHEN  ('?String1:2') ('None')
-WHEN  ('?String25') ('None')
-WHEN  ('?String26') ('None')
-WHEN  ('?String27') ('None')
-WHEN  ('?String28') ('None')
-WHEN  ('?String29') ('None')
-WHEN  ('?String3') ('None')
-WHEN  ('?String30') ('None')
-WHEN  ('?String31') ('None')
-WHEN  ('?String32') ('None')
-WHEN  ('?SwapFree') ('None')
-WHEN  ('?SwapTotal') ('None')
-WHEN  ('?SwapUsed') ('None')
-WHEN  ('?UserMemory') ('None')
-WHEN  ('?VirtualFree') ('None')
-WHEN  ('?VirtualTotal') ('None')
-WHEN  ('?VirtualUsed') ('None')
-WHEN  ('?WinRel') ('None')
-WHEN  ('?WinVer') ('None')
-
-%PreLookupKey DEPEND %Control KEY TIMES 11
-WHEN  ('?DiskFree') ()
-WHEN  ('?DiskTotal') ()
-WHEN  ('?DosRel') ()
-WHEN  ('?DosVer') ()
-WHEN  ('?String1') ()
-WHEN  ('?String10') ()
-WHEN  ('?String12') ()
-WHEN  ('?String1:2') ()
-WHEN  ('?String3') ()
-WHEN  ('?WinRel') ()
-WHEN  ('?WinVer') ()
-
-%PreLookupField DEPEND %Control COMPONENT TIMES 11
-WHEN  ('?DiskFree') ()
-WHEN  ('?DiskTotal') ()
-WHEN  ('?DosRel') ()
-WHEN  ('?DosVer') ()
-WHEN  ('?String1') ()
-WHEN  ('?String10') ()
-WHEN  ('?String12') ()
-WHEN  ('?String1:2') ()
-WHEN  ('?String3') ()
-WHEN  ('?WinRel') ()
-WHEN  ('?WinVer') ()
-
-%PreLookupProcedure DEPEND %Control PROCEDURE TIMES 11
-WHEN  ('?DiskFree') ()
-WHEN  ('?DiskTotal') ()
-WHEN  ('?DosRel') ()
-WHEN  ('?DosVer') ()
-WHEN  ('?String1') ()
-WHEN  ('?String10') ()
-WHEN  ('?String12') ()
-WHEN  ('?String1:2') ()
-WHEN  ('?String3') ()
-WHEN  ('?WinRel') ()
-WHEN  ('?WinVer') ()
-
-%PostLookupKey DEPEND %Control KEY TIMES 11
-WHEN  ('?DiskFree') ()
-WHEN  ('?DiskTotal') ()
-WHEN  ('?DosRel') ()
-WHEN  ('?DosVer') ()
-WHEN  ('?String1') ()
-WHEN  ('?String10') ()
-WHEN  ('?String12') ()
-WHEN  ('?String1:2') ()
-WHEN  ('?String3') ()
-WHEN  ('?WinRel') ()
-WHEN  ('?WinVer') ()
-
-%PostLookupField DEPEND %Control COMPONENT TIMES 11
-WHEN  ('?DiskFree') ()
-WHEN  ('?DiskTotal') ()
-WHEN  ('?DosRel') ()
-WHEN  ('?DosVer') ()
-WHEN  ('?String1') ()
-WHEN  ('?String10') ()
-WHEN  ('?String12') ()
-WHEN  ('?String1:2') ()
-WHEN  ('?String3') ()
-WHEN  ('?WinRel') ()
-WHEN  ('?WinVer') ()
-
-%PostLookupProcedure DEPEND %Control PROCEDURE TIMES 11
-WHEN  ('?DiskFree') ()
-WHEN  ('?DiskTotal') ()
-WHEN  ('?DosRel') ()
-WHEN  ('?DosVer') ()
-WHEN  ('?String1') ()
-WHEN  ('?String10') ()
-WHEN  ('?String12') ()
-WHEN  ('?String1:2') ()
-WHEN  ('?String3') ()
-WHEN  ('?WinRel') ()
-WHEN  ('?WinVer') ()
-
-%PostLookupDuringValidate DEPEND %Control LONG TIMES 32
-WHEN  ('') (1)
-WHEN  ('?Close') (1)
-WHEN  ('?DiskFree') (1)
-WHEN  ('?DiskTotal') (1)
-WHEN  ('?DosRel') (1)
-WHEN  ('?DosVer') (1)
-WHEN  ('?OsBits') (1)
-WHEN  ('?RamFree') (1)
-WHEN  ('?RamTotal') (1)
-WHEN  ('?RamUsed') (1)
-WHEN  ('?String1') (1)
-WHEN  ('?String10') (1)
-WHEN  ('?String12') (1)
-WHEN  ('?String1:2') (1)
-WHEN  ('?String25') (1)
-WHEN  ('?String26') (1)
-WHEN  ('?String27') (1)
-WHEN  ('?String28') (1)
-WHEN  ('?String29') (1)
-WHEN  ('?String3') (1)
-WHEN  ('?String30') (1)
-WHEN  ('?String31') (1)
-WHEN  ('?String32') (1)
-WHEN  ('?SwapFree') (1)
-WHEN  ('?SwapTotal') (1)
-WHEN  ('?SwapUsed') (1)
-WHEN  ('?UserMemory') (1)
-WHEN  ('?VirtualFree') (1)
-WHEN  ('?VirtualTotal') (1)
-WHEN  ('?VirtualUsed') (1)
-WHEN  ('?WinRel') (1)
-WHEN  ('?WinVer') (1)
-
-%ForceWindowRefresh DEPEND %Control LONG TIMES 11
-WHEN  ('?DiskFree') (0)
-WHEN  ('?DiskTotal') (0)
-WHEN  ('?DosRel') (0)
-WHEN  ('?DosVer') (0)
-WHEN  ('?String1') (0)
-WHEN  ('?String10') (0)
-WHEN  ('?String12') (0)
-WHEN  ('?String1:2') (0)
-WHEN  ('?String3') (0)
-WHEN  ('?WinRel') (0)
-WHEN  ('?WinVer') (0)
-
-%CheckedAssigns DEPEND %Control MULTI LONG TIMES 0
-
-%CheckedAssignVariable DEPEND %CheckedAssigns FIELD TIMES 11
-WHEN  ('?DiskFree')TIMES 0
-WHEN  ('?DiskTotal')TIMES 0
-WHEN  ('?DosRel')TIMES 0
-WHEN  ('?DosVer')TIMES 0
-WHEN  ('?String1')TIMES 0
-WHEN  ('?String10')TIMES 0
-WHEN  ('?String12')TIMES 0
-WHEN  ('?String1:2')TIMES 0
-WHEN  ('?String3')TIMES 0
-WHEN  ('?WinRel')TIMES 0
-WHEN  ('?WinVer')TIMES 0
-
-%CheckedAssignValue DEPEND %CheckedAssigns DEFAULT TIMES 11
-WHEN  ('?DiskFree')TIMES 0
-WHEN  ('?DiskTotal')TIMES 0
-WHEN  ('?DosRel')TIMES 0
-WHEN  ('?DosVer')TIMES 0
-WHEN  ('?String1')TIMES 0
-WHEN  ('?String10')TIMES 0
-WHEN  ('?String12')TIMES 0
-WHEN  ('?String1:2')TIMES 0
-WHEN  ('?String3')TIMES 0
-WHEN  ('?WinRel')TIMES 0
-WHEN  ('?WinVer')TIMES 0
-
-%CheckedHides DEPEND %Control MULTI LONG TIMES 0
-
-%CheckedControl DEPEND %CheckedHides DEFAULT TIMES 11
-WHEN  ('?DiskFree')TIMES 0
-WHEN  ('?DiskTotal')TIMES 0
-WHEN  ('?DosRel')TIMES 0
-WHEN  ('?DosVer')TIMES 0
-WHEN  ('?String1')TIMES 0
-WHEN  ('?String10')TIMES 0
-WHEN  ('?String12')TIMES 0
-WHEN  ('?String1:2')TIMES 0
-WHEN  ('?String3')TIMES 0
-WHEN  ('?WinRel')TIMES 0
-WHEN  ('?WinVer')TIMES 0
-
-%CheckedControlAction DEPEND %CheckedHides DEFAULT TIMES 32
-WHEN  ('')TIMES 0
-WHEN  ('?Close')TIMES 0
-WHEN  ('?DiskFree')TIMES 0
-WHEN  ('?DiskTotal')TIMES 0
-WHEN  ('?DosRel')TIMES 0
-WHEN  ('?DosVer')TIMES 0
-WHEN  ('?OsBits')TIMES 0
-WHEN  ('?RamFree')TIMES 0
-WHEN  ('?RamTotal')TIMES 0
-WHEN  ('?RamUsed')TIMES 0
-WHEN  ('?String1')TIMES 0
-WHEN  ('?String10')TIMES 0
-WHEN  ('?String12')TIMES 0
-WHEN  ('?String1:2')TIMES 0
-WHEN  ('?String25')TIMES 0
-WHEN  ('?String26')TIMES 0
-WHEN  ('?String27')TIMES 0
-WHEN  ('?String28')TIMES 0
-WHEN  ('?String29')TIMES 0
-WHEN  ('?String3')TIMES 0
-WHEN  ('?String30')TIMES 0
-WHEN  ('?String31')TIMES 0
-WHEN  ('?String32')TIMES 0
-WHEN  ('?SwapFree')TIMES 0
-WHEN  ('?SwapTotal')TIMES 0
-WHEN  ('?SwapUsed')TIMES 0
-WHEN  ('?UserMemory')TIMES 0
-WHEN  ('?VirtualFree')TIMES 0
-WHEN  ('?VirtualTotal')TIMES 0
-WHEN  ('?VirtualUsed')TIMES 0
-WHEN  ('?WinRel')TIMES 0
-WHEN  ('?WinVer')TIMES 0
-
-%UncheckedAssigns DEPEND %Control MULTI LONG TIMES 0
-
-%UncheckedAssignVariable DEPEND %UncheckedAssigns FIELD TIMES 11
-WHEN  ('?DiskFree')TIMES 0
-WHEN  ('?DiskTotal')TIMES 0
-WHEN  ('?DosRel')TIMES 0
-WHEN  ('?DosVer')TIMES 0
-WHEN  ('?String1')TIMES 0
-WHEN  ('?String10')TIMES 0
-WHEN  ('?String12')TIMES 0
-WHEN  ('?String1:2')TIMES 0
-WHEN  ('?String3')TIMES 0
-WHEN  ('?WinRel')TIMES 0
-WHEN  ('?WinVer')TIMES 0
-
-%UncheckedAssignValue DEPEND %UncheckedAssigns DEFAULT TIMES 11
-WHEN  ('?DiskFree')TIMES 0
-WHEN  ('?DiskTotal')TIMES 0
-WHEN  ('?DosRel')TIMES 0
-WHEN  ('?DosVer')TIMES 0
-WHEN  ('?String1')TIMES 0
-WHEN  ('?String10')TIMES 0
-WHEN  ('?String12')TIMES 0
-WHEN  ('?String1:2')TIMES 0
-WHEN  ('?String3')TIMES 0
-WHEN  ('?WinRel')TIMES 0
-WHEN  ('?WinVer')TIMES 0
-
-%UnCheckedHides DEPEND %Control MULTI LONG TIMES 0
-
-%UnCheckedControl DEPEND %UnCheckedHides DEFAULT TIMES 11
-WHEN  ('?DiskFree')TIMES 0
-WHEN  ('?DiskTotal')TIMES 0
-WHEN  ('?DosRel')TIMES 0
-WHEN  ('?DosVer')TIMES 0
-WHEN  ('?String1')TIMES 0
-WHEN  ('?String10')TIMES 0
-WHEN  ('?String12')TIMES 0
-WHEN  ('?String1:2')TIMES 0
-WHEN  ('?String3')TIMES 0
-WHEN  ('?WinRel')TIMES 0
-WHEN  ('?WinVer')TIMES 0
-
-%UnCheckedControlAction DEPEND %UnCheckedHides DEFAULT TIMES 32
-WHEN  ('')TIMES 0
-WHEN  ('?Close')TIMES 0
-WHEN  ('?DiskFree')TIMES 0
-WHEN  ('?DiskTotal')TIMES 0
-WHEN  ('?DosRel')TIMES 0
-WHEN  ('?DosVer')TIMES 0
-WHEN  ('?OsBits')TIMES 0
-WHEN  ('?RamFree')TIMES 0
-WHEN  ('?RamTotal')TIMES 0
-WHEN  ('?RamUsed')TIMES 0
-WHEN  ('?String1')TIMES 0
-WHEN  ('?String10')TIMES 0
-WHEN  ('?String12')TIMES 0
-WHEN  ('?String1:2')TIMES 0
-WHEN  ('?String25')TIMES 0
-WHEN  ('?String26')TIMES 0
-WHEN  ('?String27')TIMES 0
-WHEN  ('?String28')TIMES 0
-WHEN  ('?String29')TIMES 0
-WHEN  ('?String3')TIMES 0
-WHEN  ('?String30')TIMES 0
-WHEN  ('?String31')TIMES 0
-WHEN  ('?String32')TIMES 0
-WHEN  ('?SwapFree')TIMES 0
-WHEN  ('?SwapTotal')TIMES 0
-WHEN  ('?SwapUsed')TIMES 0
-WHEN  ('?UserMemory')TIMES 0
-WHEN  ('?VirtualFree')TIMES 0
-WHEN  ('?VirtualTotal')TIMES 0
-WHEN  ('?VirtualUsed')TIMES 0
-WHEN  ('?WinRel')TIMES 0
-WHEN  ('?WinVer')TIMES 0
-
-%ClassItem UNIQUE DEFAULT  ('Default', 'WindowToolbar')
-%DefaultBaseClassType DEPEND %ClassItem DEFAULT TIMES 2
-WHEN  ('Default') ('WindowManager')
-WHEN  ('WindowToolbar') ('ToolbarClass')
-
-%ActualDefaultBaseClassType DEPEND %ClassItem DEFAULT TIMES 2
-WHEN  ('Default') ('')
-WHEN  ('WindowToolbar') ('')
-
-%ClassLines DEPEND %ClassItem MULTI DEFAULT TIMES 1
-WHEN  ('Default') ('Init {19}PROCEDURE(),BYTE,PROC,DERIVED', 'Kill {19}PROCEDURE(),BYTE,PROC,DERIVED', |
-  'TakeAccepted {11}PROCEDURE(),BYTE,PROC,DERIVED', 'TakeEvent {14}PROCEDURE(),BYTE,PROC,DERIVED', |
-  'TakeWindowEvent        PROCEDURE(),BYTE,PROC,DERIVED')
-
-%ThisObjectName DEPEND %ClassItem DEFAULT TIMES 2
-WHEN  ('Default') ('ThisWindow')
-WHEN  ('WindowToolbar') ('Toolbar')
-
-%UseDefaultABCBaseClass DEPEND %ClassItem LONG TIMES 2
-WHEN  ('Default') (1)
-WHEN  ('WindowToolbar') (1)
-
-%UseABCBaseClass DEPEND %ClassItem LONG TIMES 2
-WHEN  ('Default') (1)
-WHEN  ('WindowToolbar') (1)
-
-%ABCBaseClass DEPEND %ClassItem DEFAULT TIMES 2
-WHEN  ('Default') ('')
-WHEN  ('WindowToolbar') ('')
-
-%ExtBaseClass DEPEND %ClassItem DEFAULT TIMES 0
-
-%BaseClassIncludeFile DEPEND %ClassItem DEFAULT TIMES 0
-
-%DeriveFromBaseClass DEPEND %ClassItem LONG TIMES 2
-WHEN  ('Default') (0)
-WHEN  ('WindowToolbar') (0)
-
-%NewMethods DEPEND %ClassItem MULTI LONG TIMES 0
-
-%NewMethodName DEPEND %NewMethods DEFAULT TIMES 0
-
-%NewMethodPrototype DEPEND %NewMethods DEFAULT TIMES 0
-
-%NewClassPropertyItems DEPEND %ClassItem MULTI LONG TIMES 0
-
-%NewClassProperty DEPEND %NewClassPropertyItems DEFAULT TIMES 0
-
-%NewClassDataType DEPEND %NewClassPropertyItems DEFAULT TIMES 1
-WHEN  ('WindowToolbar')TIMES 0
-
-%NewClassOtherType DEPEND %NewClassPropertyItems DEFAULT TIMES 0
-
-%NewClassDataIsRef DEPEND %NewClassPropertyItems LONG TIMES 0
-
-%NewClassDataSize DEPEND %NewClassPropertyItems DEFAULT TIMES 0
-
-%NewClassDataDim1 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
-
-%NewClassDataDim2 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
-
-%NewClassDataDim3 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
-
-%NewClassDataDim4 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
-
-%ClassMethods DEPEND %ClassItem MULTI LONG TIMES 0
-
-%ClassMethodName DEPEND %ClassMethods DEFAULT TIMES 0
-
-%ClassMethodPrototype DEPEND %ClassMethods DEFAULT TIMES 0
-
-%ClassPropertyItems DEPEND %ClassItem MULTI LONG TIMES 0
-
-%ClassProperty DEPEND %ClassPropertyItems DEFAULT TIMES 0
-
-%ClassDataType DEPEND %ClassPropertyItems DEFAULT TIMES 1
-WHEN  ('WindowToolbar')TIMES 0
-
-%ClassOtherType DEPEND %ClassPropertyItems DEFAULT TIMES 0
-
-%ClassDataIsRef DEPEND %ClassPropertyItems LONG TIMES 0
-
-%ClassDataSize DEPEND %ClassPropertyItems DEFAULT TIMES 0
-
-%ClassDataDim1 DEPEND %ClassPropertyItems DEFAULT TIMES 0
-
-%ClassDataDim2 DEPEND %ClassPropertyItems DEFAULT TIMES 0
-
-%ClassDataDim3 DEPEND %ClassPropertyItems DEFAULT TIMES 0
-
-%ClassDataDim4 DEPEND %ClassPropertyItems DEFAULT TIMES 0
-
-%CheckedEnables DEPEND %Control MULTI LONG TIMES 0
-
-%CheckedControl1 DEPEND %CheckedEnables DEFAULT TIMES 0
-
-%CheckedControl1Action DEPEND %CheckedEnables DEFAULT TIMES 21
-WHEN  ('')TIMES 0
-WHEN  ('?OsBits')TIMES 0
-WHEN  ('?RamFree')TIMES 0
-WHEN  ('?RamTotal')TIMES 0
-WHEN  ('?RamUsed')TIMES 0
-WHEN  ('?String1:2')TIMES 0
-WHEN  ('?String25')TIMES 0
-WHEN  ('?String26')TIMES 0
-WHEN  ('?String27')TIMES 0
-WHEN  ('?String28')TIMES 0
-WHEN  ('?String29')TIMES 0
-WHEN  ('?String30')TIMES 0
-WHEN  ('?String31')TIMES 0
-WHEN  ('?String32')TIMES 0
-WHEN  ('?SwapFree')TIMES 0
-WHEN  ('?SwapTotal')TIMES 0
-WHEN  ('?SwapUsed')TIMES 0
-WHEN  ('?UserMemory')TIMES 0
-WHEN  ('?VirtualFree')TIMES 0
-WHEN  ('?VirtualTotal')TIMES 0
-WHEN  ('?VirtualUsed')TIMES 0
-
-%UnCheckedEnables DEPEND %Control MULTI LONG TIMES 0
-
-%UnCheckedControl1 DEPEND %UnCheckedEnables DEFAULT TIMES 0
-
-%UnCheckedControl1Action DEPEND %UnCheckedEnables DEFAULT TIMES 21
-WHEN  ('')TIMES 0
-WHEN  ('?OsBits')TIMES 0
-WHEN  ('?RamFree')TIMES 0
-WHEN  ('?RamTotal')TIMES 0
-WHEN  ('?RamUsed')TIMES 0
-WHEN  ('?String1:2')TIMES 0
-WHEN  ('?String25')TIMES 0
-WHEN  ('?String26')TIMES 0
-WHEN  ('?String27')TIMES 0
-WHEN  ('?String28')TIMES 0
-WHEN  ('?String29')TIMES 0
-WHEN  ('?String30')TIMES 0
-WHEN  ('?String31')TIMES 0
-WHEN  ('?String32')TIMES 0
-WHEN  ('?SwapFree')TIMES 0
-WHEN  ('?SwapTotal')TIMES 0
-WHEN  ('?SwapUsed')TIMES 0
-WHEN  ('?UserMemory')TIMES 0
-WHEN  ('?VirtualFree')TIMES 0
-WHEN  ('?VirtualTotal')TIMES 0
-WHEN  ('?VirtualUsed')TIMES 0
-
-%ButtonReturnValueAssignment DEPEND %Control FIELD TIMES 0
-
-%ButtonReturnValueReferenceAssign DEPEND %Control LONG TIMES 0
-
-%ButtonThreadParameters DEPEND %Control DEFAULT TIMES 0
-
-%ButtonThreadReturnValueAssignment DEPEND %Control FIELD TIMES 0
-
-%LookupAssign DEPEND %Control MULTI LONG TIMES 0
-
-%MoreField DEPEND %LookupAssign DEFAULT TIMES 0
-
-%MoreTarget DEPEND %LookupAssign FIELD TIMES 0
-
-%GlobalObject DEPEND %ClassItem DEFAULT TIMES 2
-WHEN  ('Default') ('NO')
-WHEN  ('WindowToolbar') ('NO')
-
-%ProcedureDisableEnhanceFocus LONG  (0)
-%ProcedureUseEnterInsteadTabOverride LONG  (0)
-%WindowUseEnterInsteadTab LONG  (1)
-%ProcedureUseEnterInsteadTabExcludeListCombo LONG  (0)
-%ProcedureUseEnterInsteadTabEnableNextTabStop LONG  (0)
-%ProcedureUseEnterInsteadTabExcludeG LONG  (1)
-%WindowUseEnterInsteadTabExclude MULTI DEFAULT  ()
-%WindowStyles MULTI LONG  ()
-%WindowStyleFontName DEPEND %WindowStyles DEFAULT TIMES 0
-
-%WindowStyleFontNameVariable DEPEND %WindowStyles DEFAULT TIMES 0
-
-%WindowStyleFontNameIsVariable DEPEND %WindowStyles LONG TIMES 0
-
-%WindowStyleFontSize DEPEND %WindowStyles DEFAULT TIMES 0
-
-%WindowStyleFontSizeVariable DEPEND %WindowStyles DEFAULT TIMES 0
-
-%WindowStyleFontSizeIsVariable DEPEND %WindowStyles LONG TIMES 0
-
-%WindowStyleFontStyle DEPEND %WindowStyles DEFAULT TIMES 0
-
-%WindowStyleFontStyleVariable DEPEND %WindowStyles DEFAULT TIMES 0
-
-%WindowStyleFontStyleIsVariable DEPEND %WindowStyles LONG TIMES 0
-
-%WindowStyleFontColor DEPEND %WindowStyles DEFAULT TIMES 0
-
-%WindowStyleFontCharSet DEPEND %WindowStyles DEFAULT TIMES 0
-
-%WindowStyleForegroundNormal DEPEND %WindowStyles LONG TIMES 0
-
-%WindowStyleForegroundNormalVariable DEPEND %WindowStyles DEFAULT TIMES 0
-
-%WindowStyleForegroundNormalIsVariable DEPEND %WindowStyles LONG TIMES 0
-
-%WindowStyleBackgroundNormal DEPEND %WindowStyles LONG TIMES 0
-
-%WindowStyleBackgroundNormalVariable DEPEND %WindowStyles DEFAULT TIMES 0
-
-%WindowStyleBackgroundNormalIsVariable DEPEND %WindowStyles LONG TIMES 0
-
-%WindowStyleForegroundSelected DEPEND %WindowStyles LONG TIMES 0
-
-%WindowStyleForegroundSelectedVariable DEPEND %WindowStyles DEFAULT TIMES 0
-
-%WindowStyleForegroundSelectedIsVariable DEPEND %WindowStyles LONG TIMES 0
-
-%WindowStyleBackgroundSelected DEPEND %WindowStyles LONG TIMES 0
-
-%WindowStyleBackgroundSelectedVariable DEPEND %WindowStyles DEFAULT TIMES 0
-
-%WindowStyleBackgroundSelectedIsVariable DEPEND %WindowStyles LONG TIMES 0
-
-%WindowStylePicture DEPEND %WindowStyles DEFAULT TIMES 0
-
-%WindowStylePictureVariable DEPEND %WindowStyles DEFAULT TIMES 0
-
-%WindowStylePictureIsVariable DEPEND %WindowStyles LONG TIMES 0
-
-%WindowStyleOtherListboxes MULTI DEFAULT  ()
-%ProcedureAutoBindFields MULTI LONG  ()
-%ProcedureAutoBindField DEPEND %ProcedureAutoBindFields DEFAULT TIMES 0
-
-%ProcedureAutoBindFieldTPL DEPEND %ProcedureAutoBindFields DEFAULT TIMES 0
-
-%ProcedureAutoBindProcedures MULTI LONG  ()
-%ProcedureAutoBindProcedure DEPEND %ProcedureAutoBindProcedures DEFAULT TIMES 0
-
-%ProcedureAutoBindProcedureTPL DEPEND %ProcedureAutoBindProcedures DEFAULT TIMES 0
-
-%ProcedureAutoBindFieldsIgnored MULTI LONG  ()
-%ProcedureAutoBindFieldIgnored DEPEND %ProcedureAutoBindFieldsIgnored DEFAULT TIMES 0
-
-%ProcedureAutoBindProceduresIgnored MULTI LONG  ()
-%ProcedureAutoBindProcedureIgnored DEPEND %ProcedureAutoBindProceduresIgnored DEFAULT TIMES 0
-
-%ProcedureAutoBindValidToAddField LONG  (0)
-%ProcedureUserBindFields MULTI LONG  ()
-%ProcedureUserBindField DEPEND %ProcedureUserBindFields FIELD TIMES 0
-
-%ProcedureAutoBindFieldIgnore DEPEND %ProcedureAutoBindFields LONG TIMES 0
-
-%ProcedureUserBindProcedures MULTI LONG  ()
-%ProcedureUserBindProcedure DEPEND %ProcedureUserBindProcedures PROCEDURE TIMES 0
-
-%ProcedureAutoBindProcedureIgnore DEPEND %ProcedureAutoBindProcedures LONG TIMES 0
-
-%ProcedureUserBindExpressions MULTI LONG  ()
-%ProcedureUserBindExpressionName DEPEND %ProcedureUserBindExpressions DEFAULT TIMES 0
-
-%ProcedureUserBindExpression DEPEND %ProcedureUserBindExpressions DEFAULT TIMES 0
-
-%ExtUITabIcon DEPEND %Control DEFAULT TIMES 0
-
-%ExtUITabStyleOverrideGlobal DEPEND %Control LONG TIMES 0
-
-%ExtUITabStyle DEPEND %Control DEFAULT TIMES 2
-WHEN  ('') ('Default')
-WHEN  ('?OsBits') ('Default')
-
-%PreLookupProcedureParameters DEPEND %Control DEFAULT TIMES 0
-
-%PostLookupProcedureParameters DEPEND %Control DEFAULT TIMES 0
-
-%CheckedDisables DEPEND %Control MULTI LONG TIMES 0
-
-%CheckedDisableControl DEPEND %CheckedDisables DEFAULT TIMES 0
-
-%CheckedDisableControlAction DEPEND %CheckedDisables DEFAULT TIMES 2
-WHEN  ('')TIMES 0
-WHEN  ('?OsBits')TIMES 0
-
-%UnCheckedDisables DEPEND %Control MULTI LONG TIMES 0
-
-%UnCheckedDisableControl DEPEND %UnCheckedDisables DEFAULT TIMES 0
-
-%UnCheckedDisableControlAction DEPEND %UnCheckedDisables DEFAULT TIMES 2
-WHEN  ('')TIMES 0
-WHEN  ('?OsBits')TIMES 0
-
-%ProcedureOneInstance LONG  (0)
-%PreserveVarsLoc MULTI LONG  ()
-%PreserveVarLoc DEPEND %PreserveVarsLoc DEFAULT TIMES 0
-
-%FieldGradientColorType DEPEND %Control DEFAULT TIMES 3
-WHEN  ('') ('Off')
-WHEN  ('?Close') ('Off')
-WHEN  ('?OsBits') ('Off')
-
-%FieldGradientColorTypeVariable DEPEND %Control DEFAULT TIMES 3
-WHEN  ('') ('')
-WHEN  ('?Close') ('')
-WHEN  ('?OsBits') ('')
-
-%FieldGradientColorTypeIsVariable DEPEND %Control LONG TIMES 3
-WHEN  ('') (0)
-WHEN  ('?Close') (0)
-WHEN  ('?OsBits') (0)
-
-%FieldGradientColorFrom DEPEND %Control LONG TIMES 3
-WHEN  ('') (-1)
-WHEN  ('?Close') (-1)
-WHEN  ('?OsBits') (-1)
-
-%FieldGradientColorFromVariable DEPEND %Control DEFAULT TIMES 0
-
-%FieldGradientColorFromIsVariable DEPEND %Control LONG TIMES 3
-WHEN  ('') (0)
-WHEN  ('?Close') (0)
-WHEN  ('?OsBits') (0)
-
-%FieldGradientColorTo DEPEND %Control LONG TIMES 3
-WHEN  ('') (-1)
-WHEN  ('?Close') (-1)
-WHEN  ('?OsBits') (-1)
-
-%FieldGradientColorToVariable DEPEND %Control DEFAULT TIMES 0
-
-%FieldGradientColorToIsVariable DEPEND %Control LONG TIMES 3
-WHEN  ('') (0)
-WHEN  ('?Close') (0)
-WHEN  ('?OsBits') (0)
-
-%ActiveImageEnable DEPEND %Control LONG TIMES 0
-
-%AIObjectName DEPEND %Control DEFAULT TIMES 2
-WHEN  ('') ('AIBtn0')
-WHEN  ('?OsBits') ('AIBtn46')
-
-%AIEnableMimicControl DEPEND %Control LONG TIMES 2
-WHEN  ('') (1)
-WHEN  ('?OsBits') (1)
-
-%AIMimicControl DEPEND %Control DEFAULT TIMES 2
-WHEN  ('') ('?Close')
-WHEN  ('?OsBits') ('?Close')
-
-%AIImgRound DEPEND %Control LONG TIMES 0
-
-%AIOverrideImg DEPEND %Control DEFAULT TIMES 0
-
-%AIOverrideImgVariable DEPEND %Control DEFAULT TIMES 0
-
-%AIOverrideImgIsVariable DEPEND %Control LONG TIMES 2
-WHEN  ('') (0)
-WHEN  ('?OsBits') (0)
-
-%AIDisableImg DEPEND %Control DEFAULT TIMES 0
-
-%AIDisableImgVariable DEPEND %Control DEFAULT TIMES 0
-
-%AIDisableImgIsVariable DEPEND %Control LONG TIMES 2
-WHEN  ('') (0)
-WHEN  ('?OsBits') (0)
-
-%AIHotImg DEPEND %Control DEFAULT TIMES 0
-
-%AIHotImgVariable DEPEND %Control DEFAULT TIMES 0
-
-%AIHotImgIsVariable DEPEND %Control LONG TIMES 2
-WHEN  ('') (0)
-WHEN  ('?OsBits') (0)
-
-%AIPressedImg DEPEND %Control DEFAULT TIMES 0
-
-%AIPressedImgVariable DEPEND %Control DEFAULT TIMES 0
-
-%AIPressedImgIsVariable DEPEND %Control LONG TIMES 2
-WHEN  ('') (0)
-WHEN  ('?OsBits') (0)
-
-[EMBED]
-EMBED %ProcedureSetup
-[DEFINITION]
-[SOURCE]
-PROPERTY:BEGIN
-PRIORITY 4000
-PROPERTY:END
-  NewWinVersion = ds_GetWinVersion()
-  WinVer = WindowsVersion()
-  WinRel = WindowsRelease()
-  DosVer = DosVersion()
-  DosRel = DosRelease()
-  DiskFree = ds_GetDiskMegs('c:','User Free')
-  DiskTotal = ds_GetDiskMegs('c:','Total')
-
-  SwapUsed     = ds_Memory('SWAP USED')
-  SwapFree     = ds_Memory('SWAP FREE')
-  SwapTotal    = ds_Memory('SWAP TOTAL')
-  RamFree      = ds_Memory('RAM FREE')
-  RamUsed      = ds_Memory('RAM USED')
-  RamTotal     = ds_Memory('RAM TOTAL')
-  VirtualUsed  = ds_Memory('VMEM USED')
-  VirtualFree  = ds_Memory('VMEM FREE')
-  VirtualTotal = ds_Memory('VMEM TOTAL')
-  UserMemory   = ds_Memory('USER')
-
-  ScreenyDPI = ds_GetScreenDPI(1)
-  ScreenxDPI = ds_GetScreenDPI()
-  ScreenWidth = ScreenWidth()
-  ScreenHeight = ScreenHeight()
-  ScreenDepth = ScreenDepth()
-  OsBits = ds_OsBits()
-[END]
-EMBED %DataSection
-[DEFINITION]
-[SOURCE]
-PROPERTY:BEGIN
-PRIORITY 50
-PROPERTY:END
-
-! This window shamelessly copied from the CapeSoft WinEvent demo program, written by Bruce Johnson
-! Copyright (c) CapeSoft
-! Minor layout tweaks by Donn Edwards and removal of several options to simplify
-[END]
-EMBED %ControlEventHandling
-[INSTANCES]
-WHEN '?Close'
-[INSTANCES]
-WHEN 'Accepted'
-[DEFINITION]
-[GROUP]
-PRIORITY 4499
-INSTANCE 3
-[END]
-[END]
-[END]
-[END]
-[ADDITION]
-NAME ABC CloseCurrentWindow
-[INSTANCE]
-INSTANCE 3
-[ADDITION]
-NAME WinEvent WinEvent
-[INSTANCE]
-INSTANCE 1
-OWNER 6
-[PROMPTS]
-%AutoDown LONG  (0)
-%WinAlert MULTI LONG  ()
-%Mess DEPEND %WinAlert DEFAULT TIMES 0
-
-%Act1 DEPEND %WinAlert DEFAULT TIMES 0
-
-%act2 DEPEND %WinAlert DEFAULT TIMES 0
-
-%NoAutoDown LONG  (0)
-%AlertWinEventDebug LONG  (0)
-%DisplayCompileDate LONG  (0)
-%SortListbox MULTI LONG  ()
-%ThisListbox DEPEND %SortListbox DEFAULT TIMES 0
-
-%ThisListboxHeader DEPEND %SortListbox MULTI DEFAULT TIMES 0
-
-%gloWinEventTesting LONG  (0)
-%gloWinEventTestingColor1 LONG  (15728618)
-%gloWinEventTestingColor2 LONG  (16777215)
-%ShowBeta DEFAULT  ('1')
-%EnableWheelMouse LONG  (0)
-%AutoDownNM LONG  (0)
-%DisplayCompileDateFormat DEFAULT  ('@D6')
-%DisableWinEvent LONG  (0)
-%LocWindowsVisible DEFAULT  ('0')
-%WindowsVisibleAfterOpen LONG  (1)
-%CheckForCantCloseNowSetHere LONG  (1)
-%locNoHandleCloseDown LONG  (0)
-%locCloseDownWhenWindowCloses LONG  (0)
-%locCloseDownWhenWindowClosesSet LONG  (0)
-%locCloseDownWhenWindowClosesCtrl DEFAULT  ('')
-%altWinFix DEFAULT  ('Default')
-%AlertControl DEPEND %WinAlert DEFAULT TIMES 0
-
-%AlertControlType DEPEND %WinAlert DEFAULT TIMES 0
-
-[WINDOW]
-window  WINDOW('WinEvent System Info'),AT(,,301,227),FONT('Segoe UI',10,,FONT:regular),DOUBLE, |
-          CENTER,ICON('System.ico'),IMM,SYSTEM
-          BUTTON(' Close'),AT(238,200,54),USE(?Close),LEFT,ICON('System.ico'),#ORIG(?Close), |
-            #ORDINAL(1)
-          STRING('Windows Version:'),AT(13,26,83),USE(?String1),RIGHT,#ORIG(?String1),#ORDINAL(2)
-          STRING(@s3),AT(102,26),USE(WinVer),LEFT,#ORIG(?String2),#ORDINAL(3)
-          STRING('Release:'),AT(126,26),USE(?String3),#ORIG(?String3),#ORDINAL(4)
-          STRING(@s3),AT(157,26,17,10),USE(WinRel),#ORIG(?String4),#ORDINAL(5)
-          STRING(@s3),AT(157,37),USE(DosRel),#ORIG(?String8),#ORDINAL(6)
-          PROMPT('Windows Version Name:'),AT(13,13,83),USE(?NewWinVersion:Prompt),RIGHT,#LINK(?NewWinVersion), |
-            #ORIG(?NewWinVersion:Prompt),#ORDINAL(7)
-          STRING(@s60),AT(102,13,187),USE(NewWinVersion),TRN,#LINK(?NewWinVersion:Prompt), |
-            #ORIG(NewWinVersion),#ORDINAL(8)
-          STRING('Available Space (C:):'),AT(13,57,83),USE(?String10),RIGHT,#ORIG(?String10), |
-            #ORDINAL(9)
-          STRING(@n13),AT(102,57),USE(DiskFree),RIGHT,#ORIG(?String11),#ORDINAL(10)
-          PROMPT('MB'),AT(170,57,26),USE(?Prompt2),#ORIG(?Prompt2),#ORDINAL(11)
-          STRING('Maximum Capacity (C:):'),AT(13,69,83),USE(?String12),RIGHT,#ORIG(?String12), |
-            #ORDINAL(12)
-          STRING(@n13),AT(102,69),USE(DiskTotal),RIGHT,#ORIG(?String13),#ORDINAL(13)
-          PROMPT('MB'),AT(170,69,26),USE(?Prompt3),#ORIG(?Prompt3),#ORDINAL(14)
-          STRING('Memory Used by this program (Kb):'),AT(21,90,133),USE(?String30),FONT(,, |
-            COLOR:Navy),RIGHT,#ORIG(?String30),#ORDINAL(15)
-          STRING(@n13),AT(154,90),USE(UserMemory),FONT(,,COLOR:Navy),RIGHT,#ORIG(?String39), |
-            #ORDINAL(16)
-          STRING('Memory Analysis for the whole machine (in Kb)'),AT(21,101),USE(?String28), |
-            FONT(,,COLOR:Navy),#ORIG(?String28),#ORDINAL(17)
-          STRING('Total'),AT(122,111,23),USE(?String25),FONT(,,COLOR:Navy,FONT:regular,CHARSET:ANSI), |
-            RIGHT,#ORIG(?String25),#ORDINAL(18)
-          STRING('Free'),AT(259,111,23),USE(?String27),FONT(,,COLOR:Navy,FONT:regular,CHARSET:ANSI), |
-            RIGHT,#ORIG(?String27),#ORDINAL(19)
-          STRING('Physical Ram:'),AT(19,121,65),USE(?String29),FONT(,,COLOR:Navy,FONT:regular, |
-            CHARSET:ANSI),RIGHT,#ORIG(?String29),#ORDINAL(20)
-          STRING(@n13),AT(89,121),USE(RamTotal),FONT(,,COLOR:Navy),RIGHT,#ORIG(?String33), |
-            #ORDINAL(21)
-          STRING(@n13),AT(154,121),USE(RamUsed),FONT(,,COLOR:Navy),RIGHT,#ORIG(?String33), |
-            #ORDINAL(22)
-          STRING(@n13),AT(227,121),USE(RamFree),FONT(,,COLOR:Navy),RIGHT,#ORIG(?String36), |
-            #ORDINAL(23)
-          STRING('Swap File:'),AT(19,132,65),USE(?String31),FONT(,,COLOR:Navy,FONT:regular, |
-            CHARSET:ANSI),RIGHT,#ORIG(?String31),#ORDINAL(24)
-          STRING(@n13),AT(89,132),USE(SwapTotal),FONT(,,COLOR:Navy),RIGHT,#ORIG(?String34), |
-            #ORDINAL(25)
-          STRING(@n13),AT(154,132),USE(SwapUsed),FONT(,,COLOR:Navy),RIGHT,#ORIG(?String34), |
-            #ORDINAL(26)
-          STRING(@n13),AT(227,132),USE(SwapFree),FONT(,,COLOR:Navy),RIGHT,#ORIG(?String37), |
-            #ORDINAL(27)
-          STRING('Virtual Memory:'),AT(19,143,65),USE(?String32),FONT(,,COLOR:Navy,FONT:regular, |
-            CHARSET:ANSI),RIGHT,#ORIG(?String32),#ORDINAL(28)
-          STRING(@n13),AT(89,143),USE(VirtualTotal),FONT(,,COLOR:Navy),RIGHT,#ORIG(?String35), |
-            #ORDINAL(29)
-          STRING(@n13),AT(154,143),USE(VirtualUsed),FONT(,,COLOR:Navy),RIGHT,#ORIG(?String35), |
-            #ORDINAL(30)
-          STRING(@n13),AT(227,143),USE(VirtualFree),FONT(,,COLOR:Navy),RIGHT,#ORIG(?String38), |
-            #ORDINAL(31)
-          PROMPT('Screen Width:'),AT(34,174,79),USE(?ScreenWidth:Prompt),RIGHT,#LINK(?ScreenWidth), |
-            #ORIG(?ScreenWidth:Prompt),#ORDINAL(32)
-          STRING(@n-14),AT(112,173),USE(ScreenWidth),RIGHT(1),#LINK(?ScreenWidth:Prompt),#ORIG(ScreenWidth), |
-            #ORDINAL(33)
-          STRING('Used'),AT(186,111,23),USE(?String26),FONT(,,COLOR:Navy,FONT:regular,CHARSET:ANSI), |
-            RIGHT,#ORIG(?String26),#ORDINAL(34)
-          STRING('Release:'),AT(126,37),USE(?String3:2),#ORIG(?String3),#ORDINAL(35)
-          STRING(@s3),AT(102,37),USE(DosVer),LEFT,#ORIG(?String7),#ORDINAL(36)
-          STRING('Dos Version:'),AT(13,37,83),USE(?String1:2),RIGHT,#ORIG(?String1),#ORDINAL(37)
-          PROMPT('Screen Height:'),AT(34,185,79),USE(?ScreenHeight:Prompt),RIGHT,#LINK(?ScreenHeight), |
-            #ORIG(?ScreenHeight:Prompt),#ORDINAL(38)
-          STRING(@n-14),AT(112,185),USE(ScreenHeight),RIGHT(1),#LINK(?ScreenHeight:Prompt), |
-            #ORIG(ScreenHeight),#ORDINAL(39)
-          PROMPT('Screen Depth:'),AT(34,197,79),USE(?ScreenDepth:Prompt),RIGHT,#LINK(?ScreenDepth), |
-            #ORIG(?ScreenDepth:Prompt),#ORDINAL(40)
-          STRING(@n-14),AT(112,197),USE(ScreenDepth),RIGHT(1),#LINK(?ScreenDepth:Prompt),#ORIG(ScreenDepth), |
-            #ORDINAL(41)
-          PROMPT('Screenx DPI:'),AT(34,162,79),USE(?ScreenxDPI:Prompt),RIGHT,#LINK(?ScreenxDPI), |
-            #ORIG(?ScreenxDPI:Prompt),#ORDINAL(42)
-          STRING(@n-14),AT(112,162),USE(ScreenxDPI),RIGHT(1),#LINK(?ScreenxDPI:Prompt),#ORIG(ScreenxDPI), |
-            #ORDINAL(43)
-          STRING(@n-14),AT(185,162),USE(ScreenyDPI),#LINK(?ScreenyDPI:Prompt),#ORIG(ScreenyDPI), |
-            #ORDINAL(44)
-          STRING('OS Bits:'),AT(185,37),USE(?STRING2),#ORDINAL(45)
-          STRING(@n3),AT(215,37),USE(OsBits),#ORDINAL(46)
-        END
-
-[END]
-[MODULE]
-[COMMON]
-FROM ABC GENERATED
-MODIFIED '2023/09/30' '16:44:45'
+MODIFIED '2023/09/30' '17:13:56'
 [PROCEDURE]
 NAME dbg
 PROTOTYPE '(string pstrDebugMessage)'
@@ -8009,653 +8656,6 @@ OWNER 6
 %AlertControlType DEPEND %WinAlert DEFAULT TIMES 0
 
 %locCloseDownWhenWindowClosesSet LONG  (0)
-[END]
-[MODULE]
-[COMMON]
-FROM ABC GENERATED
-MODIFIED '2023/09/30' '17:13:56'
-[PROCEDURE]
-NAME MainDashboard
-[COMMON]
-DESCRIPTION 'Window'
-FROM ABC Window
-CATEGORY 'Window'
-MODIFIED '2023/10/17' '19:17:08'
-[PROMPTS]
-%ButtonAction DEPEND %Control DEFAULT TIMES 3
-WHEN  ('') ('No Special Action')
-WHEN  ('?Ok') ('No Special Action')
-WHEN  ('?btnScanFiles') ('No Special Action')
-
-%ButtonRunName DEPEND %Control DEFAULT TIMES 0
-
-%ButtonRunParameters DEPEND %Control DEFAULT TIMES 0
-
-%ButtonProcedure DEPEND %Control PROCEDURE TIMES 0
-
-%ButtonThread DEPEND %Control LONG TIMES 0
-
-%ButtonThreadStack DEPEND %Control DEFAULT TIMES 3
-WHEN  ('') ('25000')
-WHEN  ('?Ok') ('25000')
-WHEN  ('?btnScanFiles') ('25000')
-
-%ButtonParameters DEPEND %Control DEFAULT TIMES 0
-
-%ButtonRequest DEPEND %Control DEFAULT TIMES 3
-WHEN  ('') ('None')
-WHEN  ('?Ok') ('None')
-WHEN  ('?btnScanFiles') ('None')
-
-%PreLookupKey DEPEND %Control KEY TIMES 0
-
-%PreLookupField DEPEND %Control COMPONENT TIMES 0
-
-%PreLookupProcedure DEPEND %Control PROCEDURE TIMES 0
-
-%PostLookupKey DEPEND %Control KEY TIMES 0
-
-%PostLookupField DEPEND %Control COMPONENT TIMES 0
-
-%PostLookupProcedure DEPEND %Control PROCEDURE TIMES 0
-
-%ForceWindowRefresh DEPEND %Control LONG TIMES 0
-
-%ClassItem UNIQUE DEFAULT  ('Default', 'WindowToolbar')
-%DefaultBaseClassType DEPEND %ClassItem DEFAULT TIMES 2
-WHEN  ('Default') ('WindowManager')
-WHEN  ('WindowToolbar') ('ToolbarClass')
-
-%ActualDefaultBaseClassType DEPEND %ClassItem DEFAULT TIMES 2
-WHEN  ('Default') ('')
-WHEN  ('WindowToolbar') ('')
-
-%ClassLines DEPEND %ClassItem MULTI DEFAULT TIMES 1
-WHEN  ('Default') ('Init {19}PROCEDURE(),BYTE,PROC,DERIVED', 'Kill {19}PROCEDURE(),BYTE,PROC,DERIVED', |
-  'TakeAccepted {11}PROCEDURE(),BYTE,PROC,DERIVED', 'TakeEvent {14}PROCEDURE(),BYTE,PROC,DERIVED', |
-  'TakeWindowEvent        PROCEDURE(),BYTE,PROC,DERIVED')
-
-%ReturnValue FIELD  ()
-%ProcedureOneInstance LONG  (0)
-%WindowOperationMode DEFAULT  ('Use WINDOW setting')
-%INISaveWindow LONG  (1)
-%ProcedureDisableEnhanceFocus LONG  (0)
-%ProcedureUseEnterInsteadTabOverride LONG  (0)
-%WindowUseEnterInsteadTab LONG  (1)
-%ProcedureUseEnterInsteadTabExcludeListCombo LONG  (0)
-%ProcedureUseEnterInsteadTabEnableNextTabStop LONG  (0)
-%ProcedureUseEnterInsteadTabExcludeG LONG  (1)
-%WindowUseEnterInsteadTabExclude MULTI DEFAULT  ()
-%GlobalObject DEPEND %ClassItem DEFAULT TIMES 2
-WHEN  ('Default') ('NO')
-WHEN  ('WindowToolbar') ('NO')
-
-%ThisObjectName DEPEND %ClassItem DEFAULT TIMES 2
-WHEN  ('Default') ('ThisWindow')
-WHEN  ('WindowToolbar') ('Toolbar')
-
-%UseDefaultABCBaseClass DEPEND %ClassItem LONG TIMES 2
-WHEN  ('Default') (1)
-WHEN  ('WindowToolbar') (1)
-
-%UseABCBaseClass DEPEND %ClassItem LONG TIMES 2
-WHEN  ('Default') (1)
-WHEN  ('WindowToolbar') (1)
-
-%ABCBaseClass DEPEND %ClassItem DEFAULT TIMES 2
-WHEN  ('Default') ('ADOBlob')
-WHEN  ('WindowToolbar') ('ADOBlob')
-
-%ExtBaseClass DEPEND %ClassItem DEFAULT TIMES 0
-
-%BaseClassIncludeFile DEPEND %ClassItem DEFAULT TIMES 0
-
-%DeriveFromBaseClass DEPEND %ClassItem LONG TIMES 2
-WHEN  ('Default') (0)
-WHEN  ('WindowToolbar') (0)
-
-%NewMethods DEPEND %ClassItem MULTI LONG TIMES 0
-
-%NewMethodName DEPEND %NewMethods DEFAULT TIMES 0
-
-%NewMethodPrototype DEPEND %NewMethods DEFAULT TIMES 0
-
-%NewClassPropertyItems DEPEND %ClassItem MULTI LONG TIMES 0
-
-%NewClassProperty DEPEND %NewClassPropertyItems DEFAULT TIMES 0
-
-%NewClassDataType DEPEND %NewClassPropertyItems DEFAULT TIMES 1
-WHEN  ('WindowToolbar')TIMES 0
-
-%NewClassOtherType DEPEND %NewClassPropertyItems DEFAULT TIMES 0
-
-%NewClassDataIsRef DEPEND %NewClassPropertyItems LONG TIMES 0
-
-%NewClassDataSize DEPEND %NewClassPropertyItems DEFAULT TIMES 0
-
-%NewClassDataDim1 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
-
-%NewClassDataDim2 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
-
-%NewClassDataDim3 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
-
-%NewClassDataDim4 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
-
-%ClassMethods DEPEND %ClassItem MULTI LONG TIMES 0
-
-%ClassMethodName DEPEND %ClassMethods DEFAULT TIMES 0
-
-%ClassMethodPrototype DEPEND %ClassMethods DEFAULT TIMES 0
-
-%ClassPropertyItems DEPEND %ClassItem MULTI LONG TIMES 0
-
-%ClassProperty DEPEND %ClassPropertyItems DEFAULT TIMES 0
-
-%ClassDataType DEPEND %ClassPropertyItems DEFAULT TIMES 1
-WHEN  ('WindowToolbar')TIMES 0
-
-%ClassOtherType DEPEND %ClassPropertyItems DEFAULT TIMES 0
-
-%ClassDataIsRef DEPEND %ClassPropertyItems LONG TIMES 0
-
-%ClassDataSize DEPEND %ClassPropertyItems DEFAULT TIMES 0
-
-%ClassDataDim1 DEPEND %ClassPropertyItems DEFAULT TIMES 0
-
-%ClassDataDim2 DEPEND %ClassPropertyItems DEFAULT TIMES 0
-
-%ClassDataDim3 DEPEND %ClassPropertyItems DEFAULT TIMES 0
-
-%ClassDataDim4 DEPEND %ClassPropertyItems DEFAULT TIMES 0
-
-%WindowStyles MULTI LONG  ()
-%WindowStyleFontName DEPEND %WindowStyles DEFAULT TIMES 0
-
-%WindowStyleFontNameVariable DEPEND %WindowStyles DEFAULT TIMES 0
-
-%WindowStyleFontNameIsVariable DEPEND %WindowStyles LONG TIMES 0
-
-%WindowStyleFontSize DEPEND %WindowStyles DEFAULT TIMES 0
-
-%WindowStyleFontSizeVariable DEPEND %WindowStyles DEFAULT TIMES 0
-
-%WindowStyleFontSizeIsVariable DEPEND %WindowStyles LONG TIMES 0
-
-%WindowStyleFontStyle DEPEND %WindowStyles DEFAULT TIMES 0
-
-%WindowStyleFontStyleVariable DEPEND %WindowStyles DEFAULT TIMES 0
-
-%WindowStyleFontStyleIsVariable DEPEND %WindowStyles LONG TIMES 0
-
-%WindowStyleFontColor DEPEND %WindowStyles DEFAULT TIMES 0
-
-%WindowStyleFontCharSet DEPEND %WindowStyles DEFAULT TIMES 0
-
-%WindowStyleForegroundNormal DEPEND %WindowStyles LONG TIMES 0
-
-%WindowStyleForegroundNormalVariable DEPEND %WindowStyles DEFAULT TIMES 0
-
-%WindowStyleForegroundNormalIsVariable DEPEND %WindowStyles LONG TIMES 0
-
-%WindowStyleBackgroundNormal DEPEND %WindowStyles LONG TIMES 0
-
-%WindowStyleBackgroundNormalVariable DEPEND %WindowStyles DEFAULT TIMES 0
-
-%WindowStyleBackgroundNormalIsVariable DEPEND %WindowStyles LONG TIMES 0
-
-%WindowStyleForegroundSelected DEPEND %WindowStyles LONG TIMES 0
-
-%WindowStyleForegroundSelectedVariable DEPEND %WindowStyles DEFAULT TIMES 0
-
-%WindowStyleForegroundSelectedIsVariable DEPEND %WindowStyles LONG TIMES 0
-
-%WindowStyleBackgroundSelected DEPEND %WindowStyles LONG TIMES 0
-
-%WindowStyleBackgroundSelectedVariable DEPEND %WindowStyles DEFAULT TIMES 0
-
-%WindowStyleBackgroundSelectedIsVariable DEPEND %WindowStyles LONG TIMES 0
-
-%WindowStylePicture DEPEND %WindowStyles DEFAULT TIMES 0
-
-%WindowStylePictureVariable DEPEND %WindowStyles DEFAULT TIMES 0
-
-%WindowStylePictureIsVariable DEPEND %WindowStyles LONG TIMES 0
-
-%WindowStyleOtherListboxes MULTI DEFAULT  ()
-%ProcedureAutoBindFields MULTI LONG  ()
-%ProcedureAutoBindField DEPEND %ProcedureAutoBindFields DEFAULT TIMES 0
-
-%ProcedureAutoBindFieldTPL DEPEND %ProcedureAutoBindFields DEFAULT TIMES 0
-
-%ProcedureAutoBindProcedures MULTI LONG  ()
-%ProcedureAutoBindProcedure DEPEND %ProcedureAutoBindProcedures DEFAULT TIMES 0
-
-%ProcedureAutoBindProcedureTPL DEPEND %ProcedureAutoBindProcedures DEFAULT TIMES 0
-
-%ProcedureAutoBindFieldsIgnored MULTI LONG  ()
-%ProcedureAutoBindFieldIgnored DEPEND %ProcedureAutoBindFieldsIgnored DEFAULT TIMES 0
-
-%ProcedureAutoBindProceduresIgnored MULTI LONG  ()
-%ProcedureAutoBindProcedureIgnored DEPEND %ProcedureAutoBindProceduresIgnored DEFAULT TIMES 0
-
-%ProcedureAutoBindValidToAddField LONG  (0)
-%ProcedureUserBindFields MULTI LONG  ()
-%ProcedureUserBindField DEPEND %ProcedureUserBindFields FIELD TIMES 0
-
-%ProcedureAutoBindFieldIgnore DEPEND %ProcedureAutoBindFields LONG TIMES 0
-
-%ProcedureUserBindProcedures MULTI LONG  ()
-%ProcedureUserBindProcedure DEPEND %ProcedureUserBindProcedures PROCEDURE TIMES 0
-
-%ProcedureAutoBindProcedureIgnore DEPEND %ProcedureAutoBindProcedures LONG TIMES 0
-
-%ProcedureUserBindExpressions MULTI LONG  ()
-%ProcedureUserBindExpressionName DEPEND %ProcedureUserBindExpressions DEFAULT TIMES 0
-
-%ProcedureUserBindExpression DEPEND %ProcedureUserBindExpressions DEFAULT TIMES 0
-
-%PreserveVarsLoc MULTI LONG  ()
-%PreserveVarLoc DEPEND %PreserveVarsLoc DEFAULT TIMES 0
-
-%ExtUITabIcon DEPEND %Control DEFAULT TIMES 0
-
-%ExtUITabStyleOverrideGlobal DEPEND %Control LONG TIMES 0
-
-%ExtUITabStyle DEPEND %Control DEFAULT TIMES 1
-WHEN  ('') ('Default')
-
-%FieldGradientColorType DEPEND %Control DEFAULT TIMES 1
-WHEN  ('') ('Off')
-
-%FieldGradientColorTypeVariable DEPEND %Control DEFAULT TIMES 1
-WHEN  ('') ('')
-
-%FieldGradientColorTypeIsVariable DEPEND %Control LONG TIMES 1
-WHEN  ('') (0)
-
-%FieldGradientColorFrom DEPEND %Control LONG TIMES 1
-WHEN  ('') (-1)
-
-%FieldGradientColorFromVariable DEPEND %Control DEFAULT TIMES 0
-
-%FieldGradientColorFromIsVariable DEPEND %Control LONG TIMES 1
-WHEN  ('') (0)
-
-%FieldGradientColorTo DEPEND %Control LONG TIMES 1
-WHEN  ('') (-1)
-
-%FieldGradientColorToVariable DEPEND %Control DEFAULT TIMES 0
-
-%FieldGradientColorToIsVariable DEPEND %Control LONG TIMES 1
-WHEN  ('') (0)
-
-%ButtonReturnValueAssignment DEPEND %Control FIELD TIMES 0
-
-%ButtonReturnValueReferenceAssign DEPEND %Control LONG TIMES 0
-
-%ButtonThreadParameters DEPEND %Control DEFAULT TIMES 0
-
-%ButtonThreadReturnValueAssignment DEPEND %Control FIELD TIMES 0
-
-%PreLookupProcedureParameters DEPEND %Control DEFAULT TIMES 0
-
-%PostLookupProcedureParameters DEPEND %Control DEFAULT TIMES 0
-
-%PostLookupDuringValidate DEPEND %Control LONG TIMES 7
-WHEN  ('') (1)
-WHEN  ('?glo:AppDescription') (1)
-WHEN  ('?glo:FileExtensions') (1)
-WHEN  ('?glo:ProgressMessage') (1)
-WHEN  ('?glo:RootPath') (1)
-WHEN  ('?glo:qFolders') (1)
-WHEN  ('?glo:qRecords') (1)
-
-%LookupAssign DEPEND %Control MULTI LONG TIMES 0
-
-%MoreTarget DEPEND %LookupAssign FIELD TIMES 0
-
-%MoreField DEPEND %LookupAssign DEFAULT TIMES 0
-
-%CheckedAssigns DEPEND %Control MULTI LONG TIMES 0
-
-%CheckedAssignVariable DEPEND %CheckedAssigns FIELD TIMES 0
-
-%CheckedAssignValue DEPEND %CheckedAssigns DEFAULT TIMES 0
-
-%CheckedHides DEPEND %Control MULTI LONG TIMES 0
-
-%CheckedControl DEPEND %CheckedHides DEFAULT TIMES 0
-
-%CheckedControlAction DEPEND %CheckedHides DEFAULT TIMES 1
-WHEN  ('')TIMES 0
-
-%CheckedEnables DEPEND %Control MULTI LONG TIMES 0
-
-%CheckedControl1 DEPEND %CheckedEnables DEFAULT TIMES 0
-
-%CheckedControl1Action DEPEND %CheckedEnables DEFAULT TIMES 1
-WHEN  ('')TIMES 0
-
-%UncheckedAssigns DEPEND %Control MULTI LONG TIMES 0
-
-%UncheckedAssignVariable DEPEND %UncheckedAssigns FIELD TIMES 0
-
-%UncheckedAssignValue DEPEND %UncheckedAssigns DEFAULT TIMES 0
-
-%UnCheckedHides DEPEND %Control MULTI LONG TIMES 0
-
-%UnCheckedControl DEPEND %UnCheckedHides DEFAULT TIMES 0
-
-%UnCheckedControlAction DEPEND %UnCheckedHides DEFAULT TIMES 1
-WHEN  ('')TIMES 0
-
-%UnCheckedEnables DEPEND %Control MULTI LONG TIMES 0
-
-%UnCheckedControl1 DEPEND %UnCheckedEnables DEFAULT TIMES 0
-
-%UnCheckedControl1Action DEPEND %UnCheckedEnables DEFAULT TIMES 1
-WHEN  ('')TIMES 0
-
-%CheckedDisables DEPEND %Control MULTI LONG TIMES 0
-
-%CheckedDisableControl DEPEND %CheckedDisables DEFAULT TIMES 0
-
-%CheckedDisableControlAction DEPEND %CheckedDisables DEFAULT TIMES 1
-WHEN  ('')TIMES 0
-
-%UnCheckedDisables DEPEND %Control MULTI LONG TIMES 0
-
-%UnCheckedDisableControl DEPEND %UnCheckedDisables DEFAULT TIMES 0
-
-%UnCheckedDisableControlAction DEPEND %UnCheckedDisables DEFAULT TIMES 1
-WHEN  ('')TIMES 0
-
-%ActiveImageEnable DEPEND %Control LONG TIMES 0
-
-%AIObjectName DEPEND %Control DEFAULT TIMES 1
-WHEN  ('') ('AIBtn0')
-
-%AIEnableMimicControl DEPEND %Control LONG TIMES 1
-WHEN  ('') (1)
-
-%AIMimicControl DEPEND %Control DEFAULT TIMES 1
-WHEN  ('') ('?Ok')
-
-%AIImgRound DEPEND %Control LONG TIMES 0
-
-%AIOverrideImg DEPEND %Control DEFAULT TIMES 0
-
-%AIOverrideImgVariable DEPEND %Control DEFAULT TIMES 0
-
-%AIOverrideImgIsVariable DEPEND %Control LONG TIMES 1
-WHEN  ('') (0)
-
-%AIDisableImg DEPEND %Control DEFAULT TIMES 0
-
-%AIDisableImgVariable DEPEND %Control DEFAULT TIMES 0
-
-%AIDisableImgIsVariable DEPEND %Control LONG TIMES 1
-WHEN  ('') (0)
-
-%AIHotImg DEPEND %Control DEFAULT TIMES 0
-
-%AIHotImgVariable DEPEND %Control DEFAULT TIMES 0
-
-%AIHotImgIsVariable DEPEND %Control LONG TIMES 1
-WHEN  ('') (0)
-
-%AIPressedImg DEPEND %Control DEFAULT TIMES 0
-
-%AIPressedImgVariable DEPEND %Control DEFAULT TIMES 0
-
-%AIPressedImgIsVariable DEPEND %Control LONG TIMES 1
-WHEN  ('') (0)
-
-[EMBED]
-EMBED %DataSection
-[DEFINITION]
-[SOURCE]
-PROPERTY:BEGIN
-PRIORITY 50
-PROPERTY:END
-
-i                   LONG
-lngRecords          LONG
-
-[END]
-EMBED %ControlEventHandling
-[INSTANCES]
-WHEN '?btnScanFiles'
-[INSTANCES]
-WHEN 'Accepted'
-[DEFINITION]
-[SOURCE]
-PROPERTY:BEGIN
-PRIORITY 5000
-PROPERTY:END
-  ! Click the Scan Files button
-  DirAllFileAndFolders(glo:RootPath,glo:FileExtensions) 
-  ! 'c:\Clarion11.1','*.inc;*.clw;*.txa;*.dctx;*.def;*.equ;*.tpl;*.tft;*.xml;*.tpw;*.tpl;')
-[END]
-[END]
-[END]
-EMBED %WindowEventHandling
-[INSTANCES]
-WHEN 'OpenWindow'
-[DEFINITION]
-[SOURCE]
-PROPERTY:BEGIN
-PRIORITY 5000
-PROPERTY:END
-  !// Reset clFiles
-  lngRecords = RECORDS(clFiles)
-  LOOP i = lngRecords to 1 BY -1 ! Loop i
-      GET(clFiles,i)
-      CLEAR(clFiles)
-      DELETE(clFiles)
-  END ! Loop i
-  glo:qRecords  = RECORDS(clFiles)
-  glo:ProgressMessage = 'Freeware copyright <169> 2023 Black and White Inc'
-  DISPLAY()
-[END]
-[END]
-[END]
-[ADDITION]
-NAME WinEvent WinEvent
-[INSTANCE]
-INSTANCE 3
-OWNER 6
-[PROMPTS]
-%DisableWinEvent LONG  (0)
-%CheckForCantCloseNowSetHere LONG  (1)
-%AutoDown LONG  (0)
-%NoAutoDown LONG  (0)
-%LocWindowsVisible DEFAULT  ('0')
-%WindowsVisibleAfterOpen LONG  (1)
-%AlertWinEventDebug LONG  (0)
-%DisplayCompileDate LONG  (0)
-%DisplayCompileDateFormat DEFAULT  ('@D10')
-%locNoHandleCloseDown LONG  (0)
-%locCloseDownWhenWindowCloses LONG  (0)
-%locCloseDownWhenWindowClosesCtrl DEFAULT  ('')
-%altWinFix DEFAULT  ('Default')
-%WinAlert MULTI LONG  ()
-%Mess DEPEND %WinAlert DEFAULT TIMES 0
-
-%Act1 DEPEND %WinAlert DEFAULT TIMES 0
-
-%act2 DEPEND %WinAlert DEFAULT TIMES 0
-
-%AlertControl DEPEND %WinAlert DEFAULT TIMES 0
-
-%AlertControlType DEPEND %WinAlert DEFAULT TIMES 0
-
-%locCloseDownWhenWindowClosesSet LONG  (0)
-[ADDITION]
-NAME ABC CloseButton
-[INSTANCE]
-INSTANCE 1
-[ADDITION]
-NAME ABC WindowResize
-[FIELDPROMPT]
-%ResizeAnchorTop DEPEND %Control LONG TIMES 0
-
-%ResizeAnchorLeft DEPEND %Control LONG TIMES 0
-
-%ResizeAnchorRight DEPEND %Control LONG TIMES 0
-
-%ResizeAnchorBottom DEPEND %Control LONG TIMES 0
-
-%ResizeAnchorGrowTop DEPEND %Control LONG TIMES 0
-
-%ResizeAnchorGrowLeft DEPEND %Control LONG TIMES 0
-
-%ResizeAnchorGrowRight DEPEND %Control LONG TIMES 0
-
-%ResizeAnchorGrowBottom DEPEND %Control LONG TIMES 0
-
-[INSTANCE]
-INSTANCE 2
-[PROMPTS]
-%UseAppStrategy DEFAULT  ('1')
-%AppStrategy DEFAULT  ('Surface')
-%RestrictMinSize LONG  (1)
-%WindowMinWidth DEFAULT  ('0')
-%WindowMaxWidth DEFAULT  ('0')
-%ClassItem UNIQUE DEFAULT  ('Default')
-%DefaultBaseClassType DEPEND %ClassItem DEFAULT TIMES 1
-WHEN  ('Default') ('WindowResizeClass')
-
-%ActualDefaultBaseClassType DEPEND %ClassItem DEFAULT TIMES 1
-WHEN  ('Default') ('')
-
-%ClassLines DEPEND %ClassItem MULTI DEFAULT TIMES 1
-WHEN  ('Default') ('Init {19}PROCEDURE(BYTE AppStrategy=AppStrategy:Resize,BYTE SetWindowMinSize=False,BYTE SetWindowMaxSize=False)')
-
-%WindowMinHeight DEFAULT  ('')
-%RestrictMaxSize LONG  (0)
-%WindowMaxHeight DEFAULT  ('')
-%AutoFindParents DEFAULT  ('Default')
-%DeferMoves DEFAULT  ('Default')
-%OverrideControls MULTI LONG  ()
-%OverrideControl DEPEND %OverrideControls DEFAULT TIMES 0
-
-%DisableResize DEPEND %OverrideControls LONG TIMES 0
-
-%HorizResize DEPEND %OverrideControls DEFAULT TIMES 0
-
-%VertResize DEPEND %OverrideControls DEFAULT TIMES 0
-
-%HorizPositional DEPEND %OverrideControls DEFAULT TIMES 0
-
-%VertPositional DEPEND %OverrideControls DEFAULT TIMES 0
-
-%GlobalObject DEPEND %ClassItem DEFAULT TIMES 1
-WHEN  ('Default') ('NO')
-
-%ThisObjectName DEPEND %ClassItem DEFAULT TIMES 1
-WHEN  ('Default') ('Resizer')
-
-%UseDefaultABCBaseClass DEPEND %ClassItem LONG TIMES 1
-WHEN  ('Default') (1)
-
-%UseABCBaseClass DEPEND %ClassItem LONG TIMES 1
-WHEN  ('Default') (1)
-
-%ABCBaseClass DEPEND %ClassItem DEFAULT TIMES 1
-WHEN  ('Default') ('ADOBlob')
-
-%ExtBaseClass DEPEND %ClassItem DEFAULT TIMES 0
-
-%BaseClassIncludeFile DEPEND %ClassItem DEFAULT TIMES 0
-
-%DeriveFromBaseClass DEPEND %ClassItem LONG TIMES 1
-WHEN  ('Default') (0)
-
-%NewMethods DEPEND %ClassItem MULTI LONG TIMES 0
-
-%NewMethodName DEPEND %NewMethods DEFAULT TIMES 0
-
-%NewMethodPrototype DEPEND %NewMethods DEFAULT TIMES 0
-
-%NewClassPropertyItems DEPEND %ClassItem MULTI LONG TIMES 0
-
-%NewClassProperty DEPEND %NewClassPropertyItems DEFAULT TIMES 0
-
-%NewClassDataType DEPEND %NewClassPropertyItems DEFAULT TIMES 1
-WHEN  ('Default')TIMES 0
-
-%NewClassOtherType DEPEND %NewClassPropertyItems DEFAULT TIMES 0
-
-%NewClassDataIsRef DEPEND %NewClassPropertyItems LONG TIMES 0
-
-%NewClassDataSize DEPEND %NewClassPropertyItems DEFAULT TIMES 0
-
-%NewClassDataDim1 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
-
-%NewClassDataDim2 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
-
-%NewClassDataDim3 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
-
-%NewClassDataDim4 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
-
-%ClassMethods DEPEND %ClassItem MULTI LONG TIMES 0
-
-%ClassMethodName DEPEND %ClassMethods DEFAULT TIMES 0
-
-%ClassMethodPrototype DEPEND %ClassMethods DEFAULT TIMES 0
-
-%ClassPropertyItems DEPEND %ClassItem MULTI LONG TIMES 0
-
-%ClassProperty DEPEND %ClassPropertyItems DEFAULT TIMES 0
-
-%ClassDataType DEPEND %ClassPropertyItems DEFAULT TIMES 1
-WHEN  ('Default')TIMES 0
-
-%ClassOtherType DEPEND %ClassPropertyItems DEFAULT TIMES 0
-
-%ClassDataIsRef DEPEND %ClassPropertyItems LONG TIMES 0
-
-%ClassDataSize DEPEND %ClassPropertyItems DEFAULT TIMES 0
-
-%ClassDataDim1 DEPEND %ClassPropertyItems DEFAULT TIMES 0
-
-%ClassDataDim2 DEPEND %ClassPropertyItems DEFAULT TIMES 0
-
-%ClassDataDim3 DEPEND %ClassPropertyItems DEFAULT TIMES 0
-
-%ClassDataDim4 DEPEND %ClassPropertyItems DEFAULT TIMES 0
-
-[WINDOW]
-QuickWindow WINDOW('Main Dashboard'),AT(,,401,227),FONT('Segoe UI',9,,FONT:regular,CHARSET:DEFAULT), |
-          RESIZE,CENTER,ICON('toolbox.ico'),GRAY,IMM,HLP('MyDashboard'),SYSTEM
-          BUTTON('  &OK'),AT(343,204,47,14),USE(?Ok),LEFT,ICON('WAOK.ICO'),MSG('Close this screen'), |
-            TIP('Close this screen'),#ORIG(?Ok),#SEQ(1),#ORDINAL(1)
-          BUTTON('Process the Files'),AT(11,11,91,18),USE(?btnScanFiles),FONT(,,,FONT:bold), |
-            LEFT,ICON('WIZFIND.ICO'),MSG('Find the files and make the requested changes'), |
-            TIP('Find the files and make the requested changes'),#ORDINAL(2)
-          PROMPT('Files Found:'),AT(95,16,63),USE(?glo:qRecords:Prompt),RIGHT,TRN,#ORDINAL(3)
-          ENTRY(@n-14B),AT(163,15,60,12),USE(glo:qRecords),RIGHT(1),FLAT,MSG('Queue Records'), |
-            READONLY,TIP('Queue Records'),#ORDINAL(4)
-          PROMPT('Folders:'),AT(286,16,38),USE(?glo:qFolders:Prompt),RIGHT,#ORDINAL(5)
-          ENTRY(@n-14B),AT(328,15,60,12),USE(glo:qFolders),RIGHT(1),FLAT,MSG('Number of ' & |
-            'Folders scanned'),READONLY,TIP('Number of Folders scanned'),#ORDINAL(6)
-          PROMPT('App Description:'),AT(99,39,58),USE(?glo:AppDescription:Prompt),RIGHT,#ORDINAL(7)
-          ENTRY(@s50),AT(163,38,225,12),USE(glo:AppDescription),FLAT,MSG('Description'),READONLY, |
-            TIP('Description'),#ORDINAL(8)
-          PROMPT('Root Path:'),AT(99,54,58),USE(?glo:RootPath:Prompt),RIGHT,#ORDINAL(9)
-          ENTRY(@s255),AT(163,53,225,12),USE(glo:RootPath),FLAT,MSG('Root Path'),READONLY, |
-            TIP('Root Path'),#ORDINAL(10)
-          PROMPT('File Extensions:'),AT(99,68,58),USE(?glo:FileExtensions:Prompt),RIGHT,#ORDINAL(11)
-          ENTRY(@s250),AT(163,68,225,12),USE(glo:FileExtensions),FLAT,MSG('File Extensions'), |
-            READONLY,TIP('File Extensions'),#ORDINAL(12)
-          PROMPT('Exclude Files:'),AT(99,85,58),USE(?glo:ExcludeFiles:Prompt),RIGHT,#ORDINAL(13)
-          TEXT,AT(163,83,225,100),USE(glo:ExcludeFiles),VSCROLL,FLAT,MSG('Exclude Files'), |
-            READONLY,TIP('Exclude Files'),#ORDINAL(14)
-          ENTRY(@s80),AT(12,187,376,10),USE(glo:ProgressMessage),CENTER,FLAT,MSG('Progress Message'), |
-            READONLY,TIP('Progress Message'),TRN,#ORDINAL(15)
-        END
-
 [END]
 [MODULE]
 [COMMON]

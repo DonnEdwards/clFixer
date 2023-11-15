@@ -333,7 +333,7 @@ Looped BYTE
        CYCLE
      END
      IF KEYCODE()=CtrlShiftP  
-        UD.ShowProcedureInfo('Main',UD.SetApplicationName('clFixer','EXE'),AppFrame{PROP:Hlp},'09/25/2023 @ 06:24PM','10/20/2023 @ 01:03PM','10/20/2023 @ 01:04PM')  
+        UD.ShowProcedureInfo('Main',UD.SetApplicationName('clFixer','EXE'),AppFrame{PROP:Hlp},'09/25/2023 @ 06:24PM','10/20/2023 @ 01:03PM','10/20/2023 @ 07:19PM')  
     
        CYCLE
      END
